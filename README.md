@@ -6,7 +6,7 @@ The course is based on evaluation boards and material made available by STMicroe
 
 ## Data logging
 
-Data acquisition from MEMS sensors uses [STWIN boards](https://www.st.com/en/evaluation-tools/steval-stwinkt1.html)
+Data acquisition from MEMS sensors uses [STWIN boards](https://www.st.com/en/evaluation-tools/steval-stwinkt1.html) and [High Speed Datalogger firmware](https://www.st.com/en/embedded-software/fp-sns-datalog1.html)
 
 ## Data analysis
 
@@ -15,5 +15,5 @@ Data acquisition from MEMS sensors uses [STWIN boards](https://www.st.com/en/eva
 
 ## AI models for microcontrollers
 
-* FP-AI-MONITOR1
-* Cube.AI
+* [FP-AI-MONITOR1](https://www.st.com/en/embedded-software/fp-ai-monitor1.html)
+* [Cube.AI](https://www.st.com/content/st_com/en/support/learning/stm32-education/stm32-moocs/Introduction_to_STM32CubeAI_MOOC.html)
