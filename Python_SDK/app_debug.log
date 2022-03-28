@@ -1,0 +1,5 @@
+[38;21m2022-03-19 09:04:11,740 - HSDatalogApp.HSD_link.communication.STWIN_HSD.hsd_dll - INFO - Linux - 64bit (hsd_dll.py:46)[0m
+[38;21m2022-03-19 09:04:11,753 - HSDatalogApp.HSD_link.communication.STWIN_HSD.STWINHSD_com_manager - INFO - Communication Engine UP (DLL/so) (STWINHSD_com_manager.py:126)[0m
+[38;21m2022-03-19 09:04:11,755 - HSDatalogApp.HSD_link.HSDLink - INFO - STWINHSD_CommandManager command_set: STWINHSDCmd (HSDLink.py:64)[0m
+[31;21m2022-03-19 09:04:11,755 - HSDatalogApp.HSD_link.HSDLink - ERROR - No device connected. Connect a device and retry. (HSDLink.py:38)[0m
+[38;21m2022-03-19 09:04:11,780 - HSDatalogApp.HSD_link.communication.STWIN_HSD.STWINHSD_com_manager - INFO - Communication Engine DOWN (DLL/so) (STWINHSD_com_manager.py:133)[0m
