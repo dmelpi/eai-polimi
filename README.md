@@ -19,3 +19,14 @@ Data acquisition from MEMS sensors uses [STWIN boards](https://www.st.com/en/eva
 
 * [FP-AI-MONITOR1](https://www.st.com/en/embedded-software/fp-ai-monitor1.html)
 * [Cube.AI](https://www.st.com/content/st_com/en/support/learning/stm32-education/stm32-moocs/Introduction_to_STM32CubeAI_MOOC.html)
+
+## Available Jupyter notebooks
+
+* [Data logging](datalog.ipynb)
+* [Data visualization](dataviz.ipynb)
+* Data tagging
+* Data analysis
+
+## Mapping neural networks on STWIN
+
+![](docs/pic/sensorstreamer.png)
