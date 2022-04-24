@@ -24,7 +24,7 @@ Data acquisition from MEMS sensors uses [STWIN boards](https://www.st.com/en/eva
 
 * [Data logging](datalog.ipynb)
 * [Data visualization](dataviz.ipynb)
-* Data tagging
+* [Data tagging](tagging.ipynb)
 * Data analysis
 
 ## Mapping neural networks on STWIN
