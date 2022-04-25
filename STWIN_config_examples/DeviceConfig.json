@@ -55,7 +55,7 @@
                             "initialOffset": 0.277445,
                             "FS": 16,
                             "sensitivity": 0.000488,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 1000,
                             "usbDataPacketSize": 3000,
                             "sdWriteBufferSize": 54272,
@@ -141,7 +141,7 @@
                             "initialOffset": 0.311138,
                             "FS": 100,
                             "sensitivity": 1,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 25,
                             "usbDataPacketSize": 16,
                             "sdWriteBufferSize": 100,
@@ -422,9 +422,9 @@
                             "ODR": 6667,
                             "ODRMeasured": 7015.386719,
                             "initialOffset": 0.170296,
-                            "FS": 16,
+                            "FS": 4,
                             "sensitivity": 0.000488,
-                            "isActive": false,
+                            "isActive": true,
                             "samplesPerTs": 1000,
                             "usbDataPacketSize": 2048,
                             "sdWriteBufferSize": 38400,
@@ -438,7 +438,7 @@
                             "initialOffset": 0.305078,
                             "FS": 4000,
                             "sensitivity": 140,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 1000,
                             "usbDataPacketSize": 2048,
                             "sdWriteBufferSize": 13824,
@@ -532,7 +532,7 @@
                             "initialOffset": 0.77203,
                             "FS": 1260,
                             "sensitivity": 1,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 200,
                             "usbDataPacketSize": 1600,
                             "sdWriteBufferSize": 512,
@@ -598,7 +598,7 @@
                             "initialOffset": 0.268886,
                             "FS": 130,
                             "sensitivity": 1,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 1000,
                             "usbDataPacketSize": 4096,
                             "sdWriteBufferSize": 130560,
@@ -647,7 +647,7 @@
                             "initialOffset": 0.51973,
                             "FS": 100,
                             "sensitivity": 1,
-                            "isActive": true,
+                            "isActive": false,
                             "samplesPerTs": 8,
                             "usbDataPacketSize": 16,
                             "sdWriteBufferSize": 32,
@@ -664,11 +664,11 @@
             "swTags": [
                 {
                     "id": 0,
-                    "label": "SW_TAG_0"
+                    "label": "slow"
                 },
                 {
                     "id": 1,
-                    "label": "SW_TAG_1"
+                    "label": "fast"
                 },
                 {
                     "id": 2,

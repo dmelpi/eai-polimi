@@ -1,0 +1,29 @@
+{
+	"Description": "descriptionTest",
+	"Name": "testName",
+	"Tags": [
+		{
+			"Enable": true,
+			"Label": "slow",
+			"t": 6.982145917
+		},
+		{
+			"Enable": false,
+			"Label": "slow",
+			"t": 16.99552927
+		},
+		{
+			"Enable": true,
+			"Label": "fast",
+			"t": 22.02554445
+		},
+		{
+			"Enable": false,
+			"Label": "fast",
+			"t": 31.08315826
+		}
+	],
+	"UUIDAcquisition": "38dc475e-209a-4c9f-9e00-1cd818af69b5",
+	"end_time": "2022-04-25T08:41:28.599Z",
+	"start_time": "2022-04-25T08:40:53.963Z"
+}
