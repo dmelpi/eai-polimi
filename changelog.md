@@ -1,3 +1,7 @@
+220425
+=
+- new acquisition with tags slow/fast
+
 220424
 =
 - added HSDatalog.bin to /bin (1.3.0)
