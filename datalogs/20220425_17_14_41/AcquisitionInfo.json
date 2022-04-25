@@ -1,0 +1,49 @@
+{
+	"Description": "descriptionTest",
+	"Name": "testName",
+	"Tags": [
+		{
+			"Enable": true,
+			"Label": "slow",
+			"t": 8.017914592
+		},
+		{
+			"Enable": false,
+			"Label": "slow",
+			"t": 13.03025484
+		},
+		{
+			"Enable": true,
+			"Label": "fast",
+			"t": 17.04108216
+		},
+		{
+			"Enable": false,
+			"Label": "fast",
+			"t": 23.04992266
+		},
+		{
+			"Enable": true,
+			"Label": "slow",
+			"t": 27.05513507
+		},
+		{
+			"Enable": false,
+			"Label": "slow",
+			"t": 33.06453541
+		},
+		{
+			"Enable": true,
+			"Label": "fast",
+			"t": 35.06811941
+		},
+		{
+			"Enable": false,
+			"Label": "fast",
+			"t": 40.07735998
+		}
+	],
+	"UUIDAcquisition": "3d8e19ab-27e0-4751-bdc3-ecc61d79e940",
+	"end_time": "2022-04-25T17:15:24.804Z",
+	"start_time": "2022-04-25T17:14:41.374Z"
+}
