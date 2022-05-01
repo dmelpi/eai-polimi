@@ -15,6 +15,6 @@ It is meant to run on Linux x86 only. For other platforms, refer to the original
 Issues
 * scripts contain ^M characters (need dos2unix)
 * scripts permissions not set (need chmod u+x)
-* .so must be copied to /usr/lib
+* lib_hsdatalog.so must be copied to /usr/lib as root (sudo cp..)
 * cannot specify path for captured files
 * datalog folder owner is root
