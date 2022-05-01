@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "title": "AI preprocessing configuration",
+  "description": "Schema to configure pre-processing pipelines used for feature extraction.",
+  "required": [
+    
+  ],
+  "properties": {
+    "input_buffer_dim_x": {
+      "$id ": "#/properties/input_buffer_dim_x",
+      "type": "number",
+      "title": "Input Buffer Dimension X",
+      "default": 100
+    },
+    "input_buffer_dim_y": {
+      "$id ": "#/properties/input_buffer_dim_y",
+      "type": "number",
+      "title": "Input Buffer Dimension Y",
+      "default": 1
+    },
+    "functions": {
+      "$id": "#/properties/functions",
+      "type":"array",
+      "title": "The ordered list of pre-processing functions",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "string",
+            "enum": [
+              "ISM330DHCX_ACC",
+              "ISM330DHCX_GYRO",
+              "microphone",
+              "layer_1",
+              "layer_2"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "min",
+              "max",
+              "peak_to_peak",
+              "avg",
+              "std_dev"
+            ]
+          },
+          "params": {
+            "type": "string"
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "layer_1",
+              "layer_2",
+              "NN"
+            ]
+          }
+        }
+        
+      }
+    }
+  }
+}

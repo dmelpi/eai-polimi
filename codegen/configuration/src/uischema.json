@@ -1,0 +1,22 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/input_buffer_dim_x"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/input_buffer_dim_y"
+        }
+      ]
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/functions"
+    }   
+  ]
+}
