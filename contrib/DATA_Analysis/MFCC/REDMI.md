@@ -1,36 +1,74 @@
-import numpy as np
-import scipy.signal as sig
-import matplotlib.pyplot as plt
-import cmsisdsp as dsp
-import cmsisdsp.fixedpoint as f
-import cmsisdsp.mfcc as mfcc
-import scipy.signal as sig
-from cmsisdsp.datatype import F32
+# CMSIS DSP Library Python Wrapper functions for signal pre-processing
+
+In the following functions the variable names is defined as follow:
+
+- n_samples : number of samples to consider in the window
+- shift_samples : number of samples for overlapping the windows
 
 
-#######################################################################################################
-#####################################      SUPPORT FUNCTIONS      ##################################### 
-#######################################################################################################
+![](signal_example.png)
 
-# calculation of the complex absolute value when the FFT real function is used
+
+<br>
+<br>
+<br>
+
+## <ins>Support functions</ins>
+
+Functions called internally by the other main callable functions
+
+<br>
+
+### complexABS
+
+Performing the real FFT function included in the CMSIS DSP Library of signal with a length of **n_samples** it calculates the spectrum storing the result in an output array with a length of **n_samples**. 
+The spectrum array is composed by **output=[ real[0] , img[0], real[1] , img[1] , ... , real[n_samples/2] , img[n_samples/2] ]**
+
+Then this function can be used to calculate the spectrum real amplitude
+
+```{python}
 def complexABS( real,  compl):
   return np.sqrt(real*real + compl*compl)
+```
 
+<br>
+
+### dot_product
+
+this function calculates the dot product between two arrays **in_1** and **in_2**
+
+```{python}
 def dot_product_ARM(in_1, in_2):
   mult = dsp.arm_mult_f32(in_1,in_2)
   sum = 0
   for i in range(len(mult)):
     sum = sum + mult[i]
   return sum
+```
 
-# Hz/Mel axis conversion
+
+<br>
+
+### Hz -  Mel conversion functions
+
+This functions are used to convert the spectrum axis from **Hz** to **Mel** scale and vice versa. The [mel scale](https://en.wikipedia.org/wiki/Mel_scale) is mainly used for audio application to better represent how human ear the sound.
+
+```{python}
 def Hz_to_Mel(f_hz):
   return(2595*np.log10(1+f_hz/700))
 
 def Mel_to_Hz(f_mel):
   return(700*(10**(f_mel/2505)-1))
+```
 
-# Mel Filter Bank generator, it generates a defined number (nfilt) triangular filters equispaced in mel frequency domain between f_min and f_max 
+<br>
+
+### Triangular Mel Filterbank generator
+
+This function generates a defined number (**nfilt**) of [triangular filters](https://www.google.it/url?sa=i&url=https%3A%2F%2Flabrosa.ee.columbia.edu%2Fdoc%2FHTKBook21%2Fnode54.html&psig=AOvVaw0odKO6IQZWe4YaS7oiqVGh&ust=1651653732868000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNiCkOn3wvcCFQAAAAAdAAAAABAJ) equispaced in mel frequency domain between **f_min** and **f_max**
+
+
+```{python}
 def Mel_filters(nfilt, f_min, f_max, sample_rate, n_samples ):
   low_freq_mel=Hz_to_Mel(f_min)
   high_freq_mel=Hz_to_Mel(f_max)
@@ -55,14 +93,19 @@ def Mel_filters(nfilt, f_min, f_max, sample_rate, n_samples ):
     for k in range(f_m,f_m_plus):
       fbank[m-1,k]=(f_m_plus-k)/(f_m_plus-f_m)
   return fbank
+```
 
 
-#######################################################################################################
-#####################################        POWER SPECTRUM        ####################################
-#######################################################################################################
+<br>
+<br>
+<br>
 
-# this function calculates the power spectrum using the CMSIS DSP Library realFFT function
+## <ins>Power spectrum</ins>
 
+This function calculates the Power Spectrum using the **arm_real_fft** function. The input signal must have a defined length of 256, 512, 1024, 2048, etc... in order to be performed. The **status** variable check is all the set input parameters are correct, if **status==1** it means that the power spectrum calculation can be performed.
+
+
+```{python}
 def CMSIS_PowerSpectrum (signal, sampling_frequency):
   # insert a signal with a lenght of 512, 1024, 2048, etc... 
   n_samples = len(signal)
@@ -81,17 +124,23 @@ def CMSIS_PowerSpectrum (signal, sampling_frequency):
     freq_point = freq_point+1
 
   return power_spectrum
+```
 
+<br>
+<br>
+<br>
 
-#######################################################################################################
-##################################        POWER SPECTROGRAM        ####################################
-#######################################################################################################
+## <ins>Power spectrogram</ins>
 
-# This function generates a matrix containing the spectrogram of the input signal
-# The shift_samples parameters can be used to overlap the windows in the spectrogram 
+This function calculates the Power Spectrogram matrix and it uses the Power Spectrum calculated using the previous function. The input signal can have any length and it will be sliced into **N** windows composed by **n_samples** which must have specific values as mentioned above: 512, 1024, 2048, etc...
+The **shift_samples** input variable can be used to overlap the windows.
 
+The output of this function generates a matrix with a dimension of **[n_samples/2 , N]**.
+
+```{python}
 def CMSIS_PowerSpectrogram(signal, sampling_frequency, n_samples = 2048, shift_samples=256):
     n_samples_tot =int(signal.shape[0])
+
     N=0
     while (n_samples_tot-(N*shift_samples+n_samples)) > 0:
         N=N+1
@@ -104,26 +153,48 @@ def CMSIS_PowerSpectrogram(signal, sampling_frequency, n_samples = 2048, shift_s
         spectrogram_matrix[: , ii] = CMSIS_PowerSpectrum(sub_signal, sampling_frequency)
     
     return spectrogram_matrix
+```
+
+<br>
+<br>
+<br>
+
+## <ins>Mel Spectrogram & Mel Coefficients</ins>
+
+In the following image is described the process to extract the Mel Frequency Cepstrum Coefficients starting from a signal. The functions **MFCC_Spectrogram** generates a matrix containing for each column the MFCC extracted from the related signal window over time. 
+
+![](MFCC-feature-extraction.png)
 
 
-#######################################################################################################
-####################################         Mel Spectrum         #####################################
-#######################################################################################################
+<br>
 
-# this function calculates the dot product between the filter bank and the power spectrum 
+### Mel Spectrum
 
+```{python}
 def mel_spectrum_ARM(fbank,  power_spectrum):
   mel_spectrum = np.zeros(128)
   for ii in range(fbank.shape[0]):
     mel_spectrum[ii] = dot_product_ARM(fbank[ii,:], power_spectrum)  
   return mel_spectrum
+```
 
+<br>
 
-#######################################################################################################
-###################################        MFCC_Spectrogram        ####################################
-#######################################################################################################
+### Mel Spectrogram
 
-def CMSIS_MFCC_Spectrogram_V4(signal,sampling_frequency, freq_min = 0, numOfDctOutputs=13, numOfMelFilters = 128 , n_samples = 2048, shift_samples=256):
+Description of the most important input parameters:
+
+- **signal**: input signal with any length 
+- **freq_min**: minimum frequency from which the Filterbank is calculated
+- **numOfMelFilters**: it must have a specific lenght due to some limitation of the CMSIS DSP Library function, the suggested value is 128
+- **numOfDctOutputs** : num of the output MFCC, value from 0 to numOfMelFilters
+- **n_samples** : signal slice length
+- **shift_samples**: overlapping samples between two windows
+
+<br>
+
+```{python}
+def CMSIS_MFCC_Spectrogram_V4(signal,sampling_frequency, freq_min = 0, numOfDctOutputs=128, numOfMelFilters = 128 , n_samples = 2048, shift_samples=256):
     n_samples_tot =int(signal.shape[0])
     N=0
     while (n_samples_tot-(N*shift_samples+n_samples)) > 0:
@@ -152,33 +223,4 @@ def CMSIS_MFCC_Spectrogram_V4(signal,sampling_frequency, freq_min = 0, numOfDctO
         mcc_spectrogram_matrix[:,ii]=resultI[0:numOfDctOutputs]
 
     return mcc_spectrogram_matrix
-
-#######################################################################################################
-###############################        Spectrogram Matrix Plot        #################################
-#######################################################################################################
-
-def show_specgram(X,ratio,limits,cmin=None,cmax=None, title='Insert a title', y_axis = "Frequency [Hz]"):
-  ''' this function represent matrix X within a figure having the desired
-   aspect ratio. 
-   INPUT:
-   X: matrix to represent
-   ratio: aspect ratio of axes
-   limits: array with [xmin,xmax,ymax,ymin]
-   cmin: minimum value correspondig to the bottom of the colormap scale.
-   '''
-  w, h=plt.figaspect(ratio)
-  fig = plt.figure(figsize=(w*2,h*2))
-  ax = fig.add_axes([0.1,0.1,0.8,0.8])
-  im = ax.imshow(X, extent = limits, cmap ='viridis',interpolation='none')
-  xleft, xright = ax.get_xlim()
-  ybottom, ytop = ax.get_ylim()
-  ax.set_aspect(abs((xright-xleft)/(ybottom-ytop))*ratio)
-  ax.invert_yaxis()
-  ax.set_xlabel('Time [s]')
-  ax.set_ylabel(y_axis)
-  ax.set_title(title)
-
-  if cmin != None:
-    cbar = plt.colorbar(im);
-    cbar.mappable.set_clim(cmin,cmax);
-  return ax
+```
