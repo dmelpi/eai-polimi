@@ -1,0 +1,12 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:74:5:SysDebugInit	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:94:6:SysDebugToggleLed	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:100:6:SysDebugLedOn	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:106:6:SysDebugLedOff	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:112:6:null_lockfn	4	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:117:6:SysDebugLock	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:131:6:SysDebugUnlock	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:145:5:SysDebugHardwareInit	40	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:172:6:SysDebugSetupRunTimeStatsTimer	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:176:6:SysDebugStartRunTimeStatsTimer	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:181:5:SysDebugLowLevelPutchar	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysdebug.c:194:6:TIM6_DACUNDER_IRQHandler	4	static

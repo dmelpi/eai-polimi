@@ -1,0 +1,13 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:90:12:SPIMasterDriverAlloc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:107:18:SPIMasterDriver_vtblInit	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:159:18:SPIMasterDriver_vtblStart	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:172:18:SPIMasterDriver_vtblStop	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:186:18:SPIMasterDriver_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:195:18:SPIMasterDriver_vtblReset	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:204:18:SPIMasterDriver_vtblWrite	40	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:229:18:SPIMasterDriver_vtblRead	40	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:254:18:SPIMasterDriverTransmitRegAddr	40	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:272:18:SPIMasterDriverWriteRead	40	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:296:18:SPIMasterDriverSelectDevice	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:306:18:SPIMasterDriverDeselectDevice	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SPIMasterDriver.c:323:13:SPIMasterDriverTxRxCpltCallback	16	static

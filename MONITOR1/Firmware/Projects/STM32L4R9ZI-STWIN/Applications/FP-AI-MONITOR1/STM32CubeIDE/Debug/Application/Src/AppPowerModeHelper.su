@@ -1,0 +1,8 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:80:22:AppPowerModeHelperAlloc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:100:18:AppPowerModeHelper_vtblInit	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:114:12:AppPowerModeHelper_vtblComputeNewPowerMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:204:11:AppPowerModeHelper_vtblCheckPowerModeTransaction	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:246:18:AppPowerModeHelper_vtblDidEnterPowerMode	40	static,ignoring_inline_asm
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:339:12:AppPowerModeHelper_vtblGetActivePowerMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:346:16:AppPowerModeHelper_vtblGetPowerStatus	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/AppPowerModeHelper.c:353:11:AppPowerModeHelper_vtblIsLowPowerMode	16	static

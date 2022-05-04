@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/Dummy_DPU.c:75:7:Dummy_DPUAlloc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/Dummy_DPU.c:85:18:Dummy_DPUInit	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/Dummy_DPU.c:99:10:Dummy_DPUSetInputParam	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/Dummy_DPU.c:143:18:Dummy_Process_vtbl	88	static

@@ -1,0 +1,8 @@
+../../DPU/Inc/IDPUVtbl.h:64:25:IDPU_Init	16	static
+../../DPU/Inc/IDPUVtbl.h:68:25:IDPU_AttachToSensor	24	static
+../../DPU/Inc/IDPUVtbl.h:72:25:IDPU_DetachFromSensor	16	static
+../../DPU/Inc/IDPUVtbl.h:76:25:IDPU_AttachInputDPU	24	static
+../../DPU/Inc/IDPUVtbl.h:80:25:IDPU_DetachFromDPU	16	static
+../../DPU/Inc/IDPUVtbl.h:84:25:IDPU_DispatchEvents	16	static
+../../DPU/Inc/IDPUVtbl.h:88:25:IDPU_RegisterNotifyCallback	24	static
+../../DPU/Inc/IDPUVtbl.h:92:25:IDPU_Process	16	static

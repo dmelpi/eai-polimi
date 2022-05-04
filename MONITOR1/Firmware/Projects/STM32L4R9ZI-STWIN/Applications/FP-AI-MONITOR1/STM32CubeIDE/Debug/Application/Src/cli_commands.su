@@ -1,0 +1,6 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:72:6:RegisterGenericCLICommands	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:77:7:RegisterCLICommands	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:87:12:CLIParseNullCmd	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:97:19:CLIParseInfoCmd	56	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:132:19:CLIParseUidCmd	112	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/cli_commands.c:146:19:CLIParseResetCmd	24	static

@@ -1,0 +1,6 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/ApplicationContext.h:112:9:ACGetTaskCount	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/ApplicationContext.h:119:15:ACGetFirstTask	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/ApplicationContext.h:126:15:ACGetNextTask	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/ApplicationContext.c:40:18:ACInit	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/ApplicationContext.c:49:18:ACAddTask	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/ApplicationContext.c:76:18:ACRemoveTask	24	static

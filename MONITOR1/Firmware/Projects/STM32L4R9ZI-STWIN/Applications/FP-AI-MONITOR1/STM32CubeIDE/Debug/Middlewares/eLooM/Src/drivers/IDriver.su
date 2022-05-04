@@ -1,0 +1,5 @@
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:60:18:IDrvInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:65:18:IDrvStart	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:70:18:IDrvStop	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:75:18:IDrvDoEnterPowerMode	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:90:18:IDrvReset	16	static

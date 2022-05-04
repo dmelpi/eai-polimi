@@ -1,0 +1,9 @@
+../../DPU/Inc/AiDPU.h:163:11:AiDPUGetProcessingMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:79:7:AiDPUAlloc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:90:7:AiDPUStaticAlloc	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:101:18:AiDPUSetProcessingMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:118:10:AiDPUSetStreamsParam	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:155:18:AiDPUPrepareToProcessData	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:171:18:AiDPU_vtblInit	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:194:18:AiDPU_vtblProcess	656	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/AiDPU.c:269:25:AiDPUAreStreamsInitialized	16	static

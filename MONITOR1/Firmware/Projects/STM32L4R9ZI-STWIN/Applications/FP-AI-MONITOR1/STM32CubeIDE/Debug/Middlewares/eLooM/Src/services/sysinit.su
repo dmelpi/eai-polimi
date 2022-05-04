@@ -1,0 +1,14 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:151:25:SysLoadApplicationContext	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:157:25:SysOnStartApplication	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:163:18:SysInit	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:246:18:SysPostEvent	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:270:12:SysGetPowerMode	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:274:18:SysTaskErrorHandler	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:285:16:SysGetPowerStatus	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:289:6:SysResetAEDCounter	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:293:11:SysEventsPending	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:305:35:SysGetErrorDelegate	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:310:15:SysGetBootIF	4	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:314:29:SysGetPowerModeHelper	8	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:330:13:InitTaskRun	88	static,ignoring_inline_asm
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/sysinit.c:534:17:InitTaskDoEnterPowerModeForPMClass	32	static

@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/free_rtos_hooks.c:39:6:vApplicationStackOverflowHook	24	static,ignoring_inline_asm
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/free_rtos_hooks.c:51:6:vApplicationMallocFailedHook	16	static,ignoring_inline_asm
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/free_rtos_hooks.c:77:6:vFreeRTOSAssertCalled	24	static,ignoring_inline_asm
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/free_rtos_hooks.c:104:6:vApplicationIdleHook	8	static

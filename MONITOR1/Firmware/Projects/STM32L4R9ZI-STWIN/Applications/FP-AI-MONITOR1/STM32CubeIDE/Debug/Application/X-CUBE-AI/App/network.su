@@ -1,0 +1,10 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:260:9:network_configure_activations	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:287:9:network_configure_weights	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:331:9:ai_network_get_info	136	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:376:9:ai_network_get_report	136	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:422:10:ai_network_get_error	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:428:10:ai_network_create	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:438:11:ai_network_destroy	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:444:9:ai_network_init	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:461:8:ai_network_run	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/network.c:468:8:ai_network_forward	16	static

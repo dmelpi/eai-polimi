@@ -1,0 +1,9 @@
+../../Inc/drivers/BCDriver.h:145:18:BCDriverToggleLine1W	16	static
+../../Inc/drivers/BCDriver.h:155:18:BCDriverResetLine1W	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:60:10:BCDriverAlloc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:75:18:BCDriverRegisterTickCallback	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:92:18:BCDriver_vtblInit	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:111:18:BCDriver_vtblStart	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:123:18:BCDriver_vtblStop	32	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:135:18:BCDriver_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/drivers/BCDriver.c:144:18:BCDriver_vtblReset	24	static

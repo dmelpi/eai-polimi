@@ -1,0 +1,14 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:133:18:AMTHardwareInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:138:18:AMTOnCreateTask	40	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:143:18:AMTDoEnterPowerMode	24	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:158:18:AMTHandleError	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:163:18:AMTOnEnterTaskControlLoop	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:168:18:AMTInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:184:12:AMTGetSystemPowerMode	8	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:189:12:AMTGetTaskPowerMode	32	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:200:18:AMTNotifyIsStillRunning	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:213:6:AMTResetAEDCounter	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:219:11:AMTIsPowerModeSwitchPending	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:226:6:AMTReportErrOnStepExecution	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:235:18:AMTSetPMStateRemapFunc	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/AManagedTask.c:50:6:AMTRun	32	static

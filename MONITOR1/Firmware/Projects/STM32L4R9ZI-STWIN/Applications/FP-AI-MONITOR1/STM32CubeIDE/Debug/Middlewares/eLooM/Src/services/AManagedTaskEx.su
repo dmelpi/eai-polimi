@@ -1,0 +1,8 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:113:18:AMTExForceExecuteStep	24	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:126:18:AMTExOnEnterPowerMode	24	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:141:18:AMTInitEx	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:162:18:AMTExSetInactiveState	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:171:11:AMTExIsTaskInactive	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:178:18:AMTExSetPMClass	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:187:10:AMTExGetPMClass	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/AManagedTaskEx.c:47:6:AMTExRun	32	static

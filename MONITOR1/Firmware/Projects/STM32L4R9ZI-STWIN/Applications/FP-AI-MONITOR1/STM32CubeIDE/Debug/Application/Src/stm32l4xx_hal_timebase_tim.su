@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/stm32l4xx_hal_timebase_tim.c:44:19:HAL_InitTick	56	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/stm32l4xx_hal_timebase_tim.c:107:6:HAL_SuspendTick	4	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/stm32l4xx_hal_timebase_tim.c:119:6:HAL_ResumeTick	4	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/stm32l4xx_hal_timebase_tim.c:133:13:HAL_TIM7_PeriodElapsedCallback	16	static

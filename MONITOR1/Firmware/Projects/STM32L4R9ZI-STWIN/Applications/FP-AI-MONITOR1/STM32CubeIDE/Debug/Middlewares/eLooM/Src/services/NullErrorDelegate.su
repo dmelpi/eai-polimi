@@ -1,0 +1,10 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:97:18:NullAEDInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:108:18:NullAEDOnStartApplication	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:119:18:NullAEDProcessEvent	24	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:132:18:NullAEDOnNewErrEvent	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:143:11:NullAEDIsLastErrorPending	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:153:18:NullAEDAddFirstResponder	24	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:165:18:NullAEDRemoveFirstResponder	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:176:9:NullAEDGetMaxFirstResponderPriority	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/NullErrorDelegate.h:186:6:NullAEDResetCounter	16	static
+/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/services/NullErrorDelegate.c:49:28:NullAEDAlloc	4	static
