@@ -30,12 +30,14 @@ def Hz_to_Mel(f_hz):
 def Mel_to_Hz(f_mel):
   return(700*(10**(f_mel/2505)-1))
 
+
 # Mel Filter Bank generator, it generates a defined number (nfilt) triangular filters equispaced in mel frequency domain between f_min and f_max 
 def Mel_filters(nfilt, f_min, f_max, sample_rate, n_samples ):
   low_freq_mel=Hz_to_Mel(f_min)
   high_freq_mel=Hz_to_Mel(f_max)
 
   d_hz_points = (high_freq_mel-low_freq_mel)/(nfilt+2)
+
   hz_points = np.zeros(nfilt+2)
   bin_sep=sample_rate/n_samples
   bin = np.zeros(nfilt+2)
@@ -55,6 +57,7 @@ def Mel_filters(nfilt, f_min, f_max, sample_rate, n_samples ):
     for k in range(f_m,f_m_plus):
       fbank[m-1,k]=(f_m_plus-k)/(f_m_plus-f_m)
   return fbank
+
 
 
 #######################################################################################################
@@ -131,7 +134,7 @@ def CMSIS_MFCC_Spectrogram_V4(signal,sampling_frequency, freq_min = 0, numOfDctO
 
     mcc_spectrogram_matrix = np.zeros((numOfDctOutputs, N))
     
-    freq_high = int(sampling_frequency / 2.2)
+    freq_high = sampling_frequency * 0.45
     fbank = Mel_filters(128, 0, freq_high, sampling_frequency, n_samples)
     cfftradix4f32=dsp.arm_cfft_radix4_instance_f32()
     rfftf32=dsp.arm_rfft_instance_f32()
@@ -142,6 +145,7 @@ def CMSIS_MFCC_Spectrogram_V4(signal,sampling_frequency, freq_min = 0, numOfDctO
 
     for ii in range(N):
         sub_signal = np.array(signal[ii*shift_samples : ii*shift_samples + n_samples])
+        sub_signal = sub_signal - np.mean(sub_signal)
         sub_signal = sub_signal*window
         power_spectra = CMSIS_PowerSpectrum (sub_signal, sampling_frequency)
         mel_spectra = mel_spectrum_ARM(fbank,  power_spectra)

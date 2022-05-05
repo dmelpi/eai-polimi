@@ -80,30 +80,30 @@ def singal_resampling(DataFrame, resampling_f):
 #########################################      LOAD DATA      ######################################### 
 #######################################################################################################
 
-def load_data(resampling_active=False, Resampling_frequency = 6667):
+def load_data(resampling_active=False, Resampling_frequency = 6667, folder_name = 'New_acquisitions'):
     # load acquired data
     Accelerometer = 'ISM330DHCX'
     classes = np.array(['Slow','Fast','Slow_dist','Fast_dist'])
 
-    dl = hsd.Datalog('New_acquisitions/'+classes[0])
+    dl = hsd.Datalog(folder_name+'/'+classes[0])
     df_ACC_S = dl.get_sensorDataFrame(Accelerometer)
     df_ACC_S = df_ACC_S[['Time','A_x [g]','A_y [g]','A_z [g]']]
 
-    dl = hsd.Datalog('New_acquisitions/'+classes[1])
+    dl = hsd.Datalog(folder_name+'/'+classes[1])
     df_ACC_F = dl.get_sensorDataFrame(Accelerometer)
     df_ACC_F = df_ACC_F[['Time','A_x [g]','A_y [g]','A_z [g]']]
 
-    dl = hsd.Datalog('New_acquisitions/'+classes[2])
+    dl = hsd.Datalog(folder_name+'/'+classes[2])
     df_ACC_SD = dl.get_sensorDataFrame(Accelerometer)
     df_ACC_SD = df_ACC_SD[['Time','A_x [g]','A_y [g]','A_z [g]']]
 
-    dl = hsd.Datalog('New_acquisitions/'+classes[3])
+    dl = hsd.Datalog(folder_name+'/'+classes[3])
     df_ACC_FD = dl.get_sensorDataFrame(Accelerometer)
     df_ACC_FD = df_ACC_FD[['Time','A_x [g]','A_y [g]','A_z [g]']]
 
     # SIGNAL RESAMPLING IF NEEDED  
                                 
-    Available_res_freq = np.array([12.5 , 26 , 52 , 104, 208, 416, 833, 1667, 3332, 6667])
+    Available_res_freq = np.array([12.5 , 26 , 52 , 104, 208, 416, 833, 1666, 3332, 6667])
     
     print('Measured ODR:', 1/(df_ACC_S.iloc[5,0]- df_ACC_S.iloc[4,0]))
     print('')
@@ -383,30 +383,30 @@ def load_existing_model(model_name, n_last_trainable_layers = 3, out_layer = Tru
      
     exist  = os.path.exists('Saved_models/'+ model_name)
     if exist == True:
-
+        ##model_1 = tf.keras.models.load_model('Saved_models/mfcc.h5')
         if out_layer == True:
-            base_model_non_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[1:-n_last_trainable_layers])
-            input_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[0])
-            base_model_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[-n_last_trainable_layers:-1])
-            output_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[-1])
+            base_model_non_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[1:-n_last_trainable_layers])
+            input_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[0])
+            base_model_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[-n_last_trainable_layers:-1])
+            output_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[-1])
             
             input_layer.trainable = False
             base_model_non_trainable.trainable=False
             
             model = tf.keras.models.Sequential([input_layer, base_model_non_trainable, base_model_trainable, output_layer])
-            model.summary()
         else:
             
-            base_model_non_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[1:-n_last_trainable_layers])
-            input_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[0])
-            base_model_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name)).layers[-n_last_trainable_layers:-1])
+            base_model_non_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[1:-n_last_trainable_layers])
+            input_layer = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[0])
+            base_model_trainable = tf.keras.models.Sequential((tf.keras.models.load_model('Saved_models/'+ model_name+'.h5')).layers[-n_last_trainable_layers:-1])
             
             input_layer.trainable = False
             base_model_non_trainable.trainable=False
             
             model = tf.keras.models.Sequential([input_layer, base_model_non_trainable, base_model_trainable])
-            model.summary()
         
+        model.summary()
+
         return model
         
     
