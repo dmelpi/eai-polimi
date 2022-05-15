@@ -1,7 +1,0 @@
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:70:18:IapmhInit	16	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:75:12:IapmhComputeNewPowerMode	16	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:80:11:IapmhCheckPowerModeTransaction	16	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:85:18:IapmhDidEnterPowerMode	16	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:90:12:IapmhGetActivePowerMode	16	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:95:16:IapmhGetPowerStatus	24	static
-../../../../../../Middlewares/ST/eLooM/Inc/services/IAppPowerModeHelper_vtbl.h:100:11:IapmhIsLowPowerMode	16	static

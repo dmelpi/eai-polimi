@@ -1,6 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:64:12:aiBootstrap	80	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:159:13:aiPrintLayoutBufferToFile	48	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:200:5:aiProcess	136	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:290:5:aiInit	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:321:6:aiDeInit	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/X-CUBE-AI/App/aiApp.c:341:6:aiPrintNetworkInfoToFile	32	static

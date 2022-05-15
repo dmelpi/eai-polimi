@@ -1,5 +1,0 @@
-../../SensorManager/Inc/SPIBusIF.h:99:18:SPIBusIFSetWhoAmI	16	static
-../../SensorManager/Inc/SPIBusIF.h:108:9:SPIBusIFGetWhoAmI	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/SPIBusIF.c:47:18:SPIBusIFInit	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/SPIBusIF.c:72:18:SPIBusIFWaitIOComplete	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/SPIBusIF.c:90:18:SPIBusIFNotifyIOComplete	24	static

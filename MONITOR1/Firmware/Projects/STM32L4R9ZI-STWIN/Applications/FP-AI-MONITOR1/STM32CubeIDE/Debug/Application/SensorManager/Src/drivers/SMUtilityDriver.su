@@ -1,7 +1,0 @@
-../../SensorManager/Inc/drivers/SMUtilityDriver.h:104:10:SMUtilityDrvGetTimeStamp	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:60:10:SMUtilityDriverAlloc	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:77:18:SMUtilityDriver_vtblInit	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:93:18:SMUtilityDriver_vtblStart	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:110:18:SMUtilityDriver_vtblStop	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:128:18:SMUtilityDriver_vtblDoEnterPowerMode	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/SMUtilityDriver.c:146:18:SMUtilityDriver_vtblReset	24	static

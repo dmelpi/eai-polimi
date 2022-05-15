@@ -1,7 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:107:15:HelloWorldTaskAlloc	8	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:123:18:HelloWorldTask_vtblHardwareInit	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:131:18:HelloWorldTask_vtblOnCreateTask	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:148:18:HelloWorldTask_vtblDoEnterPowerMode	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:156:18:HelloWorldTask_vtblHandleError	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:164:18:HelloWorldTask_vtblOnEnterTaskControlLoop	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/HelloWorldTask.c:178:25:HelloWorldTaskExecuteStepRun	24	static,ignoring_inline_asm

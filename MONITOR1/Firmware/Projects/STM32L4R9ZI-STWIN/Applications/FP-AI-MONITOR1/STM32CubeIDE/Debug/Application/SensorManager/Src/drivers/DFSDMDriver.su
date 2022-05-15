@@ -1,8 +1,0 @@
-../../SensorManager/Inc/drivers/DFSDMDriver.h:125:18:DFSDMDriverFilterRegisterCallback	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:56:18:DFSDMDrvSetDataBuffer	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:69:10:DFSDMDriverAlloc	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:84:18:DFSDMDriver_vtblInit	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:102:18:DFSDMDriver_vtblStart	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:130:18:DFSDMDriver_vtblStop	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:141:18:DFSDMDriver_vtblDoEnterPowerMode	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/DFSDMDriver.c:150:18:DFSDMDriver_vtblReset	24	static

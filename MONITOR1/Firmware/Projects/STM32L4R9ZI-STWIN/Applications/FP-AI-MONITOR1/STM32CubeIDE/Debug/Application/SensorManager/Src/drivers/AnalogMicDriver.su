@@ -1,7 +1,0 @@
-../../SensorManager/Inc/drivers/AnalogMicDriver.h:115:18:AnalogMicDrvSetDataBuffer	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:61:10:AnalogMicDriverAlloc	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:76:18:AnalogMicDriver_vtblInit	40	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:105:18:AnalogMicDriver_vtblStart	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:126:18:AnalogMicDriver_vtblStop	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:147:18:AnalogMicDriver_vtblDoEnterPowerMode	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/drivers/AnalogMicDriver.c:169:18:AnalogMicDriver_vtblReset	24	static

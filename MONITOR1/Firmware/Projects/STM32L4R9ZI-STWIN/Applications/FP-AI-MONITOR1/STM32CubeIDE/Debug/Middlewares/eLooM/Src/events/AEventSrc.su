@@ -1,6 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:31:18:AEvtSrcSetOwner	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:40:7:AEvtSrcGetOwner	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:51:18:AEventSrv_vtblInit	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:63:18:AEventSrv_vtblAddEventListener	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:79:18:AEventSrv_vtblRemoveEventListener	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Middlewares/ST/eLooM/Src/events/AEventSrc.c:94:10:AEventSrv_vtblGetMaxListenerCount	16	static

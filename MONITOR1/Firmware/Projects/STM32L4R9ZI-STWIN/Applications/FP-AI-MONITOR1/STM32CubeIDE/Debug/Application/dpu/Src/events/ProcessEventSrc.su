@@ -1,4 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/events/ProcessEventSrc.c:57:12:ProcessEventSrcAlloc	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/events/ProcessEventSrc.c:67:18:ProcessEventSrcSetTag	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/events/ProcessEventSrc.c:76:10:ProcessEventSrcGetTag	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/events/ProcessEventSrc.c:89:18:ProcessEventSrc_vtblSendEvent	40	static

@@ -1,3 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/i2c.c:31:6:MX_I2C2_Init	8	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/i2c.c:62:6:HAL_I2C_MspInit	48	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/i2c.c:134:6:HAL_I2C_MspDeInit	16	static

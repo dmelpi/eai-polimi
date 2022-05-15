@@ -1,5 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/sysinit_mx.c:55:6:SystemClock_Config	256	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/sysinit_mx.c:125:6:SystemClock_Backup	8	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/sysinit_mx.c:137:6:SystemClock_Restore	8	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/sysinit_mx.c:163:6:SysPowerConfig	64	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/sysinit_mx.c:231:6:HAL_MspInit	16	static

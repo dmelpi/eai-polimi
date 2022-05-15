@@ -3,7 +3,7 @@ import { JsonForms } from '@jsonforms/react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import schema from './schema.json';
 import uischema from './uischema.json';
@@ -12,6 +12,8 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { makeStyles } from '@mui/styles';
+
+import {writeFileSync} from 'fs';
 
 const useStyles = makeStyles({
   container: {
@@ -30,6 +32,10 @@ const useStyles = makeStyles({
     marginBottom: '1rem',
   },
   resetButton: {
+    margin: 'auto !important',
+    display: 'block !important',
+  },
+  saveButton: {
     margin: 'auto !important',
     display: 'block !important',
   },
@@ -54,6 +60,11 @@ const App = () => {
 
   const clearData = () => {
     setData({});
+  };
+
+  const saveData = () => {
+    console.log(data);
+    writeFileSync("params.json", JSON.stringify(data));
   };
 
   return (
@@ -92,8 +103,8 @@ const App = () => {
           </div>
           <div>
             <Button
-              className={classes.resetButton}
-              onClick={clearData}
+              className={classes.saveButton}
+              onClick={saveData}
               color='primary'
               variant='contained'
             >

@@ -1,6 +1,0 @@
-../../SensorManager/Inc/I2CBusIF.h:94:18:I2CBusIFSetWhoAmI	16	static
-../../SensorManager/Inc/I2CBusIF.h:103:9:I2CBusIFGetWhoAmI	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/I2CBusIF.c:47:18:I2CBusIFInit	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/I2CBusIF.c:71:18:I2CBusIFWaitIOComplete	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/I2CBusIF.c:89:18:I2CBusIFNotifyIOComplete	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/I2CBusIF.c:111:9:I2CBusNullRW	24	static

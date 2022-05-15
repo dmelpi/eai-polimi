@@ -1,6 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:105:12:FreeRTOS_CLIRegisterCommand	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:146:12:FreeRTOS_CLIProcessCommand	40	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:221:7:FreeRTOS_CLIGetOutputBuffer	4	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:227:13:FreeRTOS_CLIGetParameter	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:283:19:prvHelpCommand	32	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/FreeRTOS_CLI.c:316:15:prvGetNumberOfParameters	24	static

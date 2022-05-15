@@ -1,4 +1,0 @@
-../../SensorManager/Inc/ABusIF.h:136:18:ABusIFSetHandle	16	static
-../../SensorManager/Inc/ABusIF.h:145:7:ABusIFGetHandle	16	static
-../../SensorManager/Inc/ABusIF.h:152:18:ABusIFInit	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/SensorManager/Src/ABusIF.c:38:9:ABusIFNullRW	24	static

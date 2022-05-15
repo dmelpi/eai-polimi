@@ -1,3 +1,17 @@
+# Preprocessing configuration 
+
+This project allows configuring a preprocessing pipeline using a web form.
+
+As a result, a JSON file is generated with user chosen parameters.
+
+Following this step, the handlebars library is used to generate Python and C code that use the CMSIS DSP library.
+
+The project is derived from the `JSON Forms React seed app`.
+
+---
+
+
+
 # JSON Forms React seed App
 
 This seed demonstrates how to use [JSON Forms](https://jsonforms.io) with React in order to render a simple form for displaying a task entity.

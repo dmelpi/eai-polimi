@@ -1,3 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/usart.c:30:6:MX_USART2_UART_Init	8	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/usart.c:73:6:HAL_UART_MspInit	48	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/mx/Src/usart.c:104:6:HAL_UART_MspDeInit	16	static

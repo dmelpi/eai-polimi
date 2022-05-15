@@ -1,8 +1,0 @@
-../../SensorManager/Inc/ISensor_vtbl.h:70:27:ISensorStart	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:74:27:ISensorStop	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:78:27:ISensorSetODR	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:82:27:ISensorSetFS	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:86:27:ISensorEnable	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:90:27:ISensorDisable	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:94:20:ISensorIsEnabled	16	static
-../../SensorManager/Inc/ISensor_vtbl.h:98:29:ISensorGetDescription	16	static

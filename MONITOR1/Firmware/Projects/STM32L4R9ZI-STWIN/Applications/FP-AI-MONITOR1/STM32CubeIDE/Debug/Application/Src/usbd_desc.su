@@ -1,8 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:242:11:USBD_FS_DeviceDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:255:11:USBD_FS_LangIDStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:268:11:USBD_FS_ProductStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:287:11:USBD_FS_ManufacturerStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:300:11:USBD_FS_SerialStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:319:11:USBD_FS_ConfigStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:338:11:USBD_FS_InterfaceStrDescriptor	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/Src/usbd_desc.c:358:11:USBD_FS_USR_BOSDescriptor	16	static

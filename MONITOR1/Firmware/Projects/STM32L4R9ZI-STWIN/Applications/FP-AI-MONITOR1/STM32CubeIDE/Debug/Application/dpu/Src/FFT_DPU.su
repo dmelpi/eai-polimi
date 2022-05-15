@@ -1,5 +1,0 @@
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/FFT_DPU.c:80:7:FFT_DPUAlloc	16	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/FFT_DPU.c:93:18:FFT_DPUInit	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/FFT_DPU.c:108:18:FFT_DPU_Process_vtbl	112	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/FFT_DPU.c:199:10:FFT_DPUSetInputParam	24	static
-/Users/leonardoiacussi/Desktop/PhD/Firmware/Projects/STM32L4R9ZI-STWIN/Applications/FP-AI-MONITOR1/DPU/Src/FFT_DPU.c:275:25:FFT_DPUIsFullInitialized	24	static
