@@ -1,0 +1,108 @@
+Neural Network Tools for STM32AI v1.6.0 (STM.ai v7.1.0-RC3)
+Created date          : 2022-03-23 19:38:45
+Parameters            : generate --name har_network -m **/AI_Resources/models/har_SVC.onnx --type onnx --compression 1 --verbosity 1 --workspace **\AppData\Local\Temp\mxAI_workspace78607225645950015540923316744940171 --output **\.stm32cubemx\har_network_output
+
+Exec/report summary (generate)
+------------------------------------------------------------------------------------------------------------------------
+model file            : **\AI_Resources\models\har_SVC.onnx
+type                  : onnx
+c_name                : har_network
+compression           : None
+workspace dir         : **\AppData\Local\Temp\mxAI_workspace78607225645950015540923316744940171
+output dir            : **\.stm32cubemx\har_network_output
+model_name            : har_SVC
+model_hash            : c4b5d0b82be85da884e846d792a5f055
+input 1/1             : 'X'
+                        72 items, 288 B, ai_float, float, (1,1,1,72), domain:user/
+output 1/2            : 'label0'
+                        1 items, 4 B, ai_float, float, (1,1,1,1), domain:user/
+output 2/2            : 'label1'
+                        4 items, 16 B, ai_float, float, (1,1,1,4), domain:user/
+outputs (total)       : 20 B
+params #              : 13,904 items (54.29 KiB)
+macc                  : 109,728
+weights (ro)          : 55,592 B (54.29 KiB) (1 segment)
+activations (rw)      : 2,076 B (2.03 KiB) (1 segment)
+ram (total)           : 2,384 B (2.33 KiB) = 2,076 + 288 + 20
+
+Model name - har_SVC ['X'] ['label', 'label']
+---------------------------------------------------------------------------------------------------------------------------
+id   layer (type)       oshape               param/size      macc      connected to   |   c_size   c_macc   c_type        
+---------------------------------------------------------------------------------------------------------------------------
+0    X (Input)          (1,1,1,72)                                                    |                    
+     variable (Dense)   (1,1,1,24)           1,728/6,912     1,728     X              |                     dense()[0]    
+---------------------------------------------------------------------------------------------------------------------------
+1    label (SVC)        (1,1,1,1)(1,1,1,4)   12,176/48,680   108,000   variable       |                     svc()()/o/o[1]
+---------------------------------------------------------------------------------------------------------------------------
+model/c-model: macc=109,728/109,728  weights=55,592/55,592  activations=--/2,076 io=--/308
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : har_svc
+c-name                : har_network
+c-node #              : 2
+c-array #             : 13
+activations size      : 2076 (1 segments)
+weights size          : 55592 (1 segments)
+macc                  : 109728
+inputs                : ['X_output']
+outputs               : ['label_output0', 'label_output1']
+
+C-Arrays (13)
+----------------------------------------------------------------------------------------------------------
+c_id   name (*_array)            item/size     domain/mem-pool           c-type          fmt      comment
+----------------------------------------------------------------------------------------------------------
+0      X_output                  72/288        user/                     float           float    /input 
+1      variable_output           24/96         activations/**default**   float           float           
+2      label_output0             1/4           user/                     float           float    /output
+3      label_output1             4/16          user/                     float           float    /output
+4      variable_weights          1728/6912     weights/                  const float     float           
+5      label_coefficients        1350/5400     weights/                  const float     float           
+6      label_support_vectors     10800/43200   weights/                  const float     float           
+7      label_rho                 6/24          weights/                  const float     float           
+8      label_classlabels_ints    4/4           weights/                  const uint8_t   int/us          
+9      label_vectors_per_class   4/4           weights/                  const uint8_t   int/us          
+10     label_prob_a              6/24          weights/                  const float     float           
+11     label_prob_b              6/24          weights/                  const float     float           
+12     label_scratch0            495/1980      activations/**default**   float           float           
+----------------------------------------------------------------------------------------------------------
+
+C-Layers (2)
+----------------------------------------------------------------------------------------------------------
+c_id   name (*_layer)   id   layer_type   macc     rom     tensors                      shape (array id) 
+----------------------------------------------------------------------------------------------------------
+0      variable         0    dense        1728     6912    I: X_output                  (1,1,1,72) (0)   
+                                                           W: variable_weights          (72,1,1,24) (4)  
+                                                           O: variable_output           (1,1,1,24) (1)   
+----------------------------------------------------------------------------------------------------------
+1      label            1    svc          108000   48680   I: variable_output           (1,1,1,24) (1)   
+                                                           S: label_scratch0                             
+                                                           W: label_coefficients        (1,1350,1,1) (5) 
+                                                           W: label_support_vectors     (1,10800,1,1) (6)
+                                                           W: label_rho                 (1,6,1,1) (7)    
+                                                           W: label_classlabels_ints    (1,4,1,1) (8)    
+                                                           W: label_vectors_per_class   (1,4,1,1) (9)    
+                                                           W: label_prob_a              (1,6,1,1) (10)   
+                                                           W: label_prob_b              (1,6,1,1) (11)   
+                                                           O: label_output0             (1,1,1,1) (2)    
+                                                           O: label_output1             (1,1,1,4) (3)    
+----------------------------------------------------------------------------------------------------------
+
+
+
+Complexity report per layer - macc=109,728 weights=55,592 act=2,076 ram_io=308
+-------------------------------------------------------------------------
+id   name       c_macc                    c_rom                     c_id
+-------------------------------------------------------------------------
+0    variable   |                  1.6%   |||               12.4%   [0] 
+1    label      ||||||||||||||||  98.4%   ||||||||||||||||  87.6%   [1] 
+
+Generated files (5)
+--------------------------------------------------------------------------------
+**\.stm32cubemx\har_network_output\har_network_config.h
+**\.stm32cubemx\har_network_output\har_network.h
+**\.stm32cubemx\har_network_output\har_network.c
+**\.stm32cubemx\har_network_output\har_network_data.h
+**\.stm32cubemx\har_network_output\har_network_data.c
