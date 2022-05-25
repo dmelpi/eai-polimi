@@ -193,7 +193,7 @@ sys_error_code_t ProcessTaskAttachToSensorEx(ProcessTask_t *_this, ISourceObserv
     _this->p_dpu_buff = NULL;
   }
 
-//  uint16_t buff_size = Dummy_DPUSetInputParam(_this->p_dpu, signal_size, axes, cb_items);
+
   uint16_t buff_size = AiDPUSetStreamsParam(_this->p_dpu, signal_size, axes, cb_items);
   _this->p_dpu_buff = pvPortMalloc(buff_size);
   if (_this->p_dpu_buff != NULL)

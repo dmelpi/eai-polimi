@@ -72,7 +72,7 @@
 #define HW_TASK_CFG_PRIORITY                      (tskIDLE_PRIORITY+1)
 
 // file ProcessTask.c
-#define PRC_TASK_CFG_STACK_DEPTH                  (configMINIMAL_STACK_SIZE*10)
+#define PRC_TASK_CFG_STACK_DEPTH                  (configMINIMAL_STACK_SIZE*120)
 #define PRC_TASK_CFG_PRIORITY                     (tskIDLE_PRIORITY+2)
 
 // SensorManager configuration
@@ -89,7 +89,7 @@
 #define IIS3DWB_TASK_CFG_PRIORITY                 (tskIDLE_PRIORITY+4)
 
 // file SPIBusTask.c
-#define SPIBUS_TASK_CFG_STACK_DEPTH               ((configMINIMAL_STACK_SIZE*2) + (configMINIMAL_STACK_SIZE/2))
+#define SPIBUS_TASK_CFG_STACK_DEPTH               ((configMINIMAL_STACK_SIZE*4) + (configMINIMAL_STACK_SIZE/2))
 #define SPIBUS_TASK_CFG_PRIORITY                  (tskIDLE_PRIORITY+4)
 
 
@@ -101,7 +101,7 @@
 // SensorStreamerCLI configuration
 
 // file SCLIUtilTask.c
-#define SCLIUTIL_TASK_CFG_STACK_DEPTH             ((configMINIMAL_STACK_SIZE*2) + (configMINIMAL_STACK_SIZE/2))
+#define SCLIUTIL_TASK_CFG_STACK_DEPTH             ((configMINIMAL_STACK_SIZE*10) + (configMINIMAL_STACK_SIZE/2))
 #define SCLIUTIL_TASK_CFG_PRIORITY                (tskIDLE_PRIORITY+1)
 
 

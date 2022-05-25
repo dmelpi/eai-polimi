@@ -27,17 +27,17 @@ extern "C" {
 
 #include "ADPU.h"
 #include "ADPU_vtbl.h"
-#include "har_network.h"
+#include "network.h"
 #include "aiApp.h"
 #include "fft.h"
 
 
-#define SET_ODR 1666.0      							// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
-#define SET_FS 4.0									// [g]  set FS (Full scale) value based on supported ODR available list of the sensor
+#define SET_ODR 26.0      							// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
+#define SET_FS 16.0									// [g]  set FS (Full scale) value based on supported ODR available list of the sensor
 #define AIDPU_NB_AXIS         (3)
 #define AIDPU_NB_SAMPLE       (512)				// Set the number of samples needed in the DPU
-#define AIDPU_AI_PROC_IN_SIZE (AI_HAR_NETWORK_IN_1_SIZE)
-#define AIDPU_NAME            "har_network"
+#define AIDPU_AI_PROC_IN_SIZE (AI_NETWORK_IN_1_SIZE)
+#define AIDPU_NAME            "network"
 
 
 

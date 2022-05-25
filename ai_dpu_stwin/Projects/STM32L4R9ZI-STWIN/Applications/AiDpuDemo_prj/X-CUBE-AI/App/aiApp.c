@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 /* header files */
 #include "aiTestHelper.h"
 
@@ -37,8 +38,7 @@
 
 #define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
-#define AI_HAR_NETWORK_CTX_IDX 0
-#define AI_USC_NETWORK_CTX_IDX 1
+#define AI_NETWORK_CTX_IDX 0
 
 #define AI_MNETWORK_OUT_NUM_MAX 2
 #if (AI_MNETWORK_OUT_NUM > AI_MNETWORK_OUT_NUM_MAX  )
@@ -56,7 +56,7 @@ FILE * plcPrintFile;
 
 //DEF_DATA_IN;
 
-DEF_DATA_OUT;
+//DEF_DATA_OUT;
 
 struct ai_network_exec_ctx {
   ai_handle handle;
@@ -68,7 +68,7 @@ static int aiBootstrap(struct ai_network_exec_ctx *ctx, const char *nn_name)
   ai_error err;
 
   /* Creating the instance of the  network ------------------------- */
-  LC_PRINT("Creating the network \"%s\"..\r\n", nn_name);
+  //LC_PRINT("Creating the network \"%s\"..\r\n", nn_name);
 
   err = ai_mnetwork_create(nn_name, &ctx->handle, NULL);
   if (err.type) {
@@ -118,16 +118,12 @@ int aiInit(const char* nn_name)
 
   /* Reset the contexts -------------------------------------------- */
 
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0)  {
-	 net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-	 res = aiBootstrap(&net_exec_ctx[AI_HAR_NETWORK_CTX_IDX],nn_name) ;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	 net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-	 res = aiBootstrap(&net_exec_ctx[AI_USC_NETWORK_CTX_IDX],nn_name) ;
+  if (strncmp(nn_name,AI_NETWORK_MODEL_NAME, 10)==0)  {
+	 net_exec_ctx[AI_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
+	 res = aiBootstrap(&net_exec_ctx[AI_NETWORK_CTX_IDX],nn_name) ;
   }
   else  {
-	LC_PRINT("\r\nAI Error : Did not Found network \"%s\"\r\n", nn_name);
+	//LC_PRINT("\r\nAI Error : Did not Found network \"%s\"\r\n", nn_name);
   }
   return res;
 }
@@ -135,27 +131,16 @@ int aiInit(const char* nn_name)
 void aiDeInit(const char* nn_name)
 {
   ai_error err;
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0){
+  if (strncmp(nn_name,AI_NETWORK_MODEL_NAME, 10)==0){
 	LC_PRINT("Releasing %s...\r\n",nn_name);
-	if (net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle != AI_HANDLE_NULL) {
-	  if (ai_mnetwork_destroy(net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle)
+	if (net_exec_ctx[AI_NETWORK_CTX_IDX].handle != AI_HANDLE_NULL) {
+	  if (ai_mnetwork_destroy(net_exec_ctx[AI_NETWORK_CTX_IDX].handle)
 		  != AI_HANDLE_NULL) {
-		err = ai_mnetwork_get_error(net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle);
+		err = ai_mnetwork_get_error(net_exec_ctx[AI_NETWORK_CTX_IDX].handle);
 		aiLogErr(err, "ai_mnetwork_destroy");
 	  }
 	}
-	net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	LC_PRINT("Releasing %s...\r\n",nn_name);
-	if (net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle != AI_HANDLE_NULL) {
-	  if (ai_mnetwork_destroy(net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle)
-		  != AI_HANDLE_NULL) {
-		err = ai_mnetwork_get_error(net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle);
-		aiLogErr(err, "ai_mnetwork_destroy");
-	  }
-	}
-	net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
+	net_exec_ctx[AI_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
   }
 }
 
@@ -167,23 +152,20 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
   ai_buffer ai_input;
   ai_buffer ai_output[AI_MNETWORK_OUT_NUM_MAX];
 
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0){
-	idx = AI_HAR_NETWORK_CTX_IDX;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	idx = AI_USC_NETWORK_CTX_IDX;
+  if (strncmp(nn_name,AI_NETWORK_MODEL_NAME, 10)==0){
+	idx = AI_NETWORK_CTX_IDX;
   }
   else return -1;
 
   if(net_exec_ctx[idx].handle == AI_HANDLE_NULL)
   {
-	LC_PRINT("E: network handle is NULL\r\n");
+	//LC_PRINT("E: network handle is NULL\r\n");
     return -1;
   }
   if ((net_exec_ctx[idx].report.n_inputs > AI_MNETWORK_IN_NUM) ||
 	  (net_exec_ctx[idx].report.n_outputs > AI_MNETWORK_OUT_NUM))
   {
-	LC_PRINT("E: AI_MNETWORK_IN/OUT_NUM definition are incoherent\r\n");
+	//LC_PRINT("E: AI_MNETWORK_IN/OUT_NUM definition are incoherent\r\n");
 	HAL_Delay(100);
 	return -1;
   }
@@ -203,7 +185,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
   if (batch != 1) {
     aiLogErr(ai_mnetwork_get_error(net_exec_ctx[idx].handle),"ai_mnetwork_run");
   }
-  if (AI_HAR_NETWORK_CTX_IDX == idx )
+  if (AI_NETWORK_CTX_IDX == idx )
   {
     /* check correct init  */
     if( net_exec_ctx[idx].report.n_outputs == 2)
@@ -212,7 +194,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 	  float *p_out1 = (float*) ai_output[1].data;
 
 	  p_out_data[0] = p_out0[0];
-	  p_out_data[1] = p_out1[(int) p_out0[0]];
+	  p_out_data[1] = p_out1[(int) p_out0[0]] * 100.0;
     }
     else if(net_exec_ctx[idx].report.n_outputs == 1)
     {
@@ -228,30 +210,11 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 		}
 	  }
 	  p_out_data[0] = max_idx;
-	  p_out_data[1] = max_out;
+	  p_out_data[1] = max_out * 100.0;
     }
-    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %f   \r\n", (int) p_out_data[0] , (float) p_out_data[1]*100.0));
+    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %d   \r\n", (int) p_out_data[0] , (int) p_out_data[1]));
+    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d  \r\n", (int) p_out_data[0]));
   }
-  else if (AI_USC_NETWORK_CTX_IDX == idx )
-  {
-	  float *p_out0 = (float*) ai_output[0].data;
-	  float max_out = *p_out0;
-	  int max_idx = 0;
-	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("%f\t",p_out0[0]));
-	  for(int i = 1; i < AI_BUFFER_SIZE(&ai_output[0]); i++)
-	  {
-	    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("%f\t",p_out0[i]));
-	    if(p_out0[i] > max_out)
-		{
-		  max_idx = i;
-		  max_out = p_out0[i];
-		}
- 	  }
-	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("\n\r"));
-	  p_out_data[0] = (float) max_idx;
-	  p_out_data[1] = max_out;
-  }
-
   return 0;
 }
 
@@ -262,11 +225,8 @@ void aiPrintNetworkInfoToFile(const char* nn_name, FILE *out)
   FILE *plcPrintFileSave = plcPrintFile;
   plcPrintFile = out;
 
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0)  {
-	p_ctx = &net_exec_ctx[AI_HAR_NETWORK_CTX_IDX];
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-    p_ctx = &net_exec_ctx[AI_USC_NETWORK_CTX_IDX];
+  if (strncmp(nn_name,AI_NETWORK_MODEL_NAME, 10)==0)  {
+	p_ctx = &net_exec_ctx[AI_NETWORK_CTX_IDX];
   }
 
   if (p_ctx) {

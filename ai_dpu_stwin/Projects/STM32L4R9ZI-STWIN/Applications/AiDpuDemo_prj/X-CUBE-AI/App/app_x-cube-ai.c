@@ -35,8 +35,6 @@
 #include <string.h>
 
 #include "app_x-cube-ai.h"
-//#include "bsp_ai.h"
-//#include "aiSystemPerformance.h"
 #include "ai_datatypes_defines.h"
 
 /* USER CODE BEGIN includes */
@@ -44,34 +42,18 @@
 
 /* IO buffers ----------------------------------------------------------------*/
 
-//DEF_DATA_IN
-//
-//DEF_DATA_OUT
+DEF_DATA_IN
+
+DEF_DATA_OUT
 /* Activations buffers -------------------------------------------------------*/
 
 AI_ALIGNED(32)
-static uint8_t pool0[AI_USC_NETWORK_DATA_ACTIVATION_1_SIZE];
+static uint8_t pool0[AI_NETWORK_DATA_ACTIVATION_1_SIZE];
 
 ai_handle data_activations0[] = {pool0};
-ai_handle data_activations1[] = {pool0};
 
 /* Entry points --------------------------------------------------------------*/
 
-//void MX_X_CUBE_AI_Init(void)
-//{
-//    MX_UARTx_Init();
-//    aiSystemPerformanceInit();
-//    /* USER CODE BEGIN 5 */
-//    /* USER CODE END 5 */
-//}
-//
-//void MX_X_CUBE_AI_Process(void)
-//{
-//    aiSystemPerformanceProcess();
-//    HAL_Delay(1000); /* delay 1s */
-//    /* USER CODE BEGIN 6 */
-//    /* USER CODE END 6 */
-//}
 /* Multiple network support --------------------------------------------------*/
 
 #include <string.h>
@@ -79,31 +61,18 @@ ai_handle data_activations1[] = {pool0};
 
 static const ai_network_entry_t networks[AI_MNETWORK_NUMBER] = {
     {
-        .name = (const char *)AI_HAR_NETWORK_MODEL_NAME,
-        .config = AI_HAR_NETWORK_DATA_CONFIG,
-        .ai_get_report = ai_har_network_get_report,
-        .ai_create = ai_har_network_create,
-        .ai_destroy = ai_har_network_destroy,
-        .ai_get_error = ai_har_network_get_error,
-        .ai_init = ai_har_network_init,
-        .ai_run = ai_har_network_run,
-        .ai_forward = ai_har_network_forward,
-        .ai_data_params_get = ai_har_network_data_params_get,
+        .name = (const char *)AI_NETWORK_MODEL_NAME,
+        .config = AI_NETWORK_DATA_CONFIG,
+        .ai_get_report = ai_network_get_report,
+        .ai_create = ai_network_create,
+        .ai_destroy = ai_network_destroy,
+        .ai_get_error = ai_network_get_error,
+        .ai_init = ai_network_init,
+        .ai_run = ai_network_run,
+        .ai_forward = ai_network_forward,
+        .ai_data_params_get = ai_network_data_params_get,
         .activations = data_activations0
     },
-//    {
-//        .name = (const char *)AI_USC_NETWORK_MODEL_NAME,
-//        .config = AI_USC_NETWORK_DATA_CONFIG,
-//        .ai_get_report = ai_usc_network_get_report,
-//        .ai_create = ai_usc_network_create,
-//        .ai_destroy = ai_usc_network_destroy,
-//        .ai_get_error = ai_usc_network_get_error,
-//        .ai_init = ai_usc_network_init,
-//        .ai_run = ai_usc_network_run,
-//        .ai_forward = ai_usc_network_forward,
-//        .ai_data_params_get = ai_usc_network_data_params_get,
-//        .activations = data_activations1
-//    },
 };
 
 struct network_instance {

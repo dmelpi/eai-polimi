@@ -27,21 +27,21 @@
 
 // set the AIDPU_G_TP_MS_2 as 9.81 if acceleration data inside the DPU are needed in [m/s^2] otherwise set it to 1.0
 
-#define AIDPU_G_TO_MS_2 (9.81F)
-//#define AIDPU_G_TO_MS_2 (1.0F)
+//#define AIDPU_G_TO_MS_2 (9.81F)
+#define AIDPU_G_TO_MS_2 (1.0F)
 
 
-float32_t preprocessing_input_array[AIDPU_NB_SAMPLE];
-float32_t input_vector_mean;
+static float32_t preprocessing_input_array[AIDPU_NB_SAMPLE];
+static float32_t input_vector_mean;
 
 //FFT Variables
-float32_t spectrum[AIDPU_NB_SAMPLE/2];
-arm_rfft_fast_instance_f32 fft_handler;
+static float32_t spectrum[AIDPU_NB_SAMPLE/2];
+static arm_rfft_fast_instance_f32 fft_handler;
 
 // filter bank variables
-int bin[bank_size+2];
-float32_t mel_spectra[bank_size];
-float ai_results[2];
+static int bin[bank_size+2];
+static float32_t mel_spectra[bank_size];
+static float ai_results[2];
 
 
 arm_cfft_radix4_instance_f32 cfftradix4f32;
@@ -255,18 +255,14 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 		preprocessing_input_array[i] = gravIn[i].AccY;
 	}
 
-
 	arm_mean_f32(preprocessing_input_array, AIDPU_NB_SAMPLE, &input_vector_mean);
 
 	for (int i=0 ; i < AIDPU_NB_SAMPLE ; i++){
 		preprocessing_input_array[i] = preprocessing_input_array[i] - input_vector_mean;
 	}
 
-
 	arm_rfft_fast_init_f32(&fft_handler , AIDPU_NB_SAMPLE);  // da inizializzare prima
 	status=arm_dct4_init_f32(&dct4f32,&rfftf32,&cfftradix4f32,bank_size,bank_size/2,0.125);
-
-
 
 	DoHanning(preprocessing_input_array, preprocessing_input_array);
 	DoFFT(&fft_handler, preprocessing_input_array  ,spectrum);
@@ -285,7 +281,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
 
     /* call Ai library. */
-    //p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);
+    p_obj->ai_processing_f(AIDPU_NAME, (float*) mel_spectra, p_obj->ai_out);
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));

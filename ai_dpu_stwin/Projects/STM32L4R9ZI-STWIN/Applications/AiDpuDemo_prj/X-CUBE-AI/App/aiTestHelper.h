@@ -30,6 +30,7 @@
 extern "C" {
 #endif
 
+
 void aiPlatformVersion(void);
 
 ai_u32 aiBufferSize(const ai_buffer* buffer);

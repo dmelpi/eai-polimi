@@ -33,9 +33,8 @@
 #if !defined(TFLM_RUNTIME)
 
 #include <aiTestHelper.h>
-//#include <aiTestUtility.h>
-
 #include <ai_platform_interface.h>
+
 
 void aiPlatformVersion(void)
 {
@@ -75,7 +74,7 @@ void aiPrintBufferInfo(const ai_buffer *buffer)
 {
   const ai_buffer_format fmt = buffer->format;
   /* shape + nb elem */
-  LC_PRINT("(%lu,%lu,%lu,%d) %d/",
+  LC_PRINT("(%d,%d,%d,%d) %d/",
       AI_BUFFER_SHAPE_ELEM(buffer, AI_SHAPE_BATCH),
       AI_BUFFER_SHAPE_ELEM(buffer, AI_SHAPE_HEIGHT),
       AI_BUFFER_SHAPE_ELEM(buffer, AI_SHAPE_WIDTH),
