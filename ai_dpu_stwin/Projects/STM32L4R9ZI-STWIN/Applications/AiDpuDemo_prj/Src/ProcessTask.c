@@ -46,11 +46,11 @@
 #define PRC_TASK_DPU_TAG                    (0x30U) // must be equal to CTRL_CMD_PARAM_AI
 
 #ifndef PRC_TASK_CFG_AXIS_NUMBER
-#define PRC_TASK_CFG_AXIS_NUMBER            3
+#define PRC_TASK_CFG_AXIS_NUMBER            AIDPU_NB_AXIS
 #endif
 
 #ifndef PRC_TASK_CFG_DATA_INPUT_USER
-#define PRC_TASK_CFG_DATA_INPUT_USER        24
+#define PRC_TASK_CFG_DATA_INPUT_USER        AIDPU_NB_SAMPLE
 #endif
 
 #define AI_LSB_16B                          (1.0F/32768)    // Value of an LSB for a 16 bit signed arithmetic
@@ -632,8 +632,8 @@ static sys_error_code_t ProcessTaskSetSensorsConfig(ProcessTask_t *_this, uint16
   if (sensor_id != SI_NULL_SENSOR_ID)
   {
     SMSensorEnable(sensor_id);
-    SMSensorSetODR(sensor_id, 26.0);
-    SMSensorSetFS(sensor_id, 4.0);
+    SMSensorSetODR(sensor_id, SET_ODR);
+    SMSensorSetFS(sensor_id, SET_FS);
   }
 
   *p_active_sensor_id = sensor_id;

@@ -23,7 +23,10 @@
 #include <stdio.h>
 
 
-#define AIDPU_G_TO_MS_2 (9.8F)
+// set the AIDPU_G_TP_MS_2 as 9.81 if acceleration data inside the DPU are needed in [m/s^2] otherwise set it to 1.0
+
+//#define AIDPU_G_TO_MS_2 (9.81F)
+#define AIDPU_G_TO_MS_2 (1.0F)
 
 /**
  * Specified the virtual table for the AiDPU_t class.
@@ -249,6 +252,15 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       gravIn[i].AccZ = *p_in++ * scale;
       gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
     }
+
+
+    /*	#####################  PREPROCESSING  #####################  */
+
+
+
+
+
+
 
     /* call Ai library. */
     p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);

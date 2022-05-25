@@ -40,10 +40,15 @@ typedef enum _EAiMode {
   E_AI_DETECTION     //!< the AI library detect the similarity of the signal with the learned model.
 } EAiMode_t;
 
+
+#define SET_ODR 26.0      							// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
+#define SET_FS 4.0									// [g]  set FS (Full scale) value based on supported ODR available list of the sensor
 #define AIDPU_NB_AXIS         (3)
-#define AIDPU_NB_SAMPLE       (24)
+#define AIDPU_NB_SAMPLE       (24)				// Set the number of samples needed in the DPU
 #define AIDPU_AI_PROC_IN_SIZE (AI_HAR_NETWORK_IN_1_SIZE)
 #define AIDPU_NAME            "har_network"
+
+
 
 /**
  * Create  type name for _AiDPU_t.
