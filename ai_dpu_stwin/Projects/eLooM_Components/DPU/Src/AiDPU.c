@@ -284,8 +284,6 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
 
 
-
-
     /* call Ai library. */
     //p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);
 
