@@ -91,7 +91,7 @@ void DoFFT(arm_rfft_fast_instance_f32 * fft_handler, float32_t *fft_in_buf ,floa
 
 	for (int i=0;   i<AIDPU_NB_SAMPLE   ; i=i+2) {
 	  spectrum[freqpoint] =(complexABS(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(AIDPU_NB_SAMPLE));
-	  spectrum[freqpoint] = 2 * spectrum[freqpoint]*spectrum[freqpoint] /(float32_t)odr;
+	  spectrum[freqpoint] = 2 * spectrum[freqpoint]*spectrum[freqpoint] /(float32_t)SET_ODR;
 	  //spectrum[freqpoint] = 20 * log10(spectrum[freqpoint]);
 	  freqpoint++;
 	}
@@ -113,13 +113,13 @@ void Mel_Filters_Bank(int * bin ){
 	static float f_min = 0.0;
 
 
-	f_max = (float)odr * 0.45;
+	f_max = (float)SET_ODR * 0.45;
 
 	low_freq_mel = Hz_to_Mel(f_min);
 	high_freq_mel = Hz_to_Mel(f_max);
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( bank_size+2);
 
-	bin_sep=odr/(float32_t)AIDPU_NB_SAMPLE;
+	bin_sep=SET_ODR/(float32_t)AIDPU_NB_SAMPLE;
 
 	for (int i=0; i < bank_size+2; i++){
 		Hz_points[i] = Mel_to_Hz((float)(low_freq_mel + i * d_hz_points));

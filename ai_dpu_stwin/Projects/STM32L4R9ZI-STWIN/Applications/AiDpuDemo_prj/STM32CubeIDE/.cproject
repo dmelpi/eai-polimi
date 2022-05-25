@@ -76,7 +76,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../Projects/eLooM_Components/SensorManager/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../Projects/eLooM_Components/SensorsStreamerCLI/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../Middlewares/feature_extraction_library/Inc"/>
-									<listOptionValue builtIn="false" value="../../STM32CubeIDE/feature_extraction_library/Inc"/>
+									<listOptionValue builtIn="false" value="../../feature_extraction_library/Inc"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.otherflags.1496185724" name="Other flags" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.otherflags" useByScannerDiscovery="true" valueType="stringList">
 									<listOptionValue builtIn="false" value="-include ../../Inc/sysconfig.h"/>

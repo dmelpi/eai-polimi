@@ -1675,6 +1675,16 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_GenericFFT_Library/Inc/fft.h</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/feature_extraction_library/Inc/feature_extraction_library.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/feature_extraction_library.h</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/feature_extraction_library/Src/feature_extraction_library.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/feature_extraction_library.c</locationURI>
+		</link>
+		<link>
 			<name>eLooM_Components/DPU/Inc/ADPU.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/ADPU.h</locationURI>

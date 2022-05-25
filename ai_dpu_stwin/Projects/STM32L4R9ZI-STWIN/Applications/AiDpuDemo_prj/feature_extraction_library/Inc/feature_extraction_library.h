@@ -8,7 +8,7 @@
 #ifndef FEATURE_EXTRACTION_LIBRARY_INC_FEATURE_EXTRACTION_LIBRARY_H_
 #define FEATURE_EXTRACTION_LIBRARY_INC_FEATURE_EXTRACTION_LIBRARY_H_
 
-//#define AIDPU_NB_SAMPLE       (256)
+#define bank_size 128
 #include "AiDPU.h"
 
 /* Exported Functions --------------------------------------------------------*/
