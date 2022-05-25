@@ -110,21 +110,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Inc/sysdebug_config.h</locationURI>
 		</link>
 		<link>
-			<name>Application/Inc/usbd_cdc_if.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Inc/usbd_cdc_if.h</locationURI>
-		</link>
-		<link>
-			<name>Application/Inc/usbd_conf.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Inc/usbd_conf.h</locationURI>
-		</link>
-		<link>
-			<name>Application/Inc/usbd_desc.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Inc/usbd_desc.h</locationURI>
-		</link>
-		<link>
 			<name>Application/Src/App.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/App.c</locationURI>
@@ -188,21 +173,6 @@
 			<name>Application/Src/system_stm32l4xx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/system_stm32l4xx.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Src/usbd_cdc_if.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/usbd_cdc_if.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Src/usbd_conf.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/usbd_conf.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Src/usbd_desc.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/usbd_desc.c</locationURI>
 		</link>
 		<link>
 			<name>Application/mx/Inc</name>
