@@ -31,15 +31,6 @@ extern "C" {
 #include "aiApp.h"
 #include "fft.h"
 
-/**
- * Specifies the execution mode for the DPU. The execution mode tells the DPU what to do when it is running
- * and new signals provided by the data source is ready to be processed by the AI library.
- */
-typedef enum _EAiMode {
-  E_AI_MODE_NONE = 0,//!< no execution mode is selected.
-  E_AI_DETECTION     //!< the AI library detect the similarity of the signal with the learned model.
-} EAiMode_t;
-
 
 #define SET_ODR 26.0      							// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
 #define SET_FS 4.0									// [g]  set FS (Full scale) value based on supported ODR available list of the sensor
@@ -146,14 +137,6 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi);
 
 
 /**
- * Get the actual processing mode for the DPU.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @return the actual processing mode of the DPU.
- */
-inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
-
-/**
  * Partial reset of the DPU internal state: all input and output buffers are re-initialized to prepare
  * the DPU to process a new stream of data.
  *
@@ -163,22 +146,6 @@ inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
 sys_error_code_t AiDPUPrepareToProcessData(AiDPU_t *_this);
 
 
-/* Inline functions definition */
-/*******************************/
-
-SYS_DEFINE_INLINE
-EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this)
-{
-  assert_param(_this != NULL);
-  EAiMode_t res = E_AI_MODE_NONE;
-/*
-  if (_this->ai_processing_f == AI_detect)
-  {
-    res = E_AI_DETECTION;
-  }
-*/
-  return res;
-}
 
 #ifdef __cplusplus
 }

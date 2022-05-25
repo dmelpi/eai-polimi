@@ -43,19 +43,6 @@ static const IDPU_vtbl sAiDPU_vtbl = {
 };
 
 
-/* Inline functions definition */
-/*******************************/
-
-
-/* GCC requires one function forward declaration in only one .c source
- * in order to manage the inline.
- * See also http://stackoverflow.com/questions/26503235/c-inline-function-and-gcc
- */
-#if defined (__GNUC__) || defined (__ICCARM__)
-extern EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
-#endif
-
-
 /* Private member function declaration */
 /***************************************/
 
