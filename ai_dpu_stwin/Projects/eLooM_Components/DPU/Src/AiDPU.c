@@ -25,8 +25,8 @@
 
 // set the AIDPU_G_TP_MS_2 as 9.81 if acceleration data inside the DPU are needed in [m/s^2] otherwise set it to 1.0
 
-//#define AIDPU_G_TO_MS_2 (9.81F)
-#define AIDPU_G_TO_MS_2 (1.0F)
+#define AIDPU_G_TO_MS_2 (9.81F)
+//#define AIDPU_G_TO_MS_2 (1.0F)
 
 /**
  * Specified the virtual table for the AiDPU_t class.
@@ -103,8 +103,10 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi)
 
 sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode)
 {
+
   assert_param(_this != NULL);
   sys_error_code_t res = SYS_NO_ERROR_CODE;
+
 
   if (mode == E_AI_DETECTION)
   {
@@ -239,7 +241,6 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     GRAV_input_t gravOut[AIDPU_NB_SAMPLE];
 
     assert_param(p_obj->scale != 0.0F);
-    assert_param(AIDPU_AI_PROC_IN_SIZE == AIDPU_NB_SAMPLE*AIDPU_NB_AXIS);
     assert_param(AIDPU_NB_AXIS == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]);
     assert_param(AIDPU_NB_SAMPLE == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT]);
 

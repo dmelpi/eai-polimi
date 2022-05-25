@@ -230,6 +230,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 	  p_out_data[0] = max_idx;
 	  p_out_data[1] = max_out;
     }
+    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %f   \r\n", (int) p_out_data[0] , (float) p_out_data[1]*100.0));
   }
   else if (AI_USC_NETWORK_CTX_IDX == idx )
   {
@@ -250,6 +251,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 	  p_out_data[0] = (float) max_idx;
 	  p_out_data[1] = max_out;
   }
+
   return 0;
 }
 

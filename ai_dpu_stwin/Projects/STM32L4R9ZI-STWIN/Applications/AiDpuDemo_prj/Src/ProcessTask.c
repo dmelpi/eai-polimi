@@ -538,7 +538,7 @@ static sys_error_code_t ProcessTaskExecuteStepSensorsActive(AManagedTask *_this)
       {
         case PRC_CMD_NEW_DATA_READY:
           res = IDPU_Process((IDPU*)p_obj->p_dpu);
-          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
+          //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
           break;
 
         case PRC_CMD_CONNECT_TO_SENSOR:
