@@ -20,6 +20,7 @@
 #include "AiDPU_vtbl.h"
 #include "services/sysdebug.h"
 #include "filter_gravity.h"
+#include "feature_extraction_library.h"
 #include <stdio.h>
 
 
@@ -221,7 +222,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       gravIn[i].AccX = *p_in++ * scale;
       gravIn[i].AccY = *p_in++ * scale;
       gravIn[i].AccZ = *p_in++ * scale;
-      gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
+      //gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
     }
 
 
@@ -234,7 +235,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
 
     /* call Ai library. */
-    p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);
+    //p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
