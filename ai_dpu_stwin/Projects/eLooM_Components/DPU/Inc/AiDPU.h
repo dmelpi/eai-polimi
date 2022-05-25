@@ -146,18 +146,6 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi);
 
 
 /**
- * Set the processing mode for the DPU. It specifies to the DPU if a new signal is used
- * to learn and improve the model, or to detect anomalies.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @param mode [IN] specifies the processing mode. Valid value are:
- *  - E_AI_DETECTION
- * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
- */
-sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode);
-
-
-/**
  * Get the actual processing mode for the DPU.
  *
  * @param _this [IN] specifies a pointer to the object.

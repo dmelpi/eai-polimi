@@ -101,24 +101,7 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi)
   return SYS_NO_ERROR_CODE;
 }
 
-sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode)
-{
 
-  assert_param(_this != NULL);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-
-
-  if (mode == E_AI_DETECTION)
-  {
-    _this->ai_processing_f = aiProcess ;
-  }
-  else
-  {
-    _this->ai_processing_f = NULL;
-  }
-
-  return res;
-}
 
 uint16_t AiDPUSetStreamsParam(AiDPU_t *_this, uint16_t signal_size, uint8_t axes, uint8_t cb_items)
 {
