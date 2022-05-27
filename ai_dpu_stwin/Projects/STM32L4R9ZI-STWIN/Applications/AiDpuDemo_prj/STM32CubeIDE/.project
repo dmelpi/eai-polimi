@@ -200,16 +200,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiApp.h</locationURI>
 		</link>
 		<link>
-			<name>Application/CubeAI/Inc/aiTestHelper.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiTestHelper.h</locationURI>
-		</link>
-		<link>
-			<name>Application/CubeAI/Inc/app_x-cube-ai.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/app_x-cube-ai.h</locationURI>
-		</link>
-		<link>
 			<name>Application/CubeAI/Inc/network.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network.h</locationURI>
@@ -228,16 +218,6 @@
 			<name>Application/CubeAI/Src/aiApp.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiApp.c</locationURI>
-		</link>
-		<link>
-			<name>Application/CubeAI/Src/aiTestHelper.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiTestHelper.c</locationURI>
-		</link>
-		<link>
-			<name>Application/CubeAI/Src/app_x-cube-ai.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/app_x-cube-ai.c</locationURI>
 		</link>
 		<link>
 			<name>Application/CubeAI/Src/network.c</name>

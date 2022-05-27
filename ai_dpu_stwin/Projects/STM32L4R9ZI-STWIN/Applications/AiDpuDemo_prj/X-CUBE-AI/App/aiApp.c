@@ -100,10 +100,10 @@ int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 
   /* 1 - Update IO handlers with the data payload */
   ai_input[0].data = AI_HANDLE_PTR(p_inData);
-  ai_output[0].data = AI_HANDLE_PTR(&out_data[0]);
+  ai_output[0].data = AI_HANDLE_PTR(out_data[0]);
 
   if (AI_NETWORK_OUT_NUM == 2){
-	  ai_output[1].data = AI_HANDLE_PTR(&out_data[1]);
+	  ai_output[1].data = AI_HANDLE_PTR(out_data[1]);
   }
 
   if (AI_NETWORK_OUT_NUM == 1){
