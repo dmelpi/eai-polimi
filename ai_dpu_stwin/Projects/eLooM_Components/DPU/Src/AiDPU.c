@@ -247,14 +247,12 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       //gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
     }
 
-
-
-    /*	#####################  PREPROCESSING  #####################  */
-
 	for (int i=0 ; i < AIDPU_NB_SAMPLE ; i++){
 		preprocessing_input_array[i] = gravIn[i].AccY;
 	}
 
+
+    /*	#####################  PREPROCESSING  #####################  */
 
 	arm_mean_f32(preprocessing_input_array, AIDPU_NB_SAMPLE, &input_vector_mean);
 

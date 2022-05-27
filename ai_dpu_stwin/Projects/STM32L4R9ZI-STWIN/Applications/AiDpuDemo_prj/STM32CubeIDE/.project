@@ -1680,9 +1680,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/feature_extraction_library.h</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/feature_extraction_library/Inc/preProcessingApp.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/preProcessingApp.h</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/feature_extraction_library/Src/feature_extraction_library.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/feature_extraction_library.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/feature_extraction_library/Src/preProcessingApp.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/preProcessingApp.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/ADPU.h</name>
