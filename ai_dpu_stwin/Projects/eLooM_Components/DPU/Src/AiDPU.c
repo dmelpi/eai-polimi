@@ -20,6 +20,7 @@
 #include "AiDPU_vtbl.h"
 #include "services/sysdebug.h"
 #include "filter_gravity.h"
+#include "preProcessingApp.h"
 #include "feature_extraction_library.h"
 #include "arm_math.h"
 #include <stdio.h>
@@ -32,22 +33,7 @@
 
 
 static float32_t preprocessing_input_array[AIDPU_NB_SAMPLE];
-static float32_t input_vector_mean;
-
-//FFT Variables
-static float32_t spectrum[AIDPU_NB_SAMPLE/2];
-static arm_rfft_fast_instance_f32 fft_handler;
-
-// filter bank variables
-static int bin[bank_size+2];
-static float32_t mel_spectra[bank_size];
-static float32_t dct_status[bank_size*2];
-
-arm_cfft_radix4_instance_f32 cfftradix4f32;
-arm_rfft_instance_f32 rfftf32;
-arm_dct4_instance_f32 dct4f32;
-arm_status status;
-
+static float32_t preprocessing_output_array[bank_size];
 
 
 /**
@@ -177,6 +163,9 @@ sys_error_code_t AiDPU_vtblInit(IDPU *_this) {
     // take the ownership of the Sensor Event IF
     IEventListenerSetOwner((IEventListener *) ADPU_GetEventListenerIF(&p_obj->super), &p_obj->super);
 
+    /* initialize signal pre-processing functions */
+    preProcessing_Init();
+
     /* initialize AI library */
     if (aiInit(AIDPU_NAME)==0)
     {
@@ -230,7 +219,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
   if((*p_consumer_buff) != NULL)
   {
     GRAV_input_t gravIn[AIDPU_NB_SAMPLE];
-    GRAV_input_t gravOut[AIDPU_NB_SAMPLE];
+    //GRAV_input_t gravOut[AIDPU_NB_SAMPLE];
 
     assert_param(p_obj->scale != 0.0F);
     assert_param(AIDPU_NB_AXIS == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]);
@@ -246,40 +235,15 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       //gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
     }
 
+    for (int i=0; i<AIDPU_NB_SAMPLE ; i++){
+    	preprocessing_input_array[i]=gravIn[i].AccY;
+    }
 
 
-    /*	#####################  PREPROCESSING  #####################  */
-
-	for (int i=0 ; i < AIDPU_NB_SAMPLE ; i++){
-		preprocessing_input_array[i] = gravIn[i].AccY;
-	}
-
-	arm_mean_f32(preprocessing_input_array, AIDPU_NB_SAMPLE, &input_vector_mean);
-
-	for (int i=0 ; i < AIDPU_NB_SAMPLE ; i++){
-		preprocessing_input_array[i] = preprocessing_input_array[i] - input_vector_mean;
-	}
-
-	arm_rfft_fast_init_f32(&fft_handler , AIDPU_NB_SAMPLE);  // da inizializzare prima
-	status=arm_dct4_init_f32(&dct4f32,&rfftf32,&cfftradix4f32,bank_size,bank_size/2,0.125);
-
-	DoHanning(preprocessing_input_array, preprocessing_input_array);
-	DoFFT(&fft_handler, preprocessing_input_array  ,spectrum);
-
-	Mel_Filters_Bank(bin);
-
-	mel_spectrum(bin , spectrum, mel_spectra);
-
-
-	for (int i = 0; i<bank_size; i++){
-		mel_spectra[i] = 20*log10(mel_spectra[i]);
-	}
-
-	arm_dct4_f32(&dct4f32, dct_status,mel_spectra);
-
+    preProcessing_Process(preprocessing_input_array, preprocessing_output_array);
 
     /* call Ai library. */
-    p_obj->ai_processing_f(AIDPU_NAME, (float*) mel_spectra, p_obj->ai_out);
+    p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
