@@ -30,7 +30,7 @@
 
 //#define AIDPU_G_TO_MS_2 (9.81F)
 #define AIDPU_G_TO_MS_2 (1.0F)
-
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
 static float32_t preprocessing_input_array[AIDPU_NB_SAMPLE];
 static float32_t preprocessing_output_array[bank_size];
@@ -243,6 +243,8 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
     /* call Ai library. */
     p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
+
+
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
