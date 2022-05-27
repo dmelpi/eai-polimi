@@ -41,8 +41,7 @@ static arm_rfft_fast_instance_f32 fft_handler;
 // filter bank variables
 static int bin[bank_size+2];
 static float32_t mel_spectra[bank_size];
-static float ai_results[2];
-
+static float32_t dct_status[bank_size*2];
 
 arm_cfft_radix4_instance_f32 cfftradix4f32;
 arm_rfft_instance_f32 rfftf32;
@@ -276,8 +275,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 		mel_spectra[i] = 20*log10(mel_spectra[i]);
 	}
 
-	arm_dct4_f32(&dct4f32, mel_spectra,mel_spectra);
-
+	arm_dct4_f32(&dct4f32, dct_status,mel_spectra);
 
 
     /* call Ai library. */
