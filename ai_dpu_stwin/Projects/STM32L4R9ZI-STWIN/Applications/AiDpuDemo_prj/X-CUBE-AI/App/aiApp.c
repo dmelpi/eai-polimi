@@ -212,8 +212,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 	  p_out_data[0] = max_idx;
 	  p_out_data[1] = max_out * 100.0;
     }
-    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %f   \r\n", (int) p_out_data[0] , p_out_data[1]));
-    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d  \r\n", (int) p_out_data[0]));
+    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %.2f   \r\n", (int) p_out_data[0] , p_out_data[1]));
   }
   return 0;
 }
