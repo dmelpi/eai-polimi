@@ -239,6 +239,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     	preprocessing_input_array[i]=gravIn[i].AccY;
     }
 
+    /* call preprocessing function */
     preProcessing_Process(preprocessing_input_array, preprocessing_output_array);
 
     /* call Ai library. */
