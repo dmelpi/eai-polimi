@@ -194,7 +194,7 @@ int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
 	  float *p_out1 = (float*) ai_output[1].data;
 
 	  p_out_data[0] = p_out0[0];
-	  p_out_data[1] = p_out1[(int) p_out0[0]] * 100.0;
+	  p_out_data[1] = p_out1[(int) p_out0[0]];
     }
     else if(net_exec_ctx[idx].report.n_outputs == 1)
     {
