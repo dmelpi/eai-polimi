@@ -6,11 +6,58 @@
       "elements": [
         {
           "type": "Control",
-          "scope": "#/properties/input_buffer_dim_x"
+          "scope": "#/properties/acc_en"
         },
         {
           "type": "Control",
-          "scope": "#/properties/input_buffer_dim_y"
+          "scope": "#/properties/acc_fs"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/acc_odr"
+        }
+      ]
+    },
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/acc_input_buffer_dim_x"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/acc_input_buffer_dim_y"
+        }
+      ]
+    },
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/mic_en"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/mic_sr"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/mic_input_buffer_dim"
+        }
+      ]
+    },
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/nn_input_layer_dim"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/nn_input_rate"
         }
       ]
     },

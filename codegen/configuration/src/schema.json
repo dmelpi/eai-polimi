@@ -6,17 +6,58 @@
     
   ],
   "properties": {
-    "input_buffer_dim_x": {
-      "$id ": "#/properties/input_buffer_dim_x",
+    "acc_input_buffer_dim_x": {
+      "$id ": "#/properties/acc_input_buffer_dim_x",
       "type": "number",
       "title": "Input Buffer Dimension X",
       "default": 100
     },
-    "input_buffer_dim_y": {
-      "$id ": "#/properties/input_buffer_dim_y",
+    "acc_input_buffer_dim_y": {
+      "$id ": "#/properties/acc_input_buffer_dim_y",
       "type": "number",
       "title": "Input Buffer Dimension Y",
       "default": 1
+    },
+    "nn_input_layer_dim": {
+      "$id": "#/properties/nn_input_layer_dim",
+      "type": "number",
+      "title": "Dimension of the neural network input layer"
+    },
+    "nn_input_rate": {
+      "$id": "#/properties/nn_input_rate",
+      "type": "number",
+      "title": "NN input data rate [Hz]"
+    },
+    "acc_en": {
+      "$id": "#/properties/acc_en",
+      "type": "boolean",
+      "title": "Enable Accelerometer"
+    },
+    "acc_fs": {
+      "$id": "#/properties/acc_fs",
+      "type": "number",
+      "enum": [ 0.5, 1, 2, 4, 8, 16, 32 ],
+      "title": "Accelerometer Full Scale [g]"
+    },
+    "acc_odr": {
+      "$id": "#/properties/acc_odr",
+      "type": "number",
+      "title": "Accelerometer Output Data Rate [Hz] (depends on component model)"
+    },
+    "mic_en": {
+      "$id": "#/properties/mic_en",
+      "type": "boolean",
+      "title": "Enable microphone"
+    },
+    "mic_sr": {
+      "$id": "#/properties/mic_sr",
+      "type": "number",
+      "title": "Microphone Sampling Rate"
+    },
+    "mic_input_buffer_dim": {
+      "$id": "#/properties/mic_input_buffer_dim",
+      "type": "number",
+      "title": "Microphone input buffer dimension"
     },
     "functions": {
       "$id": "#/properties/functions",
@@ -32,17 +73,20 @@
               "ISM330DHCX_GYRO",
               "microphone",
               "layer_1",
-              "layer_2"
+              "layer_2",
+              "layer_3"
             ]
           },
           "name": {
             "type": "string",
             "enum": [
-              "min",
-              "max",
               "peak_to_peak",
               "avg",
-              "std_dev"
+              "std_dev",
+              "Hanning",
+              "Hamming",
+              "FFT",
+              "MFCC"
             ]
           },
           "params": {
