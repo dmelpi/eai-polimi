@@ -23,11 +23,15 @@
       "elements": [
         {
           "type": "Control",
-          "scope": "#/properties/acc_input_buffer_dim_x"
+          "scope": "#/properties/acc_input_buffer_dim"
         },
         {
           "type": "Control",
-          "scope": "#/properties/acc_input_buffer_dim_y"
+          "scope": "#/properties/number_of_axes"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/selected_axes"
         }
       ]
     },

@@ -6,17 +6,25 @@
     
   ],
   "properties": {
-    "acc_input_buffer_dim_x": {
-      "$id ": "#/properties/acc_input_buffer_dim_x",
+    "acc_input_buffer_dim": {
+      "$id ": "#/properties/acc_input_buffer_dim",
       "type": "number",
-      "title": "Input Buffer Dimension X",
+      "title": "Input Buffer Dimension",
       "default": 100
     },
-    "acc_input_buffer_dim_y": {
-      "$id ": "#/properties/acc_input_buffer_dim_y",
+    "number_of_axes": {
+      "$id ": "#/properties/number_of_axes",
       "type": "number",
-      "title": "Input Buffer Dimension Y",
+      "title": "Number of Axes",
       "default": 1
+    },
+    "selected_axes": {
+      "$id ": "#/properties/number_of_axes",
+      "type": "string",
+      "title": "Selected axes",
+      "enum": [
+        "X", "Y", "Z", "XY", "XZ", "YZ","XYZ"
+      ]
     },
     "nn_input_layer_dim": {
       "$id": "#/properties/nn_input_layer_dim",
@@ -80,13 +88,17 @@
           "name": {
             "type": "string",
             "enum": [
+              "passthrough",
+              "signal_normalization",
+              "subsample",
               "peak_to_peak",
               "avg",
               "std_dev",
               "Hanning",
               "Hamming",
               "FFT",
-              "MFCC"
+              "mel_spectrum",
+              "arm_dct4_f32"
             ]
           },
           "params": {

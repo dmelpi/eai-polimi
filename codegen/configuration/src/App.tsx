@@ -3,7 +3,6 @@ import { JsonForms } from '@jsonforms/react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-//import logo from './logo.svg';
 import './App.css';
 import schema from './schema.json';
 import uischema from './uischema.json';
@@ -12,8 +11,6 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { makeStyles } from '@mui/styles';
-
-import {writeFileSync} from 'fs';
 
 const useStyles = makeStyles({
   container: {
@@ -36,6 +33,10 @@ const useStyles = makeStyles({
     display: 'block !important',
   },
   saveButton: {
+    margin: 'auto !important',
+    display: 'block !important',
+  },
+  processButton: {
     margin: 'auto !important',
     display: 'block !important',
   },
@@ -64,7 +65,18 @@ const App = () => {
 
   const saveData = () => {
     console.log(data);
-    writeFileSync("params.json", JSON.stringify(data));
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type : 'application/json'});
+    const a = document.createElement('a');
+    a.download = 'params.json';
+    a.href = URL.createObjectURL(blob);
+    a.addEventListener('click', (e) => {
+      setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
+    });
+    a.click();
+  };
+
+  const processData = () => {
+    console.log("Processing data");
   };
 
   return (
@@ -108,7 +120,17 @@ const App = () => {
               color='primary'
               variant='contained'
             >
-              Download JSON
+              Save params.json
+            </Button>
+          </div>
+          <div>
+            <Button
+              className={classes.processButton}
+              onClick={processData}
+              color='primary'
+              variant='contained'
+            >
+              Codegen
             </Button>
           </div>
         </Grid>
