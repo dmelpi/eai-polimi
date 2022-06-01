@@ -4,15 +4,20 @@
 - [x] new acquisition with tags
 - [x] visualize tagged data
 - [x] show how tagged data can be grouped to create a dataset
-- [] what is 'initial_offset'
-- [] what is enable_timestamp_recovery
+- [x] what is 'initial_offset' => in [s], time of 1st timestamp of sensor to align different sensors
+- [x] what is enable_timestamp_recovery 0> to handle lack of data, replace uncertaindata with zero
 - [x] reactjs project for preproc pipeline definition
 - [] json forms preprocessing example using DSP lib functions
 - [] Python template -> preprocess.py
-- [] Jupyter notebook that imports preprocess.py
+- [x] Jupyter notebook that imports preprocess.py => reusing JN configuration cell with proj mgr extension
 - [] C template -> preprocess.c
 - [] simple C project for Cube.AI
 - [x] build Leonardo's example
 - [] update Vespucci PoliMi installation
 - [x] get AiDpuExamaple
 - [] port AiDpuExample to STWIN
+- [x] fixed udev rules for hsd in VM
+- [] make C project configurable
+- [] user installation guide
+- [] easier dataviz after logging
+- [] installed fixed HSD extension into VSCode of Vespucci VM
