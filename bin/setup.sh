@@ -14,5 +14,6 @@ addgroup hsdatalog
 echo "Adding user to hsdatalog group"
 usermod -aG hsdatalog $USER
 
-#TODO should we restart udev?
+udevadm control --reload-rules
+udevadm trigger
 
