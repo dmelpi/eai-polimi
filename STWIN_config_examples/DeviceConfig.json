@@ -422,7 +422,7 @@
                             "ODR": 6667,
                             "ODRMeasured": 7015.386719,
                             "initialOffset": 0.170296,
-                            "FS": 4,
+                            "FS": 2,
                             "sensitivity": 0.000488,
                             "isActive": true,
                             "samplesPerTs": 1000,
