@@ -15,9 +15,9 @@
 - [x] build Leonardo's example
 - [] update Vespucci PoliMi installation
 - [x] get AiDpuExamaple
-- [] port AiDpuExample to STWIN
+- [x] port AiDpuExample to STWIN
 - [x] fixed udev rules for hsd in VM
 - [] make C project configurable
 - [] user installation guide
-- [] easier dataviz after logging
-- [] installed fixed HSD extension into VSCode of Vespucci VM
+- [x] easier dataviz after logging
+- [] install fixed HSD extension into VSCode of Vespucci VM

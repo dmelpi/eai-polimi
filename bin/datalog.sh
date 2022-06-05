@@ -36,4 +36,4 @@
 # -u <filename>: UCF Configuration file for MLC
 # -t <seconds>: Duration of the current acquisition (seconds)
 #
-./cli_example -f ../STWIN_config_examples/DeviceConfig.json -t 100
+./cli_example -f ../STWIN_config_examples/DeviceConfig.json -t 100 -o ../datalogs
