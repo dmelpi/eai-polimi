@@ -43,7 +43,7 @@ arm_status status;
 
 
 void preProcessing_Init(){
-	arm_rfft_fast_init_f32(&fft_handler , AIDPU_NB_SAMPLE);  // da inizializzare prima
+	arm_rfft_fast_init_f32(&fft_handler , AIDPU_NB_SAMPLE);
 	status=arm_dct4_init_f32(&dct4f32,&rfftf32,&cfftradix4f32,bank_size,bank_size/2,0.125);
 	if (status != ARM_MATH_SUCCESS){
 		// kind of error

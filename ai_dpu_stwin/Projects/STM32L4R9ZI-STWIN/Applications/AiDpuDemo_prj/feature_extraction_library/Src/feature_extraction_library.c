@@ -51,7 +51,7 @@ float Mel_to_Hz(float f_Mel_in) {
 /* Signal pre-processing :  Signal normalization between -1 and 1             */
 /*----------------------------------------------------------------------------*/
 
-
+// generalizzare
 void signal_normalization(float32_t *dataIn, float32_t * dataOut){
 
 	float32_t max, min;
