@@ -24,6 +24,7 @@
 
 
 float32_t input_vector_mean;
+float32_t preprocessing_input_array[AIDPU_NB_SAMPLE];
 
 //FFT Variables
 float32_t spectrum[AIDPU_NB_SAMPLE/2];
@@ -51,16 +52,20 @@ void preProcessing_Init(){
 }
 
 
-void preProcessing_Process(float * dataIn , float * mel_spectra){
+void preProcessing_Process(GRAV_input_t * dataIn , float * mel_spectra){
 
-	arm_mean_f32(dataIn, AIDPU_NB_SAMPLE, &input_vector_mean);
+    for (int i=0; i<AIDPU_NB_SAMPLE ; i++){
+    	preprocessing_input_array[i]=dataIn[i].AccY;
+    }
+
+	arm_mean_f32(preprocessing_input_array, AIDPU_NB_SAMPLE, &input_vector_mean);
 
 	for (int i=0 ; i < AIDPU_NB_SAMPLE ; i++){
-		dataIn[i] = dataIn[i] - input_vector_mean;
+		preprocessing_input_array[i] = preprocessing_input_array[i] - input_vector_mean;
 	}
 
-	DoHanning(dataIn, dataIn);
-	DoFFT(&fft_handler, dataIn  ,spectrum);
+	DoHanning(preprocessing_input_array, preprocessing_input_array);
+	DoFFT(&fft_handler, preprocessing_input_array  ,spectrum);
 
 	Mel_Filters_Bank(bin);
 
