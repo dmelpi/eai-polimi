@@ -40,6 +40,13 @@ extern "C" {
 #define AIDPU_NAME            "network"
 
 
+typedef struct
+{
+ float x;           /*  x axes  */
+ float y;           /*  y axes  */
+ float z;           /*  z axes  */
+} tridimensional_data_t;
+
 
 /**
  * Create  type name for _AiDPU_t.

@@ -130,7 +130,9 @@ int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
   if (n_batch != 1) {
 	  err = ai_network_get_error(network);
   };
+
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %.2f   \r\n", (int) p_out_data[0] , p_out_data[1]));
+
   return 0;
 }
 
