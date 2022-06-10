@@ -141,27 +141,6 @@ uint16_t AiDPUSetStreamsParam(AiDPU_t *_this, uint16_t signal_size, uint8_t axes
  */
 sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi);
 
-
-/**
- * Set the processing mode for the DPU. It specifies to the DPU if a new signal is used
- * to learn and improve the model, or to detect anomalies.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @param mode [IN] specifies the processing mode. Valid value are:
- *  - E_AI_DETECTION
- * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
- */
-sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode);
-
-
-/**
- * Get the actual processing mode for the DPU.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @return the actual processing mode of the DPU.
- */
-inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
-
 /**
  * Partial reset of the DPU internal state: all input and output buffers are re-initialized to prepare
  * the DPU to process a new stream of data.
@@ -172,22 +151,6 @@ inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
 sys_error_code_t AiDPUPrepareToProcessData(AiDPU_t *_this);
 
 
-/* Inline functions definition */
-/*******************************/
-
-SYS_DEFINE_INLINE
-EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this)
-{
-  assert_param(_this != NULL);
-  EAiMode_t res = E_AI_MODE_NONE;
-/*
-  if (_this->ai_processing_f == AI_detect)
-  {
-    res = E_AI_DETECTION;
-  }
-*/
-  return res;
-}
 
 #ifdef __cplusplus
 }
