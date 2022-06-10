@@ -618,34 +618,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiApp.h</locationURI>
 		</link>
 		<link>
-			<name>User/CubeAI/Inc/aiTestHelper.h</name>
+			<name>User/CubeAI/Inc/network.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiTestHelper.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network.h</locationURI>
 		</link>
 		<link>
-			<name>User/CubeAI/Inc/app_x-cube-ai.h</name>
+			<name>User/CubeAI/Inc/network_config.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/app_x-cube-ai.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network_config.h</locationURI>
 		</link>
 		<link>
-			<name>User/CubeAI/Inc/constants_ai.h</name>
+			<name>User/CubeAI/Inc/network_data.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/constants_ai.h</locationURI>
-		</link>
-		<link>
-			<name>User/CubeAI/Inc/har_network.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/har_network.h</locationURI>
-		</link>
-		<link>
-			<name>User/CubeAI/Inc/har_network_config.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/har_network_config.h</locationURI>
-		</link>
-		<link>
-			<name>User/CubeAI/Inc/har_network_data.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/har_network_data.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network_data.h</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Src/aiApp.c</name>
@@ -653,24 +638,14 @@
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiApp.c</locationURI>
 		</link>
 		<link>
-			<name>User/CubeAI/Src/aiTestHelper.c</name>
+			<name>User/CubeAI/Src/network.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/aiTestHelper.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network.c</locationURI>
 		</link>
 		<link>
-			<name>User/CubeAI/Src/app_x-cube-ai.c</name>
+			<name>User/CubeAI/Src/network_data.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/app_x-cube-ai.c</locationURI>
-		</link>
-		<link>
-			<name>User/CubeAI/Src/har_network.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/har_network.c</locationURI>
-		</link>
-		<link>
-			<name>User/CubeAI/Src/har_network_data.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/har_network_data.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network_data.c</locationURI>
 		</link>
 		<link>
 			<name>User/mx/Inc/gpdma.h</name>
