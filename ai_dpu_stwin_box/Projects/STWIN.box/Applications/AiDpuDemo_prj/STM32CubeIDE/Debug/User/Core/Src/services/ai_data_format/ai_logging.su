@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/services/ai_data_format/ai_logging.c:32:6:ai_logging_clear_packet	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/services/ai_data_format/ai_logging.c:43:6:ai_logging_create_shape_0d	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/services/ai_data_format/ai_logging.c:49:6:ai_logging_create_shape_1d	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/services/ai_data_format/ai_logging.c:56:6:ai_logging_create_shape_2d	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/services/ai_data_format/ai_logging.c:62:6:ai_logging_create_shape_3d	24	static

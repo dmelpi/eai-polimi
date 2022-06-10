@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network_data.c:1787:11:ai_har_network_data_activations_buffer_get	72	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network_data.c:1805:11:ai_har_network_data_weights_buffer_get	72	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network_data.c:1823:11:ai_har_network_data_weights_get	4	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network_data.c:1842:9:ai_har_network_data_params_get	32	static

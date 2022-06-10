@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/sysinit_mx.c:67:6:SystemClock_Config	336	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/sysinit_mx.c:274:6:SystemClock_Backup	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/sysinit_mx.c:286:6:SystemClock_Restore	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/sysinit_mx.c:318:6:SysPowerConfig	72	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/sysinit_mx.c:430:6:HAL_MspInit	16	static

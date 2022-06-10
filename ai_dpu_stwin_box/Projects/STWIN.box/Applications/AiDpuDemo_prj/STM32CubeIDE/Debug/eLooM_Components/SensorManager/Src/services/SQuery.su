@@ -1,0 +1,3 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/services/SQuery.c:29:18:SQInit	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/services/SQuery.c:36:10:SQNextByName	256	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/services/SQuery.c:58:10:SQNextByNameAndType	264	static

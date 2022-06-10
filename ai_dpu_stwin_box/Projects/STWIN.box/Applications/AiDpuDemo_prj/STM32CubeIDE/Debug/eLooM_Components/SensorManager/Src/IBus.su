@@ -1,0 +1,3 @@
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/IBus_vtbl.h:63:18:IBusCtrl	24	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/IBus_vtbl.h:68:18:IBusConnectDevice	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/IBus_vtbl.h:73:18:IBusDisconnectDevice	16	static

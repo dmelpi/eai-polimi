@@ -1,0 +1,8 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:80:22:AppPowerModeHelperAlloc	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:100:18:AppPowerModeHelper_vtblInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:112:12:AppPowerModeHelper_vtblComputeNewPowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:166:11:AppPowerModeHelper_vtblCheckPowerModeTransaction	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:204:18:AppPowerModeHelper_vtblDidEnterPowerMode	32	static,ignoring_inline_asm
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:288:12:AppPowerModeHelper_vtblGetActivePowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:296:16:AppPowerModeHelper_vtblGetPowerStatus	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/AppPowerModeHelper.c:304:11:AppPowerModeHelper_vtblIsLowPowerMode	16	static

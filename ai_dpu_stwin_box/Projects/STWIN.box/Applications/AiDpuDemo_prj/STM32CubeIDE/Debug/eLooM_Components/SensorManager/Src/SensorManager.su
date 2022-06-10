@@ -1,0 +1,11 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:39:10:SMGetNsensor	4	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:44:20:SMGetSensorObserver	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:57:18:SMSensorSetODR	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:75:18:SMSensorSetFS	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:93:18:SMSensorEnable	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:111:18:SMSensorDisable	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:129:20:SMSensorGetDescription	264	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:145:16:SMSensorGetStatus	64	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:161:18:SMDeviceGetDescription	264	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:184:18:SMGetSensorManager	4	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SensorManager.c:189:10:GetnBytesPerSample	64	static

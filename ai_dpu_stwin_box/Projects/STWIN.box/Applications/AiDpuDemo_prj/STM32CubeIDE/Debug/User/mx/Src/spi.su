@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/spi.c:35:6:MX_SPI1_Init	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/spi.c:86:6:MX_SPI2_Init	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/spi.c:137:6:MX_SPI3_Init	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/spi.c:188:6:HAL_SPI_MspInit	288	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/spi.c:396:6:HAL_SPI_MspDeInit	16	static

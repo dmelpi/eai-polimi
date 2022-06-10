@@ -1,0 +1,3 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SPIBusIF.c:38:9:SPIBusIFAlloc	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SPIBusIF.c:64:18:SPIBusIFWaitIOComplete	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/SPIBusIF.c:78:18:SPIBusIFNotifyIOComplete	24	static

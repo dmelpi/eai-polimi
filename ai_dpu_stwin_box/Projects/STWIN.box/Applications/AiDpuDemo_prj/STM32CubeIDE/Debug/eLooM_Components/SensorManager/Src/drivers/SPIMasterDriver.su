@@ -1,0 +1,13 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:88:12:SPIMasterDriverAlloc	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:105:18:SPIMasterDriver_vtblInit	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:146:18:SPIMasterDriver_vtblStart	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:159:18:SPIMasterDriver_vtblStop	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:173:18:SPIMasterDriver_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:182:18:SPIMasterDriver_vtblReset	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:191:18:SPIMasterDriver_vtblWrite	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:216:18:SPIMasterDriver_vtblRead	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:241:18:SPIMasterDriverTransmitRegAddr	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:259:18:SPIMasterDriverWriteRead	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:283:18:SPIMasterDriverSelectDevice	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:293:18:SPIMasterDriverDeselectDevice	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c:309:13:SPIMasterDriverTxRxCpltCallback	16	static

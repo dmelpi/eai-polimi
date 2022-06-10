@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/filter_gravity.c:48:6:iir_direct2_init	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/filter_gravity.c:63:7:iir_direct2_filter	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/filter_gravity.c:77:6:dynamic_acceleration	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/filter_gravity.c:104:14:gravity_suppress_rotate	112	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/filter_gravity.c:137:14:gravity_rotate	112	static

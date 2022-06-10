@@ -1,0 +1,8 @@
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:58:25:IDPU_Init	16	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:62:25:IDPU_AttachToSensor	24	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:66:25:IDPU_DetachFromSensor	16	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:70:25:IDPU_AttachInputDPU	24	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:74:25:IDPU_DetachFromDPU	16	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:78:25:IDPU_DispatchEvents	16	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:82:25:IDPU_RegisterNotifyCallback	24	static
+../../../../../../Projects/eLooM_Components/DPU/Inc/IDPUVtbl.h:86:25:IDPU_Process	16	static

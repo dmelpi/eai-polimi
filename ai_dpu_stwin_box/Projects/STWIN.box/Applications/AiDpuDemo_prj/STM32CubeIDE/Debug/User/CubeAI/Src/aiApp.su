@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiApp.c:66:12:aiBootstrap	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiApp.c:112:5:aiInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiApp.c:135:6:aiDeInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiApp.c:162:5:aiProcess	168	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiApp.c:256:6:aiPrintNetworkInfoToFile	24	static

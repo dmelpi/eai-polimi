@@ -1,0 +1,6 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:73:5:SysDebugInit	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:90:6:null_lockfn	4	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:95:6:SysDebugLock	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:106:6:SysDebugUnlock	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:115:5:SysDebugHardwareInit	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/sysdebug.c:122:5:__io_putchar	16	static

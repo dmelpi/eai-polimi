@@ -1,0 +1,15 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:180:18:AMTInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:58:18:IDrvInit	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/drivers/IDriver_vtbl.h:63:18:IDrvStart	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:123:15:HelloWorldTaskAlloc	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:143:18:HelloWorldTask_vtblHardwareInit	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:172:18:HelloWorldTask_vtblOnCreateTask	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:198:18:HelloWorldTask_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:206:18:HelloWorldTask_vtblHandleError	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:214:18:HelloWorldTask_vtblOnEnterTaskControlLoop	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:234:25:HelloWorldTaskExecuteStepRun	24	static,ignoring_inline_asm
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:251:18:HelloWorldTask_vtblOnProcessedDataReady	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:267:18:HelloWorldTask_vtblOnStatusChange	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:279:6:HelloWorldTask_vtblSetOwner	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:287:7:HelloWorldTask_vtblGetOwner	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/HelloWorldTask.c:299:6:HW_PB_EXTI_Callback	24	static

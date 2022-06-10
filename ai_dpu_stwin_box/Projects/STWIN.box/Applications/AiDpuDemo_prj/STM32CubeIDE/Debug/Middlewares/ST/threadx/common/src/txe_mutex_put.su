@@ -1,0 +1,2 @@
+../../../../../../Middlewares/ST/threadx/ports/cortex_m33/gnu/inc/tx_port.h:294:28:_get_ipsr	16	static,ignoring_inline_asm
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/threadx/common/src/txe_mutex_put.c:74:7:_txe_mutex_put	24	static

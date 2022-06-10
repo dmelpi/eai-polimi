@@ -1,0 +1,7 @@
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:72:27:ISensorSetODR	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:76:27:ISensorSetFS	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:80:27:ISensorEnable	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:84:27:ISensorDisable	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:88:20:ISensorIsEnabled	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:92:29:ISensorGetDescription	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h:96:25:ISensorGetStatus	16	static

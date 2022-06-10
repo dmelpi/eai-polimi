@@ -1,0 +1,5 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiTestHelper.c:40:6:aiPlatformVersion	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiTestHelper.c:51:6:aiLogErr	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiTestHelper.c:61:20:aiPrintDataType	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiTestHelper.c:74:6:aiPrintBufferInfo	80	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/aiTestHelper.c:121:6:aiPrintNetworkInfo	48	static

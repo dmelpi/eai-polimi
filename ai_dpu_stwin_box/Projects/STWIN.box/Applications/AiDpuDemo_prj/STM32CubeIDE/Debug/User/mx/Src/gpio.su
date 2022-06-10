@@ -1,0 +1,14 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:44:6:MX_GPIO_Init	64	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:265:6:MX_GPIO_PE0_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:283:6:MX_GPIO_PI6_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:302:6:MX_GPIO_PF5_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:321:6:MX_GPIO_PF9_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:340:6:MX_GPIO_PF3_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:359:6:MX_GPIO_PI7_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:378:6:MX_GPIO_PF1_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:397:6:MX_GPIO_PH6_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:416:6:MX_GPIO_PB8_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:435:6:MX_GPIO_PF4_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:454:6:MX_GPIO_PH15_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:473:6:MX_GPIO_PF15_Init	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/gpio.c:492:6:MX_GPIO_PF12_Init	32	static

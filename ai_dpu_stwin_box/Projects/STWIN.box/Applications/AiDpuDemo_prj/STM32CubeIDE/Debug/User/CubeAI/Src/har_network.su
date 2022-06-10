@@ -1,0 +1,13 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:298:9:har_network_configure_activations	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:322:9:har_network_configure_weights	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:367:9:ai_har_network_get_info	144	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:413:9:ai_har_network_get_report	144	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:459:10:ai_har_network_get_error	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:465:10:ai_har_network_create	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:475:10:ai_har_network_create_and_init	96	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:509:12:ai_har_network_inputs_get	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:519:12:ai_har_network_outputs_get	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:529:11:ai_har_network_destroy	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:535:9:ai_har_network_init	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:552:8:ai_har_network_run	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/X-CUBE-AI/App/har_network.c:559:8:ai_har_network_forward	16	static

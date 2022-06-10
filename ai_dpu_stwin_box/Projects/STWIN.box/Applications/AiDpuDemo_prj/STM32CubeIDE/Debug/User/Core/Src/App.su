@@ -1,0 +1,4 @@
+../../Core/Inc/HelloWorldTask.h:121:24:HelloWorldTaskGetProcEvtListenerIF	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/App.c:103:18:SysLoadApplicationContext	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/App.c:129:18:SysOnStartApplication	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/App.c:160:22:SysGetPowerModeHelper	8	static

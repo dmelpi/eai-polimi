@@ -1,0 +1,6 @@
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ABusIF.h:148:18:ABusIFSetHandle	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ABusIF.h:157:7:ABusIFGetHandle	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ABusIF.h:164:18:ABusIFInit	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ABusIF.h:178:18:ABusIFSetWhoAmI	16	static
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/ABusIF.h:187:9:ABusIFGetWhoAmI	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/ABusIF.c:39:9:ABusIFNullRW	24	static

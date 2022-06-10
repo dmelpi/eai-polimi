@@ -1,0 +1,6 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:51:10:PushButtonDrvAlloc	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:66:18:PushButtonDrv_vtblInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:79:18:PushButtonDrv_vtblStart	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:90:18:PushButtonDrv_vtblStop	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:101:18:PushButtonDrv_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/Core/Src/drivers/PushButtonDrv.c:110:18:PushButtonDrv_vtblReset	24	static

@@ -1,0 +1,6 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:32:6:MX_TIM3_Init	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:75:6:MX_TIM7_Init	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:108:6:HAL_TIM_IC_MspInit	48	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:137:6:HAL_TIM_Base_MspInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:157:6:HAL_TIM_IC_MspDeInit	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/tim.c:179:6:HAL_TIM_Base_MspDeInit	16	static

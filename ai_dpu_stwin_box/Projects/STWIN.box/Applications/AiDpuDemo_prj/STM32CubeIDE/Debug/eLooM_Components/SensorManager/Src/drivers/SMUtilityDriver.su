@@ -1,0 +1,7 @@
+../../../../../../Projects/eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver.h:104:10:SMUtilityDrvGetTimeStamp	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:58:10:SMUtilityDriverAlloc	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:75:18:SMUtilityDriver_vtblInit	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:91:18:SMUtilityDriver_vtblStart	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:108:18:SMUtilityDriver_vtblStop	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:126:18:SMUtilityDriver_vtblDoEnterPowerMode	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c:144:18:SMUtilityDriver_vtblReset	24	static

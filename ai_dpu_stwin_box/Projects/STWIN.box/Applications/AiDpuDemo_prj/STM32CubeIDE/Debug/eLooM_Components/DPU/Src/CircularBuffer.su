@@ -1,0 +1,17 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:126:17:CB_Alloc	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:147:6:CB_Free	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:155:10:CB_Init	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:176:9:CB_IsEmpty	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:189:9:CB_IsFull	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:202:10:CB_GetUsedItemsCount	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:225:10:CB_GetItemsCount	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:238:10:CB_GetItemSize	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:251:10:CB_GetFreeItemFromHead	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:277:10:CB_GetReadyItemFromTail	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:301:10:CB_ReleaseItem	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:326:10:CB_SetItemReady	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:351:7:CB_GetItemData	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:358:7:CB_GetItemsBuffer	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:365:9:CB_PeekNextItem	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:396:24:CB_EnterCritical	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/eLooM_Components/DPU/Src/CircularBuffer.c:413:20:CB_ExitCritical	16	static

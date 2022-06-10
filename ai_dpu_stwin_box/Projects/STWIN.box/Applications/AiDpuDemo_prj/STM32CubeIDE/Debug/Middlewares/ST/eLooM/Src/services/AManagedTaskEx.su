@@ -1,0 +1,5 @@
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:175:18:AMTOnEnterTaskControlLoop	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:201:12:AMTGetTaskPowerMode	32	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTask_vtbl.h:212:18:AMTNotifyIsStillRunning	16	static
+../../../../../../Middlewares/ST/eLooM/Inc/services/AManagedTaskEx_vtbl.h:165:18:AMTExSetInactiveState	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/services/AManagedTaskEx.c:31:6:AMTExRun	40	static

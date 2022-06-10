@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/usart.c:32:6:MX_USART2_UART_Init	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/usart.c:76:6:MX_USART3_UART_Init	8	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/usart.c:119:6:HAL_UART_MspInit	264	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/mx/Src/usart.c:204:6:HAL_UART_MspDeInit	16	static

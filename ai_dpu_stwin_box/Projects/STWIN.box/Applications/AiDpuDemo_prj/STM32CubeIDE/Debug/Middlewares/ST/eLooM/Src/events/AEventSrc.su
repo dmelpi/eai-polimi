@@ -1,0 +1,6 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:32:18:AEvtSrcSetOwner	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:41:7:AEvtSrcGetOwner	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:52:18:AEventSrv_vtblInit	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:62:18:AEventSrv_vtblAddEventListener	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:78:18:AEventSrv_vtblRemoveEventListener	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Middlewares/ST/eLooM/Src/events/AEventSrc.c:93:10:AEventSrv_vtblGetMaxListenerCount	16	static
