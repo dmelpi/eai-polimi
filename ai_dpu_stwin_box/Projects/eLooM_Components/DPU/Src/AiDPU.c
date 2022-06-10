@@ -20,10 +20,15 @@
 #include "AiDPU_vtbl.h"
 #include "services/sysdebug.h"
 #include "filter_gravity.h"
+#include "preProcessingApp.h"
+#include "feature_extraction_library.h"
+#include "arm_math.h"
 #include <stdio.h>
 
 
-#define AIDPU_G_TO_MS_2 (9.8F)
+//#define AIDPU_G_TO_MS_2 (9.81F)
+#define AIDPU_G_TO_MS_2 (1.0F)
+
 
 /**
  * Specified the virtual table for the AiDPU_t class.
@@ -40,17 +45,12 @@ static const IDPU_vtbl sAiDPU_vtbl = {
 };
 
 
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
+
+static float32_t preprocessing_output_array[bank_size];
+
 /* Inline functions definition */
 /*******************************/
-
-
-/* GCC requires one function forward declaration in only one .c source
- * in order to manage the inline.
- * See also http://stackoverflow.com/questions/26503235/c-inline-function-and-gcc
- */
-#if defined (__GNUC__) || defined (__ICCARM__)
-extern EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
-#endif
 
 
 /* Private member function declaration */
@@ -98,22 +98,6 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi)
   return SYS_NO_ERROR_CODE;
 }
 
-sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode)
-{
-  assert_param(_this != NULL);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-
-  if (mode == E_AI_DETECTION)
-  {
-    _this->ai_processing_f = aiProcess ;
-  }
-  else
-  {
-    _this->ai_processing_f = NULL;
-  }
-
-  return res;
-}
 
 uint16_t AiDPUSetStreamsParam(AiDPU_t *_this, uint16_t signal_size, uint8_t axes, uint8_t cb_items)
 {
@@ -180,6 +164,9 @@ sys_error_code_t AiDPU_vtblInit(IDPU *_this) {
     // take the ownership of the Sensor Event IF
     IEventListenerSetOwner((IEventListener *) ADPU_GetEventListenerIF(&p_obj->super), &p_obj->super);
 
+    /* initialize signal pre-processing functions */
+    preProcessing_Init();
+
     /* initialize AI library */
     if (aiInit(AIDPU_NAME)==0)
     {
@@ -232,11 +219,9 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
   if((*p_consumer_buff) != NULL)
   {
-    GRAV_input_t gravIn[AIDPU_NB_SAMPLE];
-    GRAV_input_t gravOut[AIDPU_NB_SAMPLE];
+	tridimensional_data_t raw_data[AIDPU_NB_SAMPLE];
 
     assert_param(p_obj->scale != 0.0F);
-    assert_param(AIDPU_AI_PROC_IN_SIZE == AIDPU_NB_SAMPLE*AIDPU_NB_AXIS);
     assert_param(AIDPU_NB_AXIS == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]);
     assert_param(AIDPU_NB_SAMPLE == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT]);
 
@@ -244,14 +229,16 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     float scale = p_obj->scale;
     for(int i = 0; i < AIDPU_NB_SAMPLE; i++)
     {
-      gravIn[i].AccX = *p_in++ * scale;
-      gravIn[i].AccY = *p_in++ * scale;
-      gravIn[i].AccZ = *p_in++ * scale;
-      gravOut[i] = gravity_suppress_rotate(&gravIn[i]);
+        raw_data[i].x = *p_in++ * scale;
+        raw_data[i].y = *p_in++ * scale;
+        raw_data[i].z = *p_in++ * scale;
     }
 
+    /* call preprocessing function */
+    preProcessing_Process(raw_data, preprocessing_output_array);
+
     /* call Ai library. */
-    p_obj->ai_processing_f(AIDPU_NAME, (float*) gravOut, p_obj->ai_out);
+    p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));

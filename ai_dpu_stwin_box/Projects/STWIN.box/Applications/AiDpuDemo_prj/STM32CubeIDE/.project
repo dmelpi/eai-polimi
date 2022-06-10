@@ -648,6 +648,26 @@
 			<locationURI>PARENT-1-PROJECT_LOC/X-CUBE-AI/App/network_data.c</locationURI>
 		</link>
 		<link>
+			<name>User/feature_extraction_library/Inc/feature_extraction_library.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/feature_extraction_library.h</locationURI>
+		</link>
+		<link>
+			<name>User/feature_extraction_library/Inc/preProcessingApp.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/preProcessingApp.h</locationURI>
+		</link>
+		<link>
+			<name>User/feature_extraction_library/Src/feature_extraction_library.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/feature_extraction_library.c</locationURI>
+		</link>
+		<link>
+			<name>User/feature_extraction_library/Src/preProcessingApp.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/preProcessingApp.c</locationURI>
+		</link>
+		<link>
 			<name>User/mx/Inc/gpdma.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/mx/Inc/gpdma.h</locationURI>
