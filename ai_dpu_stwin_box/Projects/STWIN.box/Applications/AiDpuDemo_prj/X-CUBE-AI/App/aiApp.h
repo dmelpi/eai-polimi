@@ -33,12 +33,8 @@ extern "C" {
 #include <stdio.h>
 
 int aiInit(const char*);
-void aiDeInit(const char*);
 int aiProcess(const char*, float *, float[2]);
 
-void aiPrintNetworkInfoToFile(const char*, FILE *out);
-
-extern FILE * plcPrintFile;
 #define LC_PRINT(...)   fprintf(plcPrintFile,__VA_ARGS__)
 
 #ifdef __cplusplus
