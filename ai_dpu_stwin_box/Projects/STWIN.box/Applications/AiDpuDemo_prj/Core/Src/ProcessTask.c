@@ -46,14 +46,6 @@
 
 #define PRC_TASK_DPU_TAG                    (0x30U) // must be equal to CTRL_CMD_PARAM_AI
 
-#ifndef PRC_TASK_CFG_AXIS_NUMBER
-#define PRC_TASK_CFG_AXIS_NUMBER            3
-#endif
-
-#ifndef PRC_TASK_CFG_DATA_INPUT_USER
-#define PRC_TASK_CFG_DATA_INPUT_USER        26
-#endif
-
 #define AI_LSB_16B                          (1.0F/32768)    // Value of an LSB for a 16 bit signed arithmetic
 
 #define SYS_DEBUGF(level, message)          SYS_DEBUGF3(SYS_DBG_PRC, level, message)
@@ -215,7 +207,7 @@ sys_error_code_t ProcessTaskAttachToSensorEx(ProcessTask_t *_this, ISourceObserv
 
 sys_error_code_t ProcessTaskAttachToSensor(ProcessTask_t *_this, ISourceObservable *p_sensor, uint8_t cb_items)
 {
-  return ProcessTaskAttachToSensorEx(_this, p_sensor, PRC_TASK_CFG_DATA_INPUT_USER, PRC_TASK_CFG_AXIS_NUMBER, cb_items);
+  return ProcessTaskAttachToSensorEx(_this, p_sensor, AIDPU_NB_SAMPLE, AIDPU_NB_AXIS, cb_items);
 }
 
 sys_error_code_t ProcessTaskAddDPUListener(ProcessTask_t *_this, IProcessEventListener *p_listener)
@@ -528,7 +520,7 @@ static sys_error_code_t ProcessTaskExecuteStepSensorsActive(AManagedTask *_this)
 
           res = IDPU_Process((IDPU*)p_obj->p_dpu);
 
-          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
+          //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
           break;
 
         case PRC_CMD_CONNECT_TO_SENSOR:
@@ -624,8 +616,8 @@ static sys_error_code_t ProcessTaskSetSensorsConfig(ProcessTask_t *_this, uint16
   if (sensor_id != SI_NULL_SENSOR_ID)
   {
     SMSensorEnable(sensor_id);
-    SMSensorSetODR(sensor_id, 26.0);
-    SMSensorSetFS(sensor_id, 4.0);
+    SMSensorSetODR(sensor_id, SET_ODR);
+    SMSensorSetFS(sensor_id, SET_FS);
   }
 
   *p_active_sensor_id = sensor_id;

@@ -255,7 +255,7 @@ sys_error_code_t HelloWorldTask_vtblOnProcessedDataReady(IEventListener *_this, 
   HelloWorldTask *p_if_owner = (HelloWorldTask*)((uint32_t)_this - offsetof(HelloWorldTask, m_xDpuListenerIF));
   UNUSED(p_if_owner);
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
 
   return xRes;
 }
