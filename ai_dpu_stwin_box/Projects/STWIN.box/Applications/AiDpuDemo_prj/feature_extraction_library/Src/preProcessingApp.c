@@ -22,7 +22,6 @@
 #include "arm_math.h"
 
 
-
 arm_dct4_instance_f32 dct4f32;
 arm_rfft_fast_instance_f32 fft_handler;
 
@@ -45,7 +44,6 @@ void preProcessing_Process(tridimensional_data_t * data_in , float * data_out){
 	/*
 	 ###################### VARIABLES ##########################
 	 */
-
 
 	// Preprocessing variables
 	float32_t input_vector_mean;
