@@ -8,11 +8,11 @@
 #ifndef PREPROCESSINGAPP_INC_PREPROCESSINGAPP_H_
 #define PREPROCESSINGAPP_INC_PREPROCESSINGAPP_H_
 
-#include "filter_gravity.h"
+#include "AiDPU.h"
 
 /* Exported Functions --------------------------------------------------------*/
 void preProcessing_Init();
-void preProcessing_Process(GRAV_input_t *  , float * );
+void preProcessing_Process(tridimensional_data_t *  , float * );
 
 
 #endif /* PREPROCESSINGAPP_INC_PREPROCESSINGAPP_H_ */
