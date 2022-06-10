@@ -95,7 +95,7 @@
 #define UTIL_TASK_CFG_PRIORITY                    (7)
 
 // file ProcessTask.c
-#define PRC_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*40)
+#define PRC_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*80)
 #define PRC_TASK_CFG_PRIORITY                     (7)
 
 // App configuration
