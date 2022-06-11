@@ -1,0 +1,6 @@
+STM32CubeIDE/Debug
+STM32CubeIDE/User
+STM32CubeIDE/Drivers
+STM32CubeIDE/Middlewares
+STM32CubeIDE/.settings
+STM32CubeIDE/*.launch
