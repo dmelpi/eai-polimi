@@ -1,0 +1,9 @@
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:22:7:complexABS	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:29:11:dot_product	1048	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:41:7:Hz_to_Mel	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:45:7:Mel_to_Hz	16	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:55:6:signal_normalization	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:73:6:DoHanning	24	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:85:6:DoFFT	40	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:105:6:Mel_Filters_Bank	32	static
+/Users/leonardoiacussi/eai-polimi/ai_dpu_stwin_box/Projects/STWIN.box/Applications/AiDpuDemo_prj/feature_extraction_library/Src/feature_extraction_library.c:135:6:mel_spectrum	48	static
