@@ -1,0 +1,59 @@
+{
+	"Description": "descriptionTest",
+	"Name": "testName",
+	"Tags": [
+		{
+			"Enable": true,
+			"Label": "slow",
+			"t": 7.018977925
+		},
+		{
+			"Enable": false,
+			"Label": "slow",
+			"t": 17.0371388
+		},
+		{
+			"Enable": true,
+			"Label": "fast",
+			"t": 25.05426563
+		},
+		{
+			"Enable": false,
+			"Label": "fast",
+			"t": 31.07236351
+		},
+		{
+			"Enable": true,
+			"Label": "SW_TAG_2",
+			"t": 35.08542638
+		},
+		{
+			"Enable": false,
+			"Label": "SW_TAG_2",
+			"t": 43.10455695
+		},
+		{
+			"Enable": true,
+			"Label": "SW_TAG_3",
+			"t": 48.11964108
+		},
+		{
+			"Enable": false,
+			"Label": "SW_TAG_3",
+			"t": 54.13373467
+		},
+		{
+			"Enable": true,
+			"Label": "SW_TAG_4",
+			"t": 69.16598084
+		},
+		{
+			"Enable": false,
+			"Label": "SW_TAG_4",
+			"t": 75.18007462
+		}
+	],
+	"UUIDAcquisition": "1b789014-36c1-4882-8229-d1813ee8a02a",
+	"end_time": "2022-06-11T18:39:58.629Z",
+	"start_time": "2022-06-11T18:38:40.270Z"
+}
