@@ -1650,24 +1650,24 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_GenericFFT_Library/Inc/fft.h</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/feature_extraction_library/Inc/feature_extraction_library.h</name>
+			<name>Middlewares/pre_processing_library/Inc/pre_processing_app.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/feature_extraction_library.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/pre_processing_library/Inc/pre_processing_app.h</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/feature_extraction_library/Inc/preProcessingApp.h</name>
+			<name>Middlewares/pre_processing_library/Inc/pre_processing_core.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Inc/preProcessingApp.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/pre_processing_library/Inc/pre_processing_core.h</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/feature_extraction_library/Src/feature_extraction_library.c</name>
+			<name>Middlewares/pre_processing_library/Src/pre_processing_app.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/feature_extraction_library.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/pre_processing_library/Src/pre_processing_app.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/feature_extraction_library/Src/preProcessingApp.c</name>
+			<name>Middlewares/pre_processing_library/Src/pre_processing_core.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/feature_extraction_library/Src/preProcessingApp.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/pre_processing_library/Src/pre_processing_core.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/ADPU.h</name>

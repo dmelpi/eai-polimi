@@ -20,8 +20,7 @@
 #include "AiDPU_vtbl.h"
 #include "services/sysdebug.h"
 #include "filter_gravity.h"
-#include "preProcessingApp.h"
-#include "feature_extraction_library.h"
+#include "pre_processing_app.h"
 #include "arm_math.h"
 #include <stdio.h>
 
@@ -33,7 +32,7 @@
 
 #define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
-static float32_t preprocessing_output_array[bank_size];
+
 
 
 /**
@@ -49,6 +48,9 @@ static const IDPU_vtbl sAiDPU_vtbl = {
     ADPU_RegisterNotifyCallbacks_vtbl,
     AiDPU_vtblProcess,
 };
+
+
+pre_processing_data_t pre_processing_data;
 
 
 /* Private member function declaration */
@@ -164,7 +166,7 @@ sys_error_code_t AiDPU_vtblInit(IDPU *_this) {
     IEventListenerSetOwner((IEventListener *) ADPU_GetEventListenerIF(&p_obj->super), &p_obj->super);
 
     /* initialize signal pre-processing functions */
-    preProcessing_Init();
+    pre_processing_init(&pre_processing_data);
 
     /* initialize AI library */
     if (aiInit(AIDPU_NAME)==0)
@@ -235,8 +237,9 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       raw_data[i].z = *p_in++ * scale;
     }
 
+    float32_t preprocessing_output_array[FILTER_BANK_SIZE];
     /* call preprocessing function */
-    preProcessing_Process(raw_data, preprocessing_output_array);
+    pre_processing_process(raw_data, preprocessing_output_array, &pre_processing_data);
 
     /* call Ai library. */
     p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
