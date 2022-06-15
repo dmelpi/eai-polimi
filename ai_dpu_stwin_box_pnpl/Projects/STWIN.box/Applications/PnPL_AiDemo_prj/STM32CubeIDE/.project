@@ -573,6 +573,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/main.h</locationURI>
 		</link>
 		<link>
+			<name>User/Core/Inc/sensor_parameters.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/sensor_parameters.h</locationURI>
+		</link>
+		<link>
 			<name>User/Core/Inc/services</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/services</locationURI>

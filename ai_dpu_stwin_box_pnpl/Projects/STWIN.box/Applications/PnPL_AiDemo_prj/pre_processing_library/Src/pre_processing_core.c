@@ -23,12 +23,12 @@ float complexABS(float real, float compl) {
 
 
 // Dot product calculation using CMSIS DSP library
-float32_t dot_product(float32_t* in_1, float32_t* in_2){
+float32_t dot_product(float32_t* in_1, uint32_t data_in1_size, float32_t* in_2, uint32_t data_in2_size){
 
-	float32_t multOutput[AIDPU_NB_SAMPLE/2];
+	float32_t multOutput[data_in1_size/2];
 	float32_t dot_out=0;
-	arm_mult_f32(in_1, in_2, multOutput, AIDPU_NB_SAMPLE/2);
-	for (int i=0;  i<AIDPU_NB_SAMPLE/2;   i++){
+	arm_mult_f32(in_1, in_2, multOutput, data_in1_size/2);
+	for (int i=0;  i<data_in1_size/2;   i++){
 		arm_add_f32(&dot_out, &multOutput[i], &dot_out, 1);
 	}
 	return dot_out;
@@ -152,7 +152,7 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 
 	for (int i=0;   i<data_in_size   ; i=i+2) {
 	  data_out[freqpoint] =(complexABS(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(data_in_size));
-	  data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)SET_ODR;
+	  data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
 	  freqpoint++;
 	}
 }
@@ -173,13 +173,13 @@ void mel_filters_bank(int * bin ){
 	static float f_min = 0.0;
 
 
-	f_max = (float)SET_ODR * 0.45;
+	f_max = (float)ISM330DHCX_ODR * 0.45;
 
 	low_freq_mel = Hz_to_Mel(f_min);
 	high_freq_mel = Hz_to_Mel(f_max);
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( FILTER_BANK_SIZE+2);
 
-	bin_sep=SET_ODR/(float32_t)AIDPU_NB_SAMPLE;
+	bin_sep=ISM330DHCX_ODR/(float32_t)AIDPU_NB_SAMPLE;
 
 	for (int i=0; i < FILTER_BANK_SIZE+2; i++){
 		Hz_points[i] = Mel_to_Hz((float)(low_freq_mel + i * d_hz_points));
@@ -213,7 +213,7 @@ void mel_spectrum(float32_t * data_in, uint32_t data_in_size, float32_t * data_o
 		for (int j=f_m; j<f_m_plus;j++){
 			in_vector[j] = (float32_t)((f_m_plus-(float32_t)j)/(f_m_plus-f_m));
 		}
-		data_out[m-1] = dot_product(in_vector, data_in);
+		data_out[m-1] = dot_product(in_vector, data_out_size,data_in, data_out_size);
 	}
 }
 

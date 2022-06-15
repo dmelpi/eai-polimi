@@ -33,8 +33,6 @@
 #define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
 
-
-
 /**
  * Specified the virtual table for the AiDPU_t class.
  */
@@ -229,7 +227,6 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     float *p_in = (float*) CB_GetItemData((*p_consumer_buff));
     float scale = p_obj->scale;
 
-
     for(int i = 0; i < AIDPU_NB_SAMPLE; i++)
     {
       raw_data[i].x = *p_in++ * scale;
@@ -237,9 +234,10 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       raw_data[i].z = *p_in++ * scale;
     }
 
-    float32_t preprocessing_output_array[FILTER_BANK_SIZE];
+    float32_t preprocessing_output_array[AI_NETWORK_IN_1_SIZE];
+
     /* call preprocessing function */
-    pre_processing_process(raw_data, AIDPU_NB_SAMPLE, preprocessing_output_array, FILTER_BANK_SIZE, &pre_processing_data);
+    pre_processing_process(raw_data, AIDPU_NB_SAMPLE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
 
     /* call Ai library. */
     p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
@@ -252,7 +250,6 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     ProcessEventInit((IEvent*) &evt_acc, super->pProcessEventSrc, (ai_logging_packet_t*) &super->dpuOutStream, ADPU_GetTag(super));
     IDPU_DispatchEvents(_this, &evt_acc);
   }
-
   return xRes;
 }
 

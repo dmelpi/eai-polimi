@@ -10,6 +10,7 @@
 
 
 #include "AiDPU.h"
+#include "sensor_parameters.h"
 #define FILTER_BANK_SIZE 128
 
 typedef enum {

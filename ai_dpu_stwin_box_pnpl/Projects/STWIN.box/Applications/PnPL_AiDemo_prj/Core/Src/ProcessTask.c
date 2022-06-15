@@ -29,6 +29,7 @@
 #include "services/sysmem.h"
 #include "tx_api.h"
 #include "ai_platform_interface.h"
+#include "sensor_parameters.h"
 
 #ifndef PRC_TASK_CFG_STACK_DEPTH
 #define PRC_TASK_CFG_STACK_DEPTH            (TX_MINIMUM_STACK)
@@ -599,8 +600,8 @@ static sys_error_code_t ProcessTaskSetSensorsConfig(ProcessTask_t *_this, uint16
   if (sensor_id != SI_NULL_SENSOR_ID)
   {
     SMSensorEnable(sensor_id);
-    SMSensorSetODR(sensor_id, SET_ODR);
-    SMSensorSetFS(sensor_id, SET_FS);
+    SMSensorSetODR(sensor_id, ISM330DHCX_ODR);
+    SMSensorSetFS(sensor_id, ISM330DHCX_FS);
   }
 
   *p_active_sensor_id = sensor_id;
