@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>410</x>
+      <y>320</y>
+      <w>110</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*STATE1*
+(MCU in RUN)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>460</x>
+      <y>260</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>type=final</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>270</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>400</x>
+      <y>450</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*SLEEP_1*
+(MCU in STOP)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>320</y>
+      <w>260</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+ (1)</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>390</x>
+      <y>120</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*SENSORS_ACTIVE*
+(MCU in RUN)
+fg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>340</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+ (2)</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>370</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+(4)</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>550</y>
+      <w>490</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>halign=left
+State change triggered by:
+(1) - SW START_NEAI, PB_PRESSED / [active_ai_lib_id == X-CUBE-AI]
+(2) - SW STOP, PB_PRESSED
+(3) - SW START_ML, PB_PRESSED / [active_ai_lib_id == NEAI]
+(4) - SW Enter LP
+(5) - PB_PRESSED
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>370</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+(5)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>220</x>
+      <y>0</y>
+      <w>540</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Note..
+- I can Start (enable) and Stop (disable) each sensor
+- I can change a sensor configuration only if the sensor is disabled
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>60</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>150.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>720</y>
+      <w>200</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*SLEEP 1*
+--
+MCU:  Stop
+Sensors: low power
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>720</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*NEAI_ACTIVE*
+--
+MCU:  Active
+Sensors: Active according
+    to configuration
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>720</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*STATE1*
+--
+MCU:  Active
+Sensors: Idle
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>750</x>
+      <y>320</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*NEAI_ACTIVE*
+(MCU in RUN)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>30</x>
+      <y>320</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*X-CUBE-AI_ACTIVE*
+(MCU in RUN)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>320</y>
+      <w>260</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+ (2)</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>340</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+ (3)</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>720</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*CUBEML_ACTIVE*
+--
+MCU:  Active
+Sensors: Active according
+    to configuration
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>720</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*SENSORS_ACTIVE*
+--
+MCU:  Active
+Sensors: Active according
+    to configuration
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>140</y>
+      <w>310</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;re-mapped&gt;&gt;
+fg=light_gray</panel_attributes>
+    <additional_attributes>10.0;180.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>140</y>
+      <w>320</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;re-mapped&gt;&gt;
+fg=light_gray</panel_attributes>
+    <additional_attributes>300.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>30</x>
+      <y>120</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*RESERVED*
+(not used)
+fg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

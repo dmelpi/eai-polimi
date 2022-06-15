@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>840</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_SPIBusTask_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>860</y>
+      <w>270</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>PnPLCompManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>700</y>
+      <w>270</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>SensorManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>1000</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_LogControllerPnPL_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>0</y>
+      <w>390</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>IUsbDelegate - Interface
+--
+IUsbDelegateOnNewData(*buffer, length): sys_error_code_t
+bg=GRAY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>890</x>
+      <y>0</y>
+      <w>480</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>UsbCdcTask
+--
+- p_delegate: IUsbDelegate *
+--
++ UsbCdcTask_vtblHardwareInit,
++ UsbCdcTask_vtblOnCreateTask,
++ UsbCdcTask_vtblDoEnterPowerMode,
++ UsbCdcTask_vtblHandleError,
++ UsbCdcTask_vtblOnEnterTaskControlLoop,
++ UsbCdcTask_vtblForceExecuteStep,
++ UsbCdcTask_vtblOnEnterPowerMode
+--
++ UsbCdcTask_SetDelegate(IUsbDelegate *p_delegate):sys_error_code_t
++ UsbCdcTask_Write(UCHAR *, ULONG, ULONG *):sys_error_code_t
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>150</y>
+      <w>480</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>HelloWorldTask
+--
+- rx_buffer[USB_CDC_RX_BUFFER_SIZE]: uint8_t
+- rx_buffer_idx: uint32_t
+--
++ HelloWorldTask_vtblHardwareInit,
++ HelloWorldTask_vtblOnCreateTask,
++ HelloWorldTask_vtblDoEnterPowerMode,
++ HelloWorldTask_vtblHandleError,
++ HelloWorldTask_vtblOnEnterTaskControlLoop,
++ HelloWorldTask_vtblForceExecuteStep,
++ HelloWorldTask_vtblOnEnterPowerMode
++ HelloWorldTask_vtblOnUsbData(*buffer, length):sys_error_code_t
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>60</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>30</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes>
+    <additional_attributes>130.0;80.0;70.0;80.0;70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>990</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_AiDPU_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>910</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_ISM330DHCX_ACC_PnPL_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>1090</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_DeviceInfoPnPL_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>910</y>
+      <w>140</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>UsbCdcTask
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>1070</y>
+      <w>190</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>HelloWorldTask
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>930</y>
+      <w>90</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Raw Data</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>750</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_ISM330DHCXTask_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>1110</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_ProcessTask_
+--
+AiDPU_Process
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>1050</y>
+      <w>70</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Buffer</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>1140</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Output
+Data</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>1090</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Telemetry
+PnPL</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>1130</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Output
+Data</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>1000</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Telemetry
+PnPL</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>700</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>PC/Gateway
+--
+_umletcode=
+drawRectangleRound(20,40,60,90,5, {bg: 'gray', fg: 'black', lt: '-', lw: 2})
+
+//Parameters (x, y, width, height, drawConfig?)
+drawRectangle(30,50,40,8)
+drawRectangle(30,70,40,8)
+drawRectangle(30,90,40,8)
+//Parameters (x, y, radius, drawConfig?)
+drawCircle(50,115,5)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>840</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Telemetry
+PnPL</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>610</y>
+      <w>230</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Data Flow
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>470</y>
+      <w>1240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;20.0;1220.0;20.0</additional_attributes>
+  </element>
+</diagram>
