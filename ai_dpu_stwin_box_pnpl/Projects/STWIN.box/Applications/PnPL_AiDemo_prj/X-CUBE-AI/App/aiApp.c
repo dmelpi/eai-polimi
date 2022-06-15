@@ -23,261 +23,120 @@
 /* System headers */
 #include <stdlib.h>
 #include <stdio.h>
-
-/* header files */
-#include "aiTestHelper.h"
+#include "arm_math.h"
 
 /* AI Run-time header files */
 #include "ai_platform_interface.h"
-
-/* AI x-cube-ai files */
-#include "app_x-cube-ai.h"
-
 #include "services/sysdebug.h"
+#include "network.h"
+#include "network_data.h"
 
 #define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
-#define AI_HAR_NETWORK_CTX_IDX 0
-#define AI_USC_NETWORK_CTX_IDX 1
+//#define AI_NETWORK_CTX_IDX 0
 
 #define AI_MNETWORK_OUT_NUM_MAX 2
 #if (AI_MNETWORK_OUT_NUM > AI_MNETWORK_OUT_NUM_MAX  )
 #error Number of output is too high
 #endif
 
-/* Global variables */
 
-FILE * plcPrintFile;
+#if(AI_NETWORK_OUT_NUM == 1)
+#define AI_NETWORK_OUT_2_SIZE 1
+static ai_float out_1_data[AI_NETWORK_OUT_1_SIZE];
+static ai_float* out_data[AI_NETWORK_OUT_NUM] = {
+&out_1_data[0]
+};
+#elif(AI_NETWORK_OUT_NUM == 2)
+static ai_float out_1_data[AI_NETWORK_OUT_1_SIZE];
+static ai_float out_2_data[AI_NETWORK_OUT_2_SIZE];
 
-/* -----------------------------------------------------------------------------
- * AI-related functions
- * -----------------------------------------------------------------------------
- */
+/* C-table to store the @ of the output buffers */
+static ai_float* out_data[AI_NETWORK_OUT_NUM] = {
+	&out_1_data[0],
+	&out_2_data[0]
+	};
+#endif
 
-//DEF_DATA_IN;
 
-DEF_DATA_OUT;
+/* Global handle to reference the instantiated C-model */
+ai_handle network = AI_HANDLE_NULL;
 
-struct ai_network_exec_ctx {
-  ai_handle handle;
-  ai_network_report report;
-} net_exec_ctx[AI_MNETWORK_NUMBER] = {0};
+/* Global c-array to handle the activations buffer */
+AI_ALIGNED(32)
+ai_u8 activations[AI_NETWORK_DATA_ACTIVATIONS_SIZE];
 
-static int aiBootstrap(struct ai_network_exec_ctx *ctx, const char *nn_name)
-{
-  ai_error err;
+ai_buffer *ai_input;
+ai_buffer *ai_output;
+float32_t *p_out0;
+float32_t *p_out1;
 
-  /* Creating the instance of the  network ------------------------- */
-  LC_PRINT("Creating the network \"%s\"..\r\n", nn_name);
 
-  err = ai_mnetwork_create(nn_name, &ctx->handle, NULL);
-  if (err.type) {
-    aiLogErr(err, "ai_mnetwork_create");
-    return -1;
-  }
-
-  /* Initialize the instance --------------------------------------- */
-  LC_PRINT("Initializing the network\r\n");
-
-  if (!ai_mnetwork_get_report(ctx->handle, &ctx->report)) {
-    err = ai_mnetwork_get_error(ctx->handle);
-    aiLogErr(err, "ai_mnetwork_get_info");
-    ai_mnetwork_destroy(ctx->handle);
-    ctx->handle = AI_HANDLE_NULL;
-    return -2;
-  }
-
-  if (!ai_mnetwork_init(ctx->handle)) {
-    err = ai_mnetwork_get_error(ctx->handle);
-    aiLogErr(err, "ai_mnetwork_init");
-    ai_mnetwork_destroy(ctx->handle);
-    ctx->handle = AI_HANDLE_NULL;
-    return -4;
-  }
-
-  /* Display the network info -------------------------------------- */
-  if (ai_mnetwork_get_report(ctx->handle, &ctx->report)) {
-    aiPrintNetworkInfo(&ctx->report);
-  } else {
-    err = ai_mnetwork_get_error(ctx->handle);
-    aiLogErr(err, "ai_mnetwork_get_info");
-    ai_mnetwork_destroy(ctx->handle);
-    ctx->handle = AI_HANDLE_NULL;
-    return -2;
-  }
-
-  return 0;
-}
 
 int aiInit(const char* nn_name)
 {
-  int res = -1;
-  plcPrintFile = stdout;
-
-  aiPlatformVersion();
-
-  /* Reset the contexts -------------------------------------------- */
-
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0)  {
-	 net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-	 res = aiBootstrap(&net_exec_ctx[AI_HAR_NETWORK_CTX_IDX],nn_name) ;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	 net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-	 res = aiBootstrap(&net_exec_ctx[AI_USC_NETWORK_CTX_IDX],nn_name) ;
-  }
-  else  {
-	LC_PRINT("\r\nAI Error : Did not Found network \"%s\"\r\n", nn_name);
-  }
-  return res;
-}
-
-void aiDeInit(const char* nn_name)
-{
   ai_error err;
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0){
-	LC_PRINT("Releasing %s...\r\n",nn_name);
-	if (net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle != AI_HANDLE_NULL) {
-	  if (ai_mnetwork_destroy(net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle)
-		  != AI_HANDLE_NULL) {
-		err = ai_mnetwork_get_error(net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle);
-		aiLogErr(err, "ai_mnetwork_destroy");
-	  }
-	}
-	net_exec_ctx[AI_HAR_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	LC_PRINT("Releasing %s...\r\n",nn_name);
-	if (net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle != AI_HANDLE_NULL) {
-	  if (ai_mnetwork_destroy(net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle)
-		  != AI_HANDLE_NULL) {
-		err = ai_mnetwork_get_error(net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle);
-		aiLogErr(err, "ai_mnetwork_destroy");
-	  }
-	}
-	net_exec_ctx[AI_USC_NETWORK_CTX_IDX].handle = AI_HANDLE_NULL;
-  }
-}
 
-int aiProcess(const char* nn_name, float * p_inData, float p_out_data[2])
-{
-  ai_i32 batch;
-  int idx; /* only one fixed network */
+  /* Create and initialize the c-model */
+  const ai_handle acts[] = { activations };
+  err = ai_network_create_and_init(&network, acts, NULL);
+  if (err.type != AI_ERROR_NONE) {
 
-  ai_buffer ai_input;
-  ai_buffer ai_output[AI_MNETWORK_OUT_NUM_MAX];
+  };
 
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0){
-	idx = AI_HAR_NETWORK_CTX_IDX;
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-	idx = AI_USC_NETWORK_CTX_IDX;
-  }
-  else return -1;
+  /* Reteive pointers to the model's input/output tensors */
+  ai_input = ai_network_inputs_get(network , NULL);
+  ai_output = ai_network_outputs_get(network, NULL);
 
-  if(net_exec_ctx[idx].handle == AI_HANDLE_NULL)
-  {
-	LC_PRINT("E: network handle is NULL\r\n");
-    return -1;
-  }
-  if ((net_exec_ctx[idx].report.n_inputs > AI_MNETWORK_IN_NUM) ||
-	  (net_exec_ctx[idx].report.n_outputs > AI_MNETWORK_OUT_NUM))
-  {
-	LC_PRINT("E: AI_MNETWORK_IN/OUT_NUM definition are incoherent\r\n");
-	HAL_Delay(100);
-	return -1;
-  }
-
-  /* we are dealing only with  1/1 or 1/2 networks  */
-  ai_input          = net_exec_ctx[idx].report.inputs[0];
-  ai_input.data     = AI_HANDLE_PTR(p_inData);
-  ai_output[0]      = net_exec_ctx[idx].report.outputs[0];
-  ai_output[0].data = AI_HANDLE_PTR(data_outs[0]);
-  if (net_exec_ctx[idx].report.n_outputs == 2)
-  {
-	ai_output[1]      = net_exec_ctx[idx].report.outputs[1];
-	ai_output[1].data = AI_HANDLE_PTR(data_outs[1]);
-  }
-
-  batch = ai_mnetwork_run(net_exec_ctx[idx].handle, &ai_input, ai_output);
-  if (batch != 1) {
-    aiLogErr(ai_mnetwork_get_error(net_exec_ctx[idx].handle),"ai_mnetwork_run");
-  }
-  if (AI_HAR_NETWORK_CTX_IDX == idx )
-  {
-    /* check correct init  */
-    if( net_exec_ctx[idx].report.n_outputs == 2)
-    {
-	  float *p_out0 = (float*) ai_output[0].data;
-	  float *p_out1 = (float*) ai_output[1].data;
-
-	  p_out_data[0] = p_out0[0];
-	  p_out_data[1] = p_out1[(int) p_out0[0]];
-    }
-    else if(net_exec_ctx[idx].report.n_outputs == 1)
-    {
-	  float *p_out0 = (float*) ai_output[0].data;
-	  float max_out = *p_out0;
-	  int max_idx = 0;
-	  for(int i = 1; i < AI_BUFFER_SIZE(&ai_output[0]); i++)
-	  {
-	    if(p_out0[i] > max_out)
-		{
-		  max_idx = i;
-		  max_out = p_out0[i];
-		}
-	  }
-	  p_out_data[0] = max_idx;
-	  p_out_data[1] = max_out;
-    }
-  }
-  else if (AI_USC_NETWORK_CTX_IDX == idx )
-  {
-	  float *p_out0 = (float*) ai_output[0].data;
-	  float max_out = *p_out0;
-	  int max_idx = 0;
-	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("%f\t",p_out0[0]));
-	  for(int i = 1; i < AI_BUFFER_SIZE(&ai_output[0]); i++)
-	  {
-	    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("%f\t",p_out0[i]));
-	    if(p_out0[i] > max_out)
-		{
-		  max_idx = i;
-		  max_out = p_out0[i];
-		}
- 	  }
-	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("\n\r"));
-	  p_out_data[0] = (float) max_idx;
-	  p_out_data[1] = max_out;
-  }
   return 0;
 }
 
-void aiPrintNetworkInfoToFile(const char* nn_name, FILE *out)
+
+
+int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 {
+  ai_i32 n_batch;
+  ai_error err;
 
-  struct ai_network_exec_ctx *p_ctx = NULL;
-  FILE *plcPrintFileSave = plcPrintFile;
-  plcPrintFile = out;
+  /* 1 - Update IO handlers with the data payload */
+  ai_input[0].data = AI_HANDLE_PTR(p_inData);
+  ai_output[0].data = AI_HANDLE_PTR(out_data[0]);
 
-  if (strncmp(nn_name,AI_HAR_NETWORK_MODEL_NAME, 10)==0)  {
-	p_ctx = &net_exec_ctx[AI_HAR_NETWORK_CTX_IDX];
-  }
-  else if (strncmp(nn_name,AI_USC_NETWORK_MODEL_NAME, 10)==0){
-    p_ctx = &net_exec_ctx[AI_USC_NETWORK_CTX_IDX];
+  if (AI_NETWORK_OUT_NUM == 2){
+	  ai_output[1].data = AI_HANDLE_PTR(out_data[1]);
   }
 
-  if (p_ctx) {
-	if (ai_mnetwork_get_report(p_ctx->handle, &p_ctx->report)) {
-	    aiPrintNetworkInfo(&p_ctx->report);
-	  }else{
-		LC_PRINT("\r\nAI Error : Cannot print network \"%s\"\r\n", nn_name);
-	  }
-  }
-  else{
-	LC_PRINT("\r\nAI Error : Did not Found network \"%s\"\r\n", nn_name);
-  }
-  plcPrintFile = plcPrintFileSave;
+  if (AI_NETWORK_OUT_NUM == 1){
+	  /* 2 - Perform the inference */
+	  n_batch = ai_network_run(network, &ai_input[0], &ai_output[0]);
+	  p_out0 = (float32_t*) ai_output[0].data;
+	  float32_t max_out = *p_out0;
+	  uint32_t max_idx = 0;
 
-  return;
+	  arm_max_f32(p_out0,AI_NETWORK_OUT_1_SIZE, &max_out, &max_idx);
+	  p_out_data[0] = (float32_t)max_idx;
+	  p_out_data[1] = max_out * 100.0;
+
+  }
+  else if (AI_NETWORK_OUT_NUM == 2){
+	  n_batch = ai_network_run(network, &ai_input[0], &ai_output[0]);
+	  p_out0 = (float32_t*) ai_output[0].data;
+	  p_out1 = (float32_t*) ai_output[1].data;
+
+	  p_out_data[0] = (float32_t)p_out0[0];
+	  p_out_data[1] = (float32_t)p_out1[(int) p_out0[0]];
+  }
+
+  if (n_batch != 1) {
+	  err = ai_network_get_error(network);
+  };
+
+  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %.8f   \r\n", (int) p_out_data[0] , p_out_data[1]));
+
+  return 0;
 }
+
+
+
+
+

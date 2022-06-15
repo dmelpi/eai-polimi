@@ -108,11 +108,11 @@
 #define USB_CDC_TASK_CFG_PRIORITY                 (7)
 
 // file ProcessTask.c
-#define PRC_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*40)
+#define PRC_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*100)
 #define PRC_TASK_CFG_PRIORITY                     (6)
 
 // file AppTask.c
-#define APP_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*10)
+#define APP_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*40)
 #define APP_TASK_CFG_PRIORITY                     (TX_MAX_PRIORITIES-2)
 
 #endif /* SYSCONFIG_H_ */

@@ -1,9 +1,9 @@
 
 /**
   ******************************************************************************
-  * @file    har_network_config.h
+  * @file    network_config.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Wed Mar 23 19:38:45 2022
+  * @date    Sat Jun 11 11:19:33 2022
   * @brief   AI Tool Automatic Code Generator for Custom Layers Implementation
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   ******************************************************************************
   */
 
-#ifndef AI_HAR_NETWORK_CONFIG_H
-#define AI_HAR_NETWORK_CONFIG_H
+#ifndef AI_NETWORK_CONFIG_H
+#define AI_NETWORK_CONFIG_H
 #pragma once
 
 #undef AI_TOOLS_VERSION_MAJOR
@@ -44,4 +44,4 @@
 #define AI_TOOLS_API_VERSION_MINOR (5)
 #define AI_TOOLS_API_VERSION_MICRO (0)
 
-#endif /*AI_HAR_NETWORK_CONFIG_H*/
+#endif /*AI_NETWORK_CONFIG_H*/

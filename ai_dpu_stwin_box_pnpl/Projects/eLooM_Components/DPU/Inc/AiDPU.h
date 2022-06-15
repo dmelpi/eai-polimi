@@ -27,23 +27,26 @@ extern "C" {
 
 #include "ADPU.h"
 #include "ADPU_vtbl.h"
-#include "har_network.h"
+#include "network.h"
 #include "aiApp.h"
 #include "fft.h"
 
-/**
- * Specifies the execution mode for the DPU. The execution mode tells the DPU what to do when it is running
- * and new signals provided by the data source is ready to be processed by the AI library.
- */
-typedef enum _EAiMode {
-  E_AI_MODE_NONE = 0,//!< no execution mode is selected.
-  E_AI_DETECTION     //!< the AI library detect the similarity of the signal with the learned model.
-} EAiMode_t;
 
+#define SET_ODR 1666.0      						// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
+#define SET_FS 16.0									// [g]  set FS (Full scale) value based on supported ODR available list of the sensor
 #define AIDPU_NB_AXIS         (3)
-#define AIDPU_NB_SAMPLE       (24)
-#define AIDPU_AI_PROC_IN_SIZE (AI_HAR_NETWORK_IN_1_SIZE)
-#define AIDPU_NAME            "har_network"
+#define AIDPU_NB_SAMPLE       (512)					// Set the number of samples needed in the DPU
+#define AIDPU_AI_PROC_IN_SIZE (AI_NETWORK_IN_1_SIZE)
+#define AIDPU_NAME            "network"
+
+
+typedef struct
+{
+ float x;           /*  x axes  */
+ float y;           /*  y axes  */
+ float z;           /*  z axes  */
+} tridimensional_data_t;
+
 
 /**
  * Create  type name for _AiDPU_t.
@@ -141,26 +144,6 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi);
 
 
 /**
- * Set the processing mode for the DPU. It specifies to the DPU if a new signal is used
- * to learn and improve the model, or to detect anomalies.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @param mode [IN] specifies the processing mode. Valid value are:
- *  - E_AI_DETECTION
- * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
- */
-sys_error_code_t AiDPUSetProcessingMode(AiDPU_t *_this, EAiMode_t mode);
-
-
-/**
- * Get the actual processing mode for the DPU.
- *
- * @param _this [IN] specifies a pointer to the object.
- * @return the actual processing mode of the DPU.
- */
-inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
-
-/**
  * Partial reset of the DPU internal state: all input and output buffers are re-initialized to prepare
  * the DPU to process a new stream of data.
  *
@@ -170,22 +153,6 @@ inline EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this);
 sys_error_code_t AiDPUPrepareToProcessData(AiDPU_t *_this);
 
 
-/* Inline functions definition */
-/*******************************/
-
-SYS_DEFINE_INLINE
-EAiMode_t AiDPUGetProcessingMode(AiDPU_t *_this)
-{
-  assert_param(_this != NULL);
-  EAiMode_t res = E_AI_MODE_NONE;
-/*
-  if (_this->ai_processing_f == AI_detect)
-  {
-    res = E_AI_DETECTION;
-  }
-*/
-  return res;
-}
 
 #ifdef __cplusplus
 }

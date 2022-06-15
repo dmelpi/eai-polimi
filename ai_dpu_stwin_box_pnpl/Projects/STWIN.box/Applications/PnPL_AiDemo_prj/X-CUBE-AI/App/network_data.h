@@ -1,9 +1,9 @@
 
 /**
   ******************************************************************************
-  * @file    usc_network_data.h
+  * @file    network_data.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Wed Mar 23 19:38:48 2022
+  * @date    Sat Jun 11 11:19:33 2022
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * Copyright (c) 2017 STMicroelectronics.
@@ -15,83 +15,83 @@
   ******************************************************************************
   */
 
-#ifndef USC_NETWORK_DATA_H
-#define USC_NETWORK_DATA_H
+#ifndef NETWORK_DATA_H
+#define NETWORK_DATA_H
 #pragma once
 
-#include "usc_network_config.h"
+#include "network_config.h"
 #include "ai_platform.h"
 
-#define AI_USC_NETWORK_DATA_CONFIG               (NULL)
+#define AI_NETWORK_DATA_CONFIG               (NULL)
 
 
-#define AI_USC_NETWORK_DATA_ACTIVATIONS_SIZES \
-  { 75972, }
-#define AI_USC_NETWORK_DATA_ACTIVATIONS_SIZE     (75972)
-#define AI_USC_NETWORK_DATA_ACTIVATIONS_COUNT    (1)
-#define AI_USC_NETWORK_DATA_ACTIVATION_1_SIZE    (75972)
-
-
-
-#define AI_USC_NETWORK_DATA_WEIGHTS_SIZES \
-  { 166928, }
-#define AI_USC_NETWORK_DATA_WEIGHTS_SIZE         (166928)
-#define AI_USC_NETWORK_DATA_WEIGHTS_COUNT        (1)
-#define AI_USC_NETWORK_DATA_WEIGHT_1_SIZE        (166928)
+#define AI_NETWORK_DATA_ACTIVATIONS_SIZES \
+  { 448, }
+#define AI_NETWORK_DATA_ACTIVATIONS_SIZE     (448)
+#define AI_NETWORK_DATA_ACTIVATIONS_COUNT    (1)
+#define AI_NETWORK_DATA_ACTIVATION_1_SIZE    (448)
 
 
 
-AI_DEPRECATED
-#define AI_USC_NETWORK_DATA_ACTIVATIONS(ptr_)  \
-  ai_usc_network_data_activations_buffer_get(AI_HANDLE_PTR(ptr_))
+#define AI_NETWORK_DATA_WEIGHTS_SIZES \
+  { 42576, }
+#define AI_NETWORK_DATA_WEIGHTS_SIZE         (42576)
+#define AI_NETWORK_DATA_WEIGHTS_COUNT        (1)
+#define AI_NETWORK_DATA_WEIGHT_1_SIZE        (42576)
+
+
 
 AI_DEPRECATED
-#define AI_USC_NETWORK_DATA_WEIGHTS(ptr_)  \
-  ai_usc_network_data_weights_buffer_get(AI_HANDLE_PTR(ptr_))
+#define AI_NETWORK_DATA_ACTIVATIONS(ptr_)  \
+  ai_network_data_activations_buffer_get(AI_HANDLE_PTR(ptr_))
+
+AI_DEPRECATED
+#define AI_NETWORK_DATA_WEIGHTS(ptr_)  \
+  ai_network_data_weights_buffer_get(AI_HANDLE_PTR(ptr_))
 
 
 AI_API_DECLARE_BEGIN
 
 /*!
  * @brief Get network activations buffer initialized struct.
- * @ingroup usc_network_data
+ * @ingroup network_data
  * @param[in] ptr a pointer to the activations array storage area
  * @return an ai_buffer initialized struct
  */
 AI_DEPRECATED
 AI_API_ENTRY
-ai_buffer ai_usc_network_data_activations_buffer_get(const ai_handle ptr);
+ai_buffer ai_network_data_activations_buffer_get(const ai_handle ptr);
 
 /*!
  * @brief Get network weights buffer initialized struct.
- * @ingroup usc_network_data
+ * @ingroup network_data
  * @param[in] ptr a pointer to the weights array storage area
  * @return an ai_buffer initialized struct
  */
 AI_DEPRECATED
 AI_API_ENTRY
-ai_buffer ai_usc_network_data_weights_buffer_get(const ai_handle ptr);
+ai_buffer ai_network_data_weights_buffer_get(const ai_handle ptr);
 
 /*!
  * @brief Get network weights array pointer as a handle ptr.
- * @ingroup usc_network_data
+ * @ingroup network_data
  * @return a ai_handle pointer to the weights array
  */
 AI_DEPRECATED
 AI_API_ENTRY
-ai_handle ai_usc_network_data_weights_get(void);
+ai_handle ai_network_data_weights_get(void);
 
 
 /*!
  * @brief Get network params configuration data structure.
- * @ingroup usc_network_data
+ * @ingroup network_data
  * @return true if a valid configuration is present, false otherwise
  */
 AI_API_ENTRY
-ai_bool ai_usc_network_data_params_get(ai_network_params* params);
+ai_bool ai_network_data_params_get(ai_network_params* params);
 
 
 AI_API_DECLARE_END
 
-#endif /* USC_NETWORK_DATA_H */
+#endif /* NETWORK_DATA_H */
 

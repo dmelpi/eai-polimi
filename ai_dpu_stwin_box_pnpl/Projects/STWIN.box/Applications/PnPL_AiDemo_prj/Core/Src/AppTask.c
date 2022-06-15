@@ -320,7 +320,7 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
 //  pxEvt->stream->payload
 
 //  PnPLSerializeTelemetry("ai_application", "label_id", "{\"a\":7}", &telemetry_buffer, &telemetry_size, 0);
-
+// TODO change Pnpl message
   PnPLSerializeTelemetry("ai_application", "accuracy", "1.5", &telemetry, &size, 0);
 
   /* Send the PnPL command via USB CDC interface */
