@@ -16,7 +16,7 @@
 /*----------------------------------------------------------------------------*/
 
 // calculation of the complex absolute value
-float complexABS(float real, float compl) {
+float complex_abs(float real, float compl) {
 	return sqrtf(real*real+compl*compl);
 }
 
@@ -33,14 +33,13 @@ float32_t dot_product(float32_t* in_1, uint32_t data_in1_size, float32_t* in_2, 
 }
 
 // conversion between Hz and Mel
-float Hz_to_Mel(float f_Hz_in) {
+float hz_to_mel(float f_Hz_in) {
 	return 2595*log10(1+f_Hz_in/700);
 }
 
-float Mel_to_Hz(float f_Mel_in) {
+float mel_to_hz(float f_Mel_in) {
 	return (700*(pow(10,f_Mel_in/2505)-1));
 }
-
 
 
 /*----------------------------------------------------------------------------*/
@@ -149,7 +148,7 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 	int freqpoint = 0;
 
 	for (int i=0;   i<data_in_size   ; i=i+2) {
-	  data_out[freqpoint] =(complexABS(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(data_in_size));
+	  data_out[freqpoint] =(complex_abs(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(data_in_size));
 	  data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
 	  freqpoint++;
 	}
@@ -173,14 +172,14 @@ void mel_filters_bank(int * bin ){
 
 	f_max = (float)ISM330DHCX_ODR * 0.45;
 
-	low_freq_mel = Hz_to_Mel(f_min);
-	high_freq_mel = Hz_to_Mel(f_max);
+	low_freq_mel = hz_to_mel(f_min);
+	high_freq_mel = hz_to_mel(f_max);
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( FILTER_BANK_SIZE+2);
 
 	bin_sep=ISM330DHCX_ODR/(float32_t)INPUT_BUFFER_SIZE;
 
 	for (int i=0; i < FILTER_BANK_SIZE+2; i++){
-		Hz_points[i] = Mel_to_Hz((float)(low_freq_mel + i * d_hz_points));
+		Hz_points[i] = mel_to_hz((float)(low_freq_mel + i * d_hz_points));
 		bin[i] = round((Hz_points[i]/bin_sep));
 	}
 }
