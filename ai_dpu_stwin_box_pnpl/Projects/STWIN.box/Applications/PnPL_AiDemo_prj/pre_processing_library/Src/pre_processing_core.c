@@ -221,8 +221,6 @@ void mfcc(float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint
 
 	fft(data_in, data_in_size, fft_out, data_in_size/2, fft_handler, signal_windowing);
 
-	//SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("fft_out:  %f.\r\n ", (float) fft_out[250]));
-
 	mel_spectrum(fft_out, data_in_size/2, data_out, data_out_size,bin);
 	for (int i = 0; i<data_out_size; i++){
 		data_out[i] = 20*log10(data_out[i]);

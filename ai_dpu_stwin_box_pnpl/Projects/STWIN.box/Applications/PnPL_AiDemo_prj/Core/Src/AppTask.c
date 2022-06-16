@@ -318,24 +318,23 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
 
 
   // Try with uint8_t
-  /*
+
   float32_t * payload = pxEvt->stream->payload;
   float32_t label_id = payload[0];
   float32_t accuracy = payload[1];
-	*/
-  //char value_s[32];
+  char value_s[16];
 
-  //sprintf(value_s, "%d", (int)label_id);
+  sprintf(value_s, "%d", (int)label_id);
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
-  //PnPLSerializeTelemetry("ai_application", "label_id", value_s, &telemetry, &size, 0);
+  PnPLSerializeTelemetry("ai_application", "label_id", value_s, &telemetry, &size, 0);
   /* Send the PnPL command via USB CDC interface */
-  //UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
+  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
 
-  //sprintf(value_s, "%.2f", accuracy);
+  sprintf(value_s, "%.2f", (float) accuracy);
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
-  //PnPLSerializeTelemetry("ai_application", "accuracy", value_s, &telemetry, &size, 0);
+  PnPLSerializeTelemetry("ai_application", "accuracy", value_s, &telemetry, &size, 0);
   /* Send the PnPL command via USB CDC interface */
-  //UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
+  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
 
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
 
