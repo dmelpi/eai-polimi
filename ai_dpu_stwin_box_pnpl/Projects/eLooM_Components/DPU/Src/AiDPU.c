@@ -239,8 +239,9 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     /* call preprocessing function */
     pre_processing_process(raw_data, INPUT_BUFFER_SIZE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
 
+    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("data_in:  %f.\r\n ", (float) preprocessing_output_array[0]));
     /* call Ai library. */
-    p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
+    p_obj->ai_processing_f(AIDPU_NAME, preprocessing_output_array, p_obj->ai_out);
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
