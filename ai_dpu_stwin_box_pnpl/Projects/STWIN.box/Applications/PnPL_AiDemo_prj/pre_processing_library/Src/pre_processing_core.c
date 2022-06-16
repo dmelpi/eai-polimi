@@ -44,7 +44,7 @@ float Mel_to_Hz(float f_Mel_in) {
 
 
 /*----------------------------------------------------------------------------*/
-/* Signal pre-processing :  Axis selection           */
+/* Signal pre-processing :  Axis selection        						      */
 /*----------------------------------------------------------------------------*/
 
 
