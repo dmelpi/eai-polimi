@@ -218,16 +218,16 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
   if((*p_consumer_buff) != NULL)
   {
-	tridimensional_data_t raw_data[AIDPU_NB_SAMPLE];
+	tridimensional_data_t raw_data[INPUT_BUFFER_SIZE];
 
     assert_param(p_obj->scale != 0.0F);
     assert_param(AIDPU_NB_AXIS == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]);
-    assert_param(AIDPU_NB_SAMPLE == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT]);
+    assert_param(INPUT_BUFFER_SIZE == p_obj->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT]);
 
     float *p_in = (float*) CB_GetItemData((*p_consumer_buff));
     float scale = p_obj->scale;
 
-    for(int i = 0; i < AIDPU_NB_SAMPLE; i++)
+    for(int i = 0; i < INPUT_BUFFER_SIZE; i++)
     {
       raw_data[i].x = *p_in++ * scale;
       raw_data[i].y = *p_in++ * scale;
@@ -237,7 +237,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
     float32_t preprocessing_output_array[AI_NETWORK_IN_1_SIZE];
 
     /* call preprocessing function */
-    pre_processing_process(raw_data, AIDPU_NB_SAMPLE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
+    pre_processing_process(raw_data, INPUT_BUFFER_SIZE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
 
     /* call Ai library. */
     p_obj->ai_processing_f(AIDPU_NAME, (float*) preprocessing_output_array, p_obj->ai_out);

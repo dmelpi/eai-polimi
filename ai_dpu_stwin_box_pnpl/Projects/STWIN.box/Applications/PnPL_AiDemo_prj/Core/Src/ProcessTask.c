@@ -208,7 +208,7 @@ sys_error_code_t ProcessTaskAttachToSensorEx(ProcessTask_t *_this, ISourceObserv
 
 sys_error_code_t ProcessTaskAttachToSensor(ProcessTask_t *_this, ISourceObservable *p_sensor, uint8_t cb_items)
 {
-  return ProcessTaskAttachToSensorEx(_this, p_sensor, AIDPU_NB_SAMPLE, AIDPU_NB_AXIS, cb_items);
+  return ProcessTaskAttachToSensorEx(_this, p_sensor, INPUT_BUFFER_SIZE, AIDPU_NB_AXIS, cb_items);
 }
 
 sys_error_code_t ProcessTaskAddDPUListener(ProcessTask_t *_this, IProcessEventListener *p_listener)

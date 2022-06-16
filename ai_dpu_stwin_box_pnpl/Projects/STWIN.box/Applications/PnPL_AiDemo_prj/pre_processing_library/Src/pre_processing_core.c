@@ -20,8 +20,6 @@ float complexABS(float real, float compl) {
 	return sqrtf(real*real+compl*compl);
 }
 
-
-
 // Dot product calculation using CMSIS DSP library
 float32_t dot_product(float32_t* in_1, uint32_t data_in1_size, float32_t* in_2, uint32_t data_in2_size){
 
@@ -179,7 +177,7 @@ void mel_filters_bank(int * bin ){
 	high_freq_mel = Hz_to_Mel(f_max);
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( FILTER_BANK_SIZE+2);
 
-	bin_sep=ISM330DHCX_ODR/(float32_t)AIDPU_NB_SAMPLE;
+	bin_sep=ISM330DHCX_ODR/(float32_t)INPUT_BUFFER_SIZE;
 
 	for (int i=0; i < FILTER_BANK_SIZE+2; i++){
 		Hz_points[i] = Mel_to_Hz((float)(low_freq_mel + i * d_hz_points));

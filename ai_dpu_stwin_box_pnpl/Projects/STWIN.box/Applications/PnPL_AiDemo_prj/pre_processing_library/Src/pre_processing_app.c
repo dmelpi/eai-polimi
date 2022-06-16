@@ -23,7 +23,7 @@
 void pre_processing_init(pre_processing_data_t * pre_processing_data){
 	arm_status status;
 
-	arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), AIDPU_NB_SAMPLE);
+	arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), INPUT_BUFFER_SIZE);
 	status=arm_dct4_init_f32(&((*pre_processing_data).dct4f32), &((*pre_processing_data).rfftf32), &((*pre_processing_data).cfftradix4f32), FILTER_BANK_SIZE, FILTER_BANK_SIZE/2, 0.125);
 
 	if (status != ARM_MATH_SUCCESS){

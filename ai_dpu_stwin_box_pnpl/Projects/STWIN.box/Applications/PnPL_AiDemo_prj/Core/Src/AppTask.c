@@ -317,6 +317,7 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   uint32_t actual_size;
 
 
+  // Try with uint8_t
   float32_t * payload = pxEvt->stream->payload;
   float32_t label_id = payload[0];
   float32_t accuracy = payload[1];
