@@ -36,7 +36,6 @@ typedef struct{
 } pre_processing_data_t;
 
 
-
 /* Exported Functions --------------------------------------------------------*/
 void signal_normalization(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size);
 void hanning(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size);

@@ -316,17 +316,26 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   uint32_t size;
   uint32_t actual_size;
 
-  /* Processed data can be found here */
-//  pxEvt->stream->payload
 
-//  PnPLSerializeTelemetry("ai_application", "label_id", "{\"a\":7}", &telemetry_buffer, &telemetry_size, 0);
-// TODO change Pnpl message
-  PnPLSerializeTelemetry("ai_application", "accuracy", "1.5", &telemetry, &size, 0);
+  float32_t * payload = pxEvt->stream->payload;
+  float32_t label_id = payload[0];
+  float32_t accuracy = payload[1];
 
+  char value_s[32];
+
+  sprintf(value_s, "%d", (int)label_id);
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
+  PnPLSerializeTelemetry("ai_application", "label_id", value_s, &telemetry, &size, 0);
   /* Send the PnPL command via USB CDC interface */
   UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
+  sprintf(value_s, "%.2f", accuracy);
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
+  PnPLSerializeTelemetry("ai_application", "accuracy", value_s, &telemetry, &size, 0);
+  /* Send the PnPL command via USB CDC interface */
+  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
+
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
 
   return xRes;
 }
