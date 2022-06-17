@@ -1,0 +1,8 @@
+/.cproject
+/.mxproject
+/.project
+/Core/
+/Drivers/
+/Middlewares/
+/STM32WB5MMGHX_FLASH.ld
+/STM32WB5MMGHX_RAM.ld
