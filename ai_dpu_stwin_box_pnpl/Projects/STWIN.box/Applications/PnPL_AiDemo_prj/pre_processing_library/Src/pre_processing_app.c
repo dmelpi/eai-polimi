@@ -48,10 +48,6 @@ void pre_processing_process(tridimensional_data_t * data_in , uint32_t data_in_s
 	float32_t data_1[data_in_size];
 	axis_selection(data_in, data_in_size, data_1, data_in_size, pre_processing_data->axis);
 
-	for(int i=0 ; i<512 ; i++){
-		data_1[i] = i;
-	}
-
 	// remove mean value from the signal
 	float32_t data_2[data_in_size];
 	mean_removal(data_1, data_in_size, data_2, data_in_size);
