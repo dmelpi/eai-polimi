@@ -72,7 +72,7 @@ void axis_selection( tridimensional_data_t * data_in, uint32_t data_in_size, flo
 
 
 /*----------------------------------------------------------------------------*/
-/* Signal pre-processing :  Remove mean from signal            */
+/* Signal pre-processing :  Remove mean from signal     			          */
 /*----------------------------------------------------------------------------*/
 
 void mean_removal (float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size){
@@ -172,12 +172,16 @@ void mel_filters_bank(int * bin ){
 
 	low_freq_mel = hz_to_mel(f_min);
 	high_freq_mel = hz_to_mel(f_max);
+
+	low_freq_mel = f_min;
+	high_freq_mel = f_max;
+
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( FILTER_BANK_SIZE+2);
 
 	bin_sep=ISM330DHCX_ODR/(float32_t)INPUT_BUFFER_SIZE;
 
 	for (int i=0; i < FILTER_BANK_SIZE+2; i++){
-		Hz_points[i] = mel_to_hz((float)(low_freq_mel + i * d_hz_points));
+		Hz_points[i] = (float32_t)(low_freq_mel + i * d_hz_points);
 		bin[i] = round((Hz_points[i]/bin_sep));
 	}
 }
@@ -211,7 +215,7 @@ void mel_spectrum(float32_t * data_in, uint32_t data_in_size, float32_t * data_o
 }
 
 /*----------------------------------------------------------------------------*/
-/* Signal pre-processing :  MFCC		                  */
+/* Signal pre-processing :  MFCC		        					          */
 /*----------------------------------------------------------------------------*/
 
 void mfcc(float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size, int * bin, arm_dct4_instance_f32 * dct4f32, arm_rfft_fast_instance_f32 * fft_handler,  signal_windowing_t signal_windowing){
