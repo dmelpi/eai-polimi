@@ -41,6 +41,7 @@ extern "C" {
 #include "IAiApplication.h"
 #include "IAiApplication_vtbl.h"
 #include "PnPLCompManager.h"
+#include "App_model.h"
 
 /**
  * Create  type name for _AppTask.

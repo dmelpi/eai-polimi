@@ -30,6 +30,7 @@ extern "C" {
 #include "IPnPLComponent.h"
 #include "IPnPLComponent_vtbl.h"
 #include "PnPLDef.h"
+#include "PnPLCompManager_Conf.h"
 #include "parson.h"
 
 /* Includes ------------------------------------------------------------------*/
@@ -60,16 +61,18 @@ struct _PnPLCompManager_t
 /**************************/
 void PnPLGenerateAcquisitionUUID(char *uuid);
 uint16_t PnPLGetNComponents(void);
-uint16_t PnPLGetNSensors(void);
+uint16_t PnPLGetComponentsNames(char **components_names);
 uint8_t PnPLAddComponent(IPnPLComponent_t *pComponent);
 uint8_t PnPLAddSensorComponent(IPnPLComponent_t *pComponent, uint8_t sensor_id, uint8_t sensor_type);
 uint8_t PnPLRemoveComponent(uint8_t id); //char*
 uint8_t PnPLGetPresentationJSON(char **SerializedJSON, uint32_t *size);
 uint8_t PnPLGetDeviceStatusJSON(char **SerializedJSON, uint32_t *size, uint8_t pretty);
+uint8_t PnPLGetFilteredDeviceStatusJSON(char **serializedJSON, uint32_t *size, char **namesList, uint32_t namesListSize, uint8_t pretty);
 uint8_t PnPLUpdateDeviceStatusFromJSON(char *serializedJSON);
 uint8_t PnPLParseCommand(char *commandString, PnPLCommand_t *command);
 uint8_t PnPLSerializeResponse(PnPLCommand_t *command, char **SerializedJSON, uint32_t *size, uint8_t pretty);
-uint8_t PnPLSerializeTelemetry(char *compName, char *telemetryKey, char *telemetryValue, char **telemetryJSON, uint32_t *size, uint8_t pretty);
+uint8_t PnPLSerializeTelemetry(char *compName, PnPLTelemetry_t *telemetryValue, uint8_t telemetryNum, char **telemetryJSON, uint32_t *size, uint8_t pretty);
+
 
 /* Inline functions definition */
 /*******************************/

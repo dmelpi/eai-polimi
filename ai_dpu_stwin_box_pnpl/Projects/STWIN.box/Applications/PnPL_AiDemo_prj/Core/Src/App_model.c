@@ -66,6 +66,23 @@ uint8_t ai_application_switch_bank(IAiApplication_t *ifn)
   IAiApplication_switch_bank(ifn);
   return 0;
 }
+
+//uint8_t <comp_name>_create_telemetry(tel1_type tel1_name, tel2_type tel2_name, ..., telN_type telN_name, char **telemetry, uint32_t *size)
+uint8_t ai_application_create_telemetry(int class, float accuracy, char **telemetry, uint32_t *size)
+{
+    PnPLTelemetry_t telemetries[2];
+    strcpy(telemetries[0].telemetry_name, "label_id");
+    telemetries[0].telemetry_value = (void*)&class;
+    telemetries[0].telemetry_type = PNPL_INT;
+    telemetries[0].n_sub_telemetries = 0;
+    strcpy(telemetries[1].telemetry_name, "accuracy");
+    telemetries[1].telemetry_value = (void*)&accuracy;
+    telemetries[1].telemetry_type = PNPL_FLOAT;
+    telemetries[1].n_sub_telemetries = 0;
+
+    PnPLSerializeTelemetry("ai_application", telemetries, 2, telemetry, size, 0);
+    return 0;
+}
 ////=================================================================================================================
 
 //FWINFO Component ==================================================================================================

@@ -44,7 +44,6 @@ float mel_to_hz(float f_Mel_in) {
 	return (700*(pow(10,f_Mel_in/2505)-1));
 }
 
-
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Axis selection        						      */
 /*----------------------------------------------------------------------------*/
@@ -70,7 +69,6 @@ void axis_selection( tridimensional_data_t * data_in, uint32_t data_in_size, flo
 	}
 }
 
-
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Remove mean from signal     			          */
 /*----------------------------------------------------------------------------*/
@@ -88,10 +86,6 @@ void mean_removal (float32_t * data_in, uint32_t data_in_size, float32_t * data_
 	}
 }
 
-
-
-
-
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Signal normalization between -1 and 1             */
 /*----------------------------------------------------------------------------*/
@@ -108,7 +102,6 @@ void signal_normalization(float32_t *data_in, uint32_t data_in_size, float32_t *
 		data_out[i] = ((data_in[i] - min)/(max - min))*2 - 1;
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Multiply the Hanning window to the input signal   */
@@ -147,12 +140,15 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 	int freqpoint = 0;
 
 	for (int i=0;   i<data_in_size   ; i=i+2) {
-	  data_out[freqpoint] =(complex_abs(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(data_in_size));
-	  data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
+	  data_out[freqpoint] =(complex_abs(fft_out_buf[i], fft_out_buf[i+1])); //(sqrt(data_in_size));
+	  //data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
+
+	  if(data_out[freqpoint] < 1e-3){
+		  data_out[freqpoint] = 1e-3;
+	  }
 	  freqpoint++;
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Calculation of the MEL Filters bank               */
@@ -185,7 +181,6 @@ void mel_filters_bank(int * bin ){
 		bin[i] = round((Hz_points[i]/bin_sep));
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Mel Spectrum calculation 		                  */

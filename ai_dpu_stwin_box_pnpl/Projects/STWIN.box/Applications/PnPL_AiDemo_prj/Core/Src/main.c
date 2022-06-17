@@ -67,6 +67,7 @@ int main(void)
 
   SysInit(FALSE);
 
+
   tx_kernel_enter();
 
   while (1);

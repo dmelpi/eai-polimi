@@ -503,6 +503,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/IUsbDelegate_vtbl.h</locationURI>
 		</link>
 		<link>
+			<name>User/Core/Inc/PnPLCompManager_Conf.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/PnPLCompManager_Conf.h</locationURI>
+		</link>
+		<link>
 			<name>User/Core/Inc/ProcMessagesDef.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/ProcMessagesDef.h</locationURI>

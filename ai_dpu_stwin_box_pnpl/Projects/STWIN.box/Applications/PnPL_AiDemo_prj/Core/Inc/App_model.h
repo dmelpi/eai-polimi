@@ -116,6 +116,10 @@ char* ai_application_get_key(void); //AUTOMATICALLY IMPLEMENTED in .c --> will r
 uint8_t ai_application_stop_log(IAiApplication_t *ifn);
 uint8_t ai_application_start_log(IAiApplication_t *ifn);
 uint8_t ai_application_switch_bank(IAiApplication_t *ifn);
+
+////TELEMETRY Send Functions
+//uint8_t <comp_name>_create_telemetry(tel1_type tel1_name, tel2_type tel2_name, ..., telN_type telN_name, char **telemetry, uint32_t *size)
+uint8_t ai_application_create_telemetry(int class, float accuracy, char **telemetry, uint32_t *size);
 //===================================================================================================================
 
 //Fwinfo Component ==================================================================================================
