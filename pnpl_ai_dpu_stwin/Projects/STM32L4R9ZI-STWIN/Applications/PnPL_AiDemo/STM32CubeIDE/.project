@@ -32,1427 +32,1427 @@
 		<link>
 			<name>Middlewares/eLooM/Inc</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/eLooM_FreeRTOS/Inc</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/eLooM_FreeRTOS/Inc</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/eLooM/Src</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/eLooM_FreeRTOS/Src</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/eLooM_FreeRTOS/Src</locationURI>
 		</link>
 		<link>
 			<name>User/mx/Inc</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/mx/Inc</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/mx/Inc</locationURI>
 		</link>
 		<link>
 			<name>User/mx/Src</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/mx/Src</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/mx/Src</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/Core/Include</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Drivers/CMSIS/Include</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/CMSIS/Include</locationURI>
 		</link>
 		<link>
 			<name>Drivers/Components/iis3dwb/iis3dwb_reg.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/BSP/Components/iis3dwb/iis3dwb_reg.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/iis3dwb/iis3dwb_reg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/Components/iis3dwb/iis3dwb_reg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/BSP/Components/iis3dwb/iis3dwb_reg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/iis3dwb/iis3dwb_reg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/Components/ism330dhcx/ism330dhcx_reg.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/Components/ism330dhcx/ism330dhcx_reg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_can.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_can.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_can.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_comp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_comp.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_comp.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dcmi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dcmi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dcmi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma2d.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma2d.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma2d.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dsi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dsi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dsi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_firewall.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_firewall.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_firewall.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gfxmmu.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gfxmmu.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gfxmmu.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lptim.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lptim.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lptim.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_mmc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nand.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nand.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nand.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nor.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nor.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nor.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ospi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ospi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ospi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pka.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pka.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pka.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pssi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pssi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pssi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sram.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sram.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sram.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_swpmi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_swpmi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_swpmi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tsc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tsc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tsc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart_ex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart_ex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart_ex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_wwdg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_wwdg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_wwdg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_bus.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_bus.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_bus.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_comp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_comp.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_comp.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_cortex.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_cortex.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_cortex.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crs.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crs.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crs.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dac.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dac.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dac.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma2d.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma2d.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma2d.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dmamux.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dmamux.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dmamux.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_exti.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_exti.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_exti.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_fmc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_fmc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_fmc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_gpio.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_gpio.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_gpio.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_iwdg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_iwdg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_iwdg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lptim.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lptim.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lptim.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lpuart.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lpuart.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lpuart.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_opamp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_opamp.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_opamp.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pka.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pka.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pka.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pwr.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pwr.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pwr.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rcc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rcc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rcc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rng.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rng.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rng.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rtc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rtc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rtc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_sdmmc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_sdmmc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_sdmmc.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_spi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_spi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_spi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_swpmi.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_swpmi.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_swpmi.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_system.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_system.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_system.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_tim.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_tim.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_tim.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usart.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usart.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usart.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_utils.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_utils.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_utils.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_wwdg.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_wwdg.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_wwdg.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/Legacy</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/Legacy</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/Legacy</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_comp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_comp.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_comp.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dcmi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dcmi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dcmi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma2d.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma2d.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma2d.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dsi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dsi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dsi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_firewall.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_firewall.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_firewall.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gfxmmu.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gfxmmu.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gfxmmu.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hcd.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hcd.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_irda.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_irda.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_irda.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_iwdg.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_iwdg.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_iwdg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lptim.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lptim.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lptim.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_mmc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nand.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nand.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nand.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nor.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nor.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nor.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ospi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ospi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ospi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pka.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pka.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pka.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pssi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pssi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pssi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sram.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sram.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sram.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_swpmi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_swpmi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_swpmi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart_ex.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart_ex.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_wwdg.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_wwdg.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_wwdg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_adc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_adc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_adc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_comp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_comp.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_comp.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crs.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crs.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crs.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dac.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dac.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dac.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma2d.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma2d.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma2d.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_exti.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_exti.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_exti.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_fmc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_fmc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_fmc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_i2c.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_i2c.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_i2c.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lptim.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lptim.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lptim.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lpuart.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lpuart.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lpuart.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_opamp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_opamp.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_opamp.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pka.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pka.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pka.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rcc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rcc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rcc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rng.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rng.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rng.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_sdmmc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_sdmmc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_sdmmc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_spi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_spi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_spi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_swpmi.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_swpmi.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_swpmi.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/History.txt</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/History.txt</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/History.txt</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/LICENSE</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/LICENSE</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/LICENSE</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/README.md</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/README.md</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/README.md</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/croutine.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/croutine.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/croutine.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/event_groups.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/include</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/include</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/include</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/list.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/list.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/list.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/queue.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/queue.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/queue.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/readme.txt</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/readme.txt</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/readme.txt</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/st_readme.txt</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/tasks.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/tasks.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/tasks.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/timers.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_common_config.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_common_config.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_common_config.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_datatypes.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_datatypes_defines.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_defines.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_defines.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_datatypes_format.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_format.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_format.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_datatypes_internal.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_internal.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_datatypes_internal.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_dqnn_helpers.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_dqnn_helpers.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_dqnn_helpers.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_layer_custom_interface.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_layer_custom_interface.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_layer_custom_interface.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_log.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_log.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_log.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_math_helpers.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_math_helpers.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_math_helpers.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_network_inspector.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_network_inspector.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_network_inspector.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_platform.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_platform.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_platform.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/ai_platform_interface.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/ai_platform_interface.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/ai_platform_interface.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_common.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_common.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_common.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_convert.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_convert.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_convert.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_datatypes.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_datatypes.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_datatypes.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_log.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_log.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_log.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_net_inspect.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_net_inspect.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_net_inspect.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_net_inspect_interface.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_net_inspect_interface.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_net_inspect_interface.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/core_private.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/core_private.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/core_private.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/datatypes_network.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/datatypes_network.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/datatypes_network.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/formats_list.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/formats_list.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/formats_list.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_common.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_common.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_common.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_conv2d.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_conv2d.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_conv2d.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_conv2d_dqnn.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_conv2d_dqnn.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_conv2d_dqnn.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_custom.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_custom.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_custom.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_dense.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_dense.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_dense.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_dense_dqnn.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_dense_dqnn.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_dense_dqnn.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_formats_converters.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_formats_converters.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_formats_converters.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_generic.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_generic.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_generic.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_generic_dqnn.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_generic_dqnn.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_generic_dqnn.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_list.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_list.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_list.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_lite_graph.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_lite_graph.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_lite_graph.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml_iforest.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_iforest.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_iforest.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml_linearclassifier.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_linearclassifier.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_linearclassifier.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml_svc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_svc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_svc.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml_svmregressor.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_svmregressor.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_svmregressor.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_ml_treeensembleclassifier.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_treeensembleclassifier.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_ml_treeensembleclassifier.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_nl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_nl.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_nl.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_norm.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_norm.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_norm.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_pool.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_pool.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_pool.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_pool_dqnn.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_pool_dqnn.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_pool_dqnn.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_rnn.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_rnn.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_rnn.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_AI_Library/layers_sm.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_AI_Library/Inc/layers_sm.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_AI_Library/Inc/layers_sm.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_GenericFFT_Library/fft.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_GenericFFT_Library/Src/fft.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_GenericFFT_Library/Src/fft.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_GenericFFT_Library/fft.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_GenericFFT_Library/Inc/fft.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_GenericFFT_Library/Inc/fft.h</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/AppControllerMessagesDef.h</name>
@@ -1572,7 +1572,7 @@
 		<link>
 			<name>User/Core/Inc/sysdebug_config.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/sysdebug_config.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/Core/Inc/sysdebug_config.h</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/usbd_cdc_if.h</name>
@@ -1682,37 +1682,37 @@
 		<link>
 			<name>User/CubeAI/Inc/aiApp.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/aiApp.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/aiApp.h</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Inc/network.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/network.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/network.h</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Inc/network_config.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/network_config.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/network_config.h</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Inc/network_data.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/network_data.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/network_data.h</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Src/aiApp.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/aiApp.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/aiApp.c</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Src/network.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/network.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/network.c</locationURI>
 		</link>
 		<link>
 			<name>User/CubeAI/Src/network_data.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/X-CUBE-AI/App/network_data.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo/X-CUBE-AI/App/network_data.c</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/AiApplicationPnPL.h</name>
@@ -1797,232 +1797,232 @@
 		<link>
 			<name>eLooM_Components/DPU/Inc/ADPU.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/ADPU.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/ADPU.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/ADPU_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/ADPU_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/ADPU_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/AiDPU.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/AiDPU.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/AiDPU.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/AiDPU_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/AiDPU_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/AiDPU_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/CircularBuffer.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/CircularBuffer.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/CircularBuffer.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/Dummy_DPU.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/Dummy_DPU.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/Dummy_DPU.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/Dummy_DPU_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/Dummy_DPU_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/Dummy_DPU_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/IDPU.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/IDPU.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/IDPU.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/IDPUVtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/IDPUVtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/IDPUVtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/ADPU.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/ADPU.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/ADPU.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/AiDPU.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/AiDPU.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/AiDPU.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/CircularBuffer.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/CircularBuffer.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/CircularBuffer.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/Dummy_DPU.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/Dummy_DPU.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/Dummy_DPU.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/IDPU.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/IDPU.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/IDPU.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/ABusIF.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/ABusIF.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/ABusIF.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/IBus.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/IBus.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/IBus.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/IBus_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/IBus_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/IBus_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/IIS3DWBTask.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/IIS3DWBTask.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/IIS3DWBTask.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/IIS3DWBTask_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/IIS3DWBTask_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/IIS3DWBTask_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/ISM330DHCXTask.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/ISM330DHCXTask.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/ISM330DHCXTask.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/ISM330DHCXTask_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/ISM330DHCXTask_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/ISM330DHCXTask_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/ISensor.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/ISensor.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/ISensor.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/ISensor_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/ISensor_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SMMessageParser.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SMMessageParser.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SMMessageParser.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SMUtilTask.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SMUtilTask.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SMUtilTask.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SPIBusIF.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SPIBusIF.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SPIBusIF.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SPIBusTask.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SPIBusTask.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SPIBusTask.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SPIBusTask_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SPIBusTask_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SPIBusTask_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SensorCommands.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SensorCommands.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SensorCommands.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SensorDef.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SensorDef.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SensorDef.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SensorManager.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SensorManager.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SensorManager.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/SensorRegister.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/SensorRegister.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/SensorRegister.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/ABusIF.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/ABusIF.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/ABusIF.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/IBus.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/IBus.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/IBus.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/IIS3DWBTask.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/IIS3DWBTask.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/IIS3DWBTask.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/ISM330DHCXTask.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/ISM330DHCXTask.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/ISM330DHCXTask.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/ISensor.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/ISensor.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/ISensor.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SMMessageParser.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SMMessageParser.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SMMessageParser.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SMUtilTask.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SMUtilTask.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SMUtilTask.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SPIBusIF.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SPIBusIF.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SPIBusIF.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SPIBusTask.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SPIBusTask.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SPIBusTask.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SensorManager.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SensorManager.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SensorManager.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/SensorRegister.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/SensorRegister.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/SensorRegister.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorsStreamerCLI/Inc/SCLIUtilTask_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorsStreamerCLI/Src/SCLIUtilTask.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorsStreamerCLI/Src/SCLIUtilTask.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorsStreamerCLI/Src/SCLIUtilTask.c</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/drivers/PushButtonDrv.h</name>
@@ -2042,162 +2042,162 @@
 		<link>
 			<name>eLooM_Components/DPU/Inc/events/IProcessEventListener.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/events/IProcessEventListener.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/events/IProcessEventListener.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/events/IProcessEventListener_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/events/IProcessEventListener_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/events/IProcessEventListener_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/events/ProcessEvent.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/events/ProcessEvent.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/events/ProcessEvent.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/events/ProcessEventSrc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/events/ProcessEventSrc.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/events/ProcessEventSrc.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Inc/events/ProcessEventSrc_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Inc/events/ProcessEventSrc_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/events/ProcessEventSrc_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/events/ProcessEventSrc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/DPU/Src/events/ProcessEventSrc.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/events/ProcessEventSrc.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/drivers/SMUtilityDriver_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/drivers/SPIMasterDriver_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/events/ISensorEventListener.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/events/ISensorEventListener.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/events/ISensorEventListener.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/events/ISensorEventListener_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/events/ISensorEventListener_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/events/ISensorEventListener_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/events/SensorEvent.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/events/SensorEvent.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/events/SensorEvent.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/events/SensorEventSrc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/events/SensorEventSrc.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/events/SensorEventSrc.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/events/SensorEventSrc_vtbl.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/events/SensorEventSrc_vtbl.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/events/SensorEventSrc_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/services/SIterator.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/services/SIterator.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/services/SIterator.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Inc/services/SQuery.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Inc/services/SQuery.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/services/SQuery.h</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/drivers/SPIMasterDriver.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/events/ISensorEventListener.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/events/ISensorEventListener.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/events/ISensorEventListener.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/events/SensorEvent.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/events/SensorEvent.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/events/SensorEvent.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/events/SensorEventSrc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/events/SensorEventSrc.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/events/SensorEventSrc.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/services/SIterator.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/services/SIterator.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/services/SIterator.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/services/SQuery.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT12/eLooM_Components/SensorManager/Src/services/SQuery.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/services/SQuery.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/portable/MemMang/heap_4.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/services/ai_data_format/ai_logging.h</name>
@@ -2222,51 +2222,37 @@
 		<link>
 			<name>Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4r9xx.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4r9xx.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4r9xx.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>$%7BPARENT-3-ECLIPSE_HOME%7D/GIT/pnpl_ai_dpu_stwin/Projects/STM32L4R9ZI-STWIN/Applications/PnPL_AiDemo</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT1</name>
-			<value>$%7BPARENT-4-copy_PARENT%7D</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT12</name>
-			<value>$%7Bcopy_PARENT1%7D/Projects</value>
-		</variable>
-	</variableList>
 </projectDescription>
