@@ -16,10 +16,7 @@
  *
  */
 
-#include "services/sysdebug.h"
 #include "pre_processing_app.h"
-
-#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
 void pre_processing_init(pre_processing_data_t * pre_processing_data){
 	arm_status status;

@@ -10,43 +10,43 @@
 #include "arm_math.h"
 #include "AiDPU.h"
 
+#include "services/sysdebug.h"
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
+
 
 /*----------------------------------------------------------------------------*/
 /* Support functions          			      						          */
 /*----------------------------------------------------------------------------*/
 
 // calculation of the complex absolute value
-float complexABS(float real, float compl) {
+float complex_abs(float real, float compl) {
 	return sqrtf(real*real+compl*compl);
 }
 
 // Dot product calculation using CMSIS DSP library
 float32_t dot_product(float32_t* in_1, uint32_t data_in1_size, float32_t* in_2, uint32_t data_in2_size){
 
-	float32_t multOutput[data_in1_size/2];
+	float32_t multOutput[data_in1_size];
 	float32_t dot_out=0;
-	arm_mult_f32(in_1, in_2, multOutput, data_in1_size/2);
-	for (int i=0;  i<data_in1_size/2;   i++){
+	arm_mult_f32(in_1, in_2, multOutput, data_in1_size);
+	for (int i=0;  i<data_in1_size;   i++){
 		arm_add_f32(&dot_out, &multOutput[i], &dot_out, 1);
 	}
 	return dot_out;
 }
 
 // conversion between Hz and Mel
-float Hz_to_Mel(float f_Hz_in) {
+float hz_to_mel(float f_Hz_in) {
 	return 2595*log10(1+f_Hz_in/700);
 }
 
-float Mel_to_Hz(float f_Mel_in) {
+float mel_to_hz(float f_Mel_in) {
 	return (700*(pow(10,f_Mel_in/2505)-1));
 }
-
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Axis selection        						      */
 /*----------------------------------------------------------------------------*/
-
 
 void axis_selection( tridimensional_data_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size, axis_t axis){
 	if (axis == X)
@@ -69,11 +69,8 @@ void axis_selection( tridimensional_data_t * data_in, uint32_t data_in_size, flo
 	}
 }
 
-
-
-
 /*----------------------------------------------------------------------------*/
-/* Signal pre-processing :  Remove mean from signal            */
+/* Signal pre-processing :  Remove mean from signal     			          */
 /*----------------------------------------------------------------------------*/
 
 void mean_removal (float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size){
@@ -89,14 +86,9 @@ void mean_removal (float32_t * data_in, uint32_t data_in_size, float32_t * data_
 	}
 }
 
-
-
-
-
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Signal normalization between -1 and 1             */
 /*----------------------------------------------------------------------------*/
-
 
 void signal_normalization(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size){
 
@@ -110,7 +102,6 @@ void signal_normalization(float32_t *data_in, uint32_t data_in_size, float32_t *
 		data_out[i] = ((data_in[i] - min)/(max - min))*2 - 1;
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Multiply the Hanning window to the input signal   */
@@ -149,12 +140,15 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 	int freqpoint = 0;
 
 	for (int i=0;   i<data_in_size   ; i=i+2) {
-	  data_out[freqpoint] =(complexABS(fft_out_buf[i], fft_out_buf[i+1]))/(sqrt(data_in_size));
-	  data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
+	  data_out[freqpoint] =(complex_abs(fft_out_buf[i], fft_out_buf[i+1])); //(sqrt(data_in_size));
+	  //data_out[freqpoint] = 2 * data_out[freqpoint]*data_out[freqpoint] /(float32_t)ISM330DHCX_ODR;
+
+	  if(data_out[freqpoint] < 1e-3){
+		  data_out[freqpoint] = 1e-3;
+	  }
 	  freqpoint++;
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Calculation of the MEL Filters bank               */
@@ -162,29 +156,31 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 
 void mel_filters_bank(int * bin ){
 
-	static float low_freq_mel;
-	static float high_freq_mel;
-	static float Hz_points[FILTER_BANK_SIZE+2];
-	static float d_hz_points;
-	static float bin_sep;
-	static float f_max;
-	static float f_min = 0.0;
-
+	float32_t low_freq_mel;
+	float32_t high_freq_mel;
+	float32_t Hz_points[FILTER_BANK_SIZE+2];
+	float32_t d_hz_points;
+	float32_t bin_sep;
+	float32_t f_max;
+	float32_t f_min = 0.0;
 
 	f_max = (float)ISM330DHCX_ODR * 0.45;
 
-	low_freq_mel = Hz_to_Mel(f_min);
-	high_freq_mel = Hz_to_Mel(f_max);
+	//low_freq_mel = hz_to_mel(f_min);
+	//high_freq_mel = hz_to_mel(f_max);
+
+	low_freq_mel = f_min;
+	high_freq_mel = f_max;
+
 	d_hz_points = (high_freq_mel-low_freq_mel)/(float32_t)( FILTER_BANK_SIZE+2);
 
 	bin_sep=ISM330DHCX_ODR/(float32_t)INPUT_BUFFER_SIZE;
 
 	for (int i=0; i < FILTER_BANK_SIZE+2; i++){
-		Hz_points[i] = Mel_to_Hz((float)(low_freq_mel + i * d_hz_points));
+		Hz_points[i] = (float32_t)(low_freq_mel + i * d_hz_points);
 		bin[i] = round((Hz_points[i]/bin_sep));
 	}
 }
-
 
 /*----------------------------------------------------------------------------*/
 /* Signal pre-processing :  Mel Spectrum calculation 		                  */
@@ -203,21 +199,18 @@ void mel_spectrum(float32_t * data_in, uint32_t data_in_size, float32_t * data_o
 		for (int i=0; i<data_in_size   ;i++){
 			in_vector[i] = (float32_t) 0.0;
 		}
-
 		for (int k=f_m_minus;k < f_m;k++){
 			in_vector[k] = (((float32_t)k-f_m_minus)/(f_m-f_m_minus));
 		}
-
 		for (int j=f_m; j<f_m_plus;j++){
 			in_vector[j] = (float32_t)((f_m_plus-(float32_t)j)/(f_m_plus-f_m));
 		}
-		data_out[m-1] = dot_product(in_vector, data_out_size,data_in, data_out_size);
+		data_out[m-1] = dot_product(in_vector, data_in_size,data_in, data_in_size);
 	}
 }
 
-
 /*----------------------------------------------------------------------------*/
-/* Signal pre-processing :  MFCC		                  */
+/* Signal pre-processing :  MFCC		        					          */
 /*----------------------------------------------------------------------------*/
 
 void mfcc(float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size, int * bin, arm_dct4_instance_f32 * dct4f32, arm_rfft_fast_instance_f32 * fft_handler,  signal_windowing_t signal_windowing){
@@ -227,8 +220,7 @@ void mfcc(float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint
 
 	fft(data_in, data_in_size, fft_out, data_in_size/2, fft_handler, signal_windowing);
 
-	mel_spectrum(fft_out, data_in_size, data_out, data_out_size,bin);
-
+	mel_spectrum(fft_out, data_in_size/2, data_out, data_out_size,bin);
 	for (int i = 0; i<data_out_size; i++){
 		data_out[i] = 20*log10(data_out[i]);
 	}

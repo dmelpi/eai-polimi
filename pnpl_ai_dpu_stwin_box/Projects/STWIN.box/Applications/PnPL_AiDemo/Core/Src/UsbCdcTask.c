@@ -97,7 +97,7 @@ static const UsbCdcClass s_xTheClass = {
     {
         UsbCdcTaskExecuteStepRun,
         NULL,
-        UsbCdcTaskExecuteStepRun
+        UsbCdcTaskExecuteStepRun,
     }
 };
 

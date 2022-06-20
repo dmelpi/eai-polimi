@@ -5,7 +5,6 @@
 *.o
 *.ko
 *.obj
-*.elf
 
 # Linker output
 *.ilk
@@ -15,6 +14,8 @@
 # Precompiled Headers
 *.gch
 *.pch
+
+
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -28,7 +29,6 @@
 *.app
 *.i*86
 *.x86_64
-*.hex
 
 # Debug files
 *.dSYM/

@@ -166,8 +166,8 @@ void mel_filters_bank(int * bin ){
 
 	f_max = (float)ISM330DHCX_ODR * 0.45;
 
-	low_freq_mel = hz_to_mel(f_min);
-	high_freq_mel = hz_to_mel(f_max);
+	//low_freq_mel = hz_to_mel(f_min);
+	//high_freq_mel = hz_to_mel(f_max);
 
 	low_freq_mel = f_min;
 	high_freq_mel = f_max;
