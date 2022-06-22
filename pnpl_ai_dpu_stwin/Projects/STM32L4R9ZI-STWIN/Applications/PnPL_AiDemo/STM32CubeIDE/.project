@@ -1545,11 +1545,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/applowpower.h</locationURI>
 		</link>
 		<link>
-			<name>User/Core/Inc/filter_gravity.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/filter_gravity.h</locationURI>
-		</link>
-		<link>
 			<name>User/Core/Inc/params.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/params.h</locationURI>

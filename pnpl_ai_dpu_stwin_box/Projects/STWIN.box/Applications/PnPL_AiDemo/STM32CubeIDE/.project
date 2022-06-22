@@ -563,19 +563,14 @@
 			<locationURI>PARENT-4-PROJECT_LOC/STWIN.box/Applications/PnPL_AiDemo/Core/Inc/drivers</locationURI>
 		</link>
 		<link>
-			<name>User/Core/Inc/filter_gravity.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STWIN.box/Applications/PnPL_AiDemo/Core/Inc/filter_gravity.h</locationURI>
-		</link>
-		<link>
 			<name>User/Core/Inc/main.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STWIN.box/Applications/PnPL_AiDemo/Core/Inc/main.h</locationURI>
 		</link>
 		<link>
-			<name>User/Core/Inc/sensor_parameters.h</name>
+			<name>User/Core/Inc/params.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STWIN.box/Applications/PnPL_AiDemo/Core/Inc/sensor_parameters.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/params.h</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/services</name>
@@ -958,16 +953,6 @@
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/CircularBuffer.h</locationURI>
 		</link>
 		<link>
-			<name>eLooM_Components/DPU/Inc/Dummy_DPU.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/Dummy_DPU.h</locationURI>
-		</link>
-		<link>
-			<name>eLooM_Components/DPU/Inc/Dummy_DPU_vtbl.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/Dummy_DPU_vtbl.h</locationURI>
-		</link>
-		<link>
 			<name>eLooM_Components/DPU/Inc/IDPU.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Inc/IDPU.h</locationURI>
@@ -991,11 +976,6 @@
 			<name>eLooM_Components/DPU/Src/CircularBuffer.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/CircularBuffer.c</locationURI>
-		</link>
-		<link>
-			<name>eLooM_Components/DPU/Src/Dummy_DPU.c</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/DPU/Src/Dummy_DPU.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/DPU/Src/IDPU.c</name>

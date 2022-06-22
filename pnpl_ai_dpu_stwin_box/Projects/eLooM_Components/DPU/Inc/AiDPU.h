@@ -32,16 +32,8 @@ extern "C" {
 #include "fft.h"
 
 #define AIDPU_NB_AXIS         (3)
-#define INPUT_BUFFER_SIZE       (512)					// INPUT_BUFFER_SIZE
 #define AIDPU_AI_PROC_IN_SIZE (AI_NETWORK_IN_1_SIZE)
-#define AIDPU_NAME            "network"
 
-typedef struct
-{
- float x;           /*  x axes  */
- float y;           /*  y axes  */
- float z;           /*  z axes  */
-} tridimensional_data_t;
 
 /**
  * Create  type name for _AiDPU_t.
