@@ -1,13 +1,11 @@
 /**
  ******************************************************************************
- * @file    sensor_parameters.h
+ * @file    params.h
  * @author  STMicroelectronics
  * @version 1.0.0
  * @date    May 21, 2022
  *
- * @brief USB_CDC Class
- *
- * This managed task is responsible to manage the USB_CDC communication
+ * @brief Handling of parameters generated with HandleBars.
  *
  ******************************************************************************
  * @attention
@@ -28,18 +26,33 @@
  *
  ******************************************************************************
  */
-#ifndef SENSOR_PARAMETERS_H_
-#define SENSOR_PARAMETERS_H_
+#ifndef PARAMS_H_
+#define PARAMS_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define ISM330DHCX_ODR 1666.0      						// [Hz] set ODR (Output Data Rate) value based on supported ODR available list of the sensor
-#define ISM330DHCX_FS 16.0
+
+/* Sensors. */
+#define ISM330DHCX_FS            (16.0)
+#define ISM330DHCX_ODR           (1666.0)
+
+
+/* Pre-Processing. */
+#define INPUT_BUFFER_SIZE        (512)
+#define SELECTED_AXIS            (X)
+#define TRIANGULAR_FILTERS_SCALE (TRIANGULAR_FILTERS_SCALE_HZ)
+#define SIGNAL_WINDOWING         (HANNING)
+
+/* AI-Processing. */
+#define NETWORK_NAME             ("network")
+
+/* Post-Processing. */
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* SENSOR_PARAMETERS_H_ */
+#endif /* PARAMS_H_ */

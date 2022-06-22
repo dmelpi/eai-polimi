@@ -38,22 +38,22 @@
 #endif
 
 #ifndef SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_SIZE
-#define SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(struct utilMessage_t)
+#define SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_SIZE       (sizeof(struct utilMessage_t))
 #endif
 
 #ifndef SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_COUNT
-#define SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_COUNT      10
+#define SCLIUTIL_TASK_CFG_IN_QUEUE_ITEM_COUNT      (10)
 #endif
 
 #ifndef SCLIUTIL_TASK_CFG_LP_TIMER_DEF_PERIOD_MS
-#define SCLIUTIL_TASK_CFG_LP_TIMER_DEF_PERIOD_MS   10000
+#define SCLIUTIL_TASK_CFG_LP_TIMER_DEF_PERIOD_MS   (10000)
 #endif
 
 /* TODO: define the symbol SYS_DBG_UTIL in the file sysdebug_config.h */
-#define SYS_DEBUGF(level, message)             SYS_DEBUGF3(SYS_DBG_UTIL, level, message)
+#define SYS_DEBUGF(level, message)                SYS_DEBUGF3(SYS_DBG_UTIL, level, message)
 
 #if defined(DEBUG) || defined (SYS_DEBUG)
-#define sTaskObj                               sSCLIUtilTaskObj
+#define sTaskObj                                  (sSCLIUtilTaskObj)
 #endif
 
 

@@ -26,7 +26,7 @@
 #include "services/sysdebug.h"
 #include "stm32l4xx_hal.h"
 
-#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_APP, level, message)
+#define SYS_DEBUGF(level, message)      (SYS_DEBUGF3(SYS_DBG_APP, level, message))
 
 
 // Private member function declaration

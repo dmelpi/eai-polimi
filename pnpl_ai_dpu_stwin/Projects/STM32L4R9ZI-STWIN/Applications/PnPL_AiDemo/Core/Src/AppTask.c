@@ -29,22 +29,22 @@
 #include "services/sysdebug.h"
 
 #if defined(DEBUG) || defined (SYS_DEBUG)
-#define CTRL_TASK_CFG_OUT_CH                      stderr
+#define CTRL_TASK_CFG_OUT_CH                      (stderr)
 #else
-#define CTRL_TASK_CFG_OUT_CH                      stdout
+#define CTRL_TASK_CFG_OUT_CH                      (stdout)
 #endif
 
 #ifndef APP_TASK_CFG_STACK_DEPTH
-#define APP_TASK_CFG_STACK_DEPTH                  120
+#define APP_TASK_CFG_STACK_DEPTH                  (120)
 #endif
 
 #ifndef APP_TASK_CFG_PRIORITY
 #define APP_TASK_CFG_PRIORITY                     (tskIDLE_PRIORITY+1)
 #endif
 
-#define APP_TASK_ANTI_DEBOUNCH_PERIOD_TICK        7U
+#define APP_TASK_ANTI_DEBOUNCH_PERIOD_TICK        (7U)
 
-#define SYS_DEBUGF(level, message)               SYS_DEBUGF3(SYS_DBG_HW, level, message)
+#define SYS_DEBUGF(level, message)                SYS_DEBUGF3(SYS_DBG_HW, level, message)
 
 /**
  * The only instance of the task object.
@@ -301,13 +301,13 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
 
   // Getting NN classification results.
-  float32_t *payload = pxEvt->stream->payload;
+  float32_t *payload = (float32_t *) (pxEvt->stream->payload);
   float32_t label_id = payload[0];
   float32_t accuracy = payload[1];
 
   // Printing NN classification results to the serial interface.
   char data_s[64];
-  uint32_t size = sprintf(data_s, "{\"label_id\": %d, \"accuracy\": %f}\r\n", (uint32_t) label_id, accuracy);
+  uint32_t size = sprintf(data_s, "{\"label_id\": %ld, \"accuracy\": %f}\r\n", (uint32_t) label_id, accuracy);
   CDC_Transmit_FS(( uint8_t * ) data_s, size);
 
 #if 0 //PnPL

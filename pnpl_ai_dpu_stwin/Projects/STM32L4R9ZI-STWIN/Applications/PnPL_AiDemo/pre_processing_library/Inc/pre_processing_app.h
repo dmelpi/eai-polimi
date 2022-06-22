@@ -8,8 +8,6 @@
 #ifndef PREPROCESSINGAPP_INC_PREPROCESSINGAPP_H_
 #define PREPROCESSINGAPP_INC_PREPROCESSINGAPP_H_
 
-#include "AiDPU.h"
-#include "arm_math.h"
 #include "pre_processing_core.h"
 
 

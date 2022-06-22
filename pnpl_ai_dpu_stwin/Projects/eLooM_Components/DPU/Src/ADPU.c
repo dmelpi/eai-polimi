@@ -19,8 +19,6 @@
 #include "ADPU.h"
 #include "ADPU_vtbl.h"
 #include <string.h>
-
-//#include "features_extraction_loc.h"
 #include "services/sysdebug.h"
 
 

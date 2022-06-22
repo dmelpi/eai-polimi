@@ -96,7 +96,6 @@ int aiInit(const char* nn_name)
 int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 {
   ai_i32 n_batch;
-  ai_error err;
 
   /* 1 - Update IO handlers with the data payload */
   ai_input[0].data = AI_HANDLE_PTR(p_inData);
@@ -128,7 +127,7 @@ int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
   }
 
   if (n_batch != 1) {
-	  err = ai_network_get_error(network);
+	  ai_network_get_error(network);
   };
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Class: %d ,  Accuracy: %.8f   \r\n", (int) p_out_data[0] , p_out_data[1]));

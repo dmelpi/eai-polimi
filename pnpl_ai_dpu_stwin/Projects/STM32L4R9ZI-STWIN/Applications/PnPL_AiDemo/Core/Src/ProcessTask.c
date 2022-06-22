@@ -28,7 +28,7 @@
 #include "task.h"
 #include "services/sysdebug.h"
 #include "ai_platform_interface.h"
-#include "sensor_parameters.h"
+#include "params.h"
 
 
 #ifndef PRC_TASK_CFG_STACK_DEPTH
@@ -40,7 +40,7 @@
 #endif
 
 #ifndef PRC_TASK_CFG_IN_QUEUE_LENGTH
-#define PRC_TASK_CFG_IN_QUEUE_LENGTH        10
+#define PRC_TASK_CFG_IN_QUEUE_LENGTH        (10)
 #endif
 
 #define PRC_TASK_CFG_IN_QUEUE_ITEM_SIZE     (sizeof(struct prcMessage_t))
@@ -55,7 +55,7 @@
 #define PRC_TASK_CFG_DATA_INPUT_USER        (INPUT_BUFFER_SIZE)
 #endif
 
-#define AI_LSB_16B                          (1.0F/32768)    // Value of an LSB for a 16 bit signed arithmetic
+#define AI_LSB_16B                          (1.0f/32768)    // Value of an LSB for a 16 bit signed arithmetic
 
 #define SYS_DEBUGF(level, message)          SYS_DEBUGF3(SYS_DBG_PRC, level, message)
 
@@ -74,7 +74,7 @@ typedef struct _ProcessTaskClass_t {
   AManagedTaskEx_vtbl vtbl;
 
   /**
-   * ProcessTask class (PM_STATE, ExecuteStepFunc) map. The map is implemente with an array and
+   * ProcessTask class (PM_STATE, ExecuteStepFunc) map. The map is implemented with an array and
    * the key is the index. Number of items of this array must be equal to the number of PM state
    * of the application. If the managed task does nothing in a PM state, then set to NULL the
    * relative entry in the map.
