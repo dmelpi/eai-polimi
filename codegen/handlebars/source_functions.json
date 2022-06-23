@@ -5,36 +5,51 @@
                 "name": "axis_selection",
                 "code_init": "// axis_selection.\n    pre_processing_data->axis = SELECTED_AXIS;\n\n    ",
                 "code_process": "// axis_selection.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    axis_selection({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, pre_processing_data->axis);\n\n    ",
+                "parameters": {
+                    "selected_axes": ["<X|Y|Z>", "..."]
+                },
                 "data_in_out_size_factor": "1"
             },
             {
                 "name": "mean_removal",
                 "code_init": "",
                 "code_process": "// mean_removal.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    mean_removal({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}});\n\n    ",
+                "parameters": {},
                 "data_in_out_size_factor": "1"
             },
             {
                 "name": "signal_normalization",
                 "code_init": "",
                 "code_process": "// signal_normalization.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    signal_normalization({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, peak_to_peak, offset);\n\n    ",
+                "parameters": {},
                 "data_in_out_size_factor": "1"
             },
             {
                 "name": "hanning",
                 "code_init": "// hanning.\n    (*pre_processing_data).multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).signal_windowing);\n\n    ",
                 "code_process": "// hanning.\n    hanning({{DATA_IN}}, {{DATA_IN_SIZE}}, (*pre_processing_data).multipliers, {{DATA_OUT_SIZE}});\n\n    ",
+                "parameters": {
+                    "signal_windowing": "<RECTANGULAR|HANNING>"
+                },
                 "data_in_out_size_factor": "1"
             },
             {
                 "name": "fft",
                 "code_init": "// fft.\n    arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), {{DATA_IN_SIZE}});\n\n    pre_processing_data->signal_windowing = SIGNAL_WINDOWING;\n    (*pre_processing_data).multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).signal_windowing);\n\n    ",
                 "code_process": "// fft.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    fft({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, &((*pre_processing_data).fft_handler), (*pre_processing_data).signal_windowing, (*pre_processing_data).multipliers);\n\n    ",
+                "parameters": {
+                    "signal_windowing": "<RECTANGULAR|HANNING>"
+                },
                 "data_in_out_size_factor": "0.5"
             },
             {
                 "name": "mfcc",
                 "code_init": "// mfcc.\n    arm_status status;\n    arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), INPUT_BUFFER_SIZE);\n    status = arm_dct4_init_f32(&((*pre_processing_data).dct4f32), &((*pre_processing_data).rfftf32), &((*pre_processing_data).cfftradix4f32), TRIANGULAR_FILTERS_BANK_SIZE, TRIANGULAR_FILTERS_BANK_SIZE/2, 0.125);\n    if (status != ARM_MATH_SUCCESS) {\n        sys_error_handler();\n    }\n    pre_processing_data->triangular_filters_scale = TRIANGULAR_FILTERS_SCALE;\n    pre_processing_data->signal_windowing = SIGNAL_WINDOWING;\n    triangular_filters_bank(INPUT_BUFFER_SIZE, ISM330DHCX_ODR, pre_processing_data->triangular_filters_scale, (*pre_processing_data).bin);\n    (*pre_processing_data).multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).signal_windowing);\n\n    ",
                 "code_process": "// mfcc.\n    mfcc({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, ((*pre_processing_data).bin), &((*pre_processing_data).dct4f32), &((*pre_processing_data).fft_handler), (*pre_processing_data).signal_windowing, (*pre_processing_data).multipliers);\n\n    ",
+                "parameters": {
+                    "triangular_filters_scale": "<TRIANGULAR_FILTERS_SCALE_HZ|TRIANGULAR_FILTERS_SCALE_MEL>",
+                    "signal_windowing": "<RECTANGULAR|HANNING>"
+                },
                 "data_in_out_size_factor": "0"
             }
         ]

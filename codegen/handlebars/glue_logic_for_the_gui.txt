@@ -1,15 +1,17 @@
 if {{INDEX}} == 0:
     {{DATA_IN}} = "data_in"
-    {{DATA_OUT}} = "data_{{INDEX}}"
+    {{DATA_OUT}} = "data_0"
     {{DATA_IN_SIZE}} = "data_in_size"
-    {{DATA_OUT_SIZE}} = "data_in_size" * "data_in_out_size_factor"
+    {{DATA_OUT_SIZE}} = "data_in_size * {{data_in_out_size_factor}}"
+
 else if {{INDEX}} == last:
     {{DATA_IN}} = "data_{{INDEX - 1}}"
     {{DATA_OUT}} = "data_out"
     {{DATA_IN_SIZE}} = {{DATA_OUT_SIZE - 1}}
     {{DATA_OUT_SIZE}} = "data_out_size"
+
 else:
     {{DATA_IN}} = "data_{{INDEX - 1}}"
     {{DATA_OUT}} = "data_{{INDEX}}"
     {{DATA_IN_SIZE}} = {{DATA_OUT_SIZE - 1}}
-    {{DATA_OUT_SIZE}} = "{{DATA_IN_SIZE}}" * "data_in_out_size_factor"
+    {{DATA_OUT_SIZE}} = "{{DATA_IN_SIZE}} * {{data_in_out_size_factor}}"

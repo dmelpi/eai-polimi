@@ -16,7 +16,8 @@
                 "code_process": "// axis_selection.\n    float32_t data_1[data_in_size];\n    axis_selection(data_in, data_in_size, data_1, data_in_size, pre_processing_data->axis);\n\n    ",
                 "parameters": {
                     "selected_axes": ["X"]
-                }
+                },
+                "data_in_out_size_factor": "1"
             },
             {
                 "name": "mean_removal",
