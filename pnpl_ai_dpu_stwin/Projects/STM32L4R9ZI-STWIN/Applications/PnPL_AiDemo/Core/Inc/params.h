@@ -5,7 +5,7 @@
  * @version 1.0.0
  * @date    May 21, 2022
  *
- * @brief Handling of parameters generated with HandleBars.
+ * @brief Handling of parameters generated with Handlebars.
  *
  ******************************************************************************
  * @attention
