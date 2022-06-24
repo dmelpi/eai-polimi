@@ -9,6 +9,7 @@
 	],
 	"pre_processing": {
 		"input_buffer_size": "<input_buffer_size>",
+		"shift_samples":"<shift_samples>",
 		"functions": [
 			{
 				"name": "axis_selection",

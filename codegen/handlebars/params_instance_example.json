@@ -9,6 +9,7 @@
     ],
     "pre_processing": {
         "input_buffer_size": 512,
+        "shift_samples": 256,
         "functions": [
             {
                 "name": "axis_selection",
