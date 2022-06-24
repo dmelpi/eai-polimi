@@ -1,22 +1,19 @@
 {
-    "sensors":  [
-        {
-            "ism330dhcx_acc": {
-                "fs": "16.0f",
-                "odr": "1666.0f"
-            }
+    "sensors":  {
+        "ism330dhcx_acc" :{
+            "fs": "16.0f",
+            "odr": "1666.0f"
         }
-    ],
+    },
     "pre_processing": {
         "input_buffer_size": 512,
-        "shift_samples": 256,
         "functions": [
             {
                 "name": "axis_selection",
                 "code_init": "// axis_selection.\n    pre_processing_data->axis = SELECTED_AXIS;\n\n    ",
                 "code_process": "// axis_selection.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    axis_selection({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, pre_processing_data->axis);\n\n    ",
                 "parameters": {
-                    "selected_axes": ["X", "Y"]
+                    "selected_axes": ["X"]
                 },
                 "data_in_out_size_factor": "1"
             },

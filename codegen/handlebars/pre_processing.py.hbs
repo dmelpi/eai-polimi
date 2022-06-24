@@ -9,7 +9,6 @@ class preProcessingData(object):
     signal_windowing = None
     bin = None
 
-        
 def pre_processing_init():
     
     pre_processing_data = preProcessingData()
@@ -18,8 +17,8 @@ def pre_processing_init():
     pre_processing_data.shift_samples = {{pre_processing.shift_samples}}
 
     #sensors
-    pre_processing_data.input_buffer_size = 512
-    pre_processing_data.ism330dhcx_odr = float("1666.0f"[:-1])
+    pre_processing_data.input_buffer_size = {{pre_processing.input_buffer_size}}
+    pre_processing_data.ism330dhcx_odr = float("{{#each sensors}}{{this.ism330dhcx_acc.odr}}{{/each}}"[:-1])
     
     #axis_selection
     pre_processing_data.axis = "Y".lower()

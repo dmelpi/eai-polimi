@@ -50,7 +50,7 @@
                     "triangular_filters_scale": "<TRIANGULAR_FILTERS_SCALE_HZ|TRIANGULAR_FILTERS_SCALE_MEL>",
                     "signal_windowing": "<RECTANGULAR|HANNING>"
                 },
-                "data_in_out_size_factor": "0"
+                "data_in_out_size_factor": "128/{{DATA_IN_SIZE}}"
             }
         ]
     }

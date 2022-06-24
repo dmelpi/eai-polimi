@@ -35,9 +35,7 @@ extern "C" {
 
 
 /* Sensors. */
-#define ISM330DHCX_FS            ({{#each sensors}}{{this.ism330dhcx_acc.fs}}{{/each}})
-#define ISM330DHCX_ODR           ({{#each sensors}}{{this.ism330dhcx_acc.odr}}{{/each}})
-
+{{component_parameter_each sensors}}
 
 /* Pre-Processing. */
 #define INPUT_BUFFER_SIZE        ({{pre_processing.input_buffer_size}})
