@@ -9,26 +9,32 @@ class preProcessingData(object):
     signal_windowing = None
     bin = None
 
+
 def pre_processing_init():
     
     pre_processing_data = preProcessingData()
 
-    #data slicing
+    # Sata slicing.
     pre_processing_data.shift_samples = {{pre_processing.shift_samples}}
 
-    #sensors
+    # Sensors.
     pre_processing_data.input_buffer_size = {{pre_processing.input_buffer_size}}
-    pre_processing_data.ism330dhcx_odr = float("{{#each sensors}}{{this.ism330dhcx_acc.odr}}{{/each}}"[:-1])
-    
+    {{component_parameter_each sensors}}
+
+    {{#pre_processing_init_each pre_processing.functions}}{{{python_code_init}}}{{/pre_processing_init_each}}
+
+    return pre_processing_data
+
+
+
     #axis_selection
-    pre_processing_data.axis = "Y".lower()
+    pre_processing_data.axis = "y"
 
     #mfcc
     pre_processing_data.triangular_filters_scale = "TRIANGULAR_FILTERS_SCALE_HZ"
     pre_processing_data.signal_windowing = "HANNING"
     pre_processing_data.bin = triangular_filters_init(pre_processing_data.input_buffer_size, pre_processing_data.ism330dhcx_odr, pre_processing_data.triangular_filters_scale)
-
-    return pre_processing_data
+   
 
 
 def pre_processing_process(data_in_df , pre_processing_data):

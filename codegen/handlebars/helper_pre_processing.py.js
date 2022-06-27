@@ -1,4 +1,14 @@
-Handlebars.registerHelper("pipeline_input_output_each", function(context, options) {
+Handlebars.registerHelper("component_parameter_each", function(context, options) {
+  let res = ""
+  Object.keys(context).forEach( componentName => {
+      Object.keys(context[componentName]).forEach((paramName) => {
+          res += "pre_processing_data." + componentName.substring(0, componentName.length - 3).toLowerCase() + paramName.toLowerCase() + " = " + context[componentName][paramName] + "\n    ";
+      });    
+  });
+  return res;
+})
+
+Handlebars.registerHelper("pre_processing_init_each", function(context, options) {
     let ret = "";
       const length = context.length;
     let previousItemDataOutSize = undefined;
@@ -33,4 +43,3 @@ Handlebars.registerHelper("pipeline_input_output_each", function(context, option
   
     return ret;
   });
-  

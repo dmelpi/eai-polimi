@@ -9,18 +9,6 @@ class preProcessingData(object):
     signal_windowing = None
     bin = None
 
-'''
-def data_slicing(data_in_df, number_of_samples, shift_samples):
-    data_out_size = 128  # HANDLEBARS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    n_samples_tot = len(data_in_df)
-    N=0
-    while (n_samples_tot-(N*shift_samples+number_of_samples)) > 0:
-        N=N+1
-
-    X = np.zeros((N,data_out_size))
-    for ii in range(N):
-        sub_df = data_in_df.iloc[ii*shift_samples : ii*shift_samples + number_of_samples, :]
-'''
         
 def pre_processing_init():
     
