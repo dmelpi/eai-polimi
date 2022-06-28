@@ -34,7 +34,7 @@ void pre_processing_init(pre_processing_data_t * pre_processing_data) {
     }
     pre_processing_data->triangular_filters_scale = TRIANGULAR_FILTERS_SCALE;
     pre_processing_data->signal_windowing = SIGNAL_WINDOWING;
-    triangular_filters_init(INPUT_BUFFER_SIZE, ISM330DHCX_ODR, pre_processing_data->triangular_filters_scale, (*pre_processing_data).bin);
+    triangular_filters_init(INPUT_BUFFER_SIZE, ISM330DHCX_ACC_ODR, pre_processing_data->triangular_filters_scale, (*pre_processing_data).bin);
     (*pre_processing_data).multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));
     multipliers_init((*pre_processing_data).multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).signal_windowing);
 
