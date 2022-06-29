@@ -49,7 +49,7 @@ Handlebars.registerHelper("pre_processing_init_each", function(context, options)
       case "mfcc":
         code = "# MFCC.\n    pre_processing_data.triangular_filters_scale = \"" + item.parameters.triangular_filters_scale + "\"\n    " +
                "pre_processing_data.signal_windowing = \"" + item.parameters.signal_windowing + "\"\n    " +
-    	       "pre_processing_data.bin = triangular_filters_init(pre_processing_data.input_buffer_size, pre_processing_data.ism330dhcx_odr, pre_processing_data.triangular_filters_scale)\n\n    ";
+    	       "pre_processing_data.bin = triangular_filters_init(pre_processing_data.input_buffer_size, pre_processing_data.ism330dhcx_acc_odr, pre_processing_data.triangular_filters_scale)\n\n    ";
         data_out_size = "128";
         data_out_size_mode = "absolute";
         break;
@@ -60,7 +60,7 @@ Handlebars.registerHelper("pre_processing_init_each", function(context, options)
     ret += code;
   }
   
-  ret += "# Data slicing.\n    pre_processing_data.shift_samples = " + context.shift_samples + "\n    pre_processing_data.data_out_size = " + final_data_out_size + "\n\n    ";
+  ret += "# Data slicing.\n    pre_processing_data.shift_samples = " + context.shift_samples + "\n    pre_processing_data.dataset_cols_size = " + final_data_out_size + "\n\n    ";
 
   return ret;
 });
