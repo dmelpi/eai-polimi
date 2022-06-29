@@ -1,8 +1,8 @@
-Handlebars.registerHelper("component_parameter_each", function(context, options) {
+Handlebars.registerHelper("sensors_each", function(context, options) {
   let res = ""
-  Object.keys(context).forEach( componentName => {
-      Object.keys(context[componentName]).forEach((paramName) => {
-          res += "pre_processing_data." + componentName.substring(0, componentName.length - 3).toLowerCase() + paramName.toLowerCase() + " = " + context[componentName][paramName] + "\n    ";
+  Object.keys(context).forEach((component_name) => {
+      Object.keys(context[component_name]).forEach((parameter_name) => {
+          res += "pre_processing_data." + (component_name + "_" + parameter_name).toLowerCase() + " = " + context[component_name][parameter_name] + ")\n    ";
       });    
   });
   return res;

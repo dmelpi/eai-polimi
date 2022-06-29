@@ -1,11 +1,11 @@
-Handlebars.registerHelper("component_parameter_each", function(context, options) {
+Handlebars.registerHelper("sensors_each", function(context, options) {
     let res = ""
-    Object.keys(context).forEach( componentName => {
-        Object.keys(context[componentName]).forEach((paramName) => {
+    Object.keys(context).forEach((component_name) => {
+        Object.keys(context[component_name]).forEach((parameter_name) => {
             let f = ""
-            if (context[componentName][paramName].toString().includes("."))
+            if (context[component_name][parameter_name].toString().includes("."))
                 f = "f"
-            res += "#define " + componentName.substring(0, componentName.length - 3).toUpperCase() + paramName.toUpperCase() + " (" + context[componentName][paramName] + f + ")\n";
+            res += "#define " + (component_name + "_" + parameter_name).toUpperCase() + " (" + context[component_name][parameter_name] + f + ")\n";
         });    
     });
     return res;

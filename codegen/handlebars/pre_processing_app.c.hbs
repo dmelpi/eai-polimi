@@ -21,10 +21,10 @@
 #include "pre_processing_app.h"
 #include <stdlib.h>
 
-void pre_processing_init(pre_processing_data_t * pre_processing_data) {
-	{{#each pre_processing.functions}}{{{this.code_init}}}{{/each}}
+void pre_processing_init(pre_processing_data_t* pre_processing_data) {
+	{{#pre_processing_init_each pre_processing.functions}}{{/pre_processing_init_each}}
 }
 
-void pre_processing_process(tridimensional_data_t * data_in , uint32_t data_in_size , float32_t * data_out, uint32_t data_out_size, pre_processing_data_t * pre_processing_data) {
-    {{#pipeline_input_output_each pre_processing.functions}}{{{code_process}}}{{/pipeline_input_output_each}}
+void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_size, float32_t* data_out, uint32_t data_out_size, pre_processing_data_t* pre_processing_data) {
+    {{#pre_processing_process_each pre_processing.functions}}{{/pre_processing_process_each}}
 }

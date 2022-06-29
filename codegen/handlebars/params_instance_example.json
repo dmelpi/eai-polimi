@@ -11,35 +11,20 @@
         "functions": [
             {
                 "name": "axis_selection",
-                "c_code_init": "// Axis selection.\n    pre_processing_data->axis = SELECTED_AXIS;\n\n    ",
-                "c_code_process": "// Axis selection.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    axis_selection({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, pre_processing_data->axis);\n\n    ",
-                "python_code_init": "// Axis selection.\n    \n\n    ",
-                "python_code_process": "// Axis selection.\n    \n\n    ",
                 "parameters": {
                     "selected_axes": ["X"]
-                },
-                "data_in_out_size_factor": "1"
+                }
             },
             {
                 "name": "mean_removal",
-                "c_code_init": "",
-                "c_code_process": "// Mean removal.\n    float32_t {{DATA_OUT}}[{{DATA_OUT_SIZE}}];\n    mean_removal({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}});\n\n    ",
-                "python_code_init": "",
-                "python_code_process": "// Mean removal.\n    \n\n    ",
-                "parameters": {},
-                "data_in_out_size_factor": "1"
+                "parameters": {}
             },
             {
                 "name": "mfcc",
-                "c_code_init": "// MFCC.\n    arm_status status;\n    arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), INPUT_BUFFER_SIZE);\n    status = arm_dct4_init_f32(&((*pre_processing_data).dct4f32), &((*pre_processing_data).rfftf32), &((*pre_processing_data).cfftradix4f32), TRIANGULAR_FILTERS_BANK_SIZE, TRIANGULAR_FILTERS_BANK_SIZE/2, 0.125);\n    if (status != ARM_MATH_SUCCESS) {\n        sys_error_handler();\n    }\n    pre_processing_data->triangular_filters_scale = TRIANGULAR_FILTERS_SCALE;\n    pre_processing_data->signal_windowing = SIGNAL_WINDOWING;\n    triangular_filters_bank(INPUT_BUFFER_SIZE, ISM330DHCX_ODR, pre_processing_data->triangular_filters_scale, (*pre_processing_data).bin);\n    (*pre_processing_data).multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).signal_windowing);\n\n    ",
-                "c_code_process": "// MFCC.\n    mfcc({{DATA_IN}}, {{DATA_IN_SIZE}}, {{DATA_OUT}}, {{DATA_OUT_SIZE}}, ((*pre_processing_data).bin), &((*pre_processing_data).dct4f32), &((*pre_processing_data).fft_handler), (*pre_processing_data).signal_windowing, (*pre_processing_data).multipliers);\n\n    ",
-                "python_code_init": "// MFCC.\n    \n\n    ",
-                "python_code_process": "// MFCC.\n    \n\n    ",
                 "parameters": {
                     "triangular_filters_scale": "TRIANGULAR_FILTERS_SCALE_MEL",
                     "signal_windowing": "HANNING"
-                },
-                "data_in_out_size_factor": "0"
+                }
             }
         ]
     },
