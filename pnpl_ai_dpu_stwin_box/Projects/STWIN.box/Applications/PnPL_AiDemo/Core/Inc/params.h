@@ -35,8 +35,8 @@ extern "C" {
 
 
 /* Sensors. */
-#define ISM330DHCX_FS            (16.0)
-#define ISM330DHCX_ODR           (1666.0)
+#define ISM330DHCX_ACC_FS        (16.0)
+#define ISM330DHCX_ACC_ODR       (1666.0)
 
 
 /* Pre-Processing. */

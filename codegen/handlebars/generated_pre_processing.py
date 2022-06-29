@@ -17,9 +17,23 @@ def pre_processing_init():
     pre_processing_data = preProcessingData()
 
     # Sensors.
-    pre_processing_data.input_buffer_size = {{pre_processing.input_buffer_size}}
-    {{{sensors_each sensors}}}
-    {{#pre_processing_init_each pre_processing}}{{/pre_processing_init_each}}
+    pre_processing_data.input_buffer_size = 512
+    pre_processing_data.ism330dhcx_acc_fs = 16.0
+    pre_processing_data.ism330dhcx_acc_odr = 1666.0
+    
+    # Axis selection.
+    pre_processing_data.axis = "x"
+
+    # MFCC.
+    pre_processing_data.triangular_filters_scale = "TRIANGULAR_FILTERS_SCALE_MEL"
+    pre_processing_data.signal_windowing = "HANNING"
+    pre_processing_data.bin = triangular_filters_init(pre_processing_data.input_buffer_size, pre_processing_data.ism330dhcx_odr, pre_processing_data.triangular_filters_scale)
+
+    # Data slicing.
+    pre_processing_data.shift_samples = 10
+    pre_processing_data.data_out_size = 128
+
+    
 
     return pre_processing_data 
 
@@ -50,3 +64,4 @@ def pre_processing_process(data_in_df, pre_processing_data):
         X[row,:] = data_out
 
     return X
+    
