@@ -1,12 +1,23 @@
 from pre_processing_core import *
 
 class preProcessingData(object):
-    shift_samples = None
+    # Data slicing.
     input_buffer_size = None
+    shift_samples = None
     dataset_cols_size = None
+
+	# Sensors.
     ism330dhcx_acc_fs = None
     ism330dhcx_acc_odr = None
+    
+    # Axis selection.
     axis = None
+
+    # Signal normalization.
+    peak_to_peak = None
+    offset = None
+
+    # MFCC / FFT.
     triangular_filters_scale = None
     signal_windowing = None
     bin = None
@@ -52,14 +63,16 @@ def pre_processing_process(data_in_df, pre_processing_data):
         # Input data.
         sub_df = data_in_df.iloc[row * pre_processing_data.shift_samples : row * pre_processing_data.shift_samples + pre_processing_data.input_buffer_size, :]
 
-        # axis selection
+        # Axis selection.
         data_0 = axis_selection(sub_df, pre_processing_data.axis)
 
-        # mean removal
+        # Mean removal.
         data_1 = mean_removal(data_0)
 
-        # mfcc
+        # MFCC.
         data_out = mfcc_(data_1, pre_processing_data.bin, pre_processing_data.signal_windowing)
+
+        
 
         # Output data.
         X[row,:] = data_out

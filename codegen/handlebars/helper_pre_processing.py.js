@@ -32,7 +32,7 @@ Handlebars.registerHelper("pre_processing_init_each", function(context, options)
         data_out_size_mode = "relative";
         break;
       case "signal_normalization":
-        code = "";
+        code = "# Signal normalization.\n    pre_processing_data.peak_to_peak = " + item.parameters.peak_to_peak + "\n    pre_processing_data.offset = " + item.parameters.offset + "\n\n    ";
         data_out_size = "1";
         data_out_size_mode = "relative";
         break;
@@ -65,4 +65,54 @@ Handlebars.registerHelper("pre_processing_init_each", function(context, options)
   return ret;
 });
 
-//ret = ret + options.fn(item);
+Handlebars.registerHelper("pre_processing_process_each", function(context, options) {
+  let ret = "";
+  let code = "";
+  let previous_
+  const elements = context.length;
+
+  for (var element = 0; element < elements; element++) {
+    const item = context[element];
+    //let previous_item = element > 0 ? context[element - 1] : undefined;
+    switch (item.name) {
+      case "axis_selection":
+        code = "# Axis selection.\n        {{DATA_OUT}} = axis_selection({{DATA_IN}}, pre_processing_data.axis)\n\n        ";
+        break;
+      case "mean_removal":
+        code = "# Mean removal.\n        {{DATA_OUT}} = mean_removal({{DATA_IN}})\n\n        ";
+        break;
+      case "signal_normalization":
+        code = "# Signal normalization.\n        {{DATA_OUT}} = signal_normalization({{DATA_IN}}, pre_processing_data.peak_to_peak, pre_processing_data.offset)\n\n        ";
+        break;
+      case "hanning":
+        code = "# Hanning.\n        {{DATA_OUT}} = hanning({{DATA_IN}})\n\n        ";
+        break;
+      case "fft":
+        code = "# FFT.\n        {{DATA_OUT}} = fft_({{DATA_IN}}, pre_processing_data.signal_windowing)\n\n        ";
+        break;
+      case "mfcc":
+        code = "# MFCC.\n        {{DATA_OUT}} = mfcc_({{DATA_IN}}, pre_processing_data.bin, pre_processing_data.signal_windowing)\n\n        ";
+        break;
+    }
+  
+    switch (element) {
+      case 0:
+        code = code.replaceAll("{{DATA_IN}}", "sub_df");
+        code = code.replaceAll("{{DATA_OUT}}", "data_0");
+        break;
+      case (elements - 1):
+        code = code.replaceAll("{{DATA_IN}}", "data_" + (element - 1));
+        code = code.replaceAll("{{DATA_OUT}}", "data_out");
+        break;
+      default:
+        code = code.replaceAll("{{DATA_IN}}", "data_" + (element - 1));
+        code = code.replaceAll("{{DATA_OUT}}", "data_" + element);
+        break;
+    }
+  
+    //ret = ret + options.fn(item);
+    ret += code;
+  }
+
+  return ret;
+});
