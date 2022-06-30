@@ -1,0 +1,44 @@
+{
+	"sensors": {
+		"ism330dhcx_acc": {
+			"fs": "<ism330dhcx_acc_fs>",
+			"odr": "<ism330dhcx_acc_odr>"
+		}
+	},
+	"pre_processing": {
+		"input_buffer_size": <input_buffer_size>,
+		"shift_samples": <shift_samples>,
+		"functions": [
+			{
+				"name": "axis_selection",
+                "parameters": {
+					"axes": ["<X|Y|Z>", "..."]
+				}
+			},
+            {
+                "name": "signal_normalization",
+                "parameters": {
+                    "peak_to_peak": "<peak_to_peak>",
+                    "offset": "<offset>"
+                }
+            },
+			{
+				"name": "mean_removal",
+                "parameters": {}
+			},
+			{
+				"name": "mfcc",
+                "parameters": {
+					"triangular_filters_scale": "<TRIANGULAR_FILTERS_SCALE_HZ|TRIANGULAR_FILTERS_SCALE_MEL>",
+					"signal_windowing": "<RECTANGULAR|HANNING>"
+				}
+			}
+		]
+	},
+	"ai_processing": {
+		"network_name": "<network_name>"
+	},
+	"post_processing": {
+		"functions": []
+	}
+}

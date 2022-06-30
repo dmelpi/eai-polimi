@@ -3,9 +3,9 @@
  * @file    params.h
  * @author  STMicroelectronics
  * @version 1.0.0
- * @date    May 21, 2022
+ * @date    June 29, 2022
  *
- * @brief Handling of parameters generated with Handlebars.
+ * @brief File generated with Handlebars.
  *
  ******************************************************************************
  * @attention
@@ -26,6 +26,7 @@
  *
  ******************************************************************************
  */
+
 #ifndef PARAMS_H_
 #define PARAMS_H_
 
@@ -35,17 +36,22 @@ extern "C" {
 
 
 /* Sensors. */
-#define ISM330DHCX_ACC_FS        (16.0)
-#define ISM330DHCX_ACC_ODR       (1666.0)
+#define ISM330DHCX_ACC_FS (16.0)
+#define ISM330DHCX_ACC_ODR (1666.0)
+
 
 /* Pre-Processing. */
-#define INPUT_BUFFER_SIZE        (512)
-#define SELECTED_AXIS            (X)
-#define TRIANGULAR_FILTERS_SCALE (TRIANGULAR_FILTERS_SCALE_HZ)
-#define SIGNAL_WINDOWING         (HANNING)
+#define INPUT_BUFFER_SIZE (512)
+// Axis selection.
+#define AXIS_SELECTION_AXIS (X)
+// MFCC.
+#define MFCC_TRIANGULAR_FILTERS_SCALE (TRIANGULAR_FILTERS_SCALE_MEL)
+#define MFCC_SIGNAL_WINDOWING (HANNING)
+
 
 /* AI-Processing. */
-#define NETWORK_NAME             ("network")
+#define NETWORK_NAME ("network")
+
 
 /* Post-Processing. */
 

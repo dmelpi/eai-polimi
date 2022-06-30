@@ -1,0 +1,39 @@
+from pre_processing_core import *
+
+class preProcessingData(object):
+    
+    {{{pre_processing_data_each sensors pre_processing}}}
+
+
+def pre_processing_init():
+    
+    # Data initialization.
+    pre_processing_data = preProcessingData()
+
+    # Sensors.
+    pre_processing_data.input_buffer_size = {{{pre_processing.input_buffer_size}}}
+    {{{sensors_each sensors}}}
+    {{{pre_processing_init_each pre_processing}}}
+
+    return pre_processing_data 
+
+
+def pre_processing_process(data_in_df, pre_processing_data):
+
+    # Data slicing.
+    pre_processing_data.dataset_rows_size = int(np.floor((len(data_in_df) - pre_processing_data.input_buffer_size) / pre_processing_data.shift_samples))
+
+    # Data initialization.
+    X = np.zeros((pre_processing_data.dataset_rows_size, pre_processing_data.dataset_cols_size))
+
+    # Data processing.
+    for row in range(pre_processing_data.dataset_rows_size):
+        # Input data.
+        sub_df = data_in_df.iloc[row * pre_processing_data.shift_samples : row * pre_processing_data.shift_samples + pre_processing_data.input_buffer_size, :]
+
+        {{{pre_processing_process_each pre_processing.functions}}}
+
+        # Output data.
+        X[row,:] = data_out
+
+    return X

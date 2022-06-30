@@ -1,15 +1,35 @@
-/*
- * pre_processing_core.c
+/**
+ ******************************************************************************
+ * @file    pre_processing_core.c
+ * @author  STMicroelectronics
+ * @version 1.0.0
+ * @date    June 29, 2022
  *
- *  Created on: Feb 16, 2022
- *      Author: leonardoiacussi
+ * @brief File generated with Handlebars.
+ *
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; COPYRIGHT 2022 STMicroelectronics</center></h2>
+ *
+ * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *        http://www.st.com/software_license_agreement_liberty_v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
  */
-
 
 #include "pre_processing_core.h"
 #include "arm_math.h"
 #include "AiDPU.h"
-
 
 /*----------------------------------------------------------------------------*/
 /* Support functions          			      						          */
@@ -46,7 +66,7 @@ float mel_to_hz(float f_Mel_in) {
 /* Signal pre-processing :  Axis selection        						      */
 /*----------------------------------------------------------------------------*/
 
-void axis_selection( tridimensional_data_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size, axis_t axis) {
+void axis_selection(tridimensional_data_t * data_in, uint32_t data_in_size, float32_t * data_out, uint32_t data_out_size, axis_t axis) {
 	if (axis == X)
 	{
 		for (int i=0; i<data_out_size ; i++){
@@ -108,17 +128,17 @@ void mean_removal (float32_t * data_in, uint32_t data_in_size, float32_t * data_
 /* Signal pre-processing :  Calculation of the triangular filters bank        */
 /*----------------------------------------------------------------------------*/
 
-void triangular_filters_init(uint32_t number_of_samples, float32_t odr, triangular_filters_scale_t triangular_filters_scale, uint32_t* bin) {
+void triangular_filters_init(uint32_t number_of_samples, uint32_t triangular_filters_bank_size, float32_t triangular_filters_bank_fraction, float32_t odr, triangular_filters_scale_t triangular_filters_scale, uint32_t* bin) {
 
 	float32_t low_freq;
 	float32_t high_freq;
-	float32_t Hz_points[TRIANGULAR_FILTERS_BANK_SIZE+2];
+	float32_t* Hz_points = calloc(triangular_filters_bank_size + 2, sizeof(float32_t));
 	float32_t d_hz_points;
 	float32_t bin_sep;
 	float32_t f_max;
 	float32_t f_min = 0.0;
 
-	f_max = odr * TRIANGULAR_FILTERS_BANK_FRACTION;
+	f_max = odr * triangular_filters_bank_fraction;
 
 	if (triangular_filters_scale == TRIANGULAR_FILTERS_SCALE_MEL) {
 	    low_freq = hz_to_mel(f_min);
@@ -128,11 +148,11 @@ void triangular_filters_init(uint32_t number_of_samples, float32_t odr, triangul
 	    high_freq = f_max;
 	}
 
-	d_hz_points = (high_freq - low_freq) / (float32_t) (TRIANGULAR_FILTERS_BANK_SIZE+2);
+	d_hz_points = (high_freq - low_freq) / (float32_t) (triangular_filters_bank_size + 2);
 
 	bin_sep = odr / (float32_t) number_of_samples;
 
-	for (int i=0; i < TRIANGULAR_FILTERS_BANK_SIZE+2; i++){
+	for (int i = 0; i < triangular_filters_bank_size + 2; i++){
 		Hz_points[i] = (float32_t) (low_freq + i * d_hz_points);
 		bin[i] = round((Hz_points[i] / bin_sep));
 	}

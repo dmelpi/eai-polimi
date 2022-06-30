@@ -1,0 +1,44 @@
+{
+    "sensors": {
+        "ism330dhcx_acc" :{
+            "fs": "16.0",
+            "odr": "1666.0"
+        }
+    },
+    "pre_processing": {
+        "input_buffer_size": 512,
+        "shift_samples": 10,
+        "functions": [
+            {
+                "name": "axis_selection",
+                "parameters": {
+                    "axes": ["X"]
+                }
+            },
+            {
+                "name": "signal_normalization",
+                "parameters": {
+                    "peak_to_peak": "2.0",
+                    "offset": "0.0"
+                }
+            },
+            {
+                "name": "mean_removal",
+                "parameters": {}
+            },
+            {
+                "name": "mfcc",
+                "parameters": {
+                    "triangular_filters_scale": "TRIANGULAR_FILTERS_SCALE_MEL",
+                    "signal_windowing": "HANNING"
+                }
+            }
+        ]
+    },
+    "ai_processing": {
+        "network_name": "network"
+    },
+    "post_processing": {
+        "functions": []
+    }
+}
