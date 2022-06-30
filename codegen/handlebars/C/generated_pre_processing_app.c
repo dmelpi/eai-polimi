@@ -71,3 +71,8 @@ void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_siz
     // MFCC.
     mfcc(data_2, data_in_size, data_out, data_out_size, ((*pre_processing_data).mfcc_bin), &((*pre_processing_data).mfcc_dct4f32), &((*pre_processing_data).mfcc_handler), (*pre_processing_data).mfcc_signal_windowing, (*pre_processing_data).mfcc_multipliers);
 }
+
+void pre_processing_free(pre_processing_data_t* pre_processing_data) {
+    // MFCC.
+    free((*pre_processing_data).mfcc_multipliers);
+}

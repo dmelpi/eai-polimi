@@ -126,4 +126,38 @@ Handlebars.registerHelper("pre_processing_process_each", function(context, optio
   return ret;
 });
 
+Handlebars.registerHelper("pre_processing_free_each", function(context, options) {
+  let ret = "";
+  let code = "";
+  const elements = context.length;
+
+  for (var element = 0; element < elements; element++) {
+    const item = context[element];
+    switch (item.name) {
+      case "axis_selection":
+        code = "";
+        break;
+      case "mean_removal":
+        code = "";
+        break;
+      case "signal_normalization":
+        code = "";
+        break;
+      case "hanning":
+        code = "// Hanning.\n    free((*pre_processing_data).hanning_multipliers);";
+        break;
+      case "fft":
+        code = "// FFT.\n    free((*pre_processing_data).fft_multipliers);";
+        break;
+      case "mfcc":
+        code = "// MFCC.\n    free((*pre_processing_data).mfcc_multipliers);";
+        break;
+    }
+    ret += code;
+    ret += (element === elements - 1 || code === "" ? "" : "\n\n    ");
+  }
+
+  return ret;
+});
+
 //ret = ret + options.fn(item);

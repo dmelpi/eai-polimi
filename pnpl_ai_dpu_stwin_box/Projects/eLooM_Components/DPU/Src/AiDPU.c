@@ -160,10 +160,13 @@ sys_error_code_t AiDPU_vtblInit(IDPU *_this) {
     // take the ownership of the Sensor Event IF
     IEventListenerSetOwner((IEventListener *) ADPU_GetEventListenerIF(&p_obj->super), &p_obj->super);
 
-    /* initialize signal pre-processing functions */
+    /* Free signal pre-processing functions */
+    pre_processing_free(&pre_processing_data);
+
+    /* Initialize signal pre-processing functions */
     pre_processing_init(&pre_processing_data);
 
-    /* initialize AI library */
+    /* Initialize AI library */
     if (aiInit(NETWORK_NAME)==0)
     {
 	  /* set the initial mode to process */

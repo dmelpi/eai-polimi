@@ -40,3 +40,7 @@ void pre_processing_init(pre_processing_data_t* pre_processing_data) {
 void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_size, float32_t* data_out, uint32_t data_out_size, pre_processing_data_t* pre_processing_data) {
     {{{pre_processing_process_each pre_processing.functions}}}
 }
+
+void pre_processing_free(pre_processing_data_t* pre_processing_data) {
+    {{{pre_processing_free_each pre_processing.functions}}}
+}
