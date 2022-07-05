@@ -30,6 +30,7 @@
 #include "pre_processing_core.h"
 #include "arm_math.h"
 #include "AiDPU.h"
+#include "services/sysmem.h"
 
 /*----------------------------------------------------------------------------*/
 /* Support functions          			      						          */
@@ -132,7 +133,7 @@ void triangular_filters_init(uint32_t number_of_samples, uint32_t triangular_fil
 
 	float32_t low_freq;
 	float32_t high_freq;
-	float32_t* Hz_points = (float32_t*) calloc(triangular_filters_bank_size + 2, sizeof(float32_t));
+	float32_t* Hz_points = (float32_t*) SysAlloc((triangular_filters_bank_size + 2) * sizeof(float32_t));
 	float32_t d_hz_points;
 	float32_t bin_sep;
 	float32_t f_max;
@@ -157,7 +158,7 @@ void triangular_filters_init(uint32_t number_of_samples, uint32_t triangular_fil
 		bin[i] = round((Hz_points[i] / bin_sep));
 	}
 
-	free(Hz_points);
+	SysFree(Hz_points);
 }
 
 
