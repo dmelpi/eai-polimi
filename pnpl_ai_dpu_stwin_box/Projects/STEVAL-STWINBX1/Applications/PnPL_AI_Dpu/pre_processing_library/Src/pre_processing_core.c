@@ -30,7 +30,7 @@
 #include "pre_processing_core.h"
 #include "arm_math.h"
 #include "AiDPU.h"
-#include "services/sysmem.h"
+
 
 /*----------------------------------------------------------------------------*/
 /* Support functions          			      						          */

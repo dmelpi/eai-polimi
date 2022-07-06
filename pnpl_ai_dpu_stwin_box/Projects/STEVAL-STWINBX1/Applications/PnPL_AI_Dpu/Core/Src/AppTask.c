@@ -29,6 +29,7 @@
 #include "UsbCdcTask.h"
 #include "parson.h"
 #include "services/sysmem.h"
+#include "App_model.h"
 
 #ifndef APP_TASK_CFG_STACK_DEPTH
 #define APP_TASK_CFG_STACK_DEPTH           TX_MINIMUM_STACK
@@ -316,25 +317,21 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   uint32_t size;
   uint32_t actual_size;
 
+  /* Processed data extraction */
+  float32_t *payload = (float32_t *) pxEvt->stream->payload;
 
-  // Try with uint8_t
-  float32_t * payload = (float32_t *) pxEvt->stream->payload;
-  float32_t label_id = payload[0];
-  float32_t accuracy = payload[1];
+  int label_id = (int) payload[0];
+  float accuracy = (float) payload[1];
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[AppTask] label_id: %d, accuracy: %.8f.\r\n", label_id, accuracy));
 
-  char value_s[32];
+  /* Create the PnPL Telemetry message using the ai_application dedicated function defined in App_model*/
+  ai_application_create_telemetry(label_id, accuracy, &telemetry, &size);
 
-  sprintf(value_s, "%d", (int)label_id);
-  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
-  PnPLSerializeTelemetry("ai_application", "label_id", value_s, &telemetry, &size, 0);
-  /* Send the PnPL command via USB CDC interface */
+  /* Send the PnPL Telemetry via USB CDC interface */
   UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
 
-  sprintf(value_s, "%.2f", accuracy);
-  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, (value_s));
-  PnPLSerializeTelemetry("ai_application", "accuracy", value_s, &telemetry, &size, 0);
-  /* Send the PnPL command via USB CDC interface */
-  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
+  char new_line[] = "\r\n";
+  UsbCdcTask_Write((uint8_t*)new_line, sizeof(new_line), &actual_size);
 
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
 

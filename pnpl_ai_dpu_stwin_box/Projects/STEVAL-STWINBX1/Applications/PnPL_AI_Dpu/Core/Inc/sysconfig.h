@@ -115,4 +115,8 @@
 #define APP_TASK_CFG_STACK_DEPTH                  (TX_MINIMUM_STACK*40)
 #define APP_TASK_CFG_PRIORITY                     (TX_MAX_PRIORITIES-2)
 
+// OS memory management.
+#include "services/sysmem.h"
+
+
 #endif /* SYSCONFIG_H_ */

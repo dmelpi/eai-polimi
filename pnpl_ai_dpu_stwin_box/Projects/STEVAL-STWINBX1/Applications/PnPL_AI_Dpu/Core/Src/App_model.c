@@ -29,6 +29,9 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "services/sysdebug.h"
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
+
 AppModel_t app_model;
 
 AppModel_t* getAppModel(void)
@@ -66,61 +69,79 @@ uint8_t ai_application_switch_bank(IAiApplication_t *ifn)
   IAiApplication_switch_bank(ifn);
   return 0;
 }
+
+//uint8_t <comp_name>_create_telemetry(tel1_type tel1_name, tel2_type tel2_name, ..., telN_type telN_name, char **telemetry, uint32_t *size)
+uint8_t ai_application_create_telemetry(int label_id, float accuracy, char **telemetry, uint32_t *size)
+{
+	PnPLTelemetry_t telemetries[2];
+    strcpy(telemetries[0].telemetry_name, "label_id");
+    telemetries[0].telemetry_value = (void*)&label_id;
+    telemetries[0].telemetry_type = PNPL_INT;
+    telemetries[0].n_sub_telemetries = 0;
+    strcpy(telemetries[1].telemetry_name, "accuracy");
+    telemetries[1].telemetry_value = (void*)&accuracy;
+    telemetries[1].telemetry_type = PNPL_FLOAT;
+    telemetries[1].n_sub_telemetries = 0;
+
+    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[ai_application_create_telemetry()] label_id: %d, accuracy: %f.\r\n", label_id, accuracy));
+    PnPLSerializeTelemetry("ai_application", telemetries, 2, telemetry, size, 0);
+    return 0;
+}
 ////=================================================================================================================
 
-//FWINFO Component ==================================================================================================
+//FIRMWARE INFO Component ==================================================================================================
 
 //////INIT Function
 //uint8_t <comp_name>_comp_init
-uint8_t fwinfo_comp_init(void)
+uint8_t firmware_info_comp_init(void)
 {
-  app_model.fwinfo_model.comp_name = fwinfo_get_key();
+  app_model.firmware_info_model.comp_name = firmware_info_get_key();
   //insert here your initialization code
   char default_alias[DEVICE_ALIAS_LENGTH] = "AI_Demo_001";
-  fwinfo_set_alias(default_alias);
+  firmware_info_set_alias(default_alias);
   return 0;
 }
 
 //////GET KEY Function
 //uint8_t <comp_name>_get_key
-char* fwinfo_get_key(void) //AUTOMATICALLY IMPLEMENTED in .c --> will return the DTDL Component name: "fwinfo"
+char* firmware_info_get_key(void) //AUTOMATICALLY IMPLEMENTED in .c --> will return the DTDL Component name: "firmware_info"
 {
-  return "fwinfo";
+  return "firmware_info";
 }
 
 //////GET Functions
 //uint8_t <comp_name>_get_<prop_name>(prop_type *prop_value)
-uint8_t fwinfo_get_alias(char **value)
+uint8_t firmware_info_get_alias(char **value)
 {
-  *value = app_model.fwinfo_model.alias;
+  *value = app_model.firmware_info_model.alias;
   return 0;
 }
 
-uint8_t fwinfo_get_fw_name(char **value)
+uint8_t firmware_info_get_fw_name(char **value)
 {
   *value = "PnPL_AI_Demo";
   return 0;
 }
 
-uint8_t fwinfo_get_fw_version(char **value)
+uint8_t firmware_info_get_fw_version(char **value)
 {
   *value = "1.0.0";
   return 0;
 }
 
-uint8_t fwinfo_get_serial_number(char **value)
+uint8_t firmware_info_get_serial_number(char **value)
 {
   *value = "STEVAL-STWINBX1";
   return 0;
 }
 
-uint8_t fwinfo_get_device_url(char **value)
+uint8_t firmware_info_get_device_url(char **value)
 {
   *value = "www.st.com/stwinbox";
   return 0;
 }
 
-uint8_t fwinfo_get_fw_url(char **value)
+uint8_t firmware_info_get_fw_url(char **value)
 {
   *value = "www.st.com/dummy_place"; //TODO fix this value
   return 0;
@@ -128,9 +149,9 @@ uint8_t fwinfo_get_fw_url(char **value)
 
 //////SET Functions
 //uint8_t <comp_name>_set_<prop_name>(prop_type prop_value)
-uint8_t fwinfo_set_alias(const char *value)
+uint8_t firmware_info_set_alias(const char *value)
 {
-  strcpy(app_model.fwinfo_model.alias, value);
+  strcpy(app_model.firmware_info_model.alias, value);
   return 0;
 }
 ////=================================================================================================================

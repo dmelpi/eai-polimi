@@ -16,13 +16,13 @@ Handlebars.registerHelper("pre_processing_init_each", function(context, options)
         code = "// Signal normalization.\n    pre_processing_data->signal_normalization_peak_to_peak = SIGNAL_NORMALIZATION_PEAK_TO_PEAK;\n    pre_processing_data->signal_normalization_offset = SIGNAL_NORMALIZATION_OFFSET;";
         break;
       case "hanning":
-        code = "// Hanning.\n    (*pre_processing_data).hanning_multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).hanning_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).hanning_signal_windowing);";
+        code = "// Hanning.\n    (*pre_processing_data).hanning_multipliers = (float32_t*) SysAlloc(INPUT_BUFFER_SIZE * sizeof(float32_t));\n    multipliers_init((*pre_processing_data).hanning_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).hanning_signal_windowing);";
         break;
       case "fft":
-        code = "// FFT.\n    arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), {{DATA_IN_SIZE}});\n\n    pre_processing_data->fft_signal_windowing = FFT_SIGNAL_WINDOWING;\n    (*pre_processing_data).fft_multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).fft_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).fft_signal_windowing);";
+        code = "// FFT.\n    arm_rfft_fast_init_f32(&((*pre_processing_data).fft_handler), {{DATA_IN_SIZE}});\n\n    pre_processing_data->fft_signal_windowing = FFT_SIGNAL_WINDOWING;\n    (*pre_processing_data).fft_multipliers = (float32_t*) SysAlloc(INPUT_BUFFER_SIZE * sizeof(float32_t));\n    multipliers_init((*pre_processing_data).fft_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).fft_signal_windowing);";
         break;
       case "mfcc":
-        code = "// MFCC.\n    arm_status mfcc_status;\n    arm_rfft_fast_init_f32(&((*pre_processing_data).mfcc_handler), INPUT_BUFFER_SIZE);\n    mfcc_status = arm_dct4_init_f32(&((*pre_processing_data).mfcc_dct4f32), &((*pre_processing_data).mfcc_rfftf32), &((*pre_processing_data).mfcc_cfftradix4f32), MFCC_TRIANGULAR_FILTERS_BANK_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_SIZE / 2.0, 0.125);\n    if (mfcc_status != ARM_MATH_SUCCESS) {\n        sys_error_handler();\n    }\n    pre_processing_data->mfcc_triangular_filters_scale = MFCC_TRIANGULAR_FILTERS_SCALE;\n    pre_processing_data->mfcc_signal_windowing = MFCC_SIGNAL_WINDOWING;\n    triangular_filters_init(INPUT_BUFFER_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_FRACTION, ISM330DHCX_ACC_ODR, pre_processing_data->mfcc_triangular_filters_scale, (*pre_processing_data).mfcc_bin);\n    (*pre_processing_data).mfcc_multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));\n    multipliers_init((*pre_processing_data).mfcc_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).mfcc_signal_windowing);";
+        code = "// MFCC.\n    arm_status mfcc_status;\n    arm_rfft_fast_init_f32(&((*pre_processing_data).mfcc_handler), INPUT_BUFFER_SIZE);\n    mfcc_status = arm_dct4_init_f32(&((*pre_processing_data).mfcc_dct4f32), &((*pre_processing_data).mfcc_rfftf32), &((*pre_processing_data).mfcc_cfftradix4f32), MFCC_TRIANGULAR_FILTERS_BANK_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_SIZE / 2.0, 0.125);\n    if (mfcc_status != ARM_MATH_SUCCESS) {\n        sys_error_handler();\n    }\n    pre_processing_data->mfcc_triangular_filters_scale = MFCC_TRIANGULAR_FILTERS_SCALE;\n    pre_processing_data->mfcc_signal_windowing = MFCC_SIGNAL_WINDOWING;\n    triangular_filters_init(INPUT_BUFFER_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_FRACTION, ISM330DHCX_ACC_ODR, pre_processing_data->mfcc_triangular_filters_scale, (*pre_processing_data).mfcc_bin);\n    (*pre_processing_data).mfcc_multipliers = (float32_t*) SysAlloc(INPUT_BUFFER_SIZE * sizeof(float32_t));\n    multipliers_init((*pre_processing_data).mfcc_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).mfcc_signal_windowing);";
         break;
     }
     ret += code;
@@ -144,13 +144,13 @@ Handlebars.registerHelper("pre_processing_free_each", function(context, options)
         code = "";
         break;
       case "hanning":
-        code = "// Hanning.\n    free((*pre_processing_data).hanning_multipliers);";
+        code = "// Hanning.\n    SysFree((*pre_processing_data).hanning_multipliers);";
         break;
       case "fft":
-        code = "// FFT.\n    free((*pre_processing_data).fft_multipliers);";
+        code = "// FFT.\n    SysFree((*pre_processing_data).fft_multipliers);";
         break;
       case "mfcc":
-        code = "// MFCC.\n    free((*pre_processing_data).mfcc_multipliers);";
+        code = "// MFCC.\n    SysFree((*pre_processing_data).mfcc_multipliers);";
         break;
     }
     ret += code;

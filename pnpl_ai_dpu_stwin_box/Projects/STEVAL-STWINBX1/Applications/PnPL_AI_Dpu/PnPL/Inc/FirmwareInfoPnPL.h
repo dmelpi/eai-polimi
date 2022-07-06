@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    FwInfoPnPL.h
+  * @file    FirmwareInfoPnPL.h
   * @author  SRA
   * @version v1.0.0
   * @date    27-Oct-2021
-  * @brief   FwInfo PnP Component Manager
+  * @brief   FirmwareInfo PnP Component Manager
   ******************************************************************************
   * @attention
   *
@@ -20,8 +20,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef _PNPL_FW_INFO__H_
-#define _PNPL_FW_INFO__H_
+#ifndef _PNPL_FIRMWARE_INFO__H_
+#define _PNPL_FIRMWARE_INFO__H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,15 +35,15 @@ extern "C" {
 
 
 /**
-  * Create a type name for _FwInfoPnPL.
+  * Create a type name for _FirmwareInfoPnPL.
  */
-typedef struct _FwInfoPnPL FwInfoPnPL;
+typedef struct _FirmwareInfoPnPL FirmwareInfoPnPL;
 
 
 // Public API declaration
 //***********************
 
-IPnPLComponent_t *FwInfoPnPLAlloc(void);
+IPnPLComponent_t *FirmwareInfoPnPLAlloc(void);
 
 /**
   * Initialize the default parameters.
@@ -51,7 +51,7 @@ IPnPLComponent_t *FwInfoPnPLAlloc(void);
   * @param _this [IN] specifies a pointer to a task object.
   * @return SYS_NO_ERROR_CODE if success, an error code otherwise
  */
-uint8_t FwInfoPnPLInit(IPnPLComponent_t *_this);
+uint8_t FirmwareInfoPnPLInit(IPnPLComponent_t *_this);
 
 /**
   * Get the IPnPLComponent interface for the component.
@@ -59,12 +59,12 @@ uint8_t FwInfoPnPLInit(IPnPLComponent_t *_this);
   * @return a pointer to the generic object ::IPnPLComponent if success,
   * or NULL if out of memory error occurs.
  */
-IPnPLComponent_t *FwInfoPnPLGetComponentIF(FwInfoPnPL *_this);
+IPnPLComponent_t *FirmwareInfoPnPLGetComponentIF(FirmwareInfoPnPL *_this);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _PNPL_FW_INFO_H_ */
+#endif /* _PNPL_FIRMWARE_INFO_H_ */
 
 /******************* (C) COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/

@@ -35,7 +35,7 @@
 
 #include "PnPLCompManager.h"
 #include "DeviceInfoPnPL.h"
-#include "FwInfoPnPL.h"
+#include "FirmwareInfoPnPL.h"
 #include "AiApplicationPnPL.h"
 #include "ISM330DHCX_ACC_PnPL.h"
 
@@ -71,7 +71,7 @@ static AManagedTaskEx *sUsbCdcObj = NULL;
 
 
 static IPnPLComponent_t *pAiApplicationPnPLObj = NULL;
-static IPnPLComponent_t *pFwInfoPnPLObj = NULL;
+static IPnPLComponent_t *pFirmwareInfoPnPLObj = NULL;
 static IPnPLComponent_t *pDeviceInfoPnPLObj = NULL;
 static IPnPLComponent_t *pISM330DHCX_ACC_PnPLObj = NULL;
 
@@ -135,7 +135,7 @@ sys_error_code_t SysLoadApplicationContext(ApplicationContext *pAppContext)
   xRes = ACAddTask(pAppContext, sAppTaskObj);
 
   pDeviceInfoPnPLObj = DeviceInfoPnPLAlloc();
-  pFwInfoPnPLObj = FwInfoPnPLAlloc();
+  pFirmwareInfoPnPLObj = FirmwareInfoPnPLAlloc();
   pISM330DHCX_ACC_PnPLObj = ISM330DHCX_ACC_PnPLAlloc();
   pAiApplicationPnPLObj = AiApplicationPnPLAlloc();
 
@@ -164,7 +164,7 @@ sys_error_code_t SysOnStartApplication(ApplicationContext *pAppContext)
 
   ISM330DHCX_ACC_PnPLInit(pISM330DHCX_ACC_PnPLObj);
   DeviceInfoPnPLInit(pDeviceInfoPnPLObj);
-  FwInfoPnPLInit(pFwInfoPnPLObj);
+  FirmwareInfoPnPLInit(pFirmwareInfoPnPLObj);
   AiApplicationPnPLInit(pAiApplicationPnPLObj, AppTaskGetIAiApplicationIF((AppTask *)sAppTaskObj));
 
   return SYS_NO_ERROR_CODE;

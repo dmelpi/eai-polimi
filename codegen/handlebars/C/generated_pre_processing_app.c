@@ -51,7 +51,7 @@ void pre_processing_init(pre_processing_data_t* pre_processing_data) {
     pre_processing_data->mfcc_triangular_filters_scale = MFCC_TRIANGULAR_FILTERS_SCALE;
     pre_processing_data->mfcc_signal_windowing = MFCC_SIGNAL_WINDOWING;
     triangular_filters_init(INPUT_BUFFER_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_SIZE, MFCC_TRIANGULAR_FILTERS_BANK_FRACTION, ISM330DHCX_ACC_ODR, pre_processing_data->mfcc_triangular_filters_scale, (*pre_processing_data).mfcc_bin);
-    (*pre_processing_data).mfcc_multipliers = (float32_t*) calloc(INPUT_BUFFER_SIZE, sizeof(float32_t));
+    (*pre_processing_data).mfcc_multipliers = (float32_t*) SysAlloc(INPUT_BUFFER_SIZE * sizeof(float32_t));
     multipliers_init((*pre_processing_data).mfcc_multipliers, INPUT_BUFFER_SIZE, (*pre_processing_data).mfcc_signal_windowing);
 }
 
@@ -74,5 +74,5 @@ void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_siz
 
 void pre_processing_free(pre_processing_data_t* pre_processing_data) {
     // MFCC.
-    free((*pre_processing_data).mfcc_multipliers);
+    SysFree((*pre_processing_data).mfcc_multipliers);
 }

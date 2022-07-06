@@ -32,7 +32,6 @@
 #include "params.h"
 #include "pre_processing_app.h"
 #include <stdlib.h>
-#include "services/sysmem.h"
 
 void pre_processing_init(pre_processing_data_t* pre_processing_data) {
     // Axis selection.

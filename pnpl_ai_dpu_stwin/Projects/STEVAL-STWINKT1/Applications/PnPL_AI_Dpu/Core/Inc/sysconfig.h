@@ -108,5 +108,9 @@
 #define SCLIUTIL_TASK_CFG_STACK_DEPTH             ((configMINIMAL_STACK_SIZE*10) + (configMINIMAL_STACK_SIZE/2))
 #define SCLIUTIL_TASK_CFG_PRIORITY                (tskIDLE_PRIORITY+1)
 
+// OS memory management.
+#define SysAlloc malloc
+#define SysFree free
+
 
 #endif /* SYSCONFIG_H_ */

@@ -503,6 +503,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Inc/IUsbDelegate_vtbl.h</locationURI>
 		</link>
 		<link>
+			<name>User/Core/Inc/PnPLCompManager_Conf.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/PnPLCompManager_Conf.h</locationURI>
+		</link>
+		<link>
 			<name>User/Core/Inc/ProcMessagesDef.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Inc/ProcMessagesDef.h</locationURI>
@@ -570,7 +575,7 @@
 		<link>
 			<name>User/Core/Inc/params.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Core/Inc/params.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/params.h</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Inc/services</name>
@@ -740,62 +745,62 @@
 		<link>
 			<name>User/PnPL/Inc/AiApplicationPnPL.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/AiApplicationPnPL.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/AiApplicationPnPL.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/AiApplicationPnPL_vtbl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/AiApplicationPnPL_vtbl.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/AiApplicationPnPL_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/DeviceInfoPnPL.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/DeviceInfoPnPL.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/DeviceInfoPnPL.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/DeviceInfoPnPL_vtbl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/DeviceInfoPnPL_vtbl.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/DeviceInfoPnPL_vtbl.h</locationURI>
 		</link>
 		<link>
-			<name>User/PnPL/Inc/FwInfoPnPL.h</name>
+			<name>User/PnPL/Inc/FirmwareInfoPnPL.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/FwInfoPnPL.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/FirmwareInfoPnPL.h</locationURI>
 		</link>
 		<link>
-			<name>User/PnPL/Inc/FwInfoPnPL_vtbl.h</name>
+			<name>User/PnPL/Inc/FirmwareInfoPnPL_vtbl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/FwInfoPnPL_vtbl.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/FirmwareInfoPnPL_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/ISM330DHCX_ACC_PnPL.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/ISM330DHCX_ACC_PnPL.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/ISM330DHCX_ACC_PnPL.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Inc/ISM330DHCX_ACC_PnPL_vtbl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Inc/ISM330DHCX_ACC_PnPL_vtbl.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Inc/ISM330DHCX_ACC_PnPL_vtbl.h</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Src/AiApplicationPnPL.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Src/AiApplicationPnPL.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Src/AiApplicationPnPL.c</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Src/DeviceInfoPnPL.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Src/DeviceInfoPnPL.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Src/DeviceInfoPnPL.c</locationURI>
 		</link>
 		<link>
-			<name>User/PnPL/Src/FwInfoPnPL.c</name>
+			<name>User/PnPL/Src/FirmwareInfoPnPL.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Src/FwInfoPnPL.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Src/FirmwareInfoPnPL.c</locationURI>
 		</link>
 		<link>
 			<name>User/PnPL/Src/ISM330DHCX_ACC_PnPL.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/PnPL/Src/ISM330DHCX_ACC_PnPL.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PnPL/Src/ISM330DHCX_ACC_PnPL.c</locationURI>
 		</link>
 		<link>
 			<name>User/USBX/Inc/app_usbx_device.h</name>

@@ -83,12 +83,12 @@ typedef struct _AlgorithmModel_t
 } AlgorithmModel_t;
 
 #define DEVICE_ALIAS_LENGTH     16U
-typedef struct _FwInfoModel_t
+typedef struct _FirmwareInfoModel_t
 {
   char *comp_name;
   //Insert here your Firmware Info model code
   char alias[DEVICE_ALIAS_LENGTH];
-} FwInfoModel_t;
+} FirmwareInfoModel_t;
 
 typedef struct _AppModel_t
 {
@@ -96,7 +96,7 @@ typedef struct _AppModel_t
 #if (ALGORITHM_NUMBER != 0)
   AlgorithmModel_t *a_models[ALGORITHM_NUMBER];       /* Generated only when algorithms are available */
 #endif
-  FwInfoModel_t fwinfo_model;
+  FirmwareInfoModel_t firmware_info_model;
 } AppModel_t;
 
 AppModel_t* getAppModel(void);
@@ -116,30 +116,34 @@ char* ai_application_get_key(void); //AUTOMATICALLY IMPLEMENTED in .c --> will r
 uint8_t ai_application_stop_log(IAiApplication_t *ifn);
 uint8_t ai_application_start_log(IAiApplication_t *ifn);
 uint8_t ai_application_switch_bank(IAiApplication_t *ifn);
+
+////TELEMETRY Send Functions
+//uint8_t <comp_name>_create_telemetry(tel1_type tel1_name, tel2_type tel2_name, ..., telN_type telN_name, char **telemetry, uint32_t *size)
+uint8_t ai_application_create_telemetry(int label_id, float accuracy, char **telemetry, uint32_t *size);
 //===================================================================================================================
 
-//Fwinfo Component ==================================================================================================
+//Firmware Info Component ==================================================================================================
 
 //////INIT Function
 //uint8_t <comp_name>_comp_init
-uint8_t fwinfo_comp_init(void);
+uint8_t firmware_info_comp_init(void);
 
 //////GET KEY Function
 //uint8_t <comp_name>_get_key
-char *fwinfo_get_key(void); //AUTOMATICALLY IMPLEMENTED in .c --> will return the DTDL Component name: "fwinfo"
+char *firmware_info_get_key(void); //AUTOMATICALLY IMPLEMENTED in .c --> will return the DTDL Component name: "firmware_info"
 
 //////GET Functions
 //uint8_t <comp_name>_get_<prop_name>(prop_type *prop_value)
-uint8_t fwinfo_get_alias(char **value);
-uint8_t fwinfo_get_fw_name(char **value);
-uint8_t fwinfo_get_fw_version(char **value);
-uint8_t fwinfo_get_serial_number(char **value);
-uint8_t fwinfo_get_device_url(char **value);
-uint8_t fwinfo_get_fw_url(char **value);
+uint8_t firmware_info_get_alias(char **value);
+uint8_t firmware_info_get_fw_name(char **value);
+uint8_t firmware_info_get_fw_version(char **value);
+uint8_t firmware_info_get_serial_number(char **value);
+uint8_t firmware_info_get_device_url(char **value);
+uint8_t firmware_info_get_fw_url(char **value);
 
 //////SET Functions
 //uint8_t <comp_name>_set_<prop_name>(prop_type prop_value)
-uint8_t fwinfo_set_alias(const char *value);
+uint8_t firmware_info_set_alias(const char *value);
 //===================================================================================================================
 
 //Deviceinfo Component ==============================================================================================

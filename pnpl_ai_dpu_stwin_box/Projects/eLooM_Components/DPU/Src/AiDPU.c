@@ -22,13 +22,11 @@
 #include "services/sysdebug.h"
 #include "pre_processing_app.h"
 
-
 // set the AIDPU_G_TP_MS_2 as 9.81 if acceleration data inside the DPU are needed in [m/s^2] otherwise set it to 1.0
 //#define AIDPU_G_TO_MS_2 (9.81F)
 #define AIDPU_G_TO_MS_2 (1.0F)
 
-#define SYS_DEBUGF(level, message)      (SYS_DEBUGF3(SYS_DBG_AI, level, message))
-
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
 /**
  * Specified the virtual table for the AiDPU_t class.
@@ -241,6 +239,7 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
     /* call Ai library. */
     p_obj->ai_processing_f(NETWORK_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
+    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[AiDPU_vtblProcess()] label_id: %d, accuracy: %f.\r\n", (int) (p_obj->ai_out[0]), (float) (p_obj->ai_out[1])));
 
     /* release the buffer as soon as possible */
     CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));

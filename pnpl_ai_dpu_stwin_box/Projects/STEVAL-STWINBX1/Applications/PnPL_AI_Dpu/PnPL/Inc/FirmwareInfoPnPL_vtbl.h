@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FwInfoPnPL_vtbl.h
+  * @file    FirmwareInfoPnPL_vtbl.h
   * @author  SRA - MCD
   * @version 1.0.0
   * @date    28-oct-2021
@@ -22,22 +22,22 @@
   *
   ******************************************************************************
   */
-#ifndef FW_INFO_PNPL_VTBL_H_
-#define FW_INFO_PNPL_VTBL_H_
+#ifndef FIRMWARE_INFO_PNPL_VTBL_H_
+#define FIRMWARE_INFO_PNPL_VTBL_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-char *FwInfoPnPL_vtblGetKey(IPnPLComponent_t *_this);
-uint8_t FwInfoPnPL_vtblGetNCommands(IPnPLComponent_t *_this);
-char *FwInfoPnPL_vtblGetCommandKey(IPnPLComponent_t *_this, uint8_t id);
-uint8_t FwInfoPnPL_vtblGetStatus(IPnPLComponent_t *_this, char **serializedJSON, uint32_t *size, uint8_t pretty);
-uint8_t FwInfoPnPL_vtblSetProperty(IPnPLComponent_t *_this, char *serializedJSON);
-uint8_t FwInfoPnPL_vtblExecuteFunction(IPnPLComponent_t *_this, char *serializedJSON);
+char *FirmwareInfoPnPL_vtblGetKey(IPnPLComponent_t *_this);
+uint8_t FirmwareInfoPnPL_vtblGetNCommands(IPnPLComponent_t *_this);
+char *FirmwareInfoPnPL_vtblGetCommandKey(IPnPLComponent_t *_this, uint8_t id);
+uint8_t FirmwareInfoPnPL_vtblGetStatus(IPnPLComponent_t *_this, char **serializedJSON, uint32_t *size, uint8_t pretty);
+uint8_t FirmwareInfoPnPL_vtblSetProperty(IPnPLComponent_t *_this, char *serializedJSON);
+uint8_t FirmwareInfoPnPL_vtblExecuteFunction(IPnPLComponent_t *_this, char *serializedJSON);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* FW_INFO_PNPL_VTBL_H_ */
+#endif /* FIRMWARE_INFO_PNPL_VTBL_H_ */
