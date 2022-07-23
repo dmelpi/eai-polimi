@@ -31,6 +31,7 @@
 #include "i2c.h"
 #include "spi.h"
 #include "gpdma.h"
+#include "mdf.h"
 
 
 /**
@@ -216,3 +217,35 @@ const MX_SPIParams_t MX_SPI2InitParams = {
     .spi_dma_rx_irq_n = GPDMA1_Channel0_IRQn,
     .spi_dma_tx_irq_n = GPDMA1_Channel1_IRQn
 };
+
+
+
+/**
+  * MDF initialization parameters.
+  */
+const MX_MDFParams_t MX_MDF1InitParams =
+{
+  .p_mdf_config = &MdfFilterConfig0,
+  .p_mdf = &MdfHandle0,
+  .p_mdf_dma_config = &MdfDmaConfig,
+  .irq_n = GPDMA1_Channel4_IRQn,
+  .p_mx_init_f = MX_MDF1_Init,
+  .p_mx_dma_init_f = MX_GPDMA1_InitCustom
+};
+
+
+/**
+  * ADF initialization parameters.
+  */
+const MX_MDFParams_t MX_ADF1InitParams =
+{
+  .p_mdf_config = &AdfFilterConfig0,
+  .p_mdf = &AdfHandle0,
+  .p_mdf_dma_config = &AdfDmaConfig,
+  .irq_n = GPDMA1_Channel5_IRQn,
+  .p_mx_init_f = MX_ADF1_Init,
+  .p_mx_dma_init_f = MX_GPDMA1_InitCustom
+};
+
+
+

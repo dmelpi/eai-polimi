@@ -83,7 +83,7 @@
 // file sysinit.c
 #define INIT_TASK_CFG_ENABLE_BOOT_IF              0
 #define INIT_TASK_CFG_STACK_SIZE                  (TX_MINIMUM_STACK*11)
-#define INIT_TASK_CFG_HEAP_SYZE                   (150*1024)
+#define INIT_TASK_CFG_HEAP_SYZE                   (250*1024)
 
 // file sensor_db.h
 #define COM_MAX_SENSORS                           4
@@ -98,6 +98,10 @@
 // file IIS3DWBTask.c
 #define IIS3DWB_TASK_CFG_STACK_DEPTH              (TX_MINIMUM_STACK*7)
 #define IIS3DWB_TASK_CFG_PRIORITY                 (8)
+
+// file IMP34DT05Task.c
+#define IMP34DT05_TASK_CFG_STACK_DEPTH            (TX_MINIMUM_STACK*20)
+#define IMP34DT05_TASK_CFG_PRIORITY               (8)
 
 // file SPIBusTask.c
 #define SPIBUS_TASK_CFG_STACK_DEPTH               (TX_MINIMUM_STACK*4)

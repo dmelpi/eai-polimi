@@ -21,6 +21,12 @@
 #include "mdf.h"
 
 /* USER CODE BEGIN 0 */
+#define Error_Handler sys_error_handler
+void sys_error_handler(void);
+
+uint8_t AdfInitialized = 0;
+MDF_DmaConfigTypeDef AdfDmaConfig;
+MDF_DmaConfigTypeDef MdfDmaConfig;
 
 /* USER CODE END 0 */
 

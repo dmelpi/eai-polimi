@@ -228,6 +228,11 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_icache.h</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_mdf.h</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_mdf.h</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pcd.h</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pcd.h</locationURI>
@@ -356,6 +361,11 @@
 			<name>Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.c</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_mdf.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_mdf.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pcd.c</name>
@@ -893,6 +903,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/mx/Src/icache.c</locationURI>
 		</link>
 		<link>
+			<name>User/mx/Src/mdf.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/mx/Src/mdf.c</locationURI>
+		</link>
+		<link>
 			<name>User/mx/Src/mx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/mx/Src/mx.c</locationURI>
@@ -1121,6 +1136,11 @@
 			<name>eLooM_Components/SensorManager/Src/IIS3DWBTask.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/IIS3DWBTask.c</locationURI>
+		</link>
+		<link>
+			<name>eLooM_Components/SensorManager/Src/IMP34DT05Task.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/IMP34DT05Task.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/ISM330DHCXTask.c</name>
@@ -1626,6 +1646,11 @@
 			<name>eLooM_Components/SensorManager/Inc/services/SQuery.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Inc/services/SQuery.h</locationURI>
+		</link>
+		<link>
+			<name>eLooM_Components/SensorManager/Src/drivers/MDFDriver.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/eLooM_Components/SensorManager/Src/drivers/MDFDriver.c</locationURI>
 		</link>
 		<link>
 			<name>eLooM_Components/SensorManager/Src/drivers/SMUtilityDriver.c</name>

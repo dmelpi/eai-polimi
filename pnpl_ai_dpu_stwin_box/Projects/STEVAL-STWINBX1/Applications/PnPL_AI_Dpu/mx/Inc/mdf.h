@@ -41,7 +41,8 @@ extern MDF_HandleTypeDef MdfHandle0;
 extern MDF_FilterConfigTypeDef MdfFilterConfig0;
 
 /* USER CODE BEGIN Private defines */
-
+extern MDF_DmaConfigTypeDef AdfDmaConfig;
+extern MDF_DmaConfigTypeDef MdfDmaConfig;
 /* USER CODE END Private defines */
 
 void MX_ADF1_Init(void);

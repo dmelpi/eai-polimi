@@ -206,6 +206,22 @@ typedef struct _MX_I2CParams_t
   void (*p_mx_dma_init_f)(void); /*!< MX DMA initialization function */
 } MX_I2CParams_t;
 
+
+
+/**
+  * MDF configuration parameters.
+  */
+typedef struct _MX_MDFParams_t
+{
+  MDF_FilterConfigTypeDef *p_mdf_config; /*!< HAL MDF filter configuration */
+  MDF_HandleTypeDef *p_mdf; /*!< HAL MDF handle */
+  MDF_DmaConfigTypeDef *p_mdf_dma_config;
+  IRQn_Type irq_n; /*!< External interrupt number. */
+  void (*p_mx_init_f)(void); /*!< MX MDF initialization function */
+  void (*p_mx_dma_init_f)(void); /*!< MX DMA initialization function */
+} MX_MDFParams_t;
+
+
 ///**
 // * DFSDM configuration parameters.
 // */
@@ -266,6 +282,17 @@ extern const MX_SPIParams_t MX_SPI2InitParams;
  */
 extern const MX_I2CParams_t MX_I2C2InitParams;
 //
+
+/**
+  * MDF CH0 F1 configuration parameters.
+  */
+extern const MX_MDFParams_t MX_MDF1InitParams;
+
+/**
+  * ADF CH0 F1 configuration parameters.
+  */
+extern const MX_MDFParams_t MX_ADF1InitParams;
+
 ///**
 // * DFSDM CH0 F1 configuration parameters.
 // */
