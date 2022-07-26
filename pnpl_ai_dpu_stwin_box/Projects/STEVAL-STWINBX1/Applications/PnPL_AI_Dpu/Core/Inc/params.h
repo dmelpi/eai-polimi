@@ -41,7 +41,7 @@ extern "C" {
 #define ISM330DHCX_ACC_ODR (1666.0)
 
 #define IMP34DT05_MIC_FS (122.5)
-#define IMP34DT05_MIC_ODR (8000.0)
+#define IMP34DT05_MIC_ODR (16000.0)
 
 
 /* Pre-Processing. */

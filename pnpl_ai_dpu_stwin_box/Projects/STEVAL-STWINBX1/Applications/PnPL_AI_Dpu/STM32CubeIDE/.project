@@ -228,11 +228,6 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_icache.h</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_mdf.h</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_mdf.h</locationURI>
-		</link>
-		<link>
 			<name>Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pcd.h</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pcd.h</locationURI>
