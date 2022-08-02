@@ -107,7 +107,7 @@ uint16_t AiDPUSetStreamsParam(AiDPU_t *_this, uint16_t signal_size, uint8_t axes
   _this->super.dpuWorkingStream.packet.payload_fmt  = AI_SP_FMT_FLOAT32_RESET();
 
   /* the shape is 2D the accelerometer is 3 AXES (X,Y,Z)  */
-  _this->super.dpuWorkingStream.packet.shape.n_shape                          = 2 ;
+  _this->super.dpuWorkingStream.packet.shape.n_shape                          = 1 ;
   _this->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]  = axes;
   _this->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT] = signal_size;
 
