@@ -45,7 +45,12 @@ extern "C" {
 
 
 /* Pre-Processing. */
-#define INPUT_BUFFER_SIZE (512)
+//for the ACC (base)
+//#define INPUT_BUFFER_SIZE (512)
+//for the MIC
+#define INPUT_BUFFER_SIZE (1024)
+
+
 // Axis selection.
 #define AXIS_SELECTION_AXIS (X)
 // MFCC.

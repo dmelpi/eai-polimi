@@ -67,6 +67,7 @@ typedef struct _CBItem CBItem;
  * Allocate an object of ::CircularBuffer type. This allocator implement the singleton design pattern,
  * so there is only one instance of circular buffer.
  * A new allocated object must be initialized before use it.
+ * "item": means a circular buffer as a whole
  *
  * @param [IN] nItemCount specifies the maximum number of items that is possible to store in the buffer.
  * @return a pointer to new allocated circular buffer object.

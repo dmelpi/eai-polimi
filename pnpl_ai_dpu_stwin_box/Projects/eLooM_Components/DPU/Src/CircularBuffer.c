@@ -162,7 +162,7 @@ uint32_t CB_Init(CircularBuffer *_this, void *pItemsBuffer, uint16_t ItemSize)
   _this->tailIdx = 0;
   _this->itemSize = ItemSize;
   uint32_t pData = (uint32_t) pItemsBuffer;
-  for(uint32_t i = 0; i < _this->itemCount; ++i)
+  for(uint32_t i = 0; i < _this->itemCount; ++i)  //ItemCount=1 (hardcoded in processTask)
   {
     _this->pItems[i].pData = (void*) pData;
     _this->pItems[i].status.status = CB_ITEM_FREE;

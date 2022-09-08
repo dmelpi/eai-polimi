@@ -106,7 +106,7 @@ uint16_t AiDPUSetStreamsParam(AiDPU_t *_this, uint16_t signal_size, uint8_t axes
   _this->super.dpuWorkingStream.packet.payload_type = AI_FMT;
   _this->super.dpuWorkingStream.packet.payload_fmt  = AI_SP_FMT_FLOAT32_RESET();
 
-  /* the shape is 2D the accelerometer is 3 AXES (X,Y,Z)  */
+  /* the shape is 1D the the microphone as 1 axis (X)*/
   _this->super.dpuWorkingStream.packet.shape.n_shape                          = 1 ;
   _this->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_WIDTH]  = axes;
   _this->super.dpuWorkingStream.packet.shape.shapes[AI_LOGGING_SHAPES_HEIGHT] = signal_size;
@@ -216,6 +216,32 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
 
   if((*p_consumer_buff) != NULL)
   {
+	   //assert_param(p_obj->scale != 0.0F);
+	  float *p_in = (float*) CB_GetItemData((*p_consumer_buff));
+	  //float scale = p_obj->scale;
+
+	  float32_t raw_data[INPUT_BUFFER_SIZE];
+	  //monodimensional_data_t raw_data[INPUT_BUFFER_SIZE];
+
+
+	  for(int i = 0; i < INPUT_BUFFER_SIZE; i++)
+		  {
+			raw_data[i] = *p_in++;
+		  }
+
+	  /*for(int i = 0; i < INPUT_BUFFER_SIZE; i++)  //AL MOMENTO CB size = 16
+		  {
+			  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE,("%f, \r\n",(float32_t)(raw_data[i])));
+			  //p_in=p_in+7; //undersampling to keep up with pace of the acquisition??
+			  // previously done as p_in=p_in+4*sizeof(p_in);
+		  }*/
+
+
+	  CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
+	  (*p_consumer_buff) = NULL;
+
+
+/* ORIGINAL CODE:
 	tridimensional_data_t raw_data[INPUT_BUFFER_SIZE];
 
     assert_param(p_obj->scale != 0.0F);
@@ -232,22 +258,24 @@ sys_error_code_t AiDPU_vtblProcess(IDPU *_this)
       raw_data[i].z = *p_in++ * scale;
     }
 
-    float32_t preprocessing_output_array[AI_NETWORK_IN_1_SIZE];
 
-    /* call preprocessing function */
-    pre_processing_process(raw_data, INPUT_BUFFER_SIZE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
+     float32_t preprocessing_output_array[AI_NETWORK_IN_1_SIZE];
 
-    /* call Ai library. */
+    // call preprocessing function
+     pre_processing_process(raw_data, INPUT_BUFFER_SIZE, preprocessing_output_array, AI_NETWORK_IN_1_SIZE, &pre_processing_data);
+    // call Ai library.
     p_obj->ai_processing_f(NETWORK_NAME, (float*) preprocessing_output_array, p_obj->ai_out);
-    //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[AiDPU_vtblProcess()] label_id: %d, accuracy: %f.\r\n", (int) (p_obj->ai_out[0]), (float) (p_obj->ai_out[1])));
+    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[AiDPU_vtblProcess()] label_id: %d, accuracy: %f.\r\n", (int) (p_obj->ai_out[0]), (float) (p_obj->ai_out[1])));
 
-    /* release the buffer as soon as possible */
-    CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
-    (*p_consumer_buff) = NULL;
+    // release the buffer as soon as possible
+ 	CB_ReleaseItem(p_circular_buffer, (*p_consumer_buff));
+	(*p_consumer_buff) = NULL;
 
     ProcessEvent evt_acc;
     ProcessEventInit((IEvent*) &evt_acc, super->pProcessEventSrc, (ai_logging_packet_t*) &super->dpuOutStream, ADPU_GetTag(super));
     IDPU_DispatchEvents(_this, &evt_acc);
+*/
+
   }
   return xRes;
 }
