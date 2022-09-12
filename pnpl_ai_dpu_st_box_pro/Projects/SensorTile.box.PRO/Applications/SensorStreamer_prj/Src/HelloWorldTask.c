@@ -242,7 +242,7 @@ static sys_error_code_t HelloWorldTaskExecuteStepRun(AManagedTask *_this) {
 
   tx_thread_sleep(1000);
 //  NucleoDriverToggleLed((NucleoDriver*)_this->m_pxDriver);
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Hello STWIN.box PRO!!\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("Hello ST.box PRO!!\r\n"));
   __NOP();
   __NOP();
 
