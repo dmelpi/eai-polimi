@@ -1,0 +1,122 @@
+Neural Network Tools for STM32AI v1.6.0 (STM.ai v7.1.0-RC3)
+Created date          : 2022-09-20 11:31:24
+Parameters            : generate --name network -m C:/Users/39347/Downloads/audioBoxProva.h5 --type keras --compression 1 --verbosity 1 --workspace C:\Users\39347\AppData\Local\Temp\mxAI_workspace4564885583656001141293203898213251 --output C:\Users\39347\.stm32cubemx\network_output
+
+Exec/report summary (generate)
+------------------------------------------------------------------------------------------------------------------------
+model file            : C:\Users\39347\Downloads\audioBoxProva.h5
+type                  : keras
+c_name                : network
+compression           : None
+workspace dir         : C:\Users\39347\AppData\Local\Temp\mxAI_workspace4564885583656001141293203898213251
+output dir            : C:\Users\39347\.stm32cubemx\network_output
+model_name            : audioBoxProva
+model_hash            : 34d0f943551f963b62ec340182dae891
+input 1/1             : 'input_0'
+                        128 items, 512 B, ai_float, float, (1,1,1,128), domain:user/
+output 1/1            : 'dense_2'
+                        4 items, 16 B, ai_float, float, (1,1,1,4), domain:user/
+params #              : 10,644 items (41.58 KiB)
+macc                  : 10,816
+weights (ro)          : 42,576 B (41.58 KiB) (1 segment)
+activations (rw)      : 448 B (448 B) (1 segment)
+ram (total)           : 976 B (976 B) = 448 + 512 + 16
+
+Model name - audioBoxProva ['input_0'] ['dense_2']
+-----------------------------------------------------------------------------------------------------------------------
+id   layer (type)             oshape           param/size     macc    connected to    |   c_size   c_macc   c_type    
+-----------------------------------------------------------------------------------------------------------------------
+0    input_0 (Input)          (None,1,1,128)                                          |                    
+     dense_dense (Dense)      (None,1,1,56)    7,224/28,896   7,224   input_0         |                     dense()[0]
+     dense (Nonlinearity)     (None,1,1,56)                   56      dense_dense     |                     nl()[1]   
+-----------------------------------------------------------------------------------------------------------------------
+1    dense_1_dense (Dense)    (None,1,1,56)    3,192/12,768   3,192   dense           |                     dense()[2]
+     dense_1 (Nonlinearity)   (None,1,1,56)                   56      dense_1_dense   |                     nl()[3]   
+-----------------------------------------------------------------------------------------------------------------------
+2    dense_2_dense (Dense)    (None,1,1,4)     228/912        228     dense_1         |                     dense()[4]
+     dense_2 (Nonlinearity)   (None,1,1,4)                    60      dense_2_dense   |                     nl()/o[5] 
+-----------------------------------------------------------------------------------------------------------------------
+model/c-model: macc=10,816/10,816  weights=42,576/42,576  activations=--/448 io=--/528
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : audioboxprova
+c-name                : network
+c-node #              : 6
+c-array #             : 13
+activations size      : 448 (1 segments)
+weights size          : 42576 (1 segments)
+macc                  : 10816
+inputs                : ['input_0_output']
+outputs               : ['dense_2_output']
+
+C-Arrays (13)
+----------------------------------------------------------------------------------------------------
+c_id   name (*_array)          item/size    domain/mem-pool           c-type        fmt     comment
+----------------------------------------------------------------------------------------------------
+0      input_0_output          128/512      user/                     float         float   /input 
+1      dense_dense_output      56/224       activations/**default**   float         float          
+2      dense_output            56/224       activations/**default**   float         float          
+3      dense_1_dense_output    56/224       activations/**default**   float         float          
+4      dense_1_output          56/224       activations/**default**   float         float          
+5      dense_2_dense_output    4/16         activations/**default**   float         float          
+6      dense_2_output          4/16         user/                     float         float   /output
+7      dense_dense_weights     7168/28672   weights/                  const float   float          
+8      dense_dense_bias        56/224       weights/                  const float   float          
+9      dense_1_dense_weights   3136/12544   weights/                  const float   float          
+10     dense_1_dense_bias      56/224       weights/                  const float   float          
+11     dense_2_dense_weights   224/896      weights/                  const float   float          
+12     dense_2_dense_bias      4/16         weights/                  const float   float          
+----------------------------------------------------------------------------------------------------
+
+C-Layers (6)
+-----------------------------------------------------------------------------------------------------
+c_id   name (*_layer)   id   layer_type   macc   rom     tensors                    shape (array id)
+-----------------------------------------------------------------------------------------------------
+0      dense_dense      0    dense        7224   28896   I: input_0_output          (1,1,1,128) (0) 
+                                                         W: dense_dense_weights     (128,1,1,56) (7)
+                                                         W: dense_dense_bias        (1,1,1,56) (8)  
+                                                         O: dense_dense_output      (1,1,1,56) (1)  
+-----------------------------------------------------------------------------------------------------
+1      dense            0    nl           56     0       I: dense_dense_output      (1,1,1,56) (1)  
+                                                         O: dense_output            (1,1,1,56) (2)  
+-----------------------------------------------------------------------------------------------------
+2      dense_1_dense    1    dense        3192   12768   I: dense_output            (1,1,1,56) (2)  
+                                                         W: dense_1_dense_weights   (56,1,1,56) (9) 
+                                                         W: dense_1_dense_bias      (1,1,1,56) (10) 
+                                                         O: dense_1_dense_output    (1,1,1,56) (3)  
+-----------------------------------------------------------------------------------------------------
+3      dense_1          1    nl           56     0       I: dense_1_dense_output    (1,1,1,56) (3)  
+                                                         O: dense_1_output          (1,1,1,56) (4)  
+-----------------------------------------------------------------------------------------------------
+4      dense_2_dense    2    dense        228    912     I: dense_1_output          (1,1,1,56) (4)  
+                                                         W: dense_2_dense_weights   (56,1,1,4) (11) 
+                                                         W: dense_2_dense_bias      (1,1,1,4) (12)  
+                                                         O: dense_2_dense_output    (1,1,1,4) (5)   
+-----------------------------------------------------------------------------------------------------
+5      dense_2          2    nl           60     0       I: dense_2_dense_output    (1,1,1,4) (5)   
+                                                         O: dense_2_output          (1,1,1,4) (6)   
+-----------------------------------------------------------------------------------------------------
+
+
+
+Complexity report per layer - macc=10,816 weights=42,576 act=448 ram_io=528
+------------------------------------------------------------------------------
+id   name            c_macc                    c_rom                     c_id
+------------------------------------------------------------------------------
+0    dense_dense     ||||||||||||||||  66.8%   ||||||||||||||||  67.9%   [0] 
+0    dense           |                  0.5%   |                  0.0%   [1] 
+1    dense_1_dense   |||||||           29.5%   |||||||           30.0%   [2] 
+1    dense_1         |                  0.5%   |                  0.0%   [3] 
+2    dense_2_dense   |                  2.1%   |                  2.1%   [4] 
+2    dense_2         |                  0.6%   |                  0.0%   [5] 
+
+Generated files (5)
+---------------------------------------------------------------------
+C:\Users\39347\.stm32cubemx\network_output\network_config.h
+C:\Users\39347\.stm32cubemx\network_output\network.h
+C:\Users\39347\.stm32cubemx\network_output\network.c
+C:\Users\39347\.stm32cubemx\network_output\network_data.h
+C:\Users\39347\.stm32cubemx\network_output\network_data.c
