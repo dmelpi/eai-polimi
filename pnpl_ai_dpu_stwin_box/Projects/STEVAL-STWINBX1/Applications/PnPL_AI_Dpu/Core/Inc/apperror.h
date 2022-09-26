@@ -49,12 +49,18 @@ extern "C" {
 // IP error
 //#define SYS_BASE_XX_ERROR_CODE                               APP_BASE_ERROR_CODE
 
+// MDF driver error code
+#define SYS_BASE_MDF_DRV_ERROR_CODE                         SYS_BASE_LL_ERROR_CODE + SYS_GROUP_ERROR_COUNT
+#define SYS_MDF_DRV_GENERIC_ERROR_CODE                      APP_BASE_ERROR_CODE + 1
+
+/*
 // DFSDM driver error code
 #define SYS_BASE_DFSDM_DRV_ERROR_CODE                         SYS_BASE_LL_ERROR_CODE + SYS_GROUP_ERROR_COUNT
 #define SYS_DFSDM_DRV_GENERIC_ERROR_CODE                      APP_BASE_ERROR_CODE + 1
+*/
 
 // SPI Master error code
-#define SYS_BASE_SPI_M_ERROR_CODE                              SYS_DFSDM_DRV_GENERIC_ERROR_CODE + SYS_GROUP_ERROR_COUNT
+#define SYS_BASE_SPI_M_ERROR_CODE                              SYS_MDF_DRV_GENERIC_ERROR_CODE + SYS_GROUP_ERROR_COUNT
 #define SYS_SPI_M_WRITE_READ_ERROR_CODE                        SYS_BASE_SPI_M_ERROR_CODE + 1
 #define SYS_SPI_M_WRITE_ERROR_CODE                             SYS_BASE_SPI_M_ERROR_CODE + 2
 

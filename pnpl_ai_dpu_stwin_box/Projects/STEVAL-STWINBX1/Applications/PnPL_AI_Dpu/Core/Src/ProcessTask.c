@@ -504,7 +504,7 @@ static sys_error_code_t ProcessTaskExecuteStepSensorsActive(AManagedTask *_this)
 
           res = IDPU_Process((IDPU*)p_obj->p_dpu);
 
-          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
+          //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: processed new data.\r\n"));
           break;
 
         case PRC_CMD_CONNECT_TO_SENSOR:
@@ -596,12 +596,12 @@ static sys_error_code_t ProcessTaskSetSensorsConfig(ProcessTask_t *_this, uint16
   /*configure only one sensor*/
   SQuery_t query;
   SQInit(&query, p_sm);
-  sensor_id = SQNextByNameAndType(&query, "ism330dhcx",  COM_TYPE_ACC);
+  sensor_id = SQNextByNameAndType(&query, "imp34dt05",  COM_TYPE_MIC);
   if (sensor_id != SI_NULL_SENSOR_ID)
   {
     SMSensorEnable(sensor_id);
-    SMSensorSetODR(sensor_id, ISM330DHCX_ACC_ODR);
-    SMSensorSetFS(sensor_id, ISM330DHCX_ACC_FS);
+    SMSensorSetODR(sensor_id, IMP34DT05_MIC_ODR);
+    SMSensorSetFS(sensor_id, IMP34DT05_MIC_FS);
   }
 
   *p_active_sensor_id = sensor_id;

@@ -78,9 +78,9 @@ sys_error_code_t MDFSetMDFConfig(IDriver *_this, float ODR)
 
     if (ODR <= 16000.0f)
     {
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 10;
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 10;  //?? corretto che vengano modificati i parametri???
       HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = -4;
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = -3;
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->DecimationRatio = 24;
     }
     else if (ODR <= 32000.0f)
@@ -94,7 +94,7 @@ sys_error_code_t MDFSetMDFConfig(IDriver *_this, float ODR)
     {
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 5;
       HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = 1;
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = 3;
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->DecimationRatio = 16;
     }
   }

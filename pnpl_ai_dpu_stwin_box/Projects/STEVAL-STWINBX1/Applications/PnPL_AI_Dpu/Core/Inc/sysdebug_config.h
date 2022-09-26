@@ -58,7 +58,7 @@ extern "C" {
 #define SYS_DBG_SMUTIL                     SYS_DBG_ON                 ///< Utility task debug control byte
 #define SYS_DBG_SDC                        SYS_DBG_OFF                 ///< SDCARD task debug control byte
 #define SYS_DBG_IMP23ABSU                  SYS_DBG_OFF                 ///< IMP23ABSU task debug control byte
-#define SYS_DBG_IMP34DT05                  SYS_DBG_OFF                 ///< IMP34DT05 task debug control byte
+#define SYS_DBG_IMP34DT05                  SYS_DBG_ON                 ///< IMP34DT05 task debug control byte
 #define SYS_DBG_IIS2MDC                    SYS_DBG_OFF                 ///< IIS2MDC task debug control byte
 #define SYS_DBG_IIS2DH                     SYS_DBG_OFF                 ///< IIS2DH task debug control byte
 #define SYS_DBG_STTS751                    SYS_DBG_OFF                 ///< STTS751 task debug control byte
