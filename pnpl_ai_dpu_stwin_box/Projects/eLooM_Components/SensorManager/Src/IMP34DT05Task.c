@@ -47,7 +47,7 @@
 #endif
 
 #ifndef IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH
-#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      100
+#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      40
 #endif
 
 #define IMP34DT05_TASK_CFG_IN_QUEUE_ITEM_SIZE   sizeof(SMMessage)
@@ -497,7 +497,7 @@ sys_error_code_t IMP34DT05Task_vtblDoEnterPowerMode(AManagedTask *_this, const E
 
   if(NewPowerMode == E_POWER_MODE_SENSORS_ACTIVE)
   {
-    if(IMP34DT05TaskSensorIsActive(p_obj))
+    //if(IMP34DT05TaskSensorIsActive(p_obj))
     {
       SMMessage xReport =
       {
@@ -932,7 +932,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepDatalog(AManagedTask *_this)
         }
       case SM_MESSAGE_ID_DATA_READY:
         {
-//          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IMP34DT05: new data.\r\n"));
+          //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IMP34DT05: new data.\r\n"));
 
           p_obj->half = report.sensorDataReadyMessage.half;
 

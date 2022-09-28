@@ -29,6 +29,7 @@
 #include "SPIBusTask.h"
 #include "IIS3DWBTask.h"
 #include "ISM330DHCXTask.h"
+#include "IMP34DT05Task.h"
 #include "ProcessTask.h"
 #include "UsbCdcTask.h"
 #include "mx.h"
@@ -54,15 +55,22 @@ static AManagedTaskEx *sProcessTaskObj = NULL;
  */
 static AManagedTaskEx *sSPIBusObj = NULL;
 
-/**
- * Sensor task object.
- */
-static AManagedTaskEx *sISM330DHCXObj = NULL;
 
 /**
  * Sensor task object.
  */
-static AManagedTaskEx *sIIS3DWBObj = NULL;
+static AManagedTaskEx *sIMP34DT05Obj = NULL;
+
+
+/**
+ * Sensor task object.
+ */
+//static AManagedTaskEx *sISM330DHCXObj = NULL;
+
+/**
+ * Sensor task object.
+ */
+//static AManagedTaskEx *sIIS3DWBObj = NULL;
 
 /**
  * USB_CDC task object.
@@ -73,7 +81,7 @@ static AManagedTaskEx *sUsbCdcObj = NULL;
 static IPnPLComponent_t *pAiApplicationPnPLObj = NULL;
 static IPnPLComponent_t *pFirmwareInfoPnPLObj = NULL;
 static IPnPLComponent_t *pDeviceInfoPnPLObj = NULL;
-static IPnPLComponent_t *pISM330DHCX_ACC_PnPLObj = NULL;
+//static IPnPLComponent_t *pISM330DHCX_ACC_PnPLObj = NULL;
 
 
 
@@ -119,8 +127,9 @@ sys_error_code_t SysLoadApplicationContext(ApplicationContext *pAppContext)
 
   // Allocate the task objects
   sSPIBusObj = SPIBusTaskAlloc(&MX_SPI2InitParams);
-  sISM330DHCXObj = ISM330DHCXTaskAlloc(&MX_GPIO_INT1_DHCXInitParams, &MX_GPIO_INT2_DHCXInitParams, &MX_GPIO_CS_DHCXInitParams);
-  sIIS3DWBObj = IIS3DWBTaskAlloc(NULL, &MX_GPIO_CS_DWBInitParams);
+  //sISM330DHCXObj = ISM330DHCXTaskAlloc(&MX_GPIO_INT1_DHCXInitParams, &MX_GPIO_INT2_DHCXInitParams, &MX_GPIO_CS_DHCXInitParams);
+  //sIIS3DWBObj = IIS3DWBTaskAlloc(NULL, &MX_GPIO_CS_DWBInitParams);
+  sIMP34DT05Obj = IMP34DT05TaskAlloc(&MX_ADF1InitParams);
 
   sUsbCdcObj = UsbCdcTaskAlloc();
   sProcessTaskObj = ProcessTaskAlloc();
@@ -128,15 +137,16 @@ sys_error_code_t SysLoadApplicationContext(ApplicationContext *pAppContext)
 
   // Add the task object to the context.
   xRes = ACAddTask(pAppContext, (AManagedTask*)sSPIBusObj);
-  xRes = ACAddTask(pAppContext, (AManagedTask*)sISM330DHCXObj);
-  xRes = ACAddTask(pAppContext, (AManagedTask*)sIIS3DWBObj);
+  //xRes = ACAddTask(pAppContext, (AManagedTask*)sISM330DHCXObj);
+  //xRes = ACAddTask(pAppContext, (AManagedTask*)sIIS3DWBObj);
   xRes = ACAddTask(pAppContext, (AManagedTask*)sUsbCdcObj);
   xRes = ACAddTask(pAppContext, (AManagedTask*)sProcessTaskObj);
   xRes = ACAddTask(pAppContext, sAppTaskObj);
+  xRes = ACAddTask(pAppContext, (AManagedTask *) sIMP34DT05Obj);
 
   pDeviceInfoPnPLObj = DeviceInfoPnPLAlloc();
   pFirmwareInfoPnPLObj = FirmwareInfoPnPLAlloc();
-  pISM330DHCX_ACC_PnPLObj = ISM330DHCX_ACC_PnPLAlloc();
+  //pISM330DHCX_ACC_PnPLObj = ISM330DHCX_ACC_PnPLAlloc();
   pAiApplicationPnPLObj = AiApplicationPnPLAlloc();
 
   /* Add the task object to the context. */
@@ -148,8 +158,8 @@ sys_error_code_t SysOnStartApplication(ApplicationContext *pAppContext)
   UNUSED(pAppContext);
 
   /* connect the sensors task to the SPI bus. */
-  SPIBusTaskConnectDevice((SPIBusTask*)sSPIBusObj, (SPIBusIF*)ISM330DHCXTaskGetSensorIF((ISM330DHCXTask*)sISM330DHCXObj));
-  SPIBusTaskConnectDevice((SPIBusTask*)sSPIBusObj, (SPIBusIF*)IIS3DWBTaskGetSensorIF((IIS3DWBTask*)sIIS3DWBObj));
+  //SPIBusTaskConnectDevice((SPIBusTask*)sSPIBusObj, (SPIBusIF*)ISM330DHCXTaskGetSensorIF((ISM330DHCXTask*)sISM330DHCXObj));
+  //SPIBusTaskConnectDevice((SPIBusTask*)sSPIBusObj, (SPIBusIF*)IIS3DWBTaskGetSensorIF((IIS3DWBTask*)sIIS3DWBObj));
 
   /*
    * For simplicity, in this demo, the configuration of the sensors is done in the virtual function
@@ -162,7 +172,7 @@ sys_error_code_t SysOnStartApplication(ApplicationContext *pAppContext)
   /* set USB_CDC class delegate */
   UsbCdcTask_SetDelegate((UsbCdcTask_t*)sUsbCdcObj, AppTaskGetUsbDelegateIF((AppTask*)sAppTaskObj));
 
-  ISM330DHCX_ACC_PnPLInit(pISM330DHCX_ACC_PnPLObj);
+  //ISM330DHCX_ACC_PnPLInit(pISM330DHCX_ACC_PnPLObj);
   DeviceInfoPnPLInit(pDeviceInfoPnPLObj);
   FirmwareInfoPnPLInit(pFirmwareInfoPnPLObj);
   AiApplicationPnPLInit(pAiApplicationPnPLObj, AppTaskGetIAiApplicationIF((AppTask *)sAppTaskObj));

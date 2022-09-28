@@ -1028,6 +1028,7 @@ sys_error_code_t ISM330DHCXTask_vtblOnEnterPowerMode(AManagedTaskEx *_this, cons
   return res;
 }
 
+
 // ISensor virtual functions definition
 // *******************************************
 
@@ -1542,7 +1543,7 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
 
       case SM_MESSAGE_ID_DATA_READY:
         {
-//        SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: new data.\r\n"));
+        //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
           if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_TIMER_PERIOD_MS),

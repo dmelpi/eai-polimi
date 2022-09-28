@@ -31,7 +31,8 @@ extern "C" {
 #include "aiApp.h"
 #include "fft.h"
 
-#define AIDPU_NB_AXIS         (3)
+//NOTE: hardcoded - needs to be equal to half of the sensor buffer to work
+#define AIDPU_NB_AXIS         (1)
 #define AIDPU_AI_PROC_IN_SIZE (AI_NETWORK_IN_1_SIZE)
 
 
@@ -140,6 +141,8 @@ sys_error_code_t AiDPUSetSensitivity(AiDPU_t *_this, float sensi);
 sys_error_code_t AiDPUPrepareToProcessData(AiDPU_t *_this);
 
 
+
+/*definition */
 
 #ifdef __cplusplus
 }

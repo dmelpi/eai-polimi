@@ -29,19 +29,22 @@ extern "C" {
 
 
 // IManagedTask virtual functions
-sys_error_code_t AppTask_vtblHardwareInit(AManagedTask *this, void *pParams); ///< @sa AMTHardwareInit
+sys_error_code_t AppTask_vtblHardwareInit(AManagedTask *this, void *pParams); 	///< @sa AMTHardwareInit
 sys_error_code_t AppTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_function_t *pTaskCode, CHAR **pName, VOID **pStackStart, ULONG *pStackDepth, UINT *pPriority, UINT *pPreemptThreshold, ULONG *pTimeSlice, ULONG *pAutoStart, ULONG *pParams); ///< @sa AMTOnCreateTask
 sys_error_code_t AppTask_vtblDoEnterPowerMode(AManagedTask *this, const EPowerMode eActivePowerMode, const EPowerMode eNewPowerMode); ///< @sa AMTDoEnterPowerMode
-sys_error_code_t AppTask_vtblHandleError(AManagedTask *this, SysEvent xError); ///< @sa AMTHandleError
-sys_error_code_t AppTask_vtblOnEnterTaskControlLoop(AManagedTask *this); ///< @sa AMTOnEnterTaskControlLoop
+sys_error_code_t AppTask_vtblHandleError(AManagedTask *this, SysEvent xError);	///< @sa AMTHandleError
+sys_error_code_t AppTask_vtblOnEnterTaskControlLoop(AManagedTask *this); 	    ///< @sa AMTOnEnterTaskControlLoop
 
 /* IListener virtual functions */
-sys_error_code_t AppTask_vtblOnStatusChange(IListener *_this);                                          ///< @sa IListenerOnStatusChange
+sys_error_code_t AppTask_vtblOnStatusChange(IListener *_this);                  ///< @sa IListenerOnStatusChange
+
 /* IEventListener virtual functions */
-void AppTask_vtblSetOwner(IEventListener *_this, void *pxOwner);                                        ///< @sa IEventListenerSetOwner
-void *AppTask_vtblGetOwner(IEventListener *_this);                                                      ///< @sa IEventListenerGetOwner
+void AppTask_vtblSetOwner(IEventListener *_this, void *pxOwner);                ///< @sa IEventListenerSetOwner
+void *AppTask_vtblGetOwner(IEventListener *_this);                              ///< @sa IEventListenerGetOwner
+
 /* IUsbDelegate virtual functions */
 sys_error_code_t AppTask_vtblOnUsbData(IUsbDelegate *_this, const uint8_t *buffer, uint32_t length);    ///< @sa IUsbDelegateOnNewData
+
 /* IApplication virtual functions */
 sys_error_code_t AppTask_vtblStart(IAiApplication_t *_this);                                               ///< @sa IApplication_start
 sys_error_code_t AppTask_vtblStop(IAiApplication_t *_this);                                                ///< @sa IApplication_stop
