@@ -2,3 +2,6 @@ app_debug.log
 exported
 __pycache__
 .DS_Store
+Debug/
+*.launch
+*.settings
