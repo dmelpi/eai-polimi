@@ -82,11 +82,11 @@ extern "C" {
 //#define SYS_DBG_TP2_CLK_ENABLE             __HAL_RCC_GPIOG_CLK_ENABLE
 
 /* ODeV DBG UART used for the system log */
-extern UART_HandleTypeDef huart2;
-void MX_USART2_UART_Init(void);
+extern UART_HandleTypeDef huart4;
+void MX_UART4_UART_Init(void);
 
-#define SYS_DBG_UART                       huart2
-#define SYS_DBG_UART_INIT                  MX_USART2_UART_Init
+#define SYS_DBG_UART                       huart4
+#define SYS_DBG_UART_INIT                  MX_UART4_UART_Init
 #define SYS_DBG_UART_TIMEOUT_MS            5000
 
 /* ODeV runtime statistic timer configuration for FreeRTOS */
