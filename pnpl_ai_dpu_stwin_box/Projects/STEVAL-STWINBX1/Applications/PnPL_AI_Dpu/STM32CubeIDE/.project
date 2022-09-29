@@ -488,6 +488,16 @@
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Inc/App_model.h</locationURI>
 		</link>
 		<link>
+			<name>User/Core/Inc/HelloTask.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/HelloTask.h</locationURI>
+		</link>
+		<link>
+			<name>User/Core/Inc/HelloTask_vtbl.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/HelloTask_vtbl.h</locationURI>
+		</link>
+		<link>
 			<name>User/Core/Inc/IAiApplication.h</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Inc/IAiApplication.h</locationURI>
@@ -631,6 +641,11 @@
 			<name>User/Core/Src/App_model.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Src/App_model.c</locationURI>
+		</link>
+		<link>
+			<name>User/Core/Src/HelloTask.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/HelloTask.c</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Src/IAiApplication.c</name>
