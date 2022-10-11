@@ -196,7 +196,7 @@ sys_error_code_t AppTask_vtblHardwareInit(AManagedTask *_this, void *pParams)
     pObj->p_driver = PushButtonDrvAlloc();
     if(pObj->p_driver == NULL)
     {
-      SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("HW: unable to alloc driver object.\r\n"));
+      SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("APP: unable to alloc driver object.\r\n"));
       xRes = SYS_GET_LAST_LOW_LEVEL_ERROR_CODE();
     }
     else
@@ -207,7 +207,7 @@ sys_error_code_t AppTask_vtblHardwareInit(AManagedTask *_this, void *pParams)
       xRes = IDrvInit((IDriver*) pObj->p_driver, &driver_cfg);
       if(SYS_IS_ERROR_CODE(xRes))
       {
-        SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("HW: error during driver initialization\r\n"));
+        SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("APP: error during driver initialization\r\n"));
       }
     }
   }
@@ -237,7 +237,7 @@ sys_error_code_t AppTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_function
 
 //  *pvTaskCode = AppTaskRun;
   *pTaskCode = AMTRun;
-  *pName = "HW";
+  *pName = "APP";
   *pStackStart = NULL; // allocate the task stack in the system memory pool.
   *pStackDepth = APP_TASK_CFG_STACK_DEPTH;
   *pParams = (ULONG)_this;
@@ -271,7 +271,7 @@ sys_error_code_t AppTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
   sys_error_code_t xRes = SYS_NO_ERROR_CODE;
   AppTask *p_obj = (AppTask*)_this;
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: start.\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("APP: start.\r\n"));
 
   if (p_obj->p_driver != NULL)
   {
@@ -328,12 +328,12 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   ai_application_create_telemetry(label_id, accuracy, &telemetry, &size);
 
   /* Send the PnPL Telemetry via USB CDC interface */
-  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
+//  UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);
 
-  char new_line[] = "\r\n";
-  UsbCdcTask_Write((uint8_t*)new_line, sizeof(new_line), &actual_size);
+//  char new_line[] = "\r\n";
+//  UsbCdcTask_Write((uint8_t*)new_line, sizeof(new_line), &actual_size);
 
-  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HW: observed new processed data.\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("APP: observed new processed data.\r\n"));
 
   return xRes;
 }
@@ -346,7 +346,7 @@ sys_error_code_t AppTask_vtblOnStatusChange(IListener *_this)
 {
   assert_param(_this != NULL);
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("HW: OnStatusChange not implemented.\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("APP: OnStatusChange not implemented.\r\n"));
 
   return SYS_NO_ERROR_CODE;
 }
@@ -359,14 +359,14 @@ void AppTask_vtblSetOwner(IEventListener *_this, void *pxOwner)
   assert_param(_this != NULL);
   UNUSED(pxOwner);
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("HW: SetOwner not implemented.\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("APP: SetOwner not implemented.\r\n"));
 }
 
 void *AppTask_vtblGetOwner(IEventListener *_this)
 {
   assert_param(_this != NULL);
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("HW: GetOwner not implemented.\r\n"));
+  SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("APP: GetOwner not implemented.\r\n"));
 
   return NULL;
 }
@@ -571,7 +571,7 @@ static void ToggleFlashBank(void)
     OBInit.USERConfig = FLASH_OPTR_SWAP_BANK;
   }
 
-  //SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("HW: Switching Bank\r\n"));
+  //SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("APP: Switching Bank\r\n"));
   if(HAL_FLASHEx_OBProgram (&OBInit) != HAL_OK)
   {
     /*

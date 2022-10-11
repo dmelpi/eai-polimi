@@ -36,7 +36,7 @@
 #endif
 
 #ifndef PRC_TASK_CFG_PRIORITY
-#define PRC_TASK_CFG_PRIORITY               (TX_MAX_PRIORITIES-2)
+#define PRC_TASK_CFG_PRIORITY               (TX_MAX_PRIORITIES-3)	// better have different prio for each thread (cfr AppTask)
 #endif
 
 #ifndef PRC_TASK_CFG_IN_QUEUE_LENGTH

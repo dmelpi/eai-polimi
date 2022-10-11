@@ -81,9 +81,8 @@ int aiInit(const char* nn_name)
   const ai_handle acts[] = { activations };
   err = ai_network_create_and_init(&network, acts, NULL);
   if (err.type != AI_ERROR_NONE) {
-
-  };
-
+	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("AI init error"));
+  }
   /* Reteive pointers to the model's input/output tensors */
   ai_input = ai_network_inputs_get(network , NULL);
   ai_output = ai_network_outputs_get(network, NULL);
@@ -92,7 +91,11 @@ int aiInit(const char* nn_name)
 }
 
 
-
+/**
+ * The combination LABEL + Probability only makes sense in case of
+ * multi-label classification. This should be more generic, or leave
+ * to the user the decision on what to do with the output
+ */
 int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 {
   ai_i32 n_batch;
@@ -130,7 +133,7 @@ int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 	  ai_network_get_error(network);
   };
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[aiProcess()] label_id: %d, accuracy: %.2f.\r\n", (int) p_out_data[0] , p_out_data[1]));
+  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[aiProcess()] Voice activity probability %.2f.\r\n", p_out_data[1]));
 
   return 0;
 }

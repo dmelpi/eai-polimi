@@ -1,12 +1,11 @@
-
 /**
   ******************************************************************************
   * @file    network_data.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Tue Sep 20 11:31:23 2022
+  * @date    Tue Oct 11 17:42:42 2022
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2022 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -20,26 +19,7 @@
 #pragma once
 
 #include "network_config.h"
-#include "ai_platform.h"
-
-#define AI_NETWORK_DATA_CONFIG               (NULL)
-
-
-#define AI_NETWORK_DATA_ACTIVATIONS_SIZES \
-  { 448, }
-#define AI_NETWORK_DATA_ACTIVATIONS_SIZE     (448)
-#define AI_NETWORK_DATA_ACTIVATIONS_COUNT    (1)
-#define AI_NETWORK_DATA_ACTIVATION_1_SIZE    (448)
-
-
-
-#define AI_NETWORK_DATA_WEIGHTS_SIZES \
-  { 42576, }
-#define AI_NETWORK_DATA_WEIGHTS_SIZE         (42576)
-#define AI_NETWORK_DATA_WEIGHTS_COUNT        (1)
-#define AI_NETWORK_DATA_WEIGHT_1_SIZE        (42576)
-
-
+#include "network_data_params.h"
 
 AI_DEPRECATED
 #define AI_NETWORK_DATA_ACTIVATIONS(ptr_)  \
@@ -51,6 +31,11 @@ AI_DEPRECATED
 
 
 AI_API_DECLARE_BEGIN
+
+
+extern const ai_u64 s_network_weights_array_u64[421];
+
+
 
 /*!
  * @brief Get network activations buffer initialized struct.

@@ -48,8 +48,17 @@ extern "C" {
 //for the ACC (base)
 //#define INPUT_BUFFER_SIZE (512)
 //for the MIC
-#define INPUT_BUFFER_SIZE (256)
+//#define INPUT_BUFFER_SIZE (256)
+// for the MIC, but for VAD
+#define INPUT_BUFFER_SIZE	(1024)	// TODO: remove or merge with HOP_LEN
+#define N_FFT				(2048)
+#define HOP_LEN				(1024)
+#define N_MELS				(20)
+#define N_DCT				(12)
+#define N_MFCC_HIST			(155)	// func. of dataset (10s audio fragments), sample rate and hop_size
 
+#define NN_QUANT_SCALE		(0.5041020512580872f)
+#define NN_QUANT_ZERO		(45.0f)
 
 // Axis selection.
 #define AXIS_SELECTION_AXIS (X)

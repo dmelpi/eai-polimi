@@ -3,12 +3,12 @@
   ******************************************************************************
   * @file    network_config.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Tue Sep 20 11:31:23 2022
+  * @date    Tue Oct 11 17:42:42 2022
   * @brief   AI Tool Automatic Code Generator for Custom Layers Implementation
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2021 STMicroelectronics.
+  * Copyright (c) 2022 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -25,9 +25,9 @@
 #undef AI_TOOLS_VERSION_MINOR
 #undef AI_TOOLS_VERSION_MICRO
 #define AI_TOOLS_VERSION_MAJOR 7
-#define AI_TOOLS_VERSION_MINOR 1
+#define AI_TOOLS_VERSION_MINOR 2
 #define AI_TOOLS_VERSION_MICRO 0
-#define AI_TOOLS_VERSION_EXTRA "RC3"
+#define AI_TOOLS_VERSION_EXTRA "RC5"
 
 
 #undef AI_PLATFORM_API_MAJOR
