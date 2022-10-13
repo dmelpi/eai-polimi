@@ -315,7 +315,6 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
   UNUSED(p_if_owner);
   char *telemetry;
   uint32_t size;
-  uint32_t actual_size;
 
   /* Processed data extraction */
   float32_t *payload = (float32_t *) pxEvt->stream->payload;
