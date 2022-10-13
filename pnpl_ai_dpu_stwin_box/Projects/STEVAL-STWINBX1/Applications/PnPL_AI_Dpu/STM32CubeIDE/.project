@@ -623,6 +623,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Inc/main.h</locationURI>
 		</link>
 		<link>
+			<name>User/Core/Inc/mfcc_params.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/mfcc_params.h</locationURI>
+		</link>
+		<link>
 			<name>User/Core/Inc/params.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/params.h</locationURI>
@@ -716,6 +721,11 @@
 			<name>User/Core/Src/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/STEVAL-STWINBX1/Applications/PnPL_AI_Dpu/Core/Src/main.c</locationURI>
+		</link>
+		<link>
+			<name>User/Core/Src/mfcc_params.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/mfcc_params.c</locationURI>
 		</link>
 		<link>
 			<name>User/Core/Src/services</name>
