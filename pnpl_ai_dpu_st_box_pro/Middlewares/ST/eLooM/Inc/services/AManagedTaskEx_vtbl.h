@@ -74,9 +74,9 @@ struct _AManagedTaskEx {
   const AManagedTaskEx_vtbl *vptr;
 
   /**
-   * Specifies the native ThreadX task handle.
+   * Specify the native ThreadX task handle.
    */
-  TX_THREAD m_xTaskHandle;
+  TX_THREAD m_xThaskHandle;
 
   /**
    *Specifies a pointer to the next managed task in the _ApplicationContext.

@@ -100,7 +100,7 @@ struct _AManagedTask {
   const AManagedTask_vtbl *vptr;
 
   /**
-   * Specifies the native ThreadX task handle.
+   * Specify the native ThreadX task handle.
    */
   TX_THREAD m_xTaskHandle;
 
@@ -143,7 +143,7 @@ sys_error_code_t AMTHardwareInit(AManagedTask *_this, void *pParams) {
 }
 
 SYS_DEFINE_STATIC_INLINE
-sys_error_code_t AMTOnCreateTask(AManagedTask *_this, tx_entry_function_t *pvTaskCode, CHAR **pcName,
+inline sys_error_code_t AMTOnCreateTask(AManagedTask *_this, tx_entry_function_t *pvTaskCode, CHAR **pcName,
     VOID **pvStackStart, ULONG *pnStackSize,
     UINT *pnPriority, UINT *pnPreemptThreshold,
     ULONG *pnTimeSlice, ULONG *pnAutoStart,

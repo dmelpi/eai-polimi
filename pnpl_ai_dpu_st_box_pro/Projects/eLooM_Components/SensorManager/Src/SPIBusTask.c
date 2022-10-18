@@ -70,7 +70,7 @@ typedef struct _SPIBusTaskClass
   /**
     * SPIBusTask (PM_STATE, ExecuteStepFunc) map.
     */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } SPIBusTaskClass_t;
 
 /* Private member function declaration */
@@ -89,7 +89,7 @@ static int32_t SPIBusTaskRead(void *pxSensor, uint8_t nRegAddr, uint8_t *pnData,
 
 static sys_error_code_t SPIBusTaskCtrl(ABusIF *_this, EBusCtrlCmd eCtrlCmd, uint32_t nParams);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 #if defined (__GNUC__)
@@ -143,9 +143,10 @@ static const SPIBusTaskClass_t sTheClass =
 
 AManagedTaskEx *SPIBusTaskAlloc(const void *p_mx_drv_cfg)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&s_xTaskObj.super);
 
   s_xTaskObj.super.vptr = &sTheClass.vtbl;
@@ -181,29 +182,29 @@ IBus *SPIBusTaskGetBusIF(SPIBusTask *_this)
 sys_error_code_t SPIBusTask_vtblHardwareInit(AManagedTask *_this, void *pParams)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  SPIBusTask *p_obj = (SPIBusTask *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  SPIBusTask *pObj = (SPIBusTask *) _this;
 
-  p_obj->m_pxDriver = SPIMasterDriverAlloc();
-  if (p_obj->m_pxDriver == NULL)
+  pObj->m_pxDriver = SPIMasterDriverAlloc();
+  if (pObj->m_pxDriver == NULL)
   {
     SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("SPIBus task: unable to alloc driver object.\r\n"));
-    res = SYS_GET_LAST_LOW_LEVEL_ERROR_CODE();
+    xRes = SYS_GET_LAST_LOW_LEVEL_ERROR_CODE();
   }
   else
   {
     SPIMasterDriverParams_t driver_cfg =
     {
-      .p_mx_spi_cfg = (void *) p_obj->p_mx_drv_cfg
+      .p_mx_spi_cfg = (void *) pObj->p_mx_drv_cfg
     };
-    res = IDrvInit((IDriver *) p_obj->m_pxDriver, &driver_cfg);
-    if (SYS_IS_ERROR_CODE(res))
+    xRes = IDrvInit((IDriver *) pObj->m_pxDriver, &driver_cfg);
+    if (SYS_IS_ERROR_CODE(xRes))
     {
       SYS_DEBUGF(SYS_DBG_LEVEL_SEVERE, ("SPIBus task: error during driver initialization\r\n"));
     }
   }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_function_t *pvTaskCode, CHAR **pcName,
@@ -212,25 +213,25 @@ sys_error_code_t SPIBusTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_funct
                                              ULONG *pParams)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  SPIBusTask *p_obj = (SPIBusTask *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  SPIBusTask *pObj = (SPIBusTask *) _this;
 
   // initialize the software resources.
 
-  uint32_t item_size = (uint32_t)SMMessageGetSize(SM_MESSAGE_ID_SPI_BUS_READ);
-  VOID *p_queue_items_buff = SysAlloc(SPIBUS_TASK_CFG_INQUEUE_LENGTH * item_size);
+  uint16_t nItemSize = SMMessageGetSize(SM_MESSAGE_ID_SPI_BUS_READ);
+  VOID *pvQueueItemsBuff = SysAlloc(SPIBUS_TASK_CFG_INQUEUE_LENGTH * nItemSize);
 
-  if (p_queue_items_buff != NULL)
+  if (pvQueueItemsBuff != NULL)
   {
-    if (TX_SUCCESS == tx_queue_create(&p_obj->m_xInQueue, "SPIBUS_Q", item_size / 4u, p_queue_items_buff,
-                                      SPIBUS_TASK_CFG_INQUEUE_LENGTH * item_size))
+    if (TX_SUCCESS == tx_queue_create(&pObj->m_xInQueue, "SPIBUS_Q", nItemSize / 4, pvQueueItemsBuff,
+                                      SPIBUS_TASK_CFG_INQUEUE_LENGTH * nItemSize))
     {
-      p_obj->m_pBusIF = SysAlloc(sizeof(SPIBusTaskIBus));
-      if (p_obj->m_pBusIF != NULL)
+      pObj->m_pBusIF = SysAlloc(sizeof(SPIBusTaskIBus));
+      if (pObj->m_pBusIF != NULL)
       {
-        p_obj->m_pBusIF->vptr = &s_xIBus_vtbl;
-        ((SPIBusTaskIBus *) p_obj->m_pBusIF)->m_pxOwner = p_obj;
-        p_obj->m_nConnectedDevices = 0;
+        pObj->m_pBusIF->vptr = &s_xIBus_vtbl;
+        ((SPIBusTaskIBus *) pObj->m_pBusIF)->m_pxOwner = pObj;
+        pObj->m_nConnectedDevices = 0;
         _this->m_pfPMState2FuncMap = sTheClass.p_pm_state2func_map;
 
         *pvTaskCode = AMTExRun;
@@ -246,77 +247,77 @@ sys_error_code_t SPIBusTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_funct
       else
       {
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
-        res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+        xRes = SYS_OUT_OF_MEMORY_ERROR_CODE;
       }
     }
     else
     {
       SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
-      res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+      xRes = SYS_OUT_OF_MEMORY_ERROR_CODE;
     }
   }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPowerMode eActivePowerMode,
                                                  const EPowerMode eNewPowerMode)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  SPIBusTask *p_obj = (SPIBusTask *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  SPIBusTask *pObj = (SPIBusTask *) _this;
 
-  IDrvDoEnterPowerMode((IDriver *) p_obj->m_pxDriver, eActivePowerMode, eNewPowerMode);
+  IDrvDoEnterPowerMode((IDriver *) pObj->m_pxDriver, eActivePowerMode, eNewPowerMode);
 
   if (eNewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    tx_queue_flush(&p_obj->m_xInQueue);
+    tx_queue_flush(&pObj->m_xInQueue);
   }
 
   if ((eActivePowerMode == E_POWER_MODE_SENSORS_ACTIVE) && (eNewPowerMode == E_POWER_MODE_STATE1))
   {
-    tx_queue_flush(&p_obj->m_xInQueue);
+    tx_queue_flush(&pObj->m_xInQueue);
   }
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("SPIBUS: -> %d\r\n", eNewPowerMode));
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblHandleError(AManagedTask *_this, SysEvent xError)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-//  SPIBusTask *p_obj = (SPIBusTask*)_this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+//  SPIBusTask *pObj = (SPIBusTask*)_this;
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
 {
   assert_param(_this != NULL);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  SPIBusTask *p_obj = (SPIBusTask *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  SPIBusTask *pObj = (SPIBusTask *) _this;
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("SPI: start.\r\n"));
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("SPIBUS: start the driver.\r\n"));
 
-  res = IDrvStart((IDriver *) p_obj->m_pxDriver);
-  if (SYS_IS_ERROR_CODE(res))
+  xRes = IDrvStart((IDriver *) pObj->m_pxDriver);
+  if (SYS_IS_ERROR_CODE(xRes))
   {
     SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("SPIBUS - Driver start failed.\r\n"));
-    res = SYS_BASE_LOW_LEVEL_ERROR_CODE;
+    xRes = SYS_BASE_LOW_LEVEL_ERROR_CODE;
   }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerMode eActivePowerMode)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  SPIBusTask *p_obj = (SPIBusTask *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  SPIBusTask *pObj = (SPIBusTask *) _this;
 
   // to resume the task we send a fake empty message.
   SMMessage xReport =
@@ -327,12 +328,12 @@ sys_error_code_t SPIBusTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerMo
   {
     if (AMTExIsTaskInactive(_this))
     {
-      if (TX_SUCCESS != tx_queue_front_send(&p_obj->m_xInQueue, &xReport, AMT_MS_TO_TICKS(100)))
+      if (TX_SUCCESS != tx_queue_front_send(&pObj->m_xInQueue, &xReport, AMT_MS_TO_TICKS(100)))
       {
 
         SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("SPIBUS: unable to resume the task.\r\n"));
 
-        res = SYS_SPIBUS_TASK_RESUME_ERROR_CODE;
+        xRes = SYS_SPIBUS_TASK_RESUME_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_SPIBUS_TASK_RESUME_ERROR_CODE);
       }
     }
@@ -345,29 +346,29 @@ sys_error_code_t SPIBusTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerMo
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if (state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblOnEnterPowerMode(AManagedTaskEx *_this, const EPowerMode eActivePowerMode,
                                                  const EPowerMode eNewPowerMode)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-//  SPIBusTask *p_obj = (SPIBusTask*)_this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+//  SPIBusTask *pObj = (SPIBusTask*)_this;
 
   AMTExSetPMClass(_this, E_PM_CLASS_1);
 
-  return res;
+  return xRes;
 }
 
 // IBus virtual functions definition
@@ -376,15 +377,15 @@ sys_error_code_t SPIBusTask_vtblOnEnterPowerMode(AManagedTaskEx *_this, const EP
 sys_error_code_t SPIBusTask_vtblCtrl(IBus *_this, EBusCtrlCmd eCtrlCmd, uint32_t nParams)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblConnectDevice(IBus *_this, ABusIF *pxBusIF)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   if (pxBusIF != NULL)
   {
@@ -399,17 +400,17 @@ sys_error_code_t SPIBusTask_vtblConnectDevice(IBus *_this, ABusIF *pxBusIF)
   }
   else
   {
-    res = SYS_INVALID_PARAMETER_ERROR_CODE;
+    xRes = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
   }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t SPIBusTask_vtblDisconnectDevice(IBus *_this, ABusIF *pxBusIF)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   if (pxBusIF != NULL)
   {
@@ -424,14 +425,14 @@ sys_error_code_t SPIBusTask_vtblDisconnectDevice(IBus *_this, ABusIF *pxBusIF)
   }
   else
   {
-    res = SYS_INVALID_PARAMETER_ERROR_CODE;
+    xRes = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
   }
 
-  return res;
+  return xRes;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t SPIBusTaskCtrl(ABusIF *_this, EBusCtrlCmd eCtrlCmd, uint32_t nParams)
@@ -442,7 +443,7 @@ static sys_error_code_t SPIBusTaskCtrl(ABusIF *_this, EBusCtrlCmd eCtrlCmd, uint
 static sys_error_code_t SPIBusTaskExecuteStep(AManagedTask *_this)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
   SPIBusTask *p_obj = (SPIBusTask *) _this;
 
   struct spiIOMessage_t xMsg =
@@ -463,24 +464,24 @@ static sys_error_code_t SPIBusTaskExecuteStep(AManagedTask *_this)
       case SM_MESSAGE_ID_SPI_BUS_READ:
         SPIMasterDriverSelectDevice((SPIMasterDriver_t *) p_obj->m_pxDriver, xMsg.pxSensor->m_pxSSPinPort,
                                     xMsg.pxSensor->m_nSSPin);
-        res = IIODrvRead(p_obj->m_pxDriver, xMsg.pnData, xMsg.nDataSize, xMsg.nRegAddr);
+        xRes = IIODrvRead(p_obj->m_pxDriver, xMsg.pnData, xMsg.nDataSize, xMsg.nRegAddr);
         SPIMasterDriverDeselectDevice((SPIMasterDriver_t *) p_obj->m_pxDriver, xMsg.pxSensor->m_pxSSPinPort,
                                       xMsg.pxSensor->m_nSSPin);
-        if (!SYS_IS_ERROR_CODE(res))
+        if (!SYS_IS_ERROR_CODE(xRes))
         {
-          res = SPIBusIFNotifyIOComplete(xMsg.pxSensor);
+          xRes = SPIBusIFNotifyIOComplete(xMsg.pxSensor);
         }
         break;
 
       case SM_MESSAGE_ID_SPI_BUS_WRITE:
         SPIMasterDriverSelectDevice((SPIMasterDriver_t *) p_obj->m_pxDriver, xMsg.pxSensor->m_pxSSPinPort,
                                     xMsg.pxSensor->m_nSSPin);
-        res = IIODrvWrite(p_obj->m_pxDriver, xMsg.pnData, xMsg.nDataSize, xMsg.nRegAddr);
+        xRes = IIODrvWrite(p_obj->m_pxDriver, xMsg.pnData, xMsg.nDataSize, xMsg.nRegAddr);
         SPIMasterDriverDeselectDevice((SPIMasterDriver_t *) p_obj->m_pxDriver, xMsg.pxSensor->m_pxSSPinPort,
                                       xMsg.pxSensor->m_nSSPin);
-        if (!SYS_IS_ERROR_CODE(res))
+        if (!SYS_IS_ERROR_CODE(xRes))
         {
-          res = SPIBusIFNotifyIOComplete(xMsg.pxSensor);
+          xRes = SPIBusIFNotifyIOComplete(xMsg.pxSensor);
         }
         break;
 
@@ -490,14 +491,14 @@ static sys_error_code_t SPIBusTaskExecuteStep(AManagedTask *_this)
     }
   }
 
-  return res;
+  return xRes;
 }
 
 static int32_t SPIBusTaskWrite(void *pxSensor, uint8_t nRegAddr, uint8_t *pnData, uint16_t nSize)
 {
   assert_param(pxSensor);
   SPIBusIF *pxSPISensor = (SPIBusIF *) pxSensor;
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
   uint8_t nAutoInc = pxSPISensor->m_nAutoInc;
 
   struct spiIOMessage_t xMsg =
@@ -514,32 +515,32 @@ static int32_t SPIBusTaskWrite(void *pxSensor, uint8_t nRegAddr, uint8_t *pnData
   {
     // we cannot read and write in the SPI BUS from an ISR. Notify the error
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_SPIBUS_TASK_IO_ERROR_CODE);
-    res = SYS_SPIBUS_TASK_IO_ERROR_CODE;
+    xRes = SYS_SPIBUS_TASK_IO_ERROR_CODE;
   }
   else
   {
     if (TX_SUCCESS != tx_queue_send(&s_xTaskObj.m_xInQueue, &xMsg, AMT_MS_TO_TICKS(SPIBUS_OP_WAIT_MS)))
     {
       SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_SPIBUS_TASK_IO_ERROR_CODE);
-      res = SYS_SPIBUS_TASK_IO_ERROR_CODE;
+      xRes = SYS_SPIBUS_TASK_IO_ERROR_CODE;
     }
   }
 //  }
 
-  if (!SYS_IS_ERROR_CODE(res))
+  if (!SYS_IS_ERROR_CODE(xRes))
   {
     // suspend the sensor task.
-    res = SPIBusIFWaitIOComplete(pxSPISensor);
+    xRes = SPIBusIFWaitIOComplete(pxSPISensor);
   }
 
-  return res;
+  return xRes;
 }
 
 static int32_t SPIBusTaskRead(void *pxSensor, uint8_t nRegAddr, uint8_t *pnData, uint16_t nSize)
 {
   assert_param(pxSensor);
   SPIBusIF *pxSPISensor = (SPIBusIF *) pxSensor;
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   uint8_t nAutoInc = 0x00;
   struct spiIOMessage_t xMsg =
@@ -556,22 +557,22 @@ static int32_t SPIBusTaskRead(void *pxSensor, uint8_t nRegAddr, uint8_t *pnData,
   {
     // we cannot read and write in the SPI BUS from an ISR. Notify the error
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_SPIBUS_TASK_IO_ERROR_CODE);
-    res = SYS_SPIBUS_TASK_IO_ERROR_CODE;
+    xRes = SYS_SPIBUS_TASK_IO_ERROR_CODE;
   }
   else
   {
     if (TX_SUCCESS != tx_queue_send(&s_xTaskObj.m_xInQueue, &xMsg, AMT_MS_TO_TICKS(SPIBUS_OP_WAIT_MS)))
     {
       SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_SPIBUS_TASK_IO_ERROR_CODE);
-      res = SYS_SPIBUS_TASK_IO_ERROR_CODE;
+      xRes = SYS_SPIBUS_TASK_IO_ERROR_CODE;
     }
   }
 //  }
 
-  if (!SYS_IS_ERROR_CODE(res))
+  if (!SYS_IS_ERROR_CODE(xRes))
   {
-    res = SPIBusIFWaitIOComplete(pxSPISensor);
+    xRes = SPIBusIFWaitIOComplete(pxSPISensor);
   }
 
-  return res;
+  return xRes;
 }

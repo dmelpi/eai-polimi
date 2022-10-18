@@ -25,39 +25,7 @@ Parson (lighweight json library written in C) must been included to parse the ex
 # Update History
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section12" checked aria-hidden="true">
-<label for="collapse-section12" aria-hidden="true">V1.5.0 / 30-June-2022</label>
-<div>
-
-## Main Changes
-
-- Added Gesture Navigation Feature
-- Fix some bugs
-
-</div>
-
-:::
-
-::: {.collapse}
-<input type="checkbox" id="collapse-section11" aria-hidden="true">
-<label for="collapse-section11" aria-hidden="true">V1.4.0 / 31-May-2022</label>
-<div>
-
-## Main Changes
-
-- Added the Geneneral Purpose features
-- Added Nano Edge Artificial intelligence Anomaly Detection features
-- Added PnPLike features
-- Added SD Log feature
-- Added the define for disabling parson
-- Fix some bugs
-
-</div>
-
-:::
-
-::: {.collapse}
-<input type="checkbox" id="collapse-section10" aria-hidden="true">
+<input type="checkbox" id="collapse-section10" checked aria-hidden="true">
 <label for="collapse-section10" aria-hidden="true">V1.3.0 / 07-March-2022</label>
 <div>
 

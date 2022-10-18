@@ -55,12 +55,12 @@ struct _ISensorMlc_t
 
 // Inline functions definition
 // ***************************
-static inline sys_error_code_t ISensorMlcLoadUcf(ISensorMlc_t *_this, uint32_t size, const char *ucf)
+inline sys_error_code_t ISensorMlcLoadUcf(ISensorMlc_t *_this, uint32_t size, const char *ucf)
 {
   return _this->vptr->SensorMlcLoadUcf(_this, size, ucf);
 }
 
-static inline boolean_t ISensorMlcIsEnabled(ISensorMlc_t *_this)
+inline boolean_t ISensorMlcIsEnabled(ISensorMlc_t *_this)
 {
   return _this->vptr->SensorMlcIsEnabled(_this);
 }

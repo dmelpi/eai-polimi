@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_HighSpeedDataLog.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   Add High Speed Data Log info services using vendor specific
   *          profiles.
   ******************************************************************************
@@ -29,7 +29,7 @@
 
 /* Exported Variables ------------------------------------------------------- */
 CustomNotifyEventHighSpeedDataLog_t CustomNotifyEventHighSpeedDataLog=NULL;
-CustomWriteRequestHighSpeedDataLog_t CustomWriteRequestHighSpeedDataLog;
+CustomWriteRequestHighSpeedDataLogFunction CustomWriteRequestHighSpeedDataLogFunctionPointer;
 
 /* Private variables ---------------------------------------------------------*/
 /* Data structure pointer for High Speed Data Log info service */
@@ -63,7 +63,7 @@ BleCharTypeDef* BLE_InitHighSpeedDataLogService(void)
   BleCharPointer->Enc_Key_Size=16;
   BleCharPointer->Is_Variable=1;
   
-  if(CustomWriteRequestHighSpeedDataLog == NULL) {
+  if(CustomWriteRequestHighSpeedDataLogFunctionPointer == NULL) {
     BLE_MANAGER_PRINTF("Error: Write request High Speed Data Log function not defined\r\n");
   }
   
@@ -127,10 +127,10 @@ static void AttrMod_Request_HighSpeedDataLog(void *VoidCharPointer, uint16_t att
  */
 static void Write_Request_HighSpeedDataLog(void *BleCharPointer,uint16_t handle, uint16_t Offset, uint8_t data_length, uint8_t *att_data)
 {
-  if(CustomWriteRequestHighSpeedDataLog!= NULL) {
-    CustomWriteRequestHighSpeedDataLog(att_data, data_length);
+  if(CustomWriteRequestHighSpeedDataLogFunctionPointer != NULL) {
+    CustomWriteRequestHighSpeedDataLogFunctionPointer(att_data, data_length);
   } else {
-    BLE_MANAGER_PRINTF("\r\n\nWrite request High Speed Data Log function not defined\r\n\n");
+    BLE_MANAGER_PRINTF("\r\n\nRead request High Speed Data Log function not defined\r\n\n");
   }
 }
 

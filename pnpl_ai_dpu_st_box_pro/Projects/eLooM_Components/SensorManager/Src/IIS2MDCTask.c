@@ -29,8 +29,8 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "iis2mdc_reg.h"
 #include <string.h>
@@ -45,7 +45,7 @@
 #endif
 
 #ifndef IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH
-#define IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #define IIS2MDC_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -141,11 +141,6 @@ struct _IIS2MDCTask
   TX_TIMER read_timer;
 
   /**
-   * Timer period used to schedule the read command
-   */
-  ULONG iis2mdc_task_cfg_timer_period_ms;
-
-  /**
    * Used to update the instantaneous ODR.
    */
   double prev_timestamp;
@@ -174,10 +169,11 @@ typedef struct _IIS2MDCTaskClass
   /**
    * IIS2MDCTask (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } IIS2MDCTaskClass_t;
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -258,7 +254,7 @@ static void IIS2MDCTaskTimerCallbackFunction(ULONG timer);
  */
 void IIS2MDCTask_EXTI_Callback(uint16_t Pin);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -362,7 +358,7 @@ static const IIS2MDCTaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* IIS2MDCTaskGetMagSensorIF(IIS2MDCTask *_this)
@@ -436,19 +432,19 @@ sys_error_code_t IIS2MDCTask_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   IIS2MDCTask *p_obj = (IIS2MDCTask*) _this;
 
-  /* Create task specific sw resources. */
+  // Create task specific sw resources.
 
-  uint32_t item_size = (uint32_t)IIS2MDC_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  uint16_t nItemSize = IIS2MDC_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS2MDC_Q", item_size / 4u, p_queue_items_buff,
-                                    IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS2MDC_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    IIS2MDC_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
@@ -473,7 +469,7 @@ sys_error_code_t IIS2MDCTask_vtblOnCreateTask(
   /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
   if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS2MDC_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, 0);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS2MDC_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -494,8 +490,8 @@ sys_error_code_t IIS2MDCTask_vtblOnCreateTask(
   {
     return res;
   }
-  /* Initialize the EventSrc interface */
-  p_obj->p_mag_event_src = DataEventSrcAlloc();
+  // Initialize the EventSrc interface.
+  p_obj->p_mag_event_src = SensorEventSrcAlloc();
   if(p_obj->p_mag_event_src == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -585,8 +581,8 @@ sys_error_code_t IIS2MDCTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = IIS2MDCTaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -596,7 +592,7 @@ sys_error_code_t IIS2MDCTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
     {
       IIS2MDCTaskConfigureIrqPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -661,12 +657,12 @@ sys_error_code_t IIS2MDCTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerM
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -712,7 +708,7 @@ sys_error_code_t IIS2MDCTask_vtblMagGetODR(ISourceObservable *_this, float *p_me
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -907,7 +903,7 @@ SensorStatus_t IIS2MDCTask_vtblSensorGetStatus(ISensor_t *_this)
   return p_if_owner->mag_sensor_status;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t IIS2MDCTaskExecuteStepState1(AManagedTask *_this)
@@ -950,7 +946,7 @@ static sys_error_code_t IIS2MDCTaskExecuteStepState1(AManagedTask *_this)
               res = IIS2MDCTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -961,7 +957,7 @@ static sys_error_code_t IIS2MDCTaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1002,7 +998,8 @@ static sys_error_code_t IIS2MDCTaskExecuteStepDatalog(AManagedTask *_this)
           //       SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IIS2MDC: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
-            if(TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(p_obj->iis2mdc_task_cfg_timer_period_ms), AMT_MS_TO_TICKS(p_obj->iis2mdc_task_cfg_timer_period_ms)))
+          if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(IIS2MDC_TASK_CFG_TIMER_PERIOD_MS),
+                                            AMT_MS_TO_TICKS(IIS2MDC_TASK_CFG_TIMER_PERIOD_MS)))
             {
               return SYS_UNDEFINED_ERROR_CODE;
             }
@@ -1016,18 +1013,19 @@ static sys_error_code_t IIS2MDCTaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-            /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue (samples_per_it):
-             * [X0, Y0, Z0]
-             * [X1, Y1, Z1]
-             * ...
-             * [Xm-1, Ym-1, Zm-1]
-             */
-            EMData_t data;
-            EMD_Init(&data, p_obj->p_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->samples_per_it, p_obj->mag_sensor_status.Dimensions);
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = p_obj->p_sensor_data_buff,
+                .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN //TODO: STF - this means that data are interleaved?!?
+                // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
+            ai_logging_create_shape_2d(&stream.packet.shape, 3, p_obj->samples_per_it);
+            stream.packet.payload_size = 2 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-            DataEvent_t evt;
-
-            DataEventInit((IEvent*)&evt, p_obj->p_mag_event_src, &data, timestamp, p_obj->mag_id);
+            SensorEvent evt;
+            SensorEventInit((IEvent*) &evt, p_obj->p_mag_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->mag_id);
             IEventSrcSendEvent(p_obj->p_mag_event_src, (IEvent*) &evt, NULL);
 
             /* update measuredODR */
@@ -1078,7 +1076,7 @@ static sys_error_code_t IIS2MDCTaskExecuteStepDatalog(AManagedTask *_this)
               res = IIS2MDCTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1088,7 +1086,7 @@ static sys_error_code_t IIS2MDCTaskExecuteStepDatalog(AManagedTask *_this)
           break;
         }
       default:
-        /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1161,10 +1159,7 @@ static sys_error_code_t IIS2MDCTaskSensorInit(IIS2MDCTask *_this)
   uint8_t reg0 = 0;
   int32_t ret_val = 0;
 
-  /* Read the output registers to reset the interrupt pin */
-  /* Without these instructions, INT PIN remains HIGH and */
-  /* it never swithces anymore */
-  iis2mdc_magnetic_raw_get(p_sensor_drv, (int16_t*) &_this->p_sensor_data_buff);
+  //TODO: SO Check if the following part is OK
 
   iis2mdc_reset_set(p_sensor_drv, 1);
   iis2mdc_block_data_update_set(p_sensor_drv, 1);
@@ -1202,23 +1197,21 @@ static sys_error_code_t IIS2MDCTaskSensorInit(IIS2MDCTask *_this)
   if(_this->mag_sensor_status.ODR < 11.0f)
   {
     iis2mdc_data_rate_set(p_sensor_drv, IIS2MDC_ODR_10Hz);
-    _this->iis2mdc_task_cfg_timer_period_ms = 100;
   }
   else if(_this->mag_sensor_status.ODR < 21.0f)
   {
     iis2mdc_data_rate_set(p_sensor_drv, IIS2MDC_ODR_20Hz);
-    _this->iis2mdc_task_cfg_timer_period_ms = 50;
   }
   else if(_this->mag_sensor_status.ODR < 51.0f)
   {
     iis2mdc_data_rate_set(p_sensor_drv, IIS2MDC_ODR_50Hz);
-    _this->iis2mdc_task_cfg_timer_period_ms = 20;
   }
   else if(_this->mag_sensor_status.ODR < 101.0f)
   {
     iis2mdc_data_rate_set(p_sensor_drv, IIS2MDC_ODR_100Hz);
-    _this->iis2mdc_task_cfg_timer_period_ms = 10;
   }
+
+  iis2mdc_magnetic_raw_get(p_sensor_drv, (int16_t*) &_this->p_sensor_data_buff);
 
   return res;
 }
@@ -1265,13 +1258,20 @@ static sys_error_code_t IIS2MDCTaskSensorInitTaskParams(IIS2MDCTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* ACCELEROMETER SENSOR STATUS */
-  _this->mag_sensor_status.DataType = E_EM_INT16;
+  _this->mag_sensor_status.DataType = DATA_TYPE_INT16;
   _this->mag_sensor_status.Dimensions = 3;
   _this->mag_sensor_status.IsActive = TRUE;
   _this->mag_sensor_status.FS = 50.0f;
   _this->mag_sensor_status.Sensitivity = 0.0015f;
   _this->mag_sensor_status.ODR = 100.0f;
   _this->mag_sensor_status.MeasuredODR = 0.0f;
+  _this->mag_sensor_status.InitialOffset = 0.0f;
+  _this->mag_sensor_status.DataPacketSize = 600;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->mag_sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->mag_sensor_status.SamplesPerTimestamp = 1000;
+#endif
 
   return res;
 }
@@ -1431,9 +1431,11 @@ static sys_error_code_t IIS2MDCTaskConfigureIrqPin(const IIS2MDCTask *_this, boo
 
 static void IIS2MDCTaskTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   // if (sTaskObj.in_queue != NULL ) {//TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
@@ -1444,19 +1446,21 @@ static void IIS2MDCTaskTimerCallbackFunction(ULONG timer)
   //}
 }
 
-/* CubeMX integration */
+// CubeMX integration
 // ******************
 
 void IIS2MDCTask_EXTI_Callback(uint16_t Pin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
 //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }

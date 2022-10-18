@@ -30,6 +30,7 @@
 extern "C" {
 #endif
 
+#include "ai_sp_dataformat.h"
 
 #include "events/IEventListener.h"
 #include "events/IEventListener_vtbl.h"
@@ -51,8 +52,7 @@ typedef struct _ISensorEventListener ISensorEventListener;
   * @param _this [IN] specifies a pointer to the object.
   * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
   */
-static inline
-sys_error_code_t ISensorEventListenerOnNewDataReady(IEventListener *_this, const SensorEvent *pxEvt);
+inline sys_error_code_t ISensorEventListenerOnNewDataReady(IEventListener *_this, const SensorEvent *pxEvt);
 
 
 // Inline functions definition

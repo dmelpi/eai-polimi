@@ -129,12 +129,12 @@ struct _ABusIF
 // Public API declaration
 // **********************
 
-static inline sys_error_code_t ABusIFInit(ABusIF *_this, uint8_t nWhoAmI);
+inline sys_error_code_t ABusIFInit(ABusIF *_this, uint8_t nWhoAmI);
 
-static inline sys_error_code_t ABusIFSetHandle(ABusIF *_this, void *pxHandle);
-static inline void *ABusIFGetHandle(const ABusIF *_this);
-static inline sys_error_code_t ABusIFSetWhoAmI(ABusIF *_this, uint8_t nWhoAmI);
-static inline uint8_t ABusIFGetWhoAmI(const ABusIF *_this);
+inline sys_error_code_t ABusIFSetHandle(ABusIF *_this, void *pxHandle);
+inline void *ABusIFGetHandle(const ABusIF *_this);
+inline sys_error_code_t ABusIFSetWhoAmI(ABusIF *_this, uint8_t nWhoAmI);
+inline uint8_t ABusIFGetWhoAmI(const ABusIF *_this);
 
 int32_t ABusIFNullRW(void *pxSensor, uint8_t nRegAddr, uint8_t* pnData, uint16_t nSize);
 

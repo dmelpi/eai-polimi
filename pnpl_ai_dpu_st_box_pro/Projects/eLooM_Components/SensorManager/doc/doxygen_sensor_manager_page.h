@@ -79,8 +79,8 @@
  *       sIIS3DWBObj = IIS3DWBTaskAlloc();
  *         
  *       // Add Tasks to the Application Context
- *       res = ACAddTask(pAppContext, (AManagedTask*)sSPI3BusObj);
- *       res = ACAddTask(pAppContext, (AManagedTask*)sIIS3DWBObj);
+ *       xRes = ACAddTask(pAppContext, (AManagedTask*)sSPI3BusObj);
+ *       xRes = ACAddTask(pAppContext, (AManagedTask*)sIIS3DWBObj);
  *       
  *       // Connect the Sensor task to the Bus
  *       SPIBusTaskConnectDevice((SPIBusTask*)sSPI3BusObj, IIS3DWBTaskGetSensorIF((IIS3DWBTask*)sIIS3DWBObj));

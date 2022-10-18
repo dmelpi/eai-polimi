@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_AudioSceneClasssification.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   Add Audio Scene Classification service using vendor specific profiles.
   ******************************************************************************
   * @attention
@@ -73,7 +73,7 @@ BleCharTypeDef* BLE_InitAudioSceneClassService(void)
   BleCharPointer->Enc_Key_Size=16;
   BleCharPointer->Is_Variable=0;
   
-  if(CustomReadRequestAudioSceneClass == NULL) {
+  if(CustomReadRequestActRec == NULL) {
     BLE_MANAGER_PRINTF("Error: Read request Audio Scene Classification function not defined\r\n");
   }
   

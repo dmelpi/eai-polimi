@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_PnPLike.h
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.0.0
+  * @date    03-May-2022
   * @brief   BLE_PnPLike info services APIs.
   ******************************************************************************
   * @attention
@@ -27,11 +27,11 @@
 #endif
    
 /* Exported typedef --------------------------------------------------------- */
-typedef void (*CustomWriteRequestPnPLike_t)(uint8_t* received_msg, uint8_t msg_length);
+typedef void (*CustomWriteRequestPnPLikeFunction)(uint8_t* received_msg, uint8_t msg_length);
 typedef void (*CustomNotifyEventPnPLike_t)(BLE_NotifyEvent_t Event);
 
 /* Exported Variables ------------------------------------------------------- */
-extern CustomWriteRequestPnPLike_t CustomWriteRequestPnPLike;
+extern CustomWriteRequestPnPLikeFunction CustomWriteRequestPnPLikeFunctionPointer;
 extern CustomNotifyEventPnPLike_t CustomNotifyEventPnPLike;
 
 /* Exported functions ------------------------------------------------------- */
@@ -42,6 +42,13 @@ extern CustomNotifyEventPnPLike_t CustomNotifyEventPnPLike;
  * @retval BleCharTypeDef* BleCharPointer: Data structure pointer for PnPLike info service
  */
 extern BleCharTypeDef* BLE_InitPnPLikeService(void);
+
+/**
+ * @brief  Setting PnPLike Advertise Data
+ * @param  uint8_t *manuf_data: Advertise Data
+ * @retval None
+ */
+extern void BLE_SetPnPLikeAdvertiseData(uint8_t *manuf_data);
 
 /**
  * @brief  PnPLike send buffer

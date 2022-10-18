@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_Manager_Conf_Template.h
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   BLE Manager configuration template file.
   *          This file should be copied to the application folder and renamed
   *          to BLE_Manager_Conf.h.

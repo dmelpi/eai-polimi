@@ -24,7 +24,6 @@
 #include "SensorManager.h"
 #include "stdlib.h"
 #include "string.h"
-#include "services/em_data_format.h"
 
 static SensorManager_t spSMObj =
 {
@@ -52,7 +51,7 @@ ISourceObservable *SMGetSensorObserver(uint8_t id)
   else
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
-    return NULL;
+    return 0;
   }
 }
 
@@ -195,16 +194,16 @@ uint32_t GetnBytesPerSample(uint8_t id)
     ISensor_t *p_obj = (ISensor_t *)(spSMObj.Sensors[id]);
     SensorStatus_t sensor_status = ISensorGetStatus(p_obj);
 
-    if (sensor_status.DataType == E_EM_FLOAT || sensor_status.DataType == E_EM_INT32
-        || sensor_status.DataType == E_EM_UINT32)
+    if (sensor_status.DataType == DATA_TYPE_FLOAT || sensor_status.DataType == DATA_TYPE_INT32
+        || sensor_status.DataType == DATA_TYPE_UINT32)
     {
       return sensor_status.Dimensions * 4;
     }
-    else if (sensor_status.DataType == E_EM_UINT16 || sensor_status.DataType == E_EM_INT16)
+    else if (sensor_status.DataType == DATA_TYPE_UINT16 || sensor_status.DataType == DATA_TYPE_INT16)
     {
       return sensor_status.Dimensions * 2;
     }
-    else if (sensor_status.DataType == E_EM_UINT8 || sensor_status.DataType == E_EM_INT8)
+    else if (sensor_status.DataType == DATA_TYPE_UINT8 || sensor_status.DataType == DATA_TYPE_INT8)
     {
       return sensor_status.Dimensions;
     }

@@ -202,3 +202,4 @@ modification in the application layer developed with older versions of the drive
 
 #endif /* STWIN_BOX_CONF_TEMPLATE_H__*/
 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_Manager.h 
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   BLE Manager services APIs
   ******************************************************************************
   * @attention
@@ -599,7 +599,7 @@ extern tBleStatus safe_aci_gatt_update_char_value   (BleCharTypeDef *BleCharPoin
 #ifndef BLE_MANAGER_NO_PARSON
 //Add a Custom Command to a Generic Feature
 extern uint8_t GenericAddCustomCommand(BLE_ExtCustomCommand_t **CustomCommands, BLE_ExtCustomCommand_t **LastCustomCommand,
-                                char *CommandName,BLE_CustomCommandTypes_t CommandType, int32_t DefaultValue,
+                                char *CommandName,BLE_CustomCommandTypes_t CommandType, 
                                 int32_t Min, int32_t Max, int32_t *ValidValuesInt,char **ValidValuesString,char *ShortDesc,JSON_Array *JSON_SensorArray);
 //Little specialization for Ext configuration
 #define AddCustomCommand(...) GenericAddCustomCommand(&ExtConfigCustomCommands, &ExtConfigLastCustomCommand, __VA_ARGS__)

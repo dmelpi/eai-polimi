@@ -525,4 +525,4 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
 /**
   * @}
   */ 
-  
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

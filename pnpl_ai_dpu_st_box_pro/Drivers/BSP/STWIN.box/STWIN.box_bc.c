@@ -4,33 +4,6 @@
  * @author  SRA
  * @brief   This file provides code for the configuration of the STBC02
  *          battery charger
- *
- * This file implements the needed logic to support the STBC02 Battery Charger.
- *
- * Single Wire protocol is implemented using 1 Timer in free running mode
- * That generates an interrupt each time the counter met the ARR value
- * The ARR value is directly updated i the ISR function to so that, in output
- *
- * SWire protocol example:
- * \code
- *
- *   Start  ....   N pulses (Short)  ....   Stop
- *    ____    __    __         __    __    ______
- *   |    |  |  |  |  |       |  |  |  |  |      |
- *   |    |  |  |  |  |       |  |  |  |  |      |
- * __|    |__|  |__|  |_ ... _|  |__|  |__|      |__
- *
- *  Start: 360 us
- *  Short: 105 us
- *  Stop:  505 us
- *
- * \endcode
- *
- * Battery charger state through CHG pin frequency detection
- * The CHG provides status information about VIN voltage level, battery charging
- * status and faults by toggling at different frequencies.
- * The frequency is detected thanks to a Timer set in Input Capture mode.
- *
  ******************************************************************************
  * @attention
  *
@@ -66,13 +39,6 @@
 #ifndef STWIN_BOX_VDDA_MV
 #define STWIN_BOX_VDDA_MV                       (2750UL)
 #endif
-
-#define BC_SW_TIM_COUNTING_FREQ    1000000U
-#define BC_CHG_TIM_COUNTING_FREQ   10000U
-
-#define STBC02_SW_START_PULSE_US   360U
-#define STBC02_SW_SHORT_PULSE_US   105U
-#define STBC02_SW_STOP_PULSE_US    500U
 
 /**
  * @brief STBC02 status name and related toggling frequency (in Hz) of the nCHG pin
@@ -120,7 +86,7 @@ static const stbc02_ChgStateNameAndFreq_TypeDef stbc02_ChgStateNameAndFreq[10] =
  */
 
 static stbc02_SwCmd_TypeDef stbc02_SwCmdSel;                    //!< The selected STBC02 SW Cmd
-static volatile stbc02_SwState_TypeDef stbc02_SwState = idle;   //!< Status during STBC02 SW Cmd sending
+static stbc02_SwState_TypeDef stbc02_SwState = idle;            //!< Status during STBC02 SW Cmd sending
 static stbc02_ChgState_TypeDef stbc02_ChgState = NotValidInput; //!< Status of STBC02
 static uint32_t stbc02_ChgPinToggledTime = 0;                   //!< SysTick value when STBC02 nCHG pin is toggling
 static TIM_HandleTypeDef BC_Sw_TIM_Handle;                      //!< Timer for Single Wire communication
@@ -131,7 +97,7 @@ static uint32_t uwIC2Value1 = 0;
 static uint32_t uwIC2Value2 = 0;
 static uint32_t uwDiffCapture = 0;
 static uint16_t uhCaptureIndex = 0; /* Capture index */
-static float uwFrequency = 0; /* Frequency Value [Hz] */
+static uint32_t uwFrequency = 0; /* Frequency Value */
 
 ADC_HandleTypeDef ADC4_Handle;
 /**
@@ -184,21 +150,9 @@ int32_t BSP_BC_Sw_CmdSend(stbc02_SwCmd_TypeDef stbc02_SwCmd)
 
   stbc02_SwCmdSel = stbc02_SwCmd;
   stbc02_SwState = start;
-  BC_Sw_TIM_Handle.Instance->ARR = STBC02_SW_START_PULSE_US-1;
-
-  /* The timer should start immediately after the pin is SET --> Critical Section */
-  __disable_irq();
-
-  /* SW Pin set */
-  STBC02_SW_GPIO_PORT->BSRR = STBC02_SW_PIN;
 
   /* Start the time base */
-  (void)HAL_TIM_Base_Start_IT(&BC_Sw_TIM_Handle);
-
-  /* Clear the first irq flag which is set immediately */
-  __HAL_TIM_CLEAR_FLAG(&BC_Sw_TIM_Handle, TIM_FLAG_UPDATE);
-
-  __enable_irq();
+  (void) HAL_TIM_Base_Start_IT(&BC_Sw_TIM_Handle);
 
   while(stbc02_SwState != idle)
   {
@@ -207,6 +161,8 @@ int32_t BSP_BC_Sw_CmdSend(stbc02_SwCmd_TypeDef stbc02_SwCmd)
       return 1;
     }
   }
+  /* Stop the time base */
+  (void) HAL_TIM_Base_Stop_IT(&BC_Sw_TIM_Handle);
 
   return 0;
 }
@@ -238,41 +194,10 @@ int32_t BSP_BC_Chg_DeInit(void)
  * @note Must be called when the charging pin of the STBC02 has toggled
  * @retval None
  */
-void BSP_BC_ChgPinHasToggled(TIM_HandleTypeDef *htim)
+void BSP_BC_ChgPinHasToggled(void)
 {
+  BC_ChgPinFreqGet();
   stbc02_ChgPinToggledTime = STBC02_GetTick();
-
-  if(uhCaptureIndex == 0)
-  {
-    /* Get the 1st Input Capture value */
-    uwIC2Value1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-    uhCaptureIndex = 1;
-  }
-  else if(uhCaptureIndex == 1)
-  {
-    /* Get the 2nd Input Capture value */
-    uwIC2Value2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-
-    /* Capture computation */
-    if (uwIC2Value2 > uwIC2Value1)
-    {
-      uwDiffCapture = (uwIC2Value2 - uwIC2Value1);
-    }
-    else if (uwIC2Value2 < uwIC2Value1)
-    {
-      /* 0xFFFF is max TIM1_CCRx value */
-      uwDiffCapture = ((0xFFFF - uwIC2Value1) + uwIC2Value2) + 1;
-    }
-    else
-    {
-      /* If capture values are equal, we have reached the limit of frequency measures */
-//      Error_Handler();
-    }
-
-    /* Frequency computation: for this example TIMx (TIM5) is clocked by APB1Clk */
-    uwFrequency = (float)BC_CHG_TIM_COUNTING_FREQ / (float)uwDiffCapture;
-    uhCaptureIndex = 0;
-  }
 }
 
 /**
@@ -532,22 +457,6 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
       while(1);
     }
 
-    /* Enable LDO: switch on analog power supply
-     * Without LDO, ADC is switched off */
-    __HAL_RCC_PWR_CLK_ENABLE();
-    HAL_PWREx_EnableVddA();
-
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_15, GPIO_PIN_SET);
-
-    /* Configure the DCDC2 Enable pin */
-    GPIO_InitStruct.Pin = GPIO_PIN_15;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-
-    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-
     /* ADC4 clock enable */
     __HAL_RCC_ADC4_CLK_ENABLE();
 
@@ -635,48 +544,111 @@ void BC_Sw_IO_Init(void)
  */
 void BC_Sw_Cmd_Handler(void)
 {
+  static uint16_t TIMx_Pulse = 0;                           //! Actual timer pulse number
+  static uint16_t TIMx_PulseTCS = 0;                        //! Timer pulse number to change state
+  static stbc02_SwState_TypeDef stbc02_sw_state_prv = idle; //! Previous state
   static uint8_t CmdPulse = 0;                              //! Cmd pulse number
 
+  TIMx_Pulse++;
   switch(stbc02_SwState)
   {
     case idle:
       break;
-    case start: /* End of the start pulse */
-      CmdPulse = 0;
-      STBC02_SW_GPIO_PORT->BRR = STBC02_SW_PIN; // RESET
-      BC_Sw_TIM_Handle.Instance->ARR = STBC02_SW_SHORT_PULSE_US-1;
-      stbc02_SwState = pulse_h;
+    case start:
+      HAL_GPIO_TogglePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN);
+      TIMx_PulseTCS = TIMx_Pulse + (uint16_t) (350 / 5);
+      stbc02_sw_state_prv = stbc02_SwState;
+      stbc02_SwState = wait;
       break;
-    case pulse_l: /* Beginning of short-low pulse (except first one) */
-      BC_Sw_TIM_Handle.Instance->ARR = STBC02_SW_SHORT_PULSE_US-1;
-      STBC02_SW_GPIO_PORT->BRR = STBC02_SW_PIN; // RESET
-      if(CmdPulse < (uint8_t) stbc02_SwCmdSel)
+    case pulse_l:
+      HAL_GPIO_TogglePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN);
+      TIMx_PulseTCS = TIMx_Pulse + (uint16_t) (100 / 5);
+      stbc02_sw_state_prv = stbc02_SwState;
+      stbc02_SwState = wait;
+      break;
+    case pulse_h:
+      HAL_GPIO_TogglePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN);
+      TIMx_PulseTCS = TIMx_Pulse + (uint16_t) (100 / 5);
+      stbc02_sw_state_prv = stbc02_SwState;
+      stbc02_SwState = wait;
+      break;
+    case stop_l:
+      HAL_GPIO_TogglePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN);
+      TIMx_PulseTCS = TIMx_Pulse + (uint16_t) (100 / 5);
+      stbc02_sw_state_prv = stbc02_SwState;
+      stbc02_SwState = wait;
+      break;
+    case stop_h:
+      HAL_GPIO_TogglePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN);
+      TIMx_PulseTCS = TIMx_Pulse + (uint16_t) (500 / 5);
+      stbc02_sw_state_prv = stbc02_SwState;
+      stbc02_SwState = wait;
+      break;
+    case wait:
+      if(TIMx_Pulse > TIMx_PulseTCS)
       {
-        stbc02_SwState = pulse_h;
+        if(stbc02_sw_state_prv == stop_h)
+        {
+          CmdPulse = 0;
+          stbc02_SwState = idle;
+          HAL_GPIO_WritePin(STBC02_SW_GPIO_PORT, STBC02_SW_PIN, GPIO_PIN_RESET);
+        }
+        else
+        {
+          if(stbc02_sw_state_prv == pulse_h)
+          {
+            CmdPulse++;
+            if(CmdPulse < (uint8_t) stbc02_SwCmdSel)
+            {
+              stbc02_sw_state_prv = start;
+            }
+            else
+              __NOP();
+          }
+          stbc02_SwState = (stbc02_SwState_TypeDef) (stbc02_sw_state_prv + 1U);
+          __NOP();
+        }
       }
-      else
-      {
-        stbc02_SwState = stop_h;
-      }
-      break;
-    case pulse_h: /* Beginning of short-high pulse */
-      BC_Sw_TIM_Handle.Instance->ARR = STBC02_SW_SHORT_PULSE_US-1;
-      STBC02_SW_GPIO_PORT->BSRR = STBC02_SW_PIN; // SET
-      CmdPulse++;
-      stbc02_SwState = pulse_l;
-      break;
-    case stop_h: /* Beginning of stop-high pulse */
-      BC_Sw_TIM_Handle.Instance->ARR = STBC02_SW_STOP_PULSE_US-1;
-      STBC02_SW_GPIO_PORT->BSRR = STBC02_SW_PIN; // SET
-      stbc02_SwState = stop_l;
-      break;
-    case stop_l: /* End of sequence */
-      STBC02_SW_GPIO_PORT->BRR = STBC02_SW_PIN; // RESET
-      (void) HAL_TIM_Base_Stop_IT(&BC_Sw_TIM_Handle);
-      stbc02_SwState = idle;
       break;
     default:
       break;
+  }
+}
+
+/**
+ * @brief Measure the toggling frequency of the charging pin of the STBC02
+ * @note This function works with 1 ms as time base
+ * @retval None
+ */
+void BC_ChgPinFreqGet(void)
+{
+  if(uhCaptureIndex == 0U)
+  {
+    /* Get the 1st Input Capture value */
+    uwIC2Value1 = HAL_GetTick();
+    uhCaptureIndex = 1;
+  }
+  if(uhCaptureIndex == 1U)
+  {
+    /* Get the 2nd Input Capture value */
+    uwIC2Value2 = HAL_GetTick();
+
+    /* Capture computation */
+    if(uwIC2Value2 > uwIC2Value1)
+    {
+      uwDiffCapture = (uwIC2Value2 - uwIC2Value1);
+    }
+    else
+    {
+      uwDiffCapture = ((0xFFFFFFFFU - uwIC2Value1) + uwIC2Value2) + 1U;
+    }
+
+    if(uwDiffCapture != 0U)
+    {
+      /* Frequency computation */
+      uwFrequency = 10000U / uwDiffCapture;
+      uhCaptureIndex = 0U;
+    }
   }
 }
 
@@ -688,7 +660,7 @@ void BC_Chg_Freq2Status(void)
 {
   float freq;
   stbc02_ChgState_TypeDef ChgState;
-  freq = uwFrequency;
+  freq = (float) uwFrequency / (float) 10;
 
   if(freq > (float) 0)
   {
@@ -713,13 +685,8 @@ void BC_Chg_Freq2Status(void)
  */
 int32_t BC_Chg_TIM_Init(void)
 {
-  RCC_ClkInitTypeDef clkconfig;
-  uint32_t uwTimclock, uwAPB1Prescaler;
-  uint32_t uwPrescalerValue;
-  uint32_t pFLatency;
-
   /*##-1- Configure the TIM peripheral #######################################*/
-  /* TIM5 configuration: Input Capture mode ---------------------
+  /* TIM1 configuration: Input Capture mode ---------------------
    The external signal is connected to TIM5 CH1 (PA0)
    The Rising edge is used as active edge
    ------------------------------------------------------------ */
@@ -729,25 +696,6 @@ int32_t BC_Chg_TIM_Init(void)
   /* Set TIMx instance */
   BC_Chg_TIM_Handle.Instance = TIM5;
 
-  /* Get clock configuration */
-  HAL_RCC_GetClockConfig(&clkconfig, &pFLatency);
-
-  /* Get APB1 prescaler */
-  uwAPB1Prescaler = clkconfig.APB1CLKDivider;
-
-  /* Compute TIM clock */
-  if(uwAPB1Prescaler == RCC_HCLK_DIV1)
-  {
-    uwTimclock = HAL_RCC_GetPCLK1Freq();
-  }
-  else
-  {
-    uwTimclock = 2UL * HAL_RCC_GetPCLK1Freq();
-  }
-
-  /* Set the Tim prescaler to obtain 10kHz counting frequency (count every 0.1ms) */
-  uwPrescalerValue = (uwTimclock / BC_CHG_TIM_COUNTING_FREQ) - 1;
-
   /* Initialize TIMx peripheral as follows:
    * Period = 0xFFFF
    * Prescaler = 0
@@ -755,7 +703,7 @@ int32_t BC_Chg_TIM_Init(void)
    * Counter direction = Up
    */
   BC_Chg_TIM_Handle.Init.Period = 0xFFFF;
-  BC_Chg_TIM_Handle.Init.Prescaler = uwPrescalerValue;
+  BC_Chg_TIM_Handle.Init.Prescaler = 0;
   BC_Chg_TIM_Handle.Init.ClockDivision = 0;
   BC_Chg_TIM_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;
   BC_Chg_TIM_Handle.Init.RepetitionCounter = 0;
@@ -802,7 +750,7 @@ void BC_Chg_TIM_CaptureCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM5 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
   {
-    BSP_BC_ChgPinHasToggled(htim);
+    BSP_BC_ChgPinHasToggled();
   }
 }
 
@@ -819,7 +767,7 @@ int32_t BC_Sw_TIM_Init(void)
   uint32_t uwPrescalerValue;
   uint32_t pFLatency;
   int32_t Status = BSP_ERROR_NONE;
-//  float tim_period;
+  float period;
 
   /* Enable TIM clock */
   STBC02_SW_TIM_CLK_ENABLE();
@@ -840,15 +788,14 @@ int32_t BC_Sw_TIM_Init(void)
     uwTimclock = 2UL * HAL_RCC_GetPCLK1Freq();
   }
 
-
-  /* Set the Tim prescaler to obtain 1MHz counting frequency (count every 1us) */
-  uwPrescalerValue = (uwTimclock / BC_SW_TIM_COUNTING_FREQ) - 1U;
+  uwPrescalerValue = 0;
+  period = (float) uwTimclock / (uwPrescalerValue + 1.0f) * STBC02_SW_TIM_PERIOD - 1.0f;
 
   /* Initialize TIM peripheral */
   BC_Sw_TIM_Handle.Instance = STBC02_SW_TIM;
-  BC_Sw_TIM_Handle.Init.Period = STBC02_SW_START_PULSE_US - 1U;
+  BC_Sw_TIM_Handle.Init.Period = (uint32_t) period;
   BC_Sw_TIM_Handle.Init.Prescaler = uwPrescalerValue;
-  BC_Sw_TIM_Handle.Init.ClockDivision = 0U;
+  BC_Sw_TIM_Handle.Init.ClockDivision = 0;
   BC_Sw_TIM_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;
 
   /* STBC02_SW_TIM clock enable */

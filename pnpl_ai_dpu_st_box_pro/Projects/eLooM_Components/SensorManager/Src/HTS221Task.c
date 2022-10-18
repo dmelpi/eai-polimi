@@ -26,8 +26,8 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "hts221_reg.h"
 #include <string.h>
@@ -44,7 +44,7 @@
 #endif
 
 #ifndef HTS221_TASK_CFG_IN_QUEUE_LENGTH
-#define HTS221_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define HTS221_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #define HTS221_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -164,11 +164,6 @@ struct _HTS221Task
   TX_TIMER read_timer;
 
   /**
-   * Timer period used to schedule the read command
-   */
-  ULONG hts221_task_cfg_timer_period_ms;
-
-  /**
    * Used to update the instantaneous ODR.
    */
   double prev_timestamp;
@@ -213,10 +208,11 @@ typedef struct _HTS221TaskClass
   /**
    * HTS221Task (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } HTS221TaskClass_t;
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -305,7 +301,7 @@ static void HTS221TaskTimerCallbackFunction(ULONG timer);
  */
 void HTS221Task_EXTI_Callback(uint16_t nPin);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -448,7 +444,7 @@ static const HTS221TaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* HTS221TaskGetTempSensorIF(HTS221Task *_this)
@@ -463,9 +459,10 @@ ISourceObservable* HTS221TaskGetHumSensorIF(HTS221Task *_this)
 
 AManagedTaskEx *HTS221TaskAlloc(const void *pIRQConfig, const void *pCSConfig)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&sTaskObj.super);
 
   sTaskObj.super.vptr = &sTheClass.vtbl;
@@ -535,18 +532,18 @@ sys_error_code_t HTS221Task_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   HTS221Task *p_obj = (HTS221Task*) _this;
 
-  /* Create task specific sw resources. */
-  uint32_t item_size = (uint32_t)HTS221_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(HTS221_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  // Create task specific sw resources.
+  uint16_t nItemSize = HTS221_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(HTS221_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "HTS221_Q", item_size / 4u, p_queue_items_buff,
-                                    HTS221_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "HTS221_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    HTS221_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
@@ -571,7 +568,7 @@ sys_error_code_t HTS221Task_vtblOnCreateTask(
   /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
   if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(HTS221_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, HTS221_SPI_AUTO_INC);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(HTS221_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, HTS221_SPI_AUTO_INC);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -593,8 +590,9 @@ sys_error_code_t HTS221Task_vtblOnCreateTask(
     return res;
   }
 
-  /* Initialize the EventSrc interface, take the ownership of the interface. */
-  p_obj->p_temp_event_src = DataEventSrcAlloc();
+  // Initialize the EventSrc interface.
+  // take the ownership of the interface.
+  p_obj->p_temp_event_src = SensorEventSrcAlloc();
   if(p_obj->p_temp_event_src == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -603,7 +601,7 @@ sys_error_code_t HTS221Task_vtblOnCreateTask(
   }
   IEventSrcInit(p_obj->p_temp_event_src);
 
-  p_obj->p_hum_event_src = DataEventSrcAlloc();
+  p_obj->p_hum_event_src = SensorEventSrcAlloc();
   if(p_obj->p_hum_event_src == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -695,8 +693,8 @@ sys_error_code_t HTS221Task_vtblDoEnterPowerMode(AManagedTask *_this, const EPow
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = HTS221TaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -706,7 +704,7 @@ sys_error_code_t HTS221Task_vtblDoEnterPowerMode(AManagedTask *_this, const EPow
     {
       HTS221TaskConfigureIrqPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -771,12 +769,12 @@ sys_error_code_t HTS221Task_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerMo
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -837,7 +835,7 @@ sys_error_code_t HTS221Task_vtblTempGetODR(ISourceObservable *_this, float *p_me
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -895,7 +893,7 @@ sys_error_code_t HTS221Task_vtblHumGetODR(ISourceObservable *_this, float *p_mea
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -1106,7 +1104,7 @@ SensorStatus_t HTS221Task_vtblHumGetStatus(ISensor_t *_this)
   return p_if_owner->hum_sensor_status;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t HTS221TaskExecuteStepState1(AManagedTask *_this)
@@ -1149,7 +1147,7 @@ static sys_error_code_t HTS221TaskExecuteStepState1(AManagedTask *_this)
               res = HTS221TaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1160,7 +1158,7 @@ static sys_error_code_t HTS221TaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1201,7 +1199,8 @@ static sys_error_code_t HTS221TaskExecuteStepDatalog(AManagedTask *_this)
 //      SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("HTS221: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
-            if(TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(p_obj->hts221_task_cfg_timer_period_ms), AMT_MS_TO_TICKS(p_obj->hts221_task_cfg_timer_period_ms)))
+          if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(HTS221_TASK_CFG_TIMER_PERIOD_MS),
+                                            AMT_MS_TO_TICKS(HTS221_TASK_CFG_TIMER_PERIOD_MS)))
             {
               return SYS_UNDEFINED_ERROR_CODE;
             }
@@ -1217,22 +1216,38 @@ static sys_error_code_t HTS221TaskExecuteStepDatalog(AManagedTask *_this)
 
             if(p_obj->temp_sensor_status.IsActive)
             {
-              EMData_t data;
-              EMD_Init(&data, (uint8_t*)&p_obj->p_sensor_data_buff[0], E_EM_FLOAT, E_EM_MODE_LINEAR, 1, 1);
+              SensorEvent evt;
 
-              DataEvent_t evt;
+              AI_SP_Stream_t stream =
+              {
+                  .packet.payload = (uint8_t*) p_obj->p_sensor_data_buff,
+                  .packet.payload_fmt = AI_SP_FMT_FLOAT32_RESET(),
+                  .mode = AI_SP_MODE_FULL //TODO: STF - this means that data are interleaved?!?
+                  // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                  // (can I represent anomogeneous matrix [4*4] with this data format ?
+                  };
+              ai_logging_create_shape_0d(&stream.packet.shape);
+              stream.packet.payload_size = 4 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-              DataEventInit((IEvent*)&evt, p_obj->p_temp_event_src, &data, timestamp, p_obj->temp_id);
+              SensorEventInit((IEvent*) &evt, p_obj->p_temp_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->temp_id);
               IEventSrcSendEvent(p_obj->p_temp_event_src, (IEvent*) &evt, NULL);
             }
             if(p_obj->hum_sensor_status.IsActive)
             {
-              EMData_t data;
-              EMD_Init(&data, (uint8_t*)&p_obj->p_sensor_data_buff[1], E_EM_FLOAT, E_EM_MODE_LINEAR, 1, 1);
+              SensorEvent evt;
 
-              DataEvent_t evt;
+              AI_SP_Stream_t stream =
+              {
+                  .packet.payload = (uint8_t*) &p_obj->p_sensor_data_buff[1],
+                  .packet.payload_fmt = AI_SP_FMT_FLOAT32_RESET(),
+                  .mode = AI_SP_MODE_FULL //TODO: STF - this means that data are interleaved?!?
+                  // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                  // (can I represent anomogeneous matrix [4*4] with this data format ?
+                  };
+              ai_logging_create_shape_0d(&stream.packet.shape);
+              stream.packet.payload_size = 4 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-              DataEventInit((IEvent*)&evt, p_obj->p_hum_event_src, &data, timestamp, p_obj->hum_id);
+              SensorEventInit((IEvent*) &evt, p_obj->p_hum_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->hum_id);
               IEventSrcSendEvent(p_obj->p_hum_event_src, (IEvent*) &evt, NULL);
             }
 
@@ -1285,7 +1300,7 @@ static sys_error_code_t HTS221TaskExecuteStepDatalog(AManagedTask *_this)
               res = HTS221TaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1295,7 +1310,7 @@ static sys_error_code_t HTS221TaskExecuteStepDatalog(AManagedTask *_this)
           break;
         }
       default:
-        /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1434,17 +1449,14 @@ static sys_error_code_t HTS221TaskSensorInit(HTS221Task *_this)
   if(hts221_odr < 2.0f)
   {
     hts221_data_rate_set(p_sensor_drv, HTS221_ODR_1Hz);
-    _this->hts221_task_cfg_timer_period_ms = 1000;
   }
   else if(hts221_odr < 8.0f)
   {
     hts221_data_rate_set(p_sensor_drv, HTS221_ODR_7Hz);
-    _this->hts221_task_cfg_timer_period_ms = 140;
   }
   else
   {
     hts221_data_rate_set(p_sensor_drv, HTS221_ODR_12Hz5);
-    _this->hts221_task_cfg_timer_period_ms = 80;
   }
 
   /* Get calibration values (only first time) */
@@ -1533,7 +1545,7 @@ static sys_error_code_t HTS221TaskSensorInitTaskParams(HTS221Task *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* TEMPERATURE SENSOR STATUS */
-  _this->temp_sensor_status.DataType = E_EM_FLOAT;
+  _this->temp_sensor_status.DataType = DATA_TYPE_FLOAT;
   _this->temp_sensor_status.Dimensions = 1;
   _this->temp_sensor_status.IsActive = TRUE;
   _this->temp_sensor_status.FS = 120.0f;
@@ -1549,7 +1561,7 @@ static sys_error_code_t HTS221TaskSensorInitTaskParams(HTS221Task *_this)
 #endif
 
   /* HUMIDITY SENSOR STATUS */
-  _this->hum_sensor_status.DataType = E_EM_FLOAT;
+  _this->hum_sensor_status.DataType = DATA_TYPE_FLOAT;
   _this->hum_sensor_status.Dimensions = 1;
   _this->hum_sensor_status.IsActive = TRUE;
   _this->hum_sensor_status.FS = 100.0f;
@@ -1779,7 +1791,7 @@ static void HTS221TaskTimerCallbackFunction(ULONG timer)
   //}
 }
 
-/* CubeMX integration */
+// CubeMX integration
 // ******************
 
 void HTS221Task_EXTI_Callback(uint16_t nPin)
@@ -1793,7 +1805,7 @@ void HTS221Task_EXTI_Callback(uint16_t nPin)
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }

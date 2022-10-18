@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_TimeDomainAlarmSpeed_RMS_Status.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   Add BLE Time Domain Alarm Speed RMS Status info services using vendor
   *          specific profiles.
   ******************************************************************************
@@ -28,7 +28,6 @@
 #define COPY_TD_ALARM_SPEED_RMS_STATUS_CHAR_UUID(uuid_struct) COPY_UUID_128(uuid_struct,0x00,0x00,0x00,0x07,0x00,0x02,0x11,0xe1,0xac,0x36,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 
 /* Exported variables --------------------------------------------------------*/
-CustomNotifyEventTD_AlarmSpeed_RMS_Status_t CustomNotifyEventTD_AlarmSpeed_RMS_Status= NULL;
 
 /* Private variables ---------------------------------------------------------*/
 /* Data structure pointer for Time Domain Alarm Speed RMS Status info service */

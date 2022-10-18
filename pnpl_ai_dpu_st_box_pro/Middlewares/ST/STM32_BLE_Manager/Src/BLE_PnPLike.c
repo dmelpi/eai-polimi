@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_PnPLike.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.0.0
+  * @date    03-May-2022
   * @brief   Add PnPLike info services using vendor specific profile.
   ******************************************************************************
   * @attention
@@ -29,7 +29,7 @@
 /* Exported Variables ------------------------------------------------------- */
 /* Identifies the notification Events */
 CustomNotifyEventPnPLike_t CustomNotifyEventPnPLike = NULL;
-CustomWriteRequestPnPLike_t CustomWriteRequestPnPLike=NULL;
+CustomWriteRequestPnPLikeFunction CustomWriteRequestPnPLikeFunctionPointer;
 
 /* Private variables ---------------------------------------------------------*/
 /* Data structure pointer for PnPLike info service */
@@ -65,13 +65,23 @@ BleCharTypeDef* BLE_InitPnPLikeService(void)
   BleCharPointer->Enc_Key_Size = 16;
   BleCharPointer->Is_Variable = 1;
 
-  if(CustomWriteRequestPnPLike == NULL) {
+  if(CustomWriteRequestPnPLikeFunctionPointer == NULL) {
     BLE_MANAGER_PRINTF("Error: Write request PnPLike function not defined\r\n");
   }
 
   BLE_MANAGER_PRINTF("BLE PnPLike features ok\r\n");
   
   return BleCharPointer;
+}
+
+/**
+ * @brief  Setting PnPLike Advertise Data
+ * @param  uint8_t *manuf_data: Advertise Data
+ * @retval None
+ */
+void BLE_SetPnPLikeAdvertiseData(uint8_t *manuf_data)
+{
+  /* Setting PnPLike Advertise Data */
 }
 
 /**
@@ -137,18 +147,18 @@ static void Write_Request_PnPLike(void *BleCharPointer,uint16_t handle, uint16_t
 {
   uint32_t CommandBufLen=0;
 
-  if(CustomWriteRequestPnPLike != NULL)
+  if(CustomWriteRequestPnPLikeFunctionPointer != NULL)
   {
      CommandBufLen = BLE_Command_TP_Parse(&ble_command_buffer, att_data, data_length);
 
      if(CommandBufLen>0)
      {
-       CustomWriteRequestPnPLike(ble_command_buffer, CommandBufLen);
+       CustomWriteRequestPnPLikeFunctionPointer(ble_command_buffer, CommandBufLen);
      }
   }
   else
   {
-    BLE_MANAGER_PRINTF("\r\n\nWrite request PnPLike function not defined\r\n\n");
+    BLE_MANAGER_PRINTF("\r\n\nRead request PnPLike function not defined\r\n\n");
   }
 }
 

@@ -64,33 +64,33 @@ ABusIF *I2CBusIFAlloc(uint8_t nWhoAmI, uint8_t nAddress, uint8_t nAutoInc)
 sys_error_code_t I2CBusIFWaitIOComplete(I2CBusIF *_this)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   // if (_this->m_xSyncObj != NULL){//TODO: STF.Port - how to check the sem is initialized ??
   if (TX_SUCCESS != tx_semaphore_get(&_this->m_xSyncObj, TX_WAIT_FOREVER))
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_UNDEFINED_ERROR_CODE);
-    res = SYS_UNDEFINED_ERROR_CODE;
+    xRes = SYS_UNDEFINED_ERROR_CODE;
   }
   // }
 
-  return res;
+  return xRes;
 }
 
 sys_error_code_t I2CBusIFNotifyIOComplete(I2CBusIF *_this)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   // if (_this->m_xSyncObj != NULL){//TODO: STF.Port - how to check the sem is initialized ??
   if (TX_SUCCESS != tx_semaphore_put(&_this->m_xSyncObj))
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_UNDEFINED_ERROR_CODE);
-    res = SYS_UNDEFINED_ERROR_CODE;
+    xRes = SYS_UNDEFINED_ERROR_CODE;
   }
 //  }
 
-  return res;
+  return xRes;
 }
 
 // Private functions definition

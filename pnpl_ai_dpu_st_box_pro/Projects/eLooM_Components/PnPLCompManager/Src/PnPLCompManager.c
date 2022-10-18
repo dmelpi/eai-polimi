@@ -23,13 +23,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
+#include "services/sysdebug.h"
+#define SYS_DEBUGF(level, message)      SYS_DEBUGF3(SYS_DBG_AI, level, message)
 
 static PnPLCompManager_t spPnPLObj =
 {
   0
 };
-
-static char global_uuid[37]; // UUID: 8 + "-" + 4 + "-" + 4 + "-" + 4 + "-" 12 = 36char + \0
 
 
 #ifndef BOARD_ID
@@ -84,13 +86,6 @@ void PnPLGenerateAcquisitionUUID(char *uuid)
   uuid += sprintf(uuid, "%04lx-%04lx-", (UUID[1] >> 16) & 0xFFFF, UUID[1] & 0xFFFF);
   uuid += sprintf(uuid, "%04lx-%04lx", (UUID[2] >> 16) & 0xFFFF, UUID[2] & 0xFFFF);
   uuid += sprintf(uuid, "%08lx", UUID[3]);
-
-  uint8_t index = 0;
-  index += sprintf(&global_uuid[index], "%08lx-", UUID[0]);
-  index += sprintf(&global_uuid[index], "%04lx-%04lx-", (UUID[1] >> 16) & 0xFFFF, UUID[1] & 0xFFFF);
-  index += sprintf(&global_uuid[index], "%04lx-%04lx", (UUID[2] >> 16) & 0xFFFF, UUID[2] & 0xFFFF);
-  index += sprintf(&global_uuid[index], "%08lx", UUID[3]);
-
 }
 
 uint8_t PnPLAddComponent(IPnPLComponent_t *pComponent)
@@ -125,7 +120,9 @@ uint16_t PnPLGetNComponents(void)
 
 uint16_t PnPLGetComponentsNames(char **components_names)
 {
+
   IPnPLComponent_t *p_obj;
+
 
   for (uint16_t i = 0; i<spPnPLObj.n_components; i++)
   {
@@ -135,55 +132,6 @@ uint16_t PnPLGetComponentsNames(char **components_names)
 
   return spPnPLObj.n_components;
 }
-
-uint8_t PnPLGetComponentValue(char *comp_name, char **SerializedJSON, uint32_t *size, uint8_t pretty)
-{
-  JSON_Object *JSON_CompObject;
-  JSON_Value *tempJSON;
-  JSON_Value *tempJSON_noKey;
-  char *comp_string = NULL;;
-  uint8_t comp_found = 0;
-
-  for (uint8_t i = 0; i < PnPLGetNComponents(); i++)
-  {
-    IPnPLComponent_t *p_obj = (IPnPLComponent_t *)(spPnPLObj.Components[i]);
-    if (strcmp(comp_name, IPnPLComponentGetKey(p_obj)) == 0)
-    {
-      IPnPLComponentGetStatus(p_obj, &comp_string, size, pretty);
-
-      tempJSON = json_parse_string(comp_string);
-      JSON_CompObject = json_object(tempJSON);
-      tempJSON_noKey = json_object_get_value(JSON_CompObject, comp_name);
-
-      /* convert to a json string and write to file */
-      if (pretty == 1)
-      {
-        *SerializedJSON = json_serialize_to_string_pretty(tempJSON_noKey);
-        *size = json_serialization_size_pretty(tempJSON_noKey);
-      }
-      else
-      {
-        *SerializedJSON = json_serialize_to_string(tempJSON_noKey);
-        *size = json_serialization_size(tempJSON_noKey);
-      }
-
-      comp_found = 1;
-
-      json_free_serialized_string(comp_string);
-      json_value_free(tempJSON);
-
-      break;
-    }
-  }
-
-  if (comp_found > 0)
-  {
-    return PNPL_CMD_NO_ERROR_CODE;
-  }
-
-  return PNPL_CMD_ERROR_CODE;
-}
-
 
 uint8_t PnPLGetPresentationJSON(char **serializedJSON, uint32_t *size)
 {
@@ -224,10 +172,14 @@ uint8_t PnPLGetDeviceStatusJSON(char **serializedJSON, uint32_t *size, uint8_t p
   tempJSON = json_value_init_object();
   JSON_DeviceConfig = json_value_get_object(tempJSON);
 
-
+  /*
+  "board_id":0,
+  "fw_id":0,
+  "sn":"3270366B3139",
+  "uuid":"62d7d7da-9030-11ec-a78f-1098c361c94d"
+  */
   /*{
-      "schema_version": "2.0.0",                 (Reference to the schema version adopted.)
-      "uuid" : "<uuid-of-the-acquisition>",      (Unique identifier of an acquisition.)​
+   *  "schema_version": "2.0.0",                 (Reference to the schema version adopted.)​
       "devices":[​
           {​
               "board_id": <board_id>,            (Unique identifier of a board type, according to Vespucci catalogs.)​
@@ -244,14 +196,15 @@ uint8_t PnPLGetDeviceStatusJSON(char **serializedJSON, uint32_t *size, uint8_t p
                   }​
               ]​
           }​
-      ],​​
+      ],​
+      "uuid" : "<uuid-of-the-acquisition>",      (Unique identifier of an acquisition.)​
   }*/
 
   json_object_dotset_string(JSON_DeviceConfig, "schema_version", "2.0.0");
   //char uuid[37];
   //PnPLGenerateAcquisitionUUID(uuid);
   //json_object_dotset_string(JSON_Device, "uuid", uuid);
-  json_object_dotset_string(JSON_DeviceConfig, "uuid", global_uuid);
+  json_object_dotset_string(JSON_DeviceConfig, "uuid", "");
 
   tempJSONDevice = json_value_init_object();
   JSON_Device = json_value_get_object(tempJSONDevice);
@@ -317,10 +270,14 @@ uint8_t PnPLGetFilteredDeviceStatusJSON(char **serializedJSON, uint32_t *size, c
    tempJSON = json_value_init_object();
    JSON_DeviceConfig = json_value_get_object(tempJSON);
 
-
+   /*
+   "board_id":0,
+   "fw_id":0,
+   "sn":"3270366B3139",
+   "uuid":"62d7d7da-9030-11ec-a78f-1098c361c94d"
+   */
    /*{
-       "schema_version": "2.0.0",                 (Reference to the schema version adopted.)
-       "uuid" : "<uuid-of-the-acquisition>",      (Unique identifier of an acquisition.)​
+    *  "schema_version": "2.0.0",                 (Reference to the schema version adopted.)​
        "devices":[​
            {​
                "board_id": <board_id>,            (Unique identifier of a board type, according to Vespucci catalogs.)​
@@ -338,14 +295,14 @@ uint8_t PnPLGetFilteredDeviceStatusJSON(char **serializedJSON, uint32_t *size, c
                ]​
            }​
        ],​
-       ​
+       "uuid" : "<uuid-of-the-acquisition>",      (Unique identifier of an acquisition.)​
    }*/
 
    json_object_dotset_string(JSON_DeviceConfig, "schema_version", "2.0.0");
    //char uuid[37];
    //PnPLGenerateAcquisitionUUID(uuid);
    //json_object_dotset_string(JSON_Device, "uuid", uuid);
-   json_object_dotset_string(JSON_DeviceConfig, "uuid", global_uuid);
+   json_object_dotset_string(JSON_DeviceConfig, "uuid", "");
 
    tempJSONDevice = json_value_init_object();
    JSON_Device = json_value_get_object(tempJSONDevice);
@@ -434,6 +391,7 @@ uint8_t PnPLUpdateDeviceStatusFromJSON(char *serializedJSON)
         component_value = json_object_get_value(component, componentName);
         char *comp_string = json_serialize_to_string(json_value_get_parent(component_value));
         IPnPLComponentSetProperty(p_obj, comp_string);
+        json_value_free(component_value);
         json_free_serialized_string(comp_string);
         break;
       }
@@ -637,6 +595,8 @@ uint8_t PnPLSerializeTelemetry(char *compName, PnPLTelemetry_t *telemetryValue, 
   tempJSON = json_value_init_object();
   JSON_Telemetry = json_value_get_object(tempJSON);
 
+  //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[PnPLSerializeTelemetry()] label_id: %d, accuracy: %f.\r\n", (int) *((int*) telemetryValue[0].telemetry_value), (float) *((float*) telemetryValue[1].telemetry_value)));
+
   for(uint8_t i = 0; i < telemetryNum; i++)
   {
     char dotStr[(COMP_KEY_MAX_LENGTH * 2) + 1];
@@ -649,19 +609,37 @@ uint8_t PnPLSerializeTelemetry(char *compName, PnPLTelemetry_t *telemetryValue, 
       switch(telemetry_type)
       {
         case PNPL_INT:
+        {
           json_object_dotset_number(JSON_Telemetry, dotStr, *(int*)(telemetryValue[i].telemetry_value));
           break;
+        }
         case PNPL_FLOAT:
+        {
+          /*
+          float f = *(float*) (telemetryValue[i].telemetry_value);
+          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("f: %f.\r\n", f));
+          f = (float) (((float) ((uint32_t) (1e2 * f))) * 1e-2);
+          //f = roundf(f * 100) / 100;
+          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("f: %f.\r\n", f));
+          json_object_dotset_number(JSON_Telemetry, dotStr, f);
+          */
           json_object_dotset_number(JSON_Telemetry, dotStr, *(float*) (telemetryValue[i].telemetry_value));
           break;
+        }
         case PNPL_STRING:
+        {
           json_object_dotset_string(JSON_Telemetry, dotStr, (const char*) telemetryValue[i].telemetry_value);
           break;
+        }
         case PNPL_BOOLEAN:
+        {
           json_object_dotset_boolean(JSON_Telemetry, dotStr, *(bool*) (telemetryValue[i].telemetry_value));
           break;
+        }
         default:
+        {
           break;
+        }
       }
     }
     else

@@ -71,37 +71,37 @@ struct _ISensor_t
 // Inline functions definition
 // ***************************
 
-static inline sys_error_code_t ISensorSetODR(ISensor_t *_this, float ODR)
+inline sys_error_code_t ISensorSetODR(ISensor_t *_this, float ODR)
 {
   return _this->vptr->SensorSetODR(_this, ODR);
 }
 
-static inline sys_error_code_t ISensorSetFS(ISensor_t *_this, float FS)
+inline sys_error_code_t ISensorSetFS(ISensor_t *_this, float FS)
 {
   return _this->vptr->SensorSetFS(_this, FS);
 }
 
-static inline sys_error_code_t ISensorEnable(ISensor_t *_this)
+inline sys_error_code_t ISensorEnable(ISensor_t *_this)
 {
   return _this->vptr->SensorEnable(_this);
 }
 
-static inline sys_error_code_t ISensorDisable(ISensor_t *_this)
+inline sys_error_code_t ISensorDisable(ISensor_t *_this)
 {
   return _this->vptr->SensorDisable(_this);
 }
 
-static inline boolean_t ISensorIsEnabled(ISensor_t *_this)
+inline boolean_t ISensorIsEnabled(ISensor_t *_this)
 {
   return _this->vptr->SensorIsEnabled(_this);
 }
 
-static inline SensorDescriptor_t ISensorGetDescription(ISensor_t *_this)
+inline SensorDescriptor_t ISensorGetDescription(ISensor_t *_this)
 {
   return _this->vptr->SensorGetDescription(_this);
 }
 
-static inline SensorStatus_t ISensorGetStatus(ISensor_t *_this)
+inline SensorStatus_t ISensorGetStatus(ISensor_t *_this)
 {
   return _this->vptr->SensorGetStatus(_this);
 }

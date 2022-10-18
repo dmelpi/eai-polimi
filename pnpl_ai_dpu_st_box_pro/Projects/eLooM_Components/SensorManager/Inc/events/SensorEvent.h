@@ -31,7 +31,7 @@ extern "C" {
 
 
 #include "events/IEvent.h"
-#include "services/em_data_format.h"
+#include "features_extraction_if.h"
 
 
 /**
@@ -52,8 +52,9 @@ struct _SensorEvent
 
   /**
     * Specify the sensor data normalized according to the internal data format.
+    * Size of the pData buffer.
     */
-  const EMData_t *p_data;
+  const ai_logging_packet_t   *stream;
 
   /**
     * Timestamp
@@ -63,7 +64,7 @@ struct _SensorEvent
   /**
     * Specifies the sensor ID.
     */
-  uint16_t sensor_id;
+  uint16_t nSensorID;
 };
 
 
@@ -88,22 +89,24 @@ struct _SensorEvent
   * @param nSubSensorID [IN] specifies the ID of the subsensor.
   * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
   */
-static inline sys_error_code_t SensorEventInit(IEvent *_this, const IEventSrc *pSource, const EMData_t *p_data, double timestamp, uint16_t sensor_id);
+static inline sys_error_code_t SensorEventInit(IEvent *_this, const IEventSrc *pSource,
+                                               const ai_logging_packet_t   *stream, double fTimeStamp, uint16_t nSensorID);
 
 
 // Inline functions definition
 // ***************************
 
 SYS_DEFINE_STATIC_INLINE
-sys_error_code_t SensorEventInit(IEvent *_this, const IEventSrc *pSource, const EMData_t *p_data, double timestamp, uint16_t sensor_id)
+sys_error_code_t SensorEventInit(IEvent *_this, const IEventSrc *pSource, const ai_logging_packet_t   *stream,
+                                 double fTimeStamp, uint16_t nSensorID)
 {
-  assert_param(_this != NULL);
-  SensorEvent *p_obj = (SensorEvent *)_this;
+  assert_param(_this);
+  SensorEvent *pObj = (SensorEvent *)_this;
 
   IEventInit(_this, pSource);
-  p_obj->p_data = p_data;
-  p_obj->fTimeStamp = timestamp;
-  p_obj->sensor_id = sensor_id;
+  pObj->stream = stream;
+  pObj->fTimeStamp = fTimeStamp;
+  pObj->nSensorID = nSensorID;
 
   return SYS_NO_ERROR_CODE;
 }

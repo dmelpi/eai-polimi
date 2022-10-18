@@ -53,7 +53,7 @@ bool SIHasNext(SIterator_t *_this)
 {
   assert_param(_this != NULL);
 
-  return (_this->sensor_idx < _this->sensors_count) ? true : false;
+  return _this->sensor_idx < _this->sensors_count ? true : false;
 }
 
 uint16_t SINext(SIterator_t *_this)

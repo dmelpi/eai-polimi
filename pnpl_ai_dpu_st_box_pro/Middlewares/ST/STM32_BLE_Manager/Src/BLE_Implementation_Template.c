@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_Implementation_Template.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   BLE Implementation template file.
   *          This file should be copied to the application folder and renamed
   *          to BLE_Implementation.c.
@@ -298,12 +298,7 @@ void BluetoothInit(void)
   BLE_StackValue.AdvIntervalMin= CFG_FAST_CONN_ADV_INTERVAL_MIN;
   BLE_StackValue.AdvIntervalMax= CFG_FAST_CONN_ADV_INTERVAL_MAX;
   
-#ifdef BLUE_WB
-  /* When using OTA, it is mandatory to set OwnAddressType to PUBLIC_ADDR */
-  BLE_StackValue.OwnAddressType = PUBLIC_ADDR;
-#else //BLUE_WB
   BLE_StackValue.OwnAddressType = RANDOM_ADDR;
-#endif //BLUE_WB
 
   /* To set the TX power level of the bluetooth device ( -2,1 dBm )*/
   BLE_StackValue.EnableHighPowerMode= 1; /*  High Power */

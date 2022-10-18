@@ -29,8 +29,8 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "iis2iclx_reg.h"
 #include <string.h>
@@ -45,7 +45,7 @@
 #endif
 
 #ifndef IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH
-#define IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #define IIS2ICLX_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -146,11 +146,6 @@ struct _IIS2ICLXTask
   TX_TIMER read_timer;
 
   /**
-   * Timer period used to schedule the read command
-   */
-  ULONG iis2iclx_task_cfg_timer_period_ms;
-
-  /**
    * Used to update the instantaneous ODR.
    */
   double prev_timestamp;
@@ -179,10 +174,11 @@ typedef struct _IIS2ICLXTaskClass
   /**
    * IIS2ICLXTask (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } IIS2ICLXTaskClass_t;
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -263,7 +259,7 @@ static void IIS2ICLXTaskTimerCallbackFunction(ULONG timer);
  */
 void IIS2ICLXTask_EXTI_Callback(uint16_t nPin);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -372,7 +368,7 @@ static const IIS2ICLXTaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* IIS2ICLXTaskGetAccSensorIF(IIS2ICLXTask *_this)
@@ -446,19 +442,19 @@ sys_error_code_t IIS2ICLXTask_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   IIS2ICLXTask *p_obj = (IIS2ICLXTask*) _this;
 
-  /* Create task specific sw resources. */
+  // Create task specific sw resources.
 
-  uint32_t item_size = (uint32_t)IIS2ICLX_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  uint16_t nItemSize = IIS2ICLX_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS2ICLX_Q", item_size / 4, p_queue_items_buff,
-                                    IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS2ICLX_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    IIS2ICLX_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
@@ -483,7 +479,7 @@ sys_error_code_t IIS2ICLXTask_vtblOnCreateTask(
   /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
   if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS2ICLX_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, 0);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS2ICLX_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -504,8 +500,8 @@ sys_error_code_t IIS2ICLXTask_vtblOnCreateTask(
   {
     return res;
   }
-  /* Initialize the EventSrc interface */
-  p_obj->p_event_src = DataEventSrcAlloc();
+  // Initialize the EventSrc interface.
+  p_obj->p_event_src = SensorEventSrcAlloc();
   if(p_obj->p_event_src == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -595,8 +591,8 @@ sys_error_code_t IIS2ICLXTask_vtblDoEnterPowerMode(AManagedTask *_this, const EP
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = IIS2ICLXTaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -606,7 +602,7 @@ sys_error_code_t IIS2ICLXTask_vtblDoEnterPowerMode(AManagedTask *_this, const EP
     {
       IIS2ICLXTaskConfigureIrqPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -671,12 +667,12 @@ sys_error_code_t IIS2ICLXTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPower
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -722,7 +718,7 @@ sys_error_code_t IIS2ICLXTask_vtblAccGetODR(ISourceObservable *_this, float *p_m
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -917,7 +913,7 @@ SensorStatus_t IIS2ICLXTask_vtblSensorGetStatus(ISensor_t *_this)
   return p_if_owner->acc_sensor_status;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t IIS2ICLXTaskExecuteStepState1(AManagedTask *_this)
@@ -960,7 +956,7 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepState1(AManagedTask *_this)
               res = IIS2ICLXTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -971,7 +967,7 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1012,7 +1008,8 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepDatalog(AManagedTask *_this)
 //        SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IIS2ICLX: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
-            if(TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(p_obj->iis2iclx_task_cfg_timer_period_ms), AMT_MS_TO_TICKS(p_obj->iis2iclx_task_cfg_timer_period_ms)))
+          if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(IIS2ICLX_TASK_CFG_TIMER_PERIOD_MS),
+                                            AMT_MS_TO_TICKS(IIS2ICLX_TASK_CFG_TIMER_PERIOD_MS)))
             {
               return SYS_UNDEFINED_ERROR_CODE;
             }
@@ -1027,19 +1024,21 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-            /* Create a bidimensional data interleaved [m x 2], m is the number of samples in the sensor queue (samples_per_it):
-             * [X0, Y0]
-             * [X1, Y1]
-             * ...
-             * [Xm-1, Ym-1]
-             */
-            EMData_t data;
-            EMD_Init(&data, p_obj->p_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->samples_per_it, p_obj->acc_sensor_status.Dimensions);
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = p_obj->p_sensor_data_buff,
+                .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN //TODO: STF - this means that data are interleaved?!?
+                // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
+            ai_logging_create_shape_2d(&stream.packet.shape, 2, p_obj->samples_per_it);
+            stream.packet.payload_size = 2 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-            DataEvent_t evt;
-
-            DataEventInit((IEvent*)&evt, p_obj->p_event_src, &data, timestamp, p_obj->acc_id);
+            SensorEvent evt;
+            SensorEventInit((IEvent*) &evt, p_obj->p_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->acc_id);
             IEventSrcSendEvent(p_obj->p_event_src, (IEvent*) &evt, NULL);
+
             /* update measuredODR */
             p_obj->acc_sensor_status.MeasuredODR = p_obj->samples_per_it / delta_timestamp;
 
@@ -1088,7 +1087,7 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepDatalog(AManagedTask *_this)
               res = IIS2ICLXTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1098,7 +1097,7 @@ static sys_error_code_t IIS2ICLXTaskExecuteStepDatalog(AManagedTask *_this)
           break;
         }
       default:
-        /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1170,6 +1169,7 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
 
   uint8_t reg0 = 0;
   int32_t ret_val = 0;
+  uint16_t iis2iclx_wtm_level = 0;
   iis2iclx_odr_xl_t iis2iclx_odr_xl = IIS2ICLX_XL_ODR_OFF;
   iis2iclx_bdr_xl_t iis2iclx_bdr_xl = IIS2ICLX_XL_NOT_BATCHED;
 
@@ -1182,9 +1182,6 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
   {
     iis2iclx_reset_get(p_sensor_drv, &reg0);
   } while (reg0);
-
-  /*Disable the I2C interface */
-  iis2iclx_i2c_interface_set(p_sensor_drv, IIS2ICLX_I2C_DISABLE);
 
   ret_val = iis2iclx_device_id_get(p_sensor_drv, (uint8_t*) &reg0);
   if(!ret_val)
@@ -1204,43 +1201,36 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_12Hz5;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_12Hz5;
-    _this->iis2iclx_task_cfg_timer_period_ms = 80;
   }
   else if(_this->acc_sensor_status.ODR < 27.0f)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_26Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_26Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 40;
   }
   else if(_this->acc_sensor_status.ODR < 53.0f)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_52Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_52Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 20;
   }
   else if(_this->acc_sensor_status.ODR < 105.0f)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_104Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_104Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 10;
   }
   else if(_this->acc_sensor_status.ODR < 209.0f)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_208Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_208Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 5;
   }
   else if(_this->acc_sensor_status.ODR < 417.0f)
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_416Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_417Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 5;
   }
   else
   {
     iis2iclx_odr_xl = IIS2ICLX_XL_ODR_833Hz;
     iis2iclx_bdr_xl = IIS2ICLX_XL_BATCHED_AT_833Hz;
-    _this->iis2iclx_task_cfg_timer_period_ms = 5;
   }
 
   /*Set full scale*/
@@ -1272,9 +1262,6 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
     iis2iclx_fifo_xl_batch_set(p_sensor_drv, IIS2ICLX_XL_NOT_BATCHED);
   }
 
-#if IIS2ICLX_FIFO_ENABLED
-  uint16_t iis2iclx_wtm_level = 0;
-
   /* Calculation of watermark and samples per int*/
   iis2iclx_wtm_level = ((uint16_t) _this->acc_sensor_status.ODR * (uint16_t) IIS2ICLX_MAX_DRDY_PERIOD);
   if(iis2iclx_wtm_level > IIS2ICLX_MAX_WTM_LEVEL)
@@ -1288,7 +1275,8 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
 
   _this->samples_per_it = iis2iclx_wtm_level;
 
-  /* Set fifo in continuous / stream mode*/
+  /*Disable the I2C interfacer and set fifo in continuous / stream mode*/
+  iis2iclx_i2c_interface_set(p_sensor_drv, IIS2ICLX_I2C_DISABLE);
   iis2iclx_fifo_mode_set(p_sensor_drv, IIS2ICLX_STREAM_MODE);
 
   /* Setup int for FIFO */
@@ -1302,18 +1290,9 @@ static sys_error_code_t IIS2ICLXTaskSensorInit(IIS2ICLXTask *_this)
   {
     int1_route.int1_ctrl.int1_fifo_th = 0;
   }
-#else
-  _this->samples_per_it = 1;
-  if(_this->pIRQConfig != NULL)
-  {
-    int1_route.int1_ctrl.int1_drdy_xl = 1;
-  }
-  else
-  {
-    int1_route.int1_ctrl.int1_drdy_xl = 0;
-  }
-#endif /* IIS2ICLX_FIFO_ENABLED */
   iis2iclx_pin_int1_route_set(p_sensor_drv, &int1_route);
+
+  iis2iclx_fifo_mode_set(p_sensor_drv, IIS2ICLX_STREAM_MODE);
 
   return res;
 }
@@ -1324,7 +1303,6 @@ static sys_error_code_t IIS2ICLXTaskSensorReadData(IIS2ICLXTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   stmdev_ctx_t *p_sensor_drv = (stmdev_ctx_t*) &_this->p_sensor_bus_if->m_xConnector;
 
-#if IIS2ICLX_FIFO_ENABLED
   uint8_t reg[2];
   uint16_t fifo_level = 0;
   uint16_t i;
@@ -1365,10 +1343,6 @@ static sys_error_code_t IIS2ICLXTaskSensorReadData(IIS2ICLXTask *_this)
     res = SYS_BASE_ERROR_CODE;
   }
 
-#else
-  iis2iclx_read_reg(p_sensor_drv, IIS2ICLX_OUTX_L_A, (uint8_t*) _this->p_sensor_data_buff, _this->samples_per_it * 4);
-#endif /* IIS2ICLX_FIFO_ENABLED */
-
   return res;
 }
 
@@ -1389,13 +1363,20 @@ static sys_error_code_t IIS2ICLXTaskSensorInitTaskParams(IIS2ICLXTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* ACCELEROMETER SENSOR STATUS */
-  _this->acc_sensor_status.DataType = E_EM_INT16;
+  _this->acc_sensor_status.DataType = DATA_TYPE_INT16;
   _this->acc_sensor_status.Dimensions = 2;
   _this->acc_sensor_status.IsActive = TRUE;
   _this->acc_sensor_status.FS = 3.0f;
   _this->acc_sensor_status.Sensitivity = 0.0000305f * _this->acc_sensor_status.FS;
   _this->acc_sensor_status.ODR = 833.0f;
   _this->acc_sensor_status.MeasuredODR = 0.0f;
+  _this->acc_sensor_status.InitialOffset = 0.0f;
+  _this->acc_sensor_status.DataPacketSize = 3000;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->acc_sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->acc_sensor_status.SamplesPerTimestamp = 200;
+#endif
 
   return res;
 }
@@ -1591,9 +1572,11 @@ static sys_error_code_t IIS2ICLXTaskConfigureIrqPin(const IIS2ICLXTask *_this, b
 
 static void IIS2ICLXTaskTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   // if (sTaskObj.in_queue != NULL ) {//TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
@@ -1604,19 +1587,21 @@ static void IIS2ICLXTaskTimerCallbackFunction(ULONG timer)
   //}
 }
 
-/* CubeMX integration */
+// CubeMX integration
 // ******************
 
 void IIS2ICLXTask_EXTI_Callback(uint16_t nPin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
   // }

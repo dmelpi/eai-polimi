@@ -222,10 +222,10 @@ sys_error_code_t I2CMasterDriver_vtblWrite(IIODriver *_this, uint8_t *p_data_buf
   I2CMasterDriver_t *p_obj = (I2CMasterDriver_t *) _this;
   I2C_HandleTypeDef *p_i2c = p_obj->mx_handle.p_mx_i2c_cfg->p_i2c_handle;
 
-  if (HAL_I2C_Mem_Write_DMA(p_i2c, p_obj->target_device_addr, channel, I2C_MEMADD_SIZE_8BIT, p_data_buffer,
+  while (HAL_I2C_Mem_Write_DMA(p_i2c, p_obj->target_device_addr, channel, I2C_MEMADD_SIZE_8BIT, p_data_buffer,
                                data_size) != HAL_OK)
   {
-    if (HAL_I2C_GetError(p_i2c) != (uint32_t)HAL_BUSY)
+    if (HAL_I2C_GetError(p_i2c) != HAL_BUSY)
     {
       SYS_SET_LOW_LEVEL_ERROR_CODE(SYS_I2C_M_WRITE_ERROR_CODE);
       SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("I2CMasterDriver - Write failed.\r\n"));
@@ -241,23 +241,23 @@ sys_error_code_t I2CMasterDriver_vtblRead(IIODriver *_this, uint8_t *p_data_buff
                                           uint16_t channel)
 {
   assert_param(_this);
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
-  I2CMasterDriver_t *p_obj = (I2CMasterDriver_t *) _this;
-  I2C_HandleTypeDef *p_i2c = p_obj->mx_handle.p_mx_i2c_cfg->p_i2c_handle;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
+  I2CMasterDriver_t *pObj = (I2CMasterDriver_t *) _this;
+  I2C_HandleTypeDef *p_i2c = pObj->mx_handle.p_mx_i2c_cfg->p_i2c_handle;
 
-  if (HAL_I2C_Mem_Read_DMA(p_i2c, p_obj->target_device_addr, channel, I2C_MEMADD_SIZE_8BIT, p_data_buffer,
+  while (HAL_I2C_Mem_Read_DMA(p_i2c, pObj->target_device_addr, channel, I2C_MEMADD_SIZE_8BIT, p_data_buffer,
                               data_size) != HAL_OK)
   {
-    if (HAL_I2C_GetError(p_i2c) != (uint32_t)HAL_BUSY)
+    if (HAL_I2C_GetError(p_i2c) != HAL_BUSY)
     {
       SYS_SET_LOW_LEVEL_ERROR_CODE(SYS_I2C_M_WRITE_ERROR_CODE);
       SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("I2CMasterDriver - Read failed.\r\n"));
     }
   }
   /* Suspend the calling task until the operation is completed.*/
-  tx_semaphore_get(&p_obj->sync_obj, TX_WAIT_FOREVER);
+  tx_semaphore_get(&pObj->sync_obj, TX_WAIT_FOREVER);
 
-  return res;
+  return xRes;
 }
 
 /* Private function definition */
@@ -290,5 +290,5 @@ static void I2CMasterDrvErrorCallback(I2C_HandleTypeDef *p_i2c)
 {
   UNUSED(p_i2c);
 
-  *(spHwResouces[0].p_ip_errors) += 1u;
+  *(spHwResouces[0].p_ip_errors) += 1;
 }

@@ -165,6 +165,7 @@ sys_error_code_t SPIMasterDriver_vtblStop(IDriver *_this)
   SPIMasterDriver_t *p_obj = (SPIMasterDriver_t *) _this;
 
   /*disable the IRQ*/
+  /*enable the IRQ*/
   HAL_NVIC_DisableIRQ(p_obj->mx_handle.p_mx_spi_cfg->spi_dma_rx_irq_n);
   HAL_NVIC_DisableIRQ(p_obj->mx_handle.p_mx_spi_cfg->spi_dma_tx_irq_n);
 
@@ -198,12 +199,12 @@ sys_error_code_t SPIMasterDriver_vtblWrite(IIODriver *_this, uint8_t *p_data_buf
   SPIMasterDriver_t *p_obj = (SPIMasterDriver_t *) _this;
   SPI_HandleTypeDef *p_spi = p_obj->mx_handle.p_mx_spi_cfg->p_spi_handle;
 
-  res = SPIMasterDriverTransmitRegAddr(p_obj, (uint8_t)channel, 500);
+  res = SPIMasterDriverTransmitRegAddr(p_obj, channel, 500);
   if (!SYS_IS_ERROR_CODE(res))
   {
-    if (HAL_SPI_Transmit_DMA(p_spi, p_data_buffer, data_size) != HAL_OK)
+    while (HAL_SPI_Transmit_DMA(p_spi, p_data_buffer, data_size) != HAL_OK)
     {
-      if (HAL_SPI_GetError(p_spi) != (uint32_t)HAL_BUSY)
+      if (HAL_SPI_GetError(p_spi) != HAL_BUSY)
       {
         SYS_SET_LOW_LEVEL_ERROR_CODE(SYS_SPI_M_WRITE_READ_ERROR_CODE);
         sys_error_handler();
@@ -224,12 +225,12 @@ sys_error_code_t SPIMasterDriver_vtblRead(IIODriver *_this, uint8_t *p_data_buff
   SPIMasterDriver_t *p_obj = (SPIMasterDriver_t *) _this;
   SPI_HandleTypeDef *p_spi = p_obj->mx_handle.p_mx_spi_cfg->p_spi_handle;
 
-  res = SPIMasterDriverTransmitRegAddr(p_obj, (uint8_t)channel, 500);
+  res = SPIMasterDriverTransmitRegAddr(p_obj, channel, 500);
   if (!SYS_IS_ERROR_CODE(res))
   {
-    if (HAL_SPI_Receive_DMA(p_spi, p_data_buffer, data_size) != HAL_OK)
+    while (HAL_SPI_Receive_DMA(p_spi, p_data_buffer, data_size) != HAL_OK)
     {
-      if (HAL_SPI_GetError(p_spi) != (uint32_t)HAL_BUSY)
+      if (HAL_SPI_GetError(p_spi) != HAL_BUSY)
       {
         SYS_SET_LOW_LEVEL_ERROR_CODE(SYS_SPI_M_WRITE_READ_ERROR_CODE);
         SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("SPIMasterDriver - Read failed.\r\n"));
@@ -270,9 +271,9 @@ sys_error_code_t SPIMasterDriverWriteRead(SPIMasterDriver_t *_this, uint8_t *p_t
   SPIMasterDriver_t *p_obj = (SPIMasterDriver_t *) _this;
   SPI_HandleTypeDef *p_spi = p_obj->mx_handle.p_mx_spi_cfg->p_spi_handle;
 
-  if (HAL_SPI_TransmitReceive_DMA(p_spi, p_tx_data_buffer, p_rx_data_buffer, data_size) != HAL_OK)
+  while (HAL_SPI_TransmitReceive_DMA(p_spi, p_tx_data_buffer, p_rx_data_buffer, data_size) != HAL_OK)
   {
-    if (HAL_SPI_GetError(p_spi) != (uint32_t)HAL_BUSY)
+    if (HAL_SPI_GetError(p_spi) != HAL_BUSY)
     {
       SYS_SET_LOW_LEVEL_ERROR_CODE(SYS_SPI_M_WRITE_READ_ERROR_CODE);
       SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("SPIMasterDriver - TransmitReceive failed.\r\n"));

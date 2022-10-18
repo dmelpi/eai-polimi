@@ -62,7 +62,6 @@ struct _PnPLCompManager_t
 void PnPLGenerateAcquisitionUUID(char *uuid);
 uint16_t PnPLGetNComponents(void);
 uint16_t PnPLGetComponentsNames(char **components_names);
-uint8_t PnPLGetComponentValue(char *comp_name, char **SerializedJSON, uint32_t *size, uint8_t pretty);
 uint8_t PnPLAddComponent(IPnPLComponent_t *pComponent);
 uint8_t PnPLAddSensorComponent(IPnPLComponent_t *pComponent, uint8_t sensor_id, uint8_t sensor_type);
 uint8_t PnPLRemoveComponent(uint8_t id); //char*
