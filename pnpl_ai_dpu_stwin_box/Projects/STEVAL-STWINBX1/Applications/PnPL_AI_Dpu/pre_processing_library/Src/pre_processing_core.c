@@ -59,7 +59,7 @@ float hz_to_mel(float f_Hz_in) {
 }
 
 float mel_to_hz(float f_Mel_in) {
-	return (700*(pow(10,f_Mel_in/2505)-1));
+	return (700*(pow(10,f_Mel_in/2595)-1));
 }
 
 
@@ -225,6 +225,7 @@ void fft(float32_t *data_in, uint32_t data_in_size, float32_t * data_out, uint32
 	  if(data_out[freqpoint] < 1e-3){
 		  data_out[freqpoint] = 1e-3;
 	  }
+	  data_out[freqpoint] = 20*log10(data_out[freqpoint]);
 	  freqpoint++;
 	}
 }
@@ -271,6 +272,9 @@ void mfcc(float32_t * data_in, uint32_t data_in_size, float32_t * data_out, uint
 
 	triangular_filters_convolution(fft_out, data_in_size/2, data_out, data_out_size, bin);
 	for (int i = 0; i<data_out_size; i++) {
+		if (data_out[i] < 10e-10){
+			data_out[i] = 10e-10;
+		}
 		data_out[i] = 20*log10(data_out[i]);
 	}
 

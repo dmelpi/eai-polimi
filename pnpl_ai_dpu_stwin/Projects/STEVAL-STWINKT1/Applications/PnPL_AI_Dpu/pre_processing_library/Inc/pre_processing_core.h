@@ -51,6 +51,11 @@ typedef struct
   float32_t z;           /*  z axis  */
 } tridimensional_data_t;
 
+typedef struct
+{
+  float32_t x;           /*  x axis  */
+} monodimensional_data_t;
+
 typedef enum {
 	X = 0,
 	Y,
