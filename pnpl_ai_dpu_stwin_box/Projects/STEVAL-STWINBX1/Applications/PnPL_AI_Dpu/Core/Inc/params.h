@@ -48,8 +48,10 @@ extern "C" {
 //for the ACC (base)
 //#define INPUT_BUFFER_SIZE (512)
 //for the MIC
-#define INPUT_BUFFER_SIZE (256)
+#define INPUT_BUFFER_SIZE (512)
 
+//ZCR hardcoded limit:
+#define ZCR_LIMIT (0.5)
 
 // Axis selection.
 #define AXIS_SELECTION_AXIS (X)

@@ -47,7 +47,7 @@
 #endif
 
 #ifndef IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH
-#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      40
+#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      120
 #endif
 
 #define IMP34DT05_TASK_CFG_IN_QUEUE_ITEM_SIZE   sizeof(SMMessage)
@@ -292,7 +292,7 @@ static const IMP34DT05TaskClass_t sTheClass =
         IMP34DT05Task_vtblHandleError,
         IMP34DT05Task_vtblOnEnterTaskControlLoop,
         IMP34DT05Task_vtblForceExecuteStep,
-    IMP34DT05Task_vtblOnEnterPowerMode
+		IMP34DT05Task_vtblOnEnterPowerMode
   },
 
     /* class::mic_sensor_if_vtbl virtual table */
@@ -310,7 +310,7 @@ static const IMP34DT05TaskClass_t sTheClass =
         IMP34DT05Task_vtblSensorDisable,
         IMP34DT05Task_vtblSensorIsEnabled,
         IMP34DT05Task_vtblSensorGetDescription,
-    IMP34DT05Task_vtblSensorGetStatus
+		IMP34DT05Task_vtblSensorGetStatus
   },
 
     /* MIC DESCRIPTOR */
@@ -340,7 +340,7 @@ static const IMP34DT05TaskClass_t sTheClass =
     {
         IMP34DT05TaskExecuteStepRun,
         NULL,
-    IMP34DT05TaskExecuteStepDatalog,
+		IMP34DT05TaskExecuteStepDatalog,
   }
 };
 
@@ -395,7 +395,7 @@ sys_error_code_t IMP34DT05Task_vtblHardwareInit(AManagedTask *_this, void *pPara
     MDFDriverParams_t cfg_params =
     {
         .p_mx_mdf_cfg = (void*) p_obj->p_mx_mdf_cfg,
-      .param = 7
+		.param = 7
     };
 
     res = IDrvInit(p_obj->p_driver, &cfg_params);
@@ -411,8 +411,7 @@ sys_error_code_t IMP34DT05Task_vtblHardwareInit(AManagedTask *_this, void *pPara
   return res;
 }
 
-sys_error_code_t IMP34DT05Task_vtblOnCreateTask(AManagedTask *_this, tx_entry_function_t *pTaskCode, CHAR **pName,
-VOID **pvStackStart,
+sys_error_code_t IMP34DT05Task_vtblOnCreateTask(AManagedTask *_this, tx_entry_function_t *pTaskCode, CHAR **pName, VOID **pvStackStart,
                                                 ULONG *pStackDepth, UINT *pPriority, UINT *pPreemptThreshold, ULONG *pTimeSlice, ULONG *pAutoStart,
                                                 ULONG *pParams)
 {

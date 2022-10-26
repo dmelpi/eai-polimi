@@ -322,10 +322,15 @@ sys_error_code_t AppTask_vtblOnProcessedDataReady(IEventListener *_this, const P
 
   int label_id = (int) payload[0];
   float accuracy = (float) payload[1];
+
+  int tmp = accuracy ;
+
+  //float accuracy_in = tmp / 10.0;
+
   //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[AppTask] label_id: %d, accuracy: %.8f.\r\n", label_id, accuracy));
 
   /* Create the PnPL Telemetry message using the ai_application dedicated function defined in App_model*/
-  ai_application_create_telemetry(label_id, accuracy, &telemetry, &size);
+  ai_application_create_telemetry(label_id, tmp, &telemetry, &size);
 
   /* Send the PnPL Telemetry via USB CDC interface */
   UsbCdcTask_Write((uint8_t*) telemetry, size, &actual_size);

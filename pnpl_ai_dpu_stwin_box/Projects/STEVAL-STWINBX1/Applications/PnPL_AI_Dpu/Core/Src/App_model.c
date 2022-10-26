@@ -74,17 +74,17 @@ uint8_t ai_application_switch_bank(IAiApplication_t *ifn)
 uint8_t ai_application_create_telemetry(int label_id, float accuracy, char **telemetry, uint32_t *size)
 {
 	PnPLTelemetry_t telemetries[2];
-    strcpy(telemetries[0].telemetry_name, "label_id");
+    strcpy(telemetries[0].telemetry_name, "B");
     telemetries[0].telemetry_value = (void*)&label_id;
     telemetries[0].telemetry_type = PNPL_INT;
     telemetries[0].n_sub_telemetries = 0;
-    strcpy(telemetries[1].telemetry_name, "accuracy");
+    strcpy(telemetries[1].telemetry_name, "C");
     telemetries[1].telemetry_value = (void*)&accuracy;
     telemetries[1].telemetry_type = PNPL_FLOAT;
     telemetries[1].n_sub_telemetries = 0;
 
     //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[ai_application_create_telemetry()] label_id: %d, accuracy: %f.\r\n", label_id, accuracy));
-    PnPLSerializeTelemetry("ai_application", telemetries, 2, telemetry, size, 0);
+    PnPLSerializeTelemetry("A", telemetries, 2, telemetry, size, 0);
     return 0;
 }
 ////=================================================================================================================
