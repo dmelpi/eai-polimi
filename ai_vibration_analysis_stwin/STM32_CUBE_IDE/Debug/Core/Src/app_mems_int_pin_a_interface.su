@@ -1,0 +1,2 @@
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/app_mems_int_pin_a_interface.c:29:6:set_mems_int_pin_a_exti	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/app_mems_int_pin_a_interface.c:38:13:mems_int_pin_a_hardware_event_isr	4	static

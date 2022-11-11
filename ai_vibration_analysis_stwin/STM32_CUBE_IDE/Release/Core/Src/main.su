@@ -1,0 +1,4 @@
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/main.c:72:6:SystemClock_Config	96	static,ignoring_inline_asm
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/main.c:128:6:PeriphCommonClock_Config	168	static,ignoring_inline_asm
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/main.c:33:5:main	32	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Core/Src/main.c:176:6:Error_Handler	0	static,ignoring_inline_asm

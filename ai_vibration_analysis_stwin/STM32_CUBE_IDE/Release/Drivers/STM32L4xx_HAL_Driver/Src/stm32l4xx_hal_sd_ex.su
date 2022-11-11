@@ -1,0 +1,10 @@
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:85:10:HAL_SDEx_HighSpeed	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:95:13:HAL_SDEx_DriveTransceiver_1_8V_Callback	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:132:19:HAL_SDEx_ConfigDMAMultiBuffer	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:156:19:HAL_SDEx_ReadBlocksDMAMultiBuffer	48	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:238:19:HAL_SDEx_WriteBlocksDMAMultiBuffer	48	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:320:19:HAL_SDEx_ChangeDMABuffer	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:341:13:HAL_SDEx_Read_DMADoubleBuffer0CpltCallback	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:356:13:HAL_SDEx_Read_DMADoubleBuffer1CpltCallback	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:371:13:HAL_SDEx_Write_DMADoubleBuffer0CpltCallback	0	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c:386:13:HAL_SDEx_Write_DMADoubleBuffer1CpltCallback	0	static

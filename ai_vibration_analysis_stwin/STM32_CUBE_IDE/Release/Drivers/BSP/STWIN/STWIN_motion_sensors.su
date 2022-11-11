@@ -1,0 +1,17 @@
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:1250:16:BSP_ISM330DHCX_WriteReg	24	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:1275:16:BSP_ISM330DHCX_ReadReg	24	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:1238:16:BSP_ISM330DHCX_DeInit	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:1197:16:BSP_ISM330DHCX_Init	56	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:85:10:BSP_MOTION_SENSOR_Init	104	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:225:9:BSP_MOTION_SENSOR_DeInit	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:251:9:BSP_MOTION_SENSOR_GetCapabilities	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:277:9:BSP_MOTION_SENSOR_ReadID	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:306:9:BSP_MOTION_SENSOR_Enable	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:345:9:BSP_MOTION_SENSOR_Disable	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:385:9:BSP_MOTION_SENSOR_GetAxes	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:425:9:BSP_MOTION_SENSOR_GetAxesRaw	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:465:9:BSP_MOTION_SENSOR_GetSensitivity	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:506:9:BSP_MOTION_SENSOR_GetOutputDataRate	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:546:9:BSP_MOTION_SENSOR_GetFullScale	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:586:9:BSP_MOTION_SENSOR_SetOutputDataRate	8	static
+/Users/leonardoiacussi/STM32CubeIDE/workspace_1.9.0/AI_STWIN_BM/Drivers/BSP/STWIN/STWIN_motion_sensors.c:626:9:BSP_MOTION_SENSOR_SetFullScale	8	static
