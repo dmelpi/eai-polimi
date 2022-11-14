@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_HighSpeedDataLog.h
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   BLE_HighSpeedDataLog info services APIs.
   ******************************************************************************
   * @attention
@@ -28,11 +28,11 @@
    
 /* Exported typedef --------------------------------------------------------- */
 typedef void (*CustomNotifyEventHighSpeedDataLog_t)(BLE_NotifyEvent_t Event);
-typedef void (*CustomWriteRequestHighSpeedDataLog_t)(uint8_t * att_data, uint8_t data_length);
+typedef void (*CustomWriteRequestHighSpeedDataLogFunction)(uint8_t * att_data, uint8_t data_length);
 
 /* Exported Variables ------------------------------------------------------- */
 extern CustomNotifyEventHighSpeedDataLog_t CustomNotifyEventHighSpeedDataLog;
-extern CustomWriteRequestHighSpeedDataLog_t CustomWriteRequestHighSpeedDataLog;
+extern CustomWriteRequestHighSpeedDataLogFunction CustomWriteRequestHighSpeedDataLogFunctionPointer;
 
 
 /* Exported functions ------------------------------------------------------- */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_NeaiAnomalyDetection.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.x.0
+  * @date    28-Feb-2022
   * @brief   Add Anomaly Detection info services using vendor specific profiles.
   ******************************************************************************
   * @attention
@@ -37,14 +37,14 @@ CustomWriteRequestAnomalyDetection_t CustomWriteRequestAD=NULL;
 static BleCharTypeDef ADBleChar;
 /* Size for AD characteristic */
 static uint8_t  ADCharSize;
-/* TODO: How many AD libraries you want manage? */
-/*static uint8_t activeLibraries; */
+/* How many AD libraries you want manage? */
+static uint8_t activeLibraries;
 
 /* Private functions ---------------------------------------------------------*/
 static void AttrMod_Request_AD(void *BleCharPointer,uint16_t attr_handle, uint16_t Offset, uint8_t data_length, uint8_t *att_data);
 static void Write_Request_AD(void *BleCharPointer,uint16_t handle, uint16_t Offset, uint8_t data_length, uint8_t *att_data);
 
-BleCharTypeDef* BLE_InitADService(void)
+BleCharTypeDef* BLE_InitADService(uint8_t available_libraries)
 {
   /* Data structure pointer for BLE service */
   BleCharTypeDef *BleCharPointer= NULL;
@@ -64,6 +64,8 @@ BleCharTypeDef* BLE_InitADService(void)
   BleCharPointer->GATT_Evt_Mask= GATT_NOTIFY_ATTRIBUTE_WRITE;
   BleCharPointer->Enc_Key_Size= 16;
   BleCharPointer->Is_Variable= 0;
+
+  activeLibraries = available_libraries;
 
   if(CustomWriteRequestAD == NULL) {
     BLE_MANAGER_PRINTF("CustomWriteRequestAD function Not Defined\r\n");

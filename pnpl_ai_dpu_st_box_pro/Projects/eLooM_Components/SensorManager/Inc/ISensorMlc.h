@@ -43,8 +43,8 @@ typedef struct _ISensorMlc_t ISensorMlc_t;
 // Public API declaration
 //***********************
 /** Public interface **/
-static inline sys_error_code_t ISensorMlcLoadUcf(ISensorMlc_t *_this, uint32_t size, const char *ucf);
-static inline boolean_t ISensorMlcIsEnabled(ISensorMlc_t *_this);
+inline sys_error_code_t ISensorMlcLoadUcf(ISensorMlc_t *_this, uint32_t size, const char *ucf);
+inline boolean_t ISensorMlcIsEnabled(ISensorMlc_t *_this);
 
 #ifdef __cplusplus
 }

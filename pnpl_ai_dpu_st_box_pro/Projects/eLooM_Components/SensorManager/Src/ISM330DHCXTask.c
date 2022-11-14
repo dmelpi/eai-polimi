@@ -29,12 +29,11 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "ism330dhcx_reg.h"
 #include <string.h>
-#include <stdlib.h>
 #include "services/sysdebug.h"
 
 #ifndef ISM330DHCX_TASK_CFG_STACK_DEPTH
@@ -46,7 +45,7 @@
 #endif
 
 #ifndef ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH
-#define ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #define ISM330DHCX_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -196,7 +195,7 @@ struct _ISM330DHCXTask
   /**
    * Buffer to store the data from mlc
    */
-  uint8_t p_mlc_sensor_data_buff[9];
+  uint16_t p_mlc_sensor_data_buff[8];
 
   /**
    * Specifies the FIFO watermark level (it depends from ODR)
@@ -232,11 +231,6 @@ struct _ISM330DHCXTask
    * Software timer used to generate the read command
    */
   TX_TIMER read_timer;
-
-  /**
-   * Timer period used to schedule the read command
-   */
-  ULONG ism330dhcx_task_cfg_timer_period_ms;
 
   /**
    * Software timer used to generate the mlc read command
@@ -297,10 +291,11 @@ typedef struct _ISM330DHCXTaskClass
   /**
    * ISM330DHCXTask (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } ISM330DHCXTaskClass_t;
 
-/* Private member function declaration */
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -416,7 +411,8 @@ static sys_error_code_t ISM330DHCX_XL_FS_From_UCF(ISM330DHCXTask *_this);
 static sys_error_code_t ISM330DHCX_GY_ODR_From_UCF(ISM330DHCXTask *_this);
 static sys_error_code_t ISM330DHCX_GY_FS_From_UCF(ISM330DHCXTask *_this);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
+// ***********************************
 
 /**
  * Private function used to post a report into the front of the task queue.
@@ -438,7 +434,7 @@ static inline sys_error_code_t ISM330DHCXTaskPostReportToFront(ISM330DHCXTask *_
 static inline sys_error_code_t ISM330DHCXTaskPostReportToBack(ISM330DHCXTask *_this, SMMessage *pReport);
 
 #if defined (__GNUC__)
-/* Inline function defined inline in the header file ISM330DHCXTask.h must be declared here as extern function. */
+// Inline function defined inline in the header file ISM330DHCXTask.h must be declared here as extern function.
 #endif
 
 /* Objects instance */
@@ -625,8 +621,8 @@ static const ISM330DHCXTaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
-
+// Public API definition
+// *********************
 
 ISourceObservable* ISM330DHCXTaskGetAccSensorIF(ISM330DHCXTask *_this)
 {
@@ -650,9 +646,10 @@ ISensorMlc_t* ISM330DHCXTaskGetMlcSensorIF(ISM330DHCXTask *_this)
 
 AManagedTaskEx* ISM330DHCXTaskAlloc(const void *pIRQConfig, const void *pMLCConfig, const void *pCSConfig)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&sTaskObj.super);
 
   sTaskObj.super.vptr = &sTheClass.vtbl;
@@ -699,7 +696,8 @@ IEventSrc* ISM330DHCXTaskGetMlcEventSrcIF(ISM330DHCXTask *_this)
   return _this->p_mlc_event_src;
 }
 
-/* AManagedTaskEx virtual functions definition */
+// AManagedTaskEx virtual functions definition
+// *******************************************
 
 sys_error_code_t ISM330DHCXTask_vtblHardwareInit(AManagedTask *_this, void *pParams)
 {
@@ -731,38 +729,59 @@ sys_error_code_t ISM330DHCXTask_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   ISM330DHCXTask *p_obj = (ISM330DHCXTask*) _this;
 
-  /* Create task specific sw resources. */
+  // Create task specific sw resources.
 
-  uint32_t item_size = (uint32_t)ISM330DHCX_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  uint16_t nItemSize = ISM330DHCX_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
+    return res;
   }
-  else if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "ISM330DHCX_Q", item_size / 4u, p_queue_items_buff,
-                                    ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "ISM330DHCX_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    ISM330DHCX_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
-  } /* create the software timer*/
-  else if(TX_SUCCESS
-      != tx_timer_create(&p_obj->read_timer, "ISM330DHCX_T", ISM330DHCXTaskTimerCallbackFunction, (ULONG)TX_NULL,
-                         AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_TIMER_PERIOD_MS), 0, TX_NO_ACTIVATE))
+    return res;
+  }
+
+  /* create the software timer*/
+  if(TX_SUCCESS != tx_timer_create(
+		  &p_obj->read_timer,
+		  "ISM330DHCX_T",
+		  ISM330DHCXTaskTimerCallbackFunction,
+		  (ULONG)TX_NULL,
+		  AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_TIMER_PERIOD_MS),
+		  0,
+		  TX_NO_ACTIVATE))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
-  } /* create the mlc software timer*/
-  else if(TX_SUCCESS
-      != tx_timer_create(&p_obj->mlc_timer, "ISM330DHCX_MLC_T", ISM330DHCXTaskMLCTimerCallbackFunction, (ULONG)TX_NULL,
-                         AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_MLC_TIMER_PERIOD_MS), 0, TX_NO_ACTIVATE))
+    return res;
+  }
+
+  /* create the mlc software timer*/
+  if(TX_SUCCESS != tx_timer_create(
+		  &p_obj->mlc_timer,
+		  "ISM330DHCX_MLC_T",
+		  ISM330DHCXTaskMLCTimerCallbackFunction,
+		  (ULONG)TX_NULL,
+		  AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_MLC_TIMER_PERIOD_MS),
+		  0,
+		  TX_NO_ACTIVATE))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
-  } /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
-  else if(p_obj->pCSConfig != NULL)
+    return res;
+  }
+
+  /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
+  if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(ISM330DHCX_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, 0);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(ISM330DHCX_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -779,37 +798,37 @@ sys_error_code_t ISM330DHCXTask_vtblOnCreateTask(
     }
   }
 
-  if(!SYS_IS_ERROR_CODE(res))
+  if (SYS_IS_ERROR_CODE(res))
   {
-    /* Initialize the EventSrc interface, take the ownership of the interface. */
-  p_obj->p_acc_event_src = DataEventSrcAlloc();
+    return res;
+  }
+  // Initialize the EventSrc interface.
+  // take the ownership of the interface.
+  p_obj->p_acc_event_src = SensorEventSrcAlloc();
   if(p_obj->p_acc_event_src == NULL)
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
     res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+    return res;
   }
-    else
-    {
   IEventSrcInit(p_obj->p_acc_event_src);
 
-  p_obj->p_gyro_event_src = DataEventSrcAlloc();
+  p_obj->p_gyro_event_src = SensorEventSrcAlloc();
   if(p_obj->p_gyro_event_src == NULL)
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
     res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+    return res;
   }
-      else
-      {
   IEventSrcInit(p_obj->p_gyro_event_src);
 
-  p_obj->p_mlc_event_src = DataEventSrcAlloc();
+  p_obj->p_mlc_event_src = SensorEventSrcAlloc();
   if(p_obj->p_mlc_event_src == NULL)
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
     res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+    return res;
   }
-        else
-        {
   IEventSrcInit(p_obj->p_mlc_event_src);
 
   memset(p_obj->p_fast_sensor_data_buff, 0, sizeof(p_obj->p_fast_sensor_data_buff));
@@ -839,20 +858,16 @@ sys_error_code_t ISM330DHCXTask_vtblOnCreateTask(
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
     res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+    return res;
   }
-          else
-          {
+
   res = ISM330DHCXTaskSensorRegister(p_obj);
   if(SYS_IS_ERROR_CODE(res))
   {
     SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: unable to register with DB\r\n"));
     sys_error_handler();
   }
-          }
-        }
-      }
-    }
-  }
+
   return res;
 }
 
@@ -907,8 +922,8 @@ sys_error_code_t ISM330DHCXTask_vtblDoEnterPowerMode(AManagedTask *_this, const 
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = ISM330DHCXTaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -922,7 +937,7 @@ sys_error_code_t ISM330DHCXTask_vtblDoEnterPowerMode(AManagedTask *_this, const 
     {
       ISM330DHCXTaskConfigureMLCPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -957,11 +972,6 @@ sys_error_code_t ISM330DHCXTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: start.\r\n"));
 
-#ifdef ENABLE_THREADX_DBG_PIN
-  ISM330DHCXTask *p_obj = (ISM330DHCXTask*) _this;
-  p_obj->super.m_xTaskHandle.pxTaskTag = ISM330DHCX_TASK_CFG_TAG;
-#endif
-
   // At this point all system has been initialized.
   // Execute task specific delayed one time initialization.
 
@@ -995,12 +1005,12 @@ sys_error_code_t ISM330DHCXTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPow
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -1017,6 +1027,7 @@ sys_error_code_t ISM330DHCXTask_vtblOnEnterPowerMode(AManagedTaskEx *_this, cons
 
   return res;
 }
+
 
 // ISensor virtual functions definition
 // *******************************************
@@ -1078,7 +1089,7 @@ sys_error_code_t ISM330DHCXTask_vtblAccGetODR(ISourceObservable *_this, float *p
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -1136,7 +1147,7 @@ sys_error_code_t ISM330DHCXTask_vtblGyroGetODR(ISourceObservable *_this, float *
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -1194,7 +1205,7 @@ sys_error_code_t ISM330DHCXTask_vtblMlcGetODR(ISourceObservable *_this, float *p
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -1407,19 +1418,19 @@ sys_error_code_t ISM330DHCXTask_vtblSensorMlcLoadUcf(ISensorMlc_t *_this, uint32
   long reg;
   long data;
 
-  for(i = 0; i < size / 4u; i++)
+  for(i = 0; i < size / 4; i++)
   {
-    ucf_reg[0] = ucf[4u * i];
-    ucf_reg[1] = ucf[4u * i + 1u];
+    ucf_reg[0] = ucf[4 * i];
+    ucf_reg[1] = ucf[4 * i + 1];
     ucf_reg[2] = '\0';
-    ucf_data[0] = ucf[4u * i + 2u];
-    ucf_data[1] = ucf[4u * i + 3u];
+    ucf_data[0] = ucf[4 * i + 2];
+    ucf_data[1] = ucf[4 * i + 3];
     ucf_data[2] = '\0';
 
     reg = strtol(ucf_reg, NULL, 16);
     data = strtol(ucf_data, NULL, 16);
 
-    res = ism330dhcx_write_reg(p_sensor_drv, (uint8_t) reg, (uint8_t*) &data, 1u);
+    res = ism330dhcx_write_reg(p_sensor_drv, (uint8_t) reg, (uint8_t*) &data, 1);
     if(res != SYS_NO_ERROR_CODE)
     {
       break;
@@ -1439,7 +1450,7 @@ sys_error_code_t ISM330DHCXTask_vtblSensorMlcLoadUcf(ISensorMlc_t *_this, uint32
   return res;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t ISM330DHCXTaskExecuteStepState1(AManagedTask *_this)
@@ -1482,7 +1493,7 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepState1(AManagedTask *_this)
               res = ISM330DHCXTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1493,7 +1504,7 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1532,10 +1543,11 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
 
       case SM_MESSAGE_ID_DATA_READY:
         {
-//        SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: new data.\r\n"));
+        //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
-            if(TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(p_obj->ism330dhcx_task_cfg_timer_period_ms), AMT_MS_TO_TICKS(p_obj->ism330dhcx_task_cfg_timer_period_ms)))
+          if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_TIMER_PERIOD_MS),
+                                            AMT_MS_TO_TICKS(ISM330DHCX_TASK_CFG_TIMER_PERIOD_MS)))
             {
               return SYS_UNDEFINED_ERROR_CODE;
             }
@@ -1549,85 +1561,112 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-            EMData_t data_acc, data_gyro;
-            DataEvent_t evt_acc, evt_gyro;
-
             if((p_obj->acc_sensor_status.IsActive) && (p_obj->gyro_sensor_status.IsActive)) /* Read both ACC and GYRO */
             {
+              SensorEvent evt_acc, evt_gyro;
 
               if(p_obj->acc_sensor_status.ODR > p_obj->gyro_sensor_status.ODR) /* Acc is faster than Gyro */
               {
-                /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue:
-                 * [X0, Y0, Z0]
-                 * [X1, Y1, Z1]
-                 * ...
-                 * [Xm-1, Ym-1, Zm-1]
-                 */
-                EMD_Init(&data_acc, p_obj->p_fast_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->acc_samples_count, p_obj->acc_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_acc, p_obj->p_acc_event_src, &data_acc, timestamp,  p_obj->acc_id);
+                AI_SP_Stream_t streamAcc =
+                {
+                    .packet.payload = p_obj->p_fast_sensor_data_buff,
+                    //.packet.payload_size = p_obj->samples_per_it, /* what is the paylod size in this case ? */
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamAcc.packet.shape, 3, p_obj->acc_samples_count);
+                streamAcc.packet.payload_size = 2 * streamAcc.packet.shape.shapes[0] * streamAcc.packet.shape.shapes[1];
 
-                EMD_Init(&data_gyro, p_obj->p_slow_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->gyro_samples_count, p_obj->gyro_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_gyro, p_obj->p_gyro_event_src, &data_gyro, timestamp,  p_obj->gyro_id);
+              SensorEventInit((IEvent *) &evt_acc, p_obj->p_acc_event_src, (ai_logging_packet_t *) &streamAcc, timestamp,
+                              p_obj->acc_id);
 
-                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*)&evt_acc, NULL);
-                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*)&evt_gyro, NULL);
+                AI_SP_Stream_t streamGyro =
+                {
+                    .packet.payload = p_obj->p_slow_sensor_data_buff,
+                    //.packet.payload_size = p_obj->samples_per_it, /* what is the paylod size in this case ? */
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamGyro.packet.shape, 3, p_obj->gyro_samples_count);
+                streamGyro.packet.payload_size = 2 * streamGyro.packet.shape.shapes[0] * streamGyro.packet.shape.shapes[1];
+
+              SensorEventInit((IEvent *) &evt_gyro, p_obj->p_gyro_event_src, (ai_logging_packet_t *) &streamGyro, timestamp,
+                              p_obj->gyro_id);
+
+                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*) &evt_acc, NULL);
+                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*) &evt_gyro, NULL);
               }
               else
               {
-                /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue:
-                 * [X0, Y0, Z0]
-                 * [X1, Y1, Z1]
-                 * ...
-                 * [Xm-1, Ym-1, Zm-1]
-                 */
-                EMD_Init(&data_acc, p_obj->p_slow_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->acc_samples_count, p_obj->acc_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_acc, p_obj->p_acc_event_src, &data_acc, timestamp,  p_obj->acc_id);
+                AI_SP_Stream_t streamAcc =
+                {
+                    .packet.payload = p_obj->p_slow_sensor_data_buff,
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamAcc.packet.shape, 3, p_obj->acc_samples_count);
+                streamAcc.packet.payload_size = 2 * streamAcc.packet.shape.shapes[0] * streamAcc.packet.shape.shapes[1];
 
-                EMD_Init(&data_gyro, p_obj->p_fast_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->gyro_samples_count, p_obj->gyro_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_gyro, p_obj->p_gyro_event_src, &data_gyro, timestamp,  p_obj->gyro_id);
+              SensorEventInit((IEvent *) &evt_acc, p_obj->p_acc_event_src, (ai_logging_packet_t *) &streamAcc, timestamp,
+                              p_obj->acc_id);
 
-                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*)&evt_acc, NULL);
-                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*)&evt_gyro, NULL);
+                AI_SP_Stream_t streamGyro =
+                {
+                    .packet.payload = p_obj->p_fast_sensor_data_buff,
+                    //.packet.payload_size = p_obj->samples_per_it, /* what is the paylod size in this case ? */
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamGyro.packet.shape, 3, p_obj->gyro_samples_count);
+                streamGyro.packet.payload_size = 2 * streamGyro.packet.shape.shapes[0] * streamGyro.packet.shape.shapes[1];
+
+              SensorEventInit((IEvent *) &evt_gyro, p_obj->p_gyro_event_src, (ai_logging_packet_t *) &streamGyro, timestamp,
+                              p_obj->gyro_id);
+
+                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*) &evt_acc, NULL);
+                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*) &evt_gyro, NULL);
               }
 
               /* update measuredODR */
-              p_obj->acc_sensor_status.MeasuredODR = (float)p_obj->acc_samples_count / (float)delta_timestamp;
-              p_obj->gyro_sensor_status.MeasuredODR = (float)p_obj->gyro_samples_count / (float)delta_timestamp;
+              p_obj->acc_sensor_status.MeasuredODR = p_obj->acc_samples_count / delta_timestamp;
+              p_obj->gyro_sensor_status.MeasuredODR = p_obj->gyro_samples_count / delta_timestamp;
 
             }
             else /* Only 1 out of 2 is active */
             {
               if(p_obj->acc_sensor_status.IsActive)
               {
-                /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue:
-                 * [X0, Y0, Z0]
-                 * [X1, Y1, Z1]
-                 * ...
-                 * [Xm-1, Ym-1, Zm-1]
-                 */
-                EMD_Init(&data_acc, p_obj->p_fast_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->acc_samples_count, p_obj->acc_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_acc, p_obj->p_acc_event_src, &data_acc, timestamp,  p_obj->acc_id);
+                SensorEvent evt_acc;
+                AI_SP_Stream_t streamAcc =
+                {
+                    .packet.payload = p_obj->p_fast_sensor_data_buff,
+                    .packet.payload_size = p_obj->samples_per_it,
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamAcc.packet.shape, 3, p_obj->samples_per_it);
+                streamAcc.packet.payload_size = 2 * streamAcc.packet.shape.shapes[0] * streamAcc.packet.shape.shapes[1];
 
-                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*)&evt_acc, NULL);
-
-                /* update measuredODR */
-                p_obj->acc_sensor_status.MeasuredODR = p_obj->acc_samples_count / delta_timestamp;
+              SensorEventInit((IEvent *) &evt_acc, p_obj->p_acc_event_src, (ai_logging_packet_t *) &streamAcc, timestamp,
+                              p_obj->acc_id);
+                IEventSrcSendEvent(p_obj->p_acc_event_src, (IEvent*) &evt_acc, NULL);
               }
               else if(p_obj->gyro_sensor_status.IsActive)
               {
-                /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue:
-                 * [X0, Y0, Z0]
-                 * [X1, Y1, Z1]
-                 * ...
-                 * [Xm-1, Ym-1, Zm-1]
-                 */
-                EMD_Init(&data_gyro, p_obj->p_fast_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->gyro_samples_count, p_obj->gyro_sensor_status.Dimensions);
-                DataEventInit((IEvent*)&evt_gyro, p_obj->p_gyro_event_src, &data_gyro, timestamp,  p_obj->gyro_id);
+                SensorEvent evt_gyro;
+                AI_SP_Stream_t streamGyro =
+                {
+                    .packet.payload = p_obj->p_fast_sensor_data_buff,
+                    .packet.payload_size = p_obj->samples_per_it,
+                    .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN
+              };
+                ai_logging_create_shape_2d(&streamGyro.packet.shape, 3, p_obj->samples_per_it);
+                streamGyro.packet.payload_size = 2 * streamGyro.packet.shape.shapes[0] * streamGyro.packet.shape.shapes[1];
 
-                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*)&evt_gyro, NULL);
-
-                /* update measuredODR */
-                p_obj->gyro_sensor_status.MeasuredODR = p_obj->gyro_samples_count / delta_timestamp;
+              SensorEventInit((IEvent *) &evt_gyro, p_obj->p_gyro_event_src, (ai_logging_packet_t *) &streamGyro, timestamp,
+                              p_obj->gyro_id);
+                IEventSrcSendEvent(p_obj->p_gyro_event_src, (IEvent*) &evt_gyro, NULL);
               }
               else
               {
@@ -1635,8 +1674,8 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
               }
 
               /* update measuredODR */
-              p_obj->acc_sensor_status.MeasuredODR = (float)p_obj->samples_per_it / (float)delta_timestamp;
-              p_obj->gyro_sensor_status.MeasuredODR = (float)p_obj->samples_per_it / (float)delta_timestamp;
+              p_obj->acc_sensor_status.MeasuredODR = p_obj->samples_per_it / delta_timestamp;
+              p_obj->gyro_sensor_status.MeasuredODR = p_obj->samples_per_it / delta_timestamp;
 
             }
 
@@ -1672,13 +1711,23 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
 
             if(p_obj->mlc_enable)
             {
-              EMData_t data;
-              EMD_Init(&data, (uint8_t*)&p_obj->p_mlc_sensor_data_buff[0], E_EM_UINT8, E_EM_MODE_LINEAR, 1, p_obj->mlc_fakesensor_status.Dimensions);
+              IEvent evt_mlc;
+              AI_SP_Stream_t streamMlc =
+              {
+                  .packet.payload = (uint8_t*) p_obj->p_mlc_sensor_data_buff,
+                  .packet.payload_size = 8,
+                  .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+              .mode = AI_SP_MODE_COLUMN
+            };
+              ai_logging_create_shape_1d(&streamMlc.packet.shape, 8);
+              streamMlc.packet.payload_size = streamMlc.packet.shape.shapes[0];
 
-              DataEvent_t evt;
-
-              DataEventInit((IEvent*)&evt, p_obj->p_mlc_event_src, &data, timestamp, p_obj->mlc_id);
-              IEventSrcSendEvent(p_obj->p_mlc_event_src, (IEvent*) &evt, NULL);
+              /* TODO: setup the proper sendevent */
+//              IEventInit((IEvent*) &evt_mlc, p_obj->p_mlc_event_src);
+//              IEventSrcSendEvent(p_obj->p_mlc_event_src, (IEvent*) &evt_mlc, (void*) &timestamp);
+            SensorEventInit((IEvent *) &evt_mlc, p_obj->p_mlc_event_src, (ai_logging_packet_t *) &streamMlc, timestamp,
+                            p_obj->mlc_id);
+              IEventSrcSendEvent(p_obj->p_mlc_event_src, (IEvent*) &evt_mlc, NULL);
             }
             else
             {
@@ -1745,28 +1794,24 @@ static sys_error_code_t ISM330DHCXTaskExecuteStepDatalog(AManagedTask *_this)
               res = ISM330DHCXTaskSensorDisable(p_obj, report);
               break;
             default:
-              {
-                /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
               SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("ISM330DHCX: unexpected report in Datalog: %i\r\n", report.messageID));
               break;
           }
-          }
           break;
         }
 
       default:
-        {
-          /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
         SYS_DEBUGF(SYS_DBG_LEVEL_WARNING, ("ISM330DHCX: unexpected report in Datalog: %i\r\n", report.messageID));
         break;
     }
-  }
   }
 
   return res;
@@ -1832,15 +1877,16 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
 
   /* Setup acc and gyro */
   uint8_t reg0 = 0;
+  uint16_t ism330dhcx_wtm_level = 0;
+  uint16_t ism330dhcx_wtm_level_acc;
+  uint16_t ism330dhcx_wtm_level_gyro;
   ism330dhcx_odr_xl_t ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_OFF;
   ism330dhcx_bdr_xl_t ism330dhcx_bdr_xl = ISM330DHCX_XL_NOT_BATCHED;
   ism330dhcx_odr_g_t ism330dhcx_odr_g = ISM330DHCX_GY_ODR_OFF;
   ism330dhcx_bdr_gy_t ism330dhcx_bdr_gy = ISM330DHCX_GY_NOT_BATCHED;
   int32_t ret_val = 0;
 
-  /* set the software timer period */
-  ULONG acc_timer, gyro_timer;
-
+  // if this variable need to persist then I move it in the managed task class declaration.
   ism330dhcx_pin_int1_route_t int1_route =
   {
     0
@@ -1850,12 +1896,6 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
     0
   };
 
-  ret_val = ism330dhcx_reset_set(p_sensor_drv, 1);
-  do
-  {
-    ism330dhcx_reset_get(p_sensor_drv, &reg0);
-  } while (reg0);
-
   ret_val = ism330dhcx_i2c_interface_set(p_sensor_drv, ISM330DHCX_I2C_DISABLE);
 
   ret_val = ism330dhcx_device_id_get(p_sensor_drv, (uint8_t*) &reg0);
@@ -1864,6 +1904,13 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
     ABusIFSetWhoAmI(_this->p_sensor_bus_if, reg0);
   }
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("ISM330DHCX: sensor - I am 0x%x.\r\n", reg0));
+
+  ret_val = ism330dhcx_reset_set(p_sensor_drv, 1);
+  do
+  {
+    ism330dhcx_reset_get(p_sensor_drv, &reg0);
+  } while (reg0);
+  ret_val = ism330dhcx_i2c_interface_set(p_sensor_drv, ISM330DHCX_I2C_DISABLE);
 
   /* AXL FS */
   if(_this->acc_sensor_status.FS < 3.0f)
@@ -1909,124 +1956,103 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_12Hz5;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_12Hz5;
-    acc_timer = 80;
   }
   else if(_this->acc_sensor_status.ODR < 27.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_26Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_26Hz;
-    acc_timer = 40;
   }
   else if(_this->acc_sensor_status.ODR < 53.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_52Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_52Hz;
-    acc_timer = 20;
   }
   else if(_this->acc_sensor_status.ODR < 105.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_104Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_104Hz;
-    acc_timer = 10;
   }
   else if(_this->acc_sensor_status.ODR < 209.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_208Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_208Hz;
-    acc_timer = 5;
   }
   else if(_this->acc_sensor_status.ODR < 417.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_416Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_417Hz;
-    acc_timer = 5;
   }
   else if(_this->acc_sensor_status.ODR < 834.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_833Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_833Hz;
-    acc_timer = 5;
   }
   else if(_this->acc_sensor_status.ODR < 1667.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_1666Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_1667Hz;
-    acc_timer = 5;
   }
   else if(_this->acc_sensor_status.ODR < 3333.0f)
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_3332Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_3333Hz;
-    acc_timer = 5;
   }
   else
   {
     ism330dhcx_odr_xl = ISM330DHCX_XL_ODR_6667Hz;
     ism330dhcx_bdr_xl = ISM330DHCX_XL_BATCHED_AT_6667Hz;
-    acc_timer = 5;
   }
 
   if(_this->gyro_sensor_status.ODR < 13.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_12Hz5;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_12Hz5;
-    gyro_timer = 80;
   }
   else if(_this->gyro_sensor_status.ODR < 27.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_26Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_26Hz;
-    gyro_timer = 40;
   }
   else if(_this->gyro_sensor_status.ODR < 53.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_52Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_52Hz;
-    gyro_timer = 20;
   }
   else if(_this->gyro_sensor_status.ODR < 105.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_104Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_104Hz;
-    gyro_timer = 10;
   }
   else if(_this->gyro_sensor_status.ODR < 209.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_208Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_208Hz;
-    gyro_timer = 5;
   }
   else if(_this->gyro_sensor_status.ODR < 417.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_416Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_417Hz;
-    gyro_timer = 5;
   }
   else if(_this->gyro_sensor_status.ODR < 834.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_833Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_833Hz;
-    gyro_timer = 5;
   }
   else if(_this->gyro_sensor_status.ODR < 1667.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_1666Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_1667Hz;
-    gyro_timer = 5;
   }
   else if(_this->gyro_sensor_status.ODR < 3333.0f)
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_3332Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_3333Hz;
-    gyro_timer = 5;
   }
   else
   {
     ism330dhcx_odr_g = ISM330DHCX_GY_ODR_6667Hz;
     ism330dhcx_bdr_gy = ISM330DHCX_GY_BATCHED_AT_6667Hz;
-    gyro_timer = 5;
   }
-  _this->ism330dhcx_task_cfg_timer_period_ms = acc_timer < gyro_timer ? acc_timer : gyro_timer;
 
   if(_this->acc_sensor_status.IsActive)
   {
@@ -2049,11 +2075,6 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
     ism330dhcx_gy_data_rate_set(p_sensor_drv, ISM330DHCX_GY_ODR_OFF);
     ism330dhcx_fifo_gy_batch_set(p_sensor_drv, ISM330DHCX_GY_NOT_BATCHED);
   }
-
-#if ISM330DHCX_FIFO_ENABLED
-  uint16_t ism330dhcx_wtm_level = 0;
-  uint16_t ism330dhcx_wtm_level_acc;
-  uint16_t ism330dhcx_wtm_level_gyro;
 
   /* Calculation of watermark and samples per int*/
   ism330dhcx_wtm_level_acc = ((uint16_t) _this->acc_sensor_status.ODR * (uint16_t) ISM330DHCX_MAX_DRDY_PERIOD);
@@ -2095,42 +2116,10 @@ static sys_error_code_t ISM330DHCXTaskSensorInit(ISM330DHCXTask *_this)
   /* Setup int for FIFO */
   ism330dhcx_fifo_watermark_set(p_sensor_drv, ism330dhcx_wtm_level);
 
-  if(_this->pIRQConfig != NULL)
-  {
   int1_route.int1_ctrl.int1_fifo_th = 1;
-  }
-  else
-  {
-    int1_route.int1_ctrl.int1_fifo_th = 0;
-  }
   ism330dhcx_pin_int1_route_set(p_sensor_drv, &int1_route);
 
   ism330dhcx_fifo_mode_set(p_sensor_drv, ISM330DHCX_STREAM_MODE);
-#else
-  _this->samples_per_it = 1;
-  if(_this->pIRQConfig != NULL)
-  {
-	if(_this->acc_sensor_status.IsActive && _this->gyro_sensor_status.IsActive) /* Both subSensor is active */
-	{
-      int1_route.int1_ctrl.int1_drdy_xl = 1;
-      int1_route.int1_ctrl.int1_drdy_g = 1;
-	}
-	else if(_this->acc_sensor_status.IsActive)
-	{
-      int1_route.int1_ctrl.int1_drdy_xl = 1;
-	}
-	else
-	{
-      int1_route.int1_ctrl.int1_drdy_g = 1;
-	}
-  }
-  else
-  {
-    int1_route.int1_ctrl.int1_drdy_xl = 0;
-    int1_route.int1_ctrl.int1_drdy_g = 0;
-  }
-  ism330dhcx_pin_int1_route_set(p_sensor_drv, &int1_route);
-#endif /* ISM330DHCX_FIFO_ENABLED */
 
   /* Setup mlc */
   if(_this->mlc_enable)
@@ -2161,8 +2150,6 @@ static sys_error_code_t ISM330DHCXTaskSensorReadData(ISM330DHCXTask *_this)
   assert_param(_this != NULL);
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   stmdev_ctx_t *p_sensor_drv = (stmdev_ctx_t*) &_this->p_sensor_bus_if->m_xConnector;
-
-#if ISM330DHCX_FIFO_ENABLED
   uint8_t reg[2];
   uint16_t i;
 
@@ -2173,7 +2160,8 @@ static sys_error_code_t ISM330DHCXTaskSensorReadData(ISM330DHCXTask *_this)
 
   if((reg[1]) & 0x80 && (fifo_level >= _this->samples_per_it))
   {
-    ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_FIFO_DATA_OUT_TAG, _this->p_fast_sensor_data_buff, _this->samples_per_it * 7);
+    ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_FIFO_DATA_OUT_TAG, _this->p_fast_sensor_data_buff,
+                        _this->samples_per_it * 7);
 
 #if (HSD_USE_DUMMY_DATA == 1)
     int16_t * p16 = (int16_t *)(_this->p_fast_sensor_data_buff);
@@ -2253,49 +2241,13 @@ static sys_error_code_t ISM330DHCXTaskSensorReadData(ISM330DHCXTask *_this)
         *p16_dest++ = *p16_src++;
         *p16_dest++ = *p16_src++;
       }
-      if(_this->acc_sensor_status.IsActive)
-      {
-        _this->acc_samples_count = _this->samples_per_it;
-      }
-      else
-      {
-        _this->gyro_samples_count = _this->samples_per_it;
-      }
     }
 
   }
   else
-      {
+  {
     res = SYS_BASE_ERROR_CODE;
   }
-#else
-  if((_this->acc_sensor_status.IsActive) && (_this->gyro_sensor_status.IsActive))
-  { /* Read both ACC and GYRO */
-
-    uint32_t odr_acc = (uint32_t) _this->acc_sensor_status.ODR;
-    uint32_t odr_gyro = (uint32_t) _this->gyro_sensor_status.ODR;
-
-    if(odr_acc > odr_gyro) /* Acc is faster than Gyro */
-    {
-      ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_A, _this->p_fast_sensor_data_buff, _this->samples_per_it * 6);
-      ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_G, _this->p_slow_sensor_data_buff, _this->samples_per_it * 6);
-      }
-      else
-      {
-      ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_G, _this->p_fast_sensor_data_buff, _this->samples_per_it * 6);
-      ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_A, _this->p_slow_sensor_data_buff, _this->samples_per_it * 6);
-      }
-
-    }
-  else if(_this->acc_sensor_status.IsActive)/* 1 subsensor active only --> simply drop TAGS */
-  {
-    ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_A, _this->p_fast_sensor_data_buff, _this->samples_per_it * 6);
-  }
-  else
-  {
-    ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_OUTX_L_G, _this->p_fast_sensor_data_buff, _this->samples_per_it * 6);
-  }
-#endif /* ISM330DHCX_FIFO_ENABLED */
 
   return res;
 }
@@ -2305,6 +2257,7 @@ static sys_error_code_t ISM330DHCXTaskSensorReadMLC(ISM330DHCXTask *_this)
   assert_param(_this != NULL);
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   stmdev_ctx_t *p_sensor_drv = (stmdev_ctx_t*) &_this->p_sensor_bus_if->m_xConnector;
+  ism330dhcx_mlc_status_mainpage_t mlc_status;
   uint8_t ii;
 
   if(_this->mlc_enable)
@@ -2315,9 +2268,8 @@ static sys_error_code_t ISM330DHCXTaskSensorReadMLC(ISM330DHCXTask *_this)
       ism330dhcx_read_reg(p_sensor_drv, ISM330DHCX_MLC0_SRC + ii, (uint8_t*) (&_this->p_mlc_sensor_data_buff[ii]), 1);
       ism330dhcx_mem_bank_set(p_sensor_drv, ISM330DHCX_USER_BANK);
     }
-    ism330dhcx_mlc_status_get(p_sensor_drv, (ism330dhcx_mlc_status_mainpage_t*)&_this->p_mlc_sensor_data_buff[8]);
+    ism330dhcx_mlc_status_get(p_sensor_drv, &mlc_status);
   }
-
   return res;
 }
 
@@ -2343,31 +2295,52 @@ static sys_error_code_t ISM330DHCXTaskSensorInitTaskParams(ISM330DHCXTask *_this
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* ACCELEROMETER STATUS */
-  _this->acc_sensor_status.DataType = E_EM_INT16;
+  _this->acc_sensor_status.DataType = DATA_TYPE_INT16;
   _this->acc_sensor_status.Dimensions = 3;
   _this->acc_sensor_status.IsActive = TRUE;
   _this->acc_sensor_status.FS = 16.0f;
   _this->acc_sensor_status.Sensitivity = 0.0000305f * _this->acc_sensor_status.FS;
   _this->acc_sensor_status.ODR = 6667.0f;
   _this->acc_sensor_status.MeasuredODR = 0.0f;
+  _this->acc_sensor_status.InitialOffset = 0.0f;
+  _this->acc_sensor_status.DataPacketSize = 2048;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->acc_sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->acc_sensor_status.SamplesPerTimestamp = 1000;
+#endif
 
   /* GYROSCOPE STATUS */
-  _this->gyro_sensor_status.DataType = E_EM_INT16;
+  _this->gyro_sensor_status.DataType = DATA_TYPE_INT16;
   _this->gyro_sensor_status.Dimensions = 3;
   _this->gyro_sensor_status.IsActive = TRUE;
   _this->gyro_sensor_status.FS = 4000.0f;
   _this->gyro_sensor_status.Sensitivity = 0.035f * _this->gyro_sensor_status.FS;
   _this->gyro_sensor_status.ODR = 6667.0f;
   _this->gyro_sensor_status.MeasuredODR = 0.0f;
+  _this->gyro_sensor_status.InitialOffset = 0.0f;
+  _this->gyro_sensor_status.DataPacketSize = 2048;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->gyro_sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->gyro_sensor_status.SamplesPerTimestamp = 1000;
+#endif
 
   /* MLC STATUS */
-  _this->mlc_fakesensor_status.DataType = E_EM_INT8;
-  _this->mlc_fakesensor_status.Dimensions = 9;
+  _this->mlc_fakesensor_status.DataType = DATA_TYPE_INT8;
+  _this->mlc_fakesensor_status.Dimensions = 8;
   _this->mlc_fakesensor_status.IsActive = FALSE;
   _this->mlc_fakesensor_status.FS = 1.0f;
   _this->mlc_fakesensor_status.Sensitivity = 1.0f;
   _this->mlc_fakesensor_status.ODR = 1.0f;
   _this->mlc_fakesensor_status.MeasuredODR = 0.0f;
+  _this->mlc_fakesensor_status.InitialOffset = 0.0f;
+  _this->mlc_fakesensor_status.DataPacketSize = 16;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->mlc_fakesensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->mlc_fakesensor_status.SamplesPerTimestamp = 1;
+#endif
 
   return res;
 }
@@ -2754,9 +2727,11 @@ static inline ISM330DHCXTask* ISM330DHCXTaskGetOwnerFromISensorMlcIF(ISensorMlc_
 
 static void ISM330DHCXTaskTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   // if (sTaskObj.in_queue != NULL ) {//TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
@@ -2769,20 +2744,22 @@ static void ISM330DHCXTaskTimerCallbackFunction(ULONG timer)
 
 static void ISM330DHCXTaskMLCTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY_MLC;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY_MLC,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   // if (sTaskObj.in_queue != NULL ) {//TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the message. Signal the error
     sys_error_handler();
   }
   //}
 }
 
-/* CubeMX integration */
+// CubeMX integration
 // ******************
 
 /**
@@ -2790,14 +2767,16 @@ static void ISM330DHCXTaskMLCTimerCallbackFunction(ULONG timer)
  */
 void ISM330DHCXTask_EXTI_Callback(uint16_t Pin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
 //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }
@@ -2805,14 +2784,16 @@ void ISM330DHCXTask_EXTI_Callback(uint16_t Pin)
 
 void INT2_DHCX_EXTI_Callback(uint16_t Pin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY_MLC;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY_MLC,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
 //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }

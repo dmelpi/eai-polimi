@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_NeaiAnomalyDetection.h
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.0.0
+  * @date    28-Apr-2022
   * @brief   NEAI(Cartesiam) Anomaly Detection info services APIs.
   ******************************************************************************
   * @attention
@@ -29,32 +29,29 @@
 /* Exported Defines ---------------------------------------------------------*/
 #define NEAI_AD_ESCAPE 0xFF
 
+/* Exported typedef ---------------------------------------------------------*/
+
 typedef enum
 {
-  NEAI_AD_NORMAL        = 0x00,
-  NEAI_AD_ANOMALY       = 0x01,
-  NEAI_AD_STATUS_NULL   = 0x02
+  NEAI_AD_NORMAL  = 0x00,
+  NEAI_AD_ANOMALY = 0x01
 } BLE_AD_status_t;
 
 typedef enum
 {
-  NEAI_AD_IDLE          = 0x00,
-  NEAI_AD_LEARNING      = 0x01,
-  NEAI_AD_DETECTING     = 0x02,
-  NEAI_AD_IDLE_TRAINED  = 0x03,
-  NEAI_AD_PHASE_NULL    = 0xFF
+  NEAI_AD_IDLE      = 0x00,
+  NEAI_AD_LEARNING  = 0x01,
+  NEAI_AD_DETECTING = 0x02
 } BLE_AD_phase_t;
 
 typedef enum
 {
-  NEAI_AD_OK                     = 0x00,
-  NEAI_AD_NOINIT                 = 0x7B,
-  NEAI_AD_BOARD_ERROR            = 0x7C,
-  NEAI_AD_BUFFER_ERROR           = 0x7D,
-  NEAI_NOT_ENOUGH_CALL           = 0x7E,
-  NEAI_RECOMMENDED_LEARNING_DONE = 0x7F,
-  NEAI_AD_UNKNOWN                = 0x80,
-  NEAI_AD_STATE_NULL             = 0xFF
+  NEAI_AD_OK           = 0x00,
+  NEAI_AD_NOINIT       = 0x7B,
+  NEAI_AD_BOARD_ERROR  = 0x7C,
+  NEAI_AD_BUFFER_ERROR = 0x7D,
+  NEAI_AD_LESS_CALL    = 0x7E,
+  NEAI_AD_UNKNOWN      = 0x7F
 } BLE_AD_state_t;
 
 typedef struct
@@ -86,9 +83,10 @@ extern CustomWriteRequestAnomalyDetection_t CustomWriteRequestAD;
 
 /**
  * @brief  Init NeaiAnomalyDetection info service
+ * @param  uint8_t available_libraries:    numbers of available libraries in the application
  * @retval BleCharTypeDef* BleCharPointer: Data structure pointer for environmental info service
  */
-extern BleCharTypeDef* BLE_InitADService(void);
+extern BleCharTypeDef* BLE_InitADService(uint8_t available_libraries);
 
 /**
  * @brief  Update NeaiAnomalyDetection characteristic value

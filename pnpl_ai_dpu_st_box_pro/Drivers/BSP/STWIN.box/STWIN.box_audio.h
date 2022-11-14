@@ -1,21 +1,24 @@
 /**
- ******************************************************************************
- * @file    STWIN.box_audio.h
- * @author  SRA
- * @brief   This file contains the common defines and functions prototypes for
- *          STWIN.box_audio.c driver.
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2022 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+******************************************************************************
+* @file    STWIN_audio.h
+* @author  SRA
+* @version v1.4.0
+* @date    11-Sep-2020
+* @brief   This file contains the common defines and functions prototypes for
+*          STWIN_audio.c driver.
+******************************************************************************
+* @attention
+*
+* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
+* All rights reserved.</center></h2>
+*
+* This software component is licensed by ST under BSD 3-Clause license,
+* the "License"; You may not use this file except in compliance with the 
+* License. You may obtain a copy of the License at:
+*                        opensource.org/licenses/BSD-3-Clause
+*
+******************************************************************************
+*/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef STWIN_BOX_AUDIO_H
@@ -449,3 +452,4 @@ void BSP_AUDIO_IN_Error_CallBack(uint32_t Instance);
 
 #endif /* STWIN_BOX_AUDIO_H */
 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

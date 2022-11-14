@@ -106,7 +106,7 @@ sys_error_code_t MDFSetMDFConfig(IDriver *_this, float ODR);
   * Register a callback function with the HAL driver.
   * @sa HAL_MDF_RegisterCallback()
   */
-static inline sys_error_code_t MDFDriverFilterRegisterCallback(MDFDriver_t *_this, HAL_MDF_CallbackIDTypeDef CallbackID,
+inline sys_error_code_t MDFDriverFilterRegisterCallback(MDFDriver_t *_this, HAL_MDF_CallbackIDTypeDef CallbackID,
                                                         pMDF_CallbackTypeDef pCallback);
 
 /**
@@ -130,7 +130,7 @@ sys_error_code_t MDFDriverFilterRegisterCallback(MDFDriver_t *_this, HAL_MDF_Cal
 {
   assert_param(_this != NULL);
 
-  (void)HAL_MDF_RegisterCallback(_this->mx_handle.p_mx_mdf_cfg->p_mdf, CallbackID, pCallback);
+  HAL_MDF_RegisterCallback(_this->mx_handle.p_mx_mdf_cfg->p_mdf, CallbackID, pCallback);
 
   return SYS_NO_ERROR_CODE;
 }

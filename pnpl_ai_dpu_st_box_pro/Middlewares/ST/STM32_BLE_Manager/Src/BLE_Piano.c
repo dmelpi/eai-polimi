@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_Piano.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   AddP iano info services using vendor specific
   *          profiles.
   ******************************************************************************
@@ -29,7 +29,7 @@
 
 /* Exported Variables ------------------------------------------------------- */
 CustomNotifyEventPiano_t CustomNotifyEventPiano=NULL;
-CustomWriteRequestPiano_t CustomWriteRequestPiano=NULL;
+CustomWriteRequestPianoFunction CustomWriteRequestPianoFunctionPointer;
 
 /* Private variables ---------------------------------------------------------*/
 /* Data structure pointer for Piano info service */
@@ -63,7 +63,7 @@ BleCharTypeDef* BLE_InitPianoService(void)
   BleCharPointer->Enc_Key_Size=16;
   BleCharPointer->Is_Variable=0;
   
-  if(CustomWriteRequestPiano == NULL) {
+  if(CustomWriteRequestPianoFunctionPointer == NULL) {
     BLE_MANAGER_PRINTF("Error: Write request Piano function not defined\r\n");
   }
   
@@ -129,10 +129,10 @@ static void AttrMod_Request_Piano(void *VoidCharPointer, uint16_t attr_handle, u
  */
 static void Write_Request_Piano(void *BleCharPointer,uint16_t handle, uint16_t Offset, uint8_t data_length, uint8_t *att_data)
 {
-  if(CustomWriteRequestPiano != NULL) {
-    CustomWriteRequestPiano(att_data, data_length);
+  if(CustomWriteRequestPianoFunctionPointer != NULL) {
+    CustomWriteRequestPianoFunctionPointer(att_data, data_length);
   } else {
-    BLE_MANAGER_PRINTF("\r\n\nWrite request Piano function not defined\r\n\n");
+    BLE_MANAGER_PRINTF("\r\n\nRead request Piano function not defined\r\n\n");
   }
 }
 

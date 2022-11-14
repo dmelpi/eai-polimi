@@ -156,12 +156,8 @@ int32_t BSP_SD_Init(uint32_t Instance)
     gpio_init_structure.Pin     = PinDetect[Instance];
     gpio_init_structure.Pull    = GPIO_PULLUP;
     gpio_init_structure.Speed   = GPIO_SPEED_FREQ_HIGH;
-    gpio_init_structure.Mode    = GPIO_MODE_IT_RISING_FALLING;
+    gpio_init_structure.Mode    = GPIO_MODE_INPUT;
     HAL_GPIO_Init(SD_GPIO_PORT[Instance], &gpio_init_structure);
-
-    /* EXTI interrupt init*/
-    HAL_NVIC_SetPriority(EXTI1_IRQn, 10, 0);
-    HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 
     /* Check if SD card is present */
     if ((uint32_t)BSP_SD_IsDetected(Instance) != SD_PRESENT)
@@ -283,13 +279,8 @@ __weak HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd)
   hsd->Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   hsd->Init.BusWide             = SDMMC_BUS_WIDE_4B;
   hsd->Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_ENABLE;
-  /*
-   *   Peripheral_clock/4
-   *   PLL1P 160MHz
-   *   SDCard clock 40 MHz
-   */
+//  hsd->Init.ClockDiv            = SDMMC_NSpeed_CLK_DIV;
   hsd->Init.ClockDiv            = SDMMC_HSpeed_CLK_DIV;
-
 
   /* HAL SD initialization */
   if (HAL_SD_Init(hsd) != HAL_OK)
@@ -873,8 +864,7 @@ static void SD_MspInit(SD_HandleTypeDef *hsd)
   {
     /* Configure the Eval SDMMC1 clock source. The clock is derived from the HSI48 */
     RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_SDMMC;
-    RCC_PeriphClkInit.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_PLL1;    /* TODO: SDCard 40 MHz */
-//    RCC_PeriphClkInit.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_CLK48;
+    RCC_PeriphClkInit.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_CLK48;
     ret = HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInit);
 
     if (ret == HAL_OK)

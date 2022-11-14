@@ -47,34 +47,15 @@
   */
 typedef enum
 {
-    CON34_PIN_5,
-    CON34_PIN_7,
-    CON34_PIN_8,
-    CON34_PIN_9,
-    CON34_PIN_10,
-    CON34_PIN_11,
-    CON34_PIN_12,
-    CON34_PIN_13,
-    CON34_PIN_14,
-    CON34_PIN_16,
-    CON34_PIN_17,
-    CON34_PIN_18,
-    CON34_PIN_19,
-    CON34_PIN_21,
-    CON34_PIN_22,
-    CON34_PIN_23,
-    CON34_PIN_24,
-    CON34_PIN_25,
-    CON34_PIN_26,
-    CON34_PIN_27,
-    CON34_PIN_28,
-    CON34_PIN_30,
-
-  DEBUG_PIN_MAX_NUM
+  DEBUG_PIN14 = 0,
+  DEBUG_PIN15,
+  DEBUG_PIN18,
+  DEBUG_PIN19,
+  DEBUG_PIN20,
+  DEBUG_PIN21,
+  DEBUG_PIN22
 } Debug_Pin_TypeDef;
 
-extern const uint16_t  DEBUG_PIN[DEBUG_PIN_MAX_NUM];
-extern GPIO_TypeDef  *DEBUG_PIN_PORT[DEBUG_PIN_MAX_NUM];
 
 /**
   * @}
@@ -88,165 +69,60 @@ extern GPIO_TypeDef  *DEBUG_PIN_PORT[DEBUG_PIN_MAX_NUM];
 /** @defgroup STWIN.box_LOW_LEVEL_DEBUG_PINS PINS
   * @{
   */
+#define DEBUG_PINn 7
   
-#define DEBUG_CON34_PIN_5_GPIO_PIN                     GPIO_PIN_15
-#define DEBUG_CON34_PIN_5_GPIO_PORT                    GPIOB
-#define DEBUG_CON34_PIN_5_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOB_CLK_ENABLE()
-#define DEBUG_CON34_PIN_5_GPIO_CLK_DISABLE()           __HAL_RCC_GPIOB_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_7_GPIO_PIN                     GPIO_PIN_11
-#define DEBUG_CON34_PIN_7_GPIO_PORT                    GPIOD
-#define DEBUG_CON34_PIN_7_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOD_CLK_ENABLE()
-#define DEBUG_CON34_PIN_7_GPIO_CLK_DISABLE()           __HAL_RCC_GPIOD_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_8_GPIO_PIN                     GPIO_PIN_8
-#define DEBUG_CON34_PIN_8_GPIO_PORT                    GPIOG
-#define DEBUG_CON34_PIN_8_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOG_CLK_ENABLE()
-#define DEBUG_CON34_PIN_8_GPIO_CLK_DISABLE()           __HAL_RCC_GPIOG_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_9_GPIO_PIN                     GPIO_PIN_7
-#define DEBUG_CON34_PIN_9_GPIO_PORT                    GPIOA
-#define DEBUG_CON34_PIN_9_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOA_CLK_ENABLE()
-#define DEBUG_CON34_PIN_9_GPIO_CLK_DISABLE()           __HAL_RCC_GPIOA_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_10_GPIO_PIN                    GPIO_PIN_5
-#define DEBUG_CON34_PIN_10_GPIO_PORT                   GPIOG
-#define DEBUG_CON34_PIN_10_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOG_CLK_ENABLE()
-#define DEBUG_CON34_PIN_10_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOG_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_11_GPIO_PIN                    GPIO_PIN_5
-#define DEBUG_CON34_PIN_11_GPIO_PORT                   GPIOA
-#define DEBUG_CON34_PIN_11_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOA_CLK_ENABLE()
-#define DEBUG_CON34_PIN_11_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOA_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_12_GPIO_PIN                    GPIO_PIN_1
-#define DEBUG_CON34_PIN_12_GPIO_PORT                   GPIOB
-#define DEBUG_CON34_PIN_12_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOB_CLK_ENABLE()
-#define DEBUG_CON34_PIN_12_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOB_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_13_GPIO_PIN                    GPIO_PIN_12
-#define DEBUG_CON34_PIN_13_GPIO_PORT                   GPIOD
-#define DEBUG_CON34_PIN_13_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOD_CLK_ENABLE()
-#define DEBUG_CON34_PIN_13_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOD_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_14_GPIO_PIN                    GPIO_PIN_3
-#define DEBUG_CON34_PIN_14_GPIO_PORT                   GPIOC
-#define DEBUG_CON34_PIN_14_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOC_CLK_ENABLE()
-#define DEBUG_CON34_PIN_14_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOC_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_16_GPIO_PIN                    GPIO_PIN_6
-#define DEBUG_CON34_PIN_16_GPIO_PORT                   GPIOC
-#define DEBUG_CON34_PIN_16_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOC_CLK_ENABLE()
-#define DEBUG_CON34_PIN_16_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOC_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_17_GPIO_PIN                   GPIO_PIN_10
-#define DEBUG_CON34_PIN_17_GPIO_PORT                  GPIOF
-#define DEBUG_CON34_PIN_17_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOF_CLK_ENABLE()
-#define DEBUG_CON34_PIN_17_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOF_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_18_GPIO_PIN                   GPIO_PIN_2
-#define DEBUG_CON34_PIN_18_GPIO_PORT                  GPIOE
-#define DEBUG_CON34_PIN_18_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
-#define DEBUG_CON34_PIN_18_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_19_GPIO_PIN                   GPIO_PIN_0
-#define DEBUG_CON34_PIN_19_GPIO_PORT                  GPIOI
-#define DEBUG_CON34_PIN_19_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOI_CLK_ENABLE()
-#define DEBUG_CON34_PIN_19_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOI_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_21_GPIO_PIN                   GPIO_PIN_3
-#define DEBUG_CON34_PIN_21_GPIO_PORT                  GPIOI
-#define DEBUG_CON34_PIN_21_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOI_CLK_ENABLE()
-#define DEBUG_CON34_PIN_21_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOI_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_22_GPIO_PIN                   GPIO_PIN_5
-#define DEBUG_CON34_PIN_22_GPIO_PORT                  GPIOE
-#define DEBUG_CON34_PIN_22_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
-#define DEBUG_CON34_PIN_22_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_23_GPIO_PIN                   GPIO_PIN_3
-#define DEBUG_CON34_PIN_23_GPIO_PORT                  GPIOD
-#define DEBUG_CON34_PIN_23_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOD_CLK_ENABLE()
-#define DEBUG_CON34_PIN_23_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOD_CLK_DISABLE()
+#define DEBUG_PIN_14_PIN                                 GPIO_PIN_5
+#define DEBUG_PIN_14_GPIO_PORT                           GPIOG
+#define DEBUG_PIN_14_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOG_CLK_ENABLE()
+#define DEBUG_PIN_14_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOG_CLK_DISABLE()
   
-#define DEBUG_CON34_PIN_24_GPIO_PIN                   GPIO_PIN_4
-#define DEBUG_CON34_PIN_24_GPIO_PORT                  GPIOE
-#define DEBUG_CON34_PIN_24_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
-#define DEBUG_CON34_PIN_24_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_25_GPIO_PIN                   GPIO_PIN_1
-#define DEBUG_CON34_PIN_25_GPIO_PORT                  GPIOI
-#define DEBUG_CON34_PIN_25_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOI_CLK_ENABLE()
-#define DEBUG_CON34_PIN_25_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOI_CLK_DISABLE()
+#define DEBUG_PIN_15_PIN                                 GPIO_PIN_1
+#define DEBUG_PIN_15_GPIO_PORT                           GPIOB
+#define DEBUG_PIN_15_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOB_CLK_ENABLE()
+#define DEBUG_PIN_15_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOB_CLK_DISABLE()
   
-#define DEBUG_CON34_PIN_26_GPIO_PIN                   GPIO_PIN_3
-#define DEBUG_CON34_PIN_26_GPIO_PORT                  GPIOE
-#define DEBUG_CON34_PIN_26_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
-#define DEBUG_CON34_PIN_26_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
+#define DEBUG_PIN_18_PIN                                 GPIO_PIN_8
+#define DEBUG_PIN_18_GPIO_PORT                           GPIOF
+#define DEBUG_PIN_18_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOF_CLK_ENABLE()
+#define DEBUG_PIN_18_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOF_CLK_DISABLE()
+  
+#define DEBUG_PIN_19_PIN                                 GPIO_PIN_0
+#define DEBUG_PIN_19_GPIO_PORT                           GPIOI
+#define DEBUG_PIN_19_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOI_CLK_ENABLE()
+#define DEBUG_PIN_19_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOI_CLK_DISABLE()
+  
+#define DEBUG_PIN_20_PIN                                 GPIO_PIN_1
+#define DEBUG_PIN_20_GPIO_PORT                           GPIOI
+#define DEBUG_PIN_20_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOI_CLK_ENABLE()
+#define DEBUG_PIN_20_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOI_CLK_DISABLE()
+  
+#define DEBUG_PIN_21_PIN                                 GPIO_PIN_8
+#define DEBUG_PIN_21_GPIO_PORT                           GPIOG
+#define DEBUG_PIN_21_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOG_CLK_ENABLE()
+#define DEBUG_PIN_21_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOG_CLK_DISABLE()
+  
+#define DEBUG_PIN_22_PIN                                 GPIO_PIN_3
+#define DEBUG_PIN_22_GPIO_PORT                           GPIOD
+#define DEBUG_PIN_22_GPIO_CLK_ENABLE()                   __HAL_RCC_GPIOD_CLK_ENABLE()
+#define DEBUG_PIN_22_GPIO_CLK_DISABLE()                  __HAL_RCC_GPIOD_CLK_DISABLE()
 
-#define DEBUG_CON34_PIN_27_GPIO_PIN                   GPIO_PIN_7
-#define DEBUG_CON34_PIN_27_GPIO_PORT                  GPIOG
-#define DEBUG_CON34_PIN_27_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOG_CLK_ENABLE()
-#define DEBUG_CON34_PIN_27_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOG_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_28_GPIO_PIN                   GPIO_PIN_2
-#define DEBUG_CON34_PIN_28_GPIO_PORT                  GPIOE
-#define DEBUG_CON34_PIN_28_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
-#define DEBUG_CON34_PIN_28_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
-
-#define DEBUG_CON34_PIN_30_GPIO_PIN                   GPIO_PIN_2
-#define DEBUG_CON34_PIN_30_GPIO_PORT                  GPIOI
-#define DEBUG_CON34_PIN_30_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOI_CLK_ENABLE()
-#define DEBUG_CON34_PIN_30_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOI_CLK_DISABLE()
-
-
-#define DEBUG_PINx_GPIO_CLK_ENABLE(__DEBUG_PIN__)   do { if((__DEBUG_PIN__) == CON34_PIN_5)  { DEBUG_CON34_PIN_5_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_7)  { DEBUG_CON34_PIN_7_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_8)  { DEBUG_CON34_PIN_8_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_9)  { DEBUG_CON34_PIN_9_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_10) { DEBUG_CON34_PIN_10_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_11) { DEBUG_CON34_PIN_11_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_12) { DEBUG_CON34_PIN_12_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_13) { DEBUG_CON34_PIN_13_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_14) { DEBUG_CON34_PIN_14_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_16) { DEBUG_CON34_PIN_16_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_17) { DEBUG_CON34_PIN_17_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_18) { DEBUG_CON34_PIN_18_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_19) { DEBUG_CON34_PIN_19_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_21) { DEBUG_CON34_PIN_21_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_22) { DEBUG_CON34_PIN_22_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_23) { DEBUG_CON34_PIN_23_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_24) { DEBUG_CON34_PIN_24_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_25) { DEBUG_CON34_PIN_25_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_26) { DEBUG_CON34_PIN_26_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_27) { DEBUG_CON34_PIN_27_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_28) { DEBUG_CON34_PIN_28_GPIO_CLK_ENABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_30) { DEBUG_CON34_PIN_30_GPIO_CLK_ENABLE(); } else \
-                                                         { /*No more pin available on STWIN CON34 connector*/ } } while(0)
+#define DEBUG_PINx_GPIO_CLK_ENABLE(__DEBUG_PIN__)   do { if((__DEBUG_PIN__) == DEBUG_PIN14) { HAL_PWREx_EnableVddIO2(); DEBUG_PIN_14_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN15) { DEBUG_PIN_15_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN18) { DEBUG_PIN_18_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN19) { HAL_PWREx_EnableVddIO2(); DEBUG_PIN_19_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN20) { HAL_PWREx_EnableVddIO2(); DEBUG_PIN_20_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN21) { HAL_PWREx_EnableVddIO2(); DEBUG_PIN_21_GPIO_CLK_ENABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN22) { DEBUG_PIN_22_GPIO_CLK_ENABLE(); } else \
+                                                         { /*No more pin available on DIL24 connector*/ } } while(0)
                                                            
-#define DEBUG_PINx_GPIO_CLK_DISABLE(__DEBUG_PIN__)  do { if((__DEBUG_PIN__) == CON34_PIN_5)  { DEBUG_CON34_PIN_5_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_7)  { DEBUG_CON34_PIN_7_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_8)  { DEBUG_CON34_PIN_8_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_9)  { DEBUG_CON34_PIN_9_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_10) { DEBUG_CON34_PIN_10_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_11) { DEBUG_CON34_PIN_11_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_12) { DEBUG_CON34_PIN_12_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_13) { DEBUG_CON34_PIN_13_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_14) { DEBUG_CON34_PIN_14_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_16) { DEBUG_CON34_PIN_16_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_17) { DEBUG_CON34_PIN_17_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_18) { DEBUG_CON34_PIN_18_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_19) { DEBUG_CON34_PIN_19_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_21) { DEBUG_CON34_PIN_21_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_22) { DEBUG_CON34_PIN_22_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_23) { DEBUG_CON34_PIN_23_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_24) { DEBUG_CON34_PIN_24_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_25) { DEBUG_CON34_PIN_25_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_26) { DEBUG_CON34_PIN_26_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_27) { DEBUG_CON34_PIN_27_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_28) { DEBUG_CON34_PIN_28_GPIO_CLK_DISABLE(); } else \
-                                                         if((__DEBUG_PIN__) == CON34_PIN_30) { DEBUG_CON34_PIN_30_GPIO_CLK_DISABLE(); } else \
-                                                         { /*No more pin available on STWIN CON34 connector*/ } } while(0)
+#define DEBUG_PINx_GPIO_CLK_DISABLE(__DEBUG_PIN__)  do { if((__DEBUG_PIN__) == DEBUG_PIN14) { DEBUG_PIN_14_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN15) { DEBUG_PIN_15_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN18) { DEBUG_PIN_18_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN19) { DEBUG_PIN_19_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN20) { DEBUG_PIN_20_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN21) { DEBUG_PIN_21_GPIO_CLK_DISABLE(); } else \
+                                                         if((__DEBUG_PIN__) == DEBUG_PIN22) { DEBUG_PIN_22_GPIO_CLK_DISABLE(); } else \
+                                                         { /*No more pin available on DIL24 connector*/ } } while(0)
 
 
 /**

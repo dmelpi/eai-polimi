@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_ECompass.h
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   E-Compass info service APIs.
   ******************************************************************************
   * @attention
@@ -54,7 +54,7 @@ extern void BLE_SetECompassAdvertiseData(uint8_t *manuf_data);
 
 /**
  * @brief  Update E-Compass characteristic
- * @param  uint16_t Angle measured
+ * @param  BLE_CP_output_t ECompassCode E-Compass Recognized
  * @retval tBleStatus   Status
  */
 extern tBleStatus BLE_ECompassUpdate(uint16_t Angle);

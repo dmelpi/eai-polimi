@@ -53,7 +53,7 @@ VOID AMTExRun(ULONG nParam) {
       nPosture = tx_interrupt_control(TX_INT_DISABLE);
         _this->m_xStatus.nDelayPowerModeSwitch = 0;
       tx_interrupt_control(nPosture);
-      tx_thread_suspend(&_this->m_xTaskHandle);
+      tx_thread_suspend(&_this->m_xThaskHandle);
     }
     else {
       /* find the execute step function  */
@@ -72,7 +72,7 @@ VOID AMTExRun(ULONG nParam) {
       else {
         /* there is no function so, we suspend the task.*/
         (void)AMTExSetInactiveState(_this, TRUE);
-        tx_thread_suspend(&_this->m_xTaskHandle);
+        tx_thread_suspend(&_this->m_xThaskHandle);
         (void)AMTExSetInactiveState(_this, FALSE);
       }
 

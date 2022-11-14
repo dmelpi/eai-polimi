@@ -53,8 +53,7 @@
 /*! \name Timer Peripheral
  */
 //@{
-//#define STBC02_SW_TIM_PERIOD                (float)50e-6 // s
-#define STBC02_SW_50US                      (float)50e-6 // s
+#define STBC02_SW_TIM_PERIOD                (float)5e-6 // s
 #define STBC02_SW_TIM                       TIM4
 #define STBC02_SW_TIM_CLK_ENABLE()          __HAL_RCC_TIM4_CLK_ENABLE()
 #define STBC02_SW_TIM_CLK_DISABLE()         __HAL_RCC_TIM4_CLK_DISABLE()
@@ -199,7 +198,7 @@ int32_t BSP_BC_Sw_CmdSend(stbc02_SwCmd_TypeDef stbc02_SwCmd);
 
 int32_t BSP_BC_Chg_Init(void);
 int32_t BSP_BC_Chg_DeInit(void);
-void    BSP_BC_ChgPinHasToggled(TIM_HandleTypeDef *htim);
+void    BSP_BC_ChgPinHasToggled(void);
 void    BSP_BC_GetState(stbc02_State_TypeDef *BC_State);
 int32_t BSP_BC_IsChgPinToggling(void);
 

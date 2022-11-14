@@ -29,8 +29,8 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "stts22h_reg.h"
 #include <string.h>
@@ -45,15 +45,11 @@
 #endif
 
 #ifndef STTS22H_TASK_CFG_IN_QUEUE_LENGTH
-#define STTS22H_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define STTS22H_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #ifndef STTS22H_TASK_CFG_TIMER_PERIOD_MS
 #define STTS22H_TASK_CFG_TIMER_PERIOD_MS          250
-#endif
-
-#ifndef STTS22H_TASK_CFG_I2C_ADDRESS
-#define STTS22H_TASK_CFG_I2C_ADDRESS              STTS22H_I2C_ADD_L
 #endif
 
 #define STTS22H_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -178,10 +174,11 @@ typedef struct _STTS22HTaskClass
   /**
    * STTS22HTask (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } STTS22HTaskClass_t;
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -271,7 +268,7 @@ static void STTS22HTaskTimerCallbackFunction(ULONG timer);
  */
 void STT22HTask_EXTI_Callback(uint16_t nPin);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -374,7 +371,7 @@ static const STTS22HTaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* STTS22HTaskGetTempSensorIF(STTS22HTask *_this)
@@ -384,9 +381,10 @@ ISourceObservable* STTS22HTaskGetTempSensorIF(STTS22HTask *_this)
 
 AManagedTaskEx* STTS22HTaskAlloc(const void *pIRQConfig, const void *pCSConfig)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&sTaskObj.super);
 
   sTaskObj.super.vptr = &sTheClass.vtbl;
@@ -413,7 +411,7 @@ IEventSrc* STTS22HTaskGetTempEventSrcIF(STTS22HTask *_this)
   return (IEventSrc*) _this->p_temp_event_src;
 }
 
-/* AManagedTaskEx virtual functions definition */
+// AManagedTaskEx virtual functions definition
 // *******************************************
 
 sys_error_code_t STTS22HTask_vtblHardwareInit(AManagedTask *_this, void *pParams)
@@ -447,19 +445,19 @@ sys_error_code_t STTS22HTask_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   STTS22HTask *p_obj = (STTS22HTask*) _this;
 
-  /* Create task specific sw resources. */
+  // Create task specific sw resources.
 
-  uint32_t item_size = (uint32_t)STTS22H_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(STTS22H_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  uint16_t nItemSize = STTS22H_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(STTS22H_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "STTS22H_Q", item_size / 4u, p_queue_items_buff,
-                                    STTS22H_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "STTS22H_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    STTS22H_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
@@ -484,7 +482,7 @@ sys_error_code_t STTS22HTask_vtblOnCreateTask(
   /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
   if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(STTS22H_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, 0);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(STTS22H_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -493,7 +491,7 @@ sys_error_code_t STTS22HTask_vtblOnCreateTask(
   }
   else
   {
-    p_obj->p_sensor_bus_if = I2CBusIFAlloc(STTS22H_ID, STTS22H_TASK_CFG_I2C_ADDRESS, 0);
+    p_obj->p_sensor_bus_if = I2CBusIFAlloc(STTS22H_ID, STTS22H_I2C_ADD_L, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -506,8 +504,9 @@ sys_error_code_t STTS22HTask_vtblOnCreateTask(
     return res;
   }
 
-  /* Initialize the EventSrc interface, take the ownership of the interface. */
-  p_obj->p_temp_event_src = DataEventSrcAlloc();
+  // Initialize the EventSrc interface.
+  // take the ownership of the interface.
+  p_obj->p_temp_event_src = SensorEventSrcAlloc();
   if(p_obj->p_temp_event_src == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -521,7 +520,7 @@ sys_error_code_t STTS22HTask_vtblOnCreateTask(
   p_obj->temp_id = 0;
   p_obj->prev_timestamp = 0.0f;
   p_obj->samples_per_it = 0;
-  p_obj->temperature = 0.0f;
+  p_obj->temperature = 0;
   _this->m_pfPMState2FuncMap = sTheClass.p_pm_state2func_map;
 
   *pTaskCode = AMTExRun;
@@ -598,8 +597,8 @@ sys_error_code_t STTS22HTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = STTS22HTaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -609,7 +608,7 @@ sys_error_code_t STTS22HTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
     {
       STTS22HTaskConfigureIrqPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -674,12 +673,12 @@ sys_error_code_t STTS22HTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerM
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -724,7 +723,7 @@ sys_error_code_t STTS22HTask_vtblTempGetODR(ISourceObservable *_this, float *p_m
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -920,7 +919,7 @@ SensorStatus_t STTS22HTask_vtblSensorGetStatus(ISensor_t *_this)
 
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t STTS22HTaskExecuteStepState1(AManagedTask *_this)
@@ -963,7 +962,7 @@ static sys_error_code_t STTS22HTaskExecuteStepState1(AManagedTask *_this)
               res = STTS22HTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -974,7 +973,7 @@ static sys_error_code_t STTS22HTaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1031,12 +1030,19 @@ static sys_error_code_t STTS22HTaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-            EMData_t data;
-            EMD_Init(&data, (uint8_t*)&p_obj->temperature, E_EM_FLOAT, E_EM_MODE_LINEAR, 1, 1);
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = (uint8_t*) &p_obj->temperature,
+                .packet.payload_fmt = AI_SP_FMT_FLOAT32_RESET(),
+                .mode = AI_SP_MODE_COLUMN //TODO: STF - this means that data are interleaved?!?
+                // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
+            ai_logging_create_shape_0d(&stream.packet.shape);
+            stream.packet.payload_size = 4 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-            DataEvent_t evt;
-
-            DataEventInit((IEvent*)&evt, p_obj->p_temp_event_src, &data, timestamp, p_obj->temp_id);
+            SensorEvent evt;
+            SensorEventInit((IEvent*) &evt, p_obj->p_temp_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->temp_id);
             IEventSrcSendEvent(p_obj->p_temp_event_src, (IEvent*) &evt, NULL);
 
             /* update measuredODR */
@@ -1088,7 +1094,7 @@ static sys_error_code_t STTS22HTaskExecuteStepDatalog(AManagedTask *_this)
               res = STTS22HTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE)
               ;
@@ -1099,7 +1105,7 @@ static sys_error_code_t STTS22HTaskExecuteStepDatalog(AManagedTask *_this)
           break;
         }
       default:
-        /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE)
         ;
@@ -1271,13 +1277,20 @@ static sys_error_code_t STTS22HTaskSensorInitTaskParams(STTS22HTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* TEMPERATURE SENSOR STATUS */
-  _this->sensor_status.DataType = E_EM_FLOAT;
+  _this->sensor_status.DataType = DATA_TYPE_FLOAT;
   _this->sensor_status.Dimensions = 1;
   _this->sensor_status.IsActive = TRUE;
   _this->sensor_status.FS = 100.0f;
   _this->sensor_status.Sensitivity = 1.0f;
   _this->sensor_status.ODR = 25.0f;
   _this->sensor_status.MeasuredODR = 0.0f;
+  _this->sensor_status.InitialOffset = 0.0f;
+  _this->sensor_status.DataPacketSize = 16;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->sensor_status.SamplesPerTimestamp = 50;
+#endif
 
   return res;
 }
@@ -1454,18 +1467,21 @@ static sys_error_code_t STTS22HTaskConfigureIrqPin(const STTS22HTask *_this, boo
   return res;
 }
 
-/* CubeMX integration */
+// CubeMX integration
+// ******************
 
 static void STTS22HTaskTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
 //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }
@@ -1473,14 +1489,16 @@ static void STTS22HTaskTimerCallbackFunction(ULONG timer)
 
 void STTS22HTask_EXTI_Callback(uint16_t nPin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
 //  }

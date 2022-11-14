@@ -22,8 +22,8 @@
   *
   ******************************************************************************
   */
-#ifndef SENSORMANAGER_H_
-#define SENSORMANAGER_H_
+#ifndef HSDCORE_INC_SENSORMANAGER_H_
+#define HSDCORE_INC_SENSORMANAGER_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -83,4 +83,4 @@ uint32_t GetnBytesPerSample(uint8_t id);
 }
 #endif
 
-#endif /* SENSORMANAGER_H_ */
+#endif /* HSDCORE_INC_SENSORMANAGER_H_ */

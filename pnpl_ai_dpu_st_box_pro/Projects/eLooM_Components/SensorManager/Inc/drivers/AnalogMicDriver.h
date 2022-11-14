@@ -105,7 +105,7 @@ IDriver *AnalogMicDriverAlloc(void);
   * @param buffer_size [IN] specifies the size in word of the data buffer.
   * @return SYS_NO_ERROR_CODE if success, an erro code otherwise.
   */
-static inline sys_error_code_t AnalogMicDrvSetDataBuffer(AnalogMicDriver_t *_this, int16_t *p_buffer, uint32_t buffer_size);
+inline sys_error_code_t AnalogMicDrvSetDataBuffer(AnalogMicDriver_t *_this, int16_t *p_buffer, uint32_t buffer_size);
 
 
 /** Inline functions definition */

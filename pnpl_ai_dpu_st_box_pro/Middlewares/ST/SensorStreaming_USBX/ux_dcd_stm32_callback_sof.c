@@ -1,3 +1,4 @@
+
 /**************************************************************************/
 /**************************************************************************/
 /**                                                                       */
@@ -39,11 +40,11 @@ void HAL_PCD_SOFCallback(PCD_HandleTypeDef *hpcd)
 
     if(sensor_streaming != NULL)
     {
-      uint8_t i, ep;
-      __IO uint8_t *tx_buff_status = sensor_streaming->hwcid->tx_buff_status;
-      uint8_t **tx_buffer = sensor_streaming->hwcid->tx_buffer;
-      uint16_t *ch_data_size = sensor_streaming->hwcid->ch_data_size;
-      uint8_t *status = &sensor_streaming->hwcid->streaming_status;
+      uint8_t        i, ep;
+      __IO uint8_t  *tx_buff_status = sensor_streaming->hwcid->tx_buff_status;
+      uint8_t      **tx_buffer = sensor_streaming->hwcid->tx_buffer;
+      uint16_t      *ch_data_size = sensor_streaming->hwcid->ch_data_size;
+      uint8_t       *status = &sensor_streaming->hwcid->streaming_status;
 
       UX_THREAD_EP_BULKIN_PARAM *ep_bulk = NULL;
 
@@ -82,6 +83,70 @@ void HAL_PCD_SOFCallback(PCD_HandleTypeDef *hpcd)
             }
           }
         }
+
+//        for(i = 0; i < (N_IN_ENDPOINTS - 1U); i++)
+//        {
+//          ep_bulk = &sensor_streaming->ux_slave_class_sensor_streaming_bulkin[i].ep_param;
+//          if(ep_bulk->tx_state != 1U)
+//          {
+//            if(TxBuffStatus[i] == 1U)
+//            {
+//              ep_bulk->last_packet_sent = 0;
+//              TxBuffStatus[i] = 0;
+//              /*send*/
+//              (void) _SetTxBuffer(sensor_streaming, (uint8_t*) &(TxBuffer[i][0]), (USB_DataSizePerEp[i] / 2U), i);
+//              if(_TransmitPacket(sensor_streaming, i) != UX_SUCCESS) //(i + 1U)|0x80U
+//              {
+//                //              return UX_ERROR;     /* USBD_FAIL */
+//              }
+//            }
+//            else if(TxBuffStatus[i] == 2U)
+//            {
+//              ep_bulk->last_packet_sent = 0;
+//              TxBuffStatus[i] = 0;
+//              /*send*/
+//              (void) _SetTxBuffer(sensor_streaming, (uint8_t*) &(TxBuffer[i][(USB_DataSizePerEp[i] / 2U)]), (USB_DataSizePerEp[i] / 2U), i);
+//              if(_TransmitPacket(sensor_streaming, i) != UX_SUCCESS)
+//              {
+//                //              return UX_ERROR;     /* USBD_FAIL */
+//              }
+//            }
+//            else
+//            {
+//            }
+//          }
+//        }
+//
+//        ep_bulk = &sensor_streaming->ux_slave_class_sensor_streaming_bulkin[N_IN_ENDPOINTS - 1U].ep_param;
+//        for(i = (N_IN_ENDPOINTS - 1U); i < N_CHANNELS_MAX; i++)
+//        {
+//          if(ep_bulk->tx_state != 1U)
+//          {
+//            if(TxBuffStatus[i] == 1U)
+//            {
+//              /*send*/
+//              ep_bulk->last_packet_sent = 0;
+//              (void) _SetTxBuffer(sensor_streaming, (uint8_t*) &(TxBuffer[i][0]), (USB_DataSizePerEp[i] / 2U), (N_IN_ENDPOINTS - 1));
+//              if(_TransmitPacket(sensor_streaming, (N_IN_ENDPOINTS - 1)) == UX_SUCCESS)
+//              {
+//                TxBuffStatus[i] = 0;
+//              }
+//            }
+//            else if(TxBuffStatus[i] == 2U)
+//            {
+//              /*send*/
+//              ep_bulk->last_packet_sent = 0;
+//              (void) _SetTxBuffer(sensor_streaming, (uint8_t*) &(TxBuffer[i][(USB_DataSizePerEp[i] / 2U)]), (USB_DataSizePerEp[i] / 2U), (N_IN_ENDPOINTS - 1));
+//              if(_TransmitPacket(sensor_streaming, (N_IN_ENDPOINTS - 1)) == UX_SUCCESS)
+//              {
+//                TxBuffStatus[i] = 0;
+//              }
+//            }
+//            else
+//            {
+//            }
+//          }
+//        }
       }
       else if(*status == STREAMING_STATUS_STOPPING)
       {
@@ -149,6 +214,7 @@ static UINT _TransmitPacket(UX_SLAVE_CLASS_SENSOR_STREAMING *sensor_streaming, u
   {
     /* Tx Transfer in progress */
     ep_bulk->tx_state = 1;
+//    status = tx_semaphore_put(&ep_bulk->semaphore_0);
     status = _ux_utility_semaphore_put(&ep_bulk->semaphore);
     /* Check completion status. */
     if(status != TX_SUCCESS)

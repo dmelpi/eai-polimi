@@ -29,8 +29,8 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "iis3dwb_reg.h"
 #include <string.h>
@@ -45,7 +45,7 @@
 #endif
 
 #ifndef IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH
-#define IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH          20u
+#define IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH          20
 #endif
 
 #define IIS3DWB_TASK_CFG_IN_QUEUE_ITEM_SIZE       sizeof(SMMessage)
@@ -169,10 +169,11 @@ typedef struct _IIS3DWBTaskClass
   /**
    * IIS3DWBTask (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } IIS3DWBTaskClass_t;
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -253,7 +254,7 @@ static void IIS3DWBTaskTimerCallbackFunction(ULONG timer);
  */
 void IIS3DWBTask_EXTI_Callback(uint16_t nPin);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -357,7 +358,7 @@ static const IIS3DWBTaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* IIS3DWBTaskGetAccSensorIF(IIS3DWBTask *_this)
@@ -367,9 +368,10 @@ ISourceObservable* IIS3DWBTaskGetAccSensorIF(IIS3DWBTask *_this)
 
 AManagedTaskEx* IIS3DWBTaskAlloc(const void *pIRQConfig, const void *pCSConfig)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&sTaskObj.super);
 
   sTaskObj.super.vptr = &sTheClass.vtbl;
@@ -430,19 +432,19 @@ sys_error_code_t IIS3DWBTask_vtblOnCreateTask(
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   IIS3DWBTask *p_obj = (IIS3DWBTask*) _this;
 
-  /* Create task specific sw resources. */
+  // Create task specific sw resources.
 
-  uint32_t item_size = (uint32_t)IIS3DWB_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  uint16_t nItemSize = IIS3DWB_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS3DWB_Q", item_size / 4u, p_queue_items_buff,
-                                    IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IIS3DWB_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    IIS3DWB_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
@@ -467,7 +469,7 @@ sys_error_code_t IIS3DWBTask_vtblOnCreateTask(
   /* Alloc the bus interface (SPI if the task is given the CS Pin configuration param, I2C otherwise) */
   if(p_obj->pCSConfig != NULL)
   {
-    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS3DWB_ID, p_obj->pCSConfig->port, (uint16_t)p_obj->pCSConfig->pin, 0);
+    p_obj->p_sensor_bus_if = SPIBusIFAlloc(IIS3DWB_ID, p_obj->pCSConfig->port, p_obj->pCSConfig->pin, 0);
     if (p_obj->p_sensor_bus_if == NULL)
     {
       res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
@@ -488,8 +490,8 @@ sys_error_code_t IIS3DWBTask_vtblOnCreateTask(
   {
     return res;
   }
-  /* Initialize the EventSrc interface */
-  p_obj->p_event_src = DataEventSrcAlloc();
+  // Initialize the EventSrc interface.
+  p_obj->p_event_src = SensorEventSrcAlloc();
   if(p_obj->p_event_src == NULL)
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
@@ -579,8 +581,8 @@ sys_error_code_t IIS3DWBTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
   }
   else if(NewPowerMode == E_POWER_MODE_SLEEP_1)
   {
-    /* the MCU is going in stop so I put the sensor in low power
-     from the INIT task */
+    // the MCU is going in stop so I put the sensor in low power
+    // from the INIT task
     res = IIS3DWBTaskEnterLowPowerMode(p_obj);
     if(SYS_IS_ERROR_CODE(res))
     {
@@ -590,7 +592,7 @@ sys_error_code_t IIS3DWBTask_vtblDoEnterPowerMode(AManagedTask *_this, const EPo
     {
       IIS3DWBTaskConfigureIrqPin(p_obj, TRUE);
     }
-    /* notify the bus */
+    // notify the bus
     if(p_obj->p_sensor_bus_if->m_pfBusCtrl != NULL)
     {
       p_obj->p_sensor_bus_if->m_pfBusCtrl(p_obj->p_sensor_bus_if, E_BUS_CTRL_DEV_NOTIFY_POWER_MODE, 0);
@@ -621,11 +623,6 @@ sys_error_code_t IIS3DWBTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IIS3DWB: start.\r\n"));
-
-#ifdef ENABLE_THREADX_DBG_PIN
-  IIS3DWBTask *p_obj = (IIS3DWBTask *) _this;
-  p_obj->super.m_xTaskHandle.pxTaskTag = IIS3DWB_TASK_CFG_TAG;
-#endif
 
   // At this point all system has been initialized.
   // Execute task specific delayed one time initialization.
@@ -660,12 +657,12 @@ sys_error_code_t IIS3DWBTask_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerM
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -711,7 +708,7 @@ sys_error_code_t IIS3DWBTask_vtblAccGetODR(ISourceObservable *_this, float *p_me
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -906,7 +903,7 @@ SensorStatus_t IIS3DWBTask_vtblSensorGetStatus(ISensor_t *_this)
   return p_if_owner->acc_sensor_status;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t IIS3DWBTaskExecuteStepState1(AManagedTask *_this)
@@ -949,7 +946,7 @@ static sys_error_code_t IIS3DWBTaskExecuteStepState1(AManagedTask *_this)
               res = IIS3DWBTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -960,7 +957,7 @@ static sys_error_code_t IIS3DWBTaskExecuteStepState1(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1001,7 +998,8 @@ static sys_error_code_t IIS3DWBTaskExecuteStepDatalog(AManagedTask *_this)
 //        SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IIS3DWB: new data.\r\n"));
           if(p_obj->pIRQConfig == NULL)
           {
-            if(TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(IIS3DWB_TASK_CFG_TIMER_PERIOD_MS), AMT_MS_TO_TICKS(IIS3DWB_TASK_CFG_TIMER_PERIOD_MS)))
+          if (TX_SUCCESS != tx_timer_change(&p_obj->read_timer, AMT_MS_TO_TICKS(IIS3DWB_TASK_CFG_TIMER_PERIOD_MS),
+                                            AMT_MS_TO_TICKS(IIS3DWB_TASK_CFG_TIMER_PERIOD_MS)))
             {
               return SYS_UNDEFINED_ERROR_CODE;
             }
@@ -1015,18 +1013,19 @@ static sys_error_code_t IIS3DWBTaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-            /* Create a bidimensional data interleaved [m x 3], m is the number of samples in the sensor queue (samples_per_it):
-             * [X0, Y0, Z0]
-             * [X1, Y1, Z1]
-             * ...
-             * [Xm-1, Ym-1, Zm-1]
-             */
-            EMData_t data;
-            EMD_Init(&data, p_obj->p_sensor_data_buff, E_EM_INT16, E_EM_MODE_INTERLEAVED, 2, p_obj->samples_per_it, p_obj->acc_sensor_status.Dimensions);
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = p_obj->p_sensor_data_buff,
+                .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_COLUMN //TODO: STF - this means that data are interleaved?!?
+                // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+                // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
+            ai_logging_create_shape_2d(&stream.packet.shape, 3, p_obj->samples_per_it);
+            stream.packet.payload_size = 2 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-            DataEvent_t evt;
-
-            DataEventInit((IEvent*)&evt, p_obj->p_event_src, &data, timestamp, p_obj->acc_id);
+            SensorEvent evt;
+            SensorEventInit((IEvent*) &evt, p_obj->p_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->acc_id);
             IEventSrcSendEvent(p_obj->p_event_src, (IEvent*) &evt, NULL);
 
             /* update measuredODR */
@@ -1077,7 +1076,7 @@ static sys_error_code_t IIS3DWBTaskExecuteStepDatalog(AManagedTask *_this)
               res = IIS3DWBTaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1087,7 +1086,7 @@ static sys_error_code_t IIS3DWBTaskExecuteStepDatalog(AManagedTask *_this)
           break;
         }
       default:
-        /* unwanted report */
+        // unwanted report
         res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
         SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1159,7 +1158,8 @@ static sys_error_code_t IIS3DWBTaskSensorInit(IIS3DWBTask *_this)
 
   uint8_t reg0 = 0;
   int32_t ret_val = 0;
-
+  uint16_t iis3dwb_wtm_level = 0;
+  // if this variable need to persist then I move it in the managed task class declaration.
   iis3dwb_pin_int1_route_t pin_int1_route =
   {
       0
@@ -1171,9 +1171,6 @@ static sys_error_code_t IIS3DWBTaskSensorInit(IIS3DWBTask *_this)
   {
     iis3dwb_reset_get(p_sensor_drv, &reg0);
   } while (reg0);
-
-  /*Disable the I2C interface*/
-  iis3dwb_i2c_interface_set(p_sensor_drv, IIS3DWB_I2C_DISABLE);
 
   ret_val = iis3dwb_device_id_get(p_sensor_drv, (uint8_t*) &reg0);
   if(!ret_val)
@@ -1187,24 +1184,6 @@ static sys_error_code_t IIS3DWBTaskSensorInit(IIS3DWBTask *_this)
   reg0 |= 0xA0;
   iis3dwb_write_reg(p_sensor_drv, IIS3DWB_CTRL1_XL, (uint8_t*) &reg0, 1);
 
-
-
-
-  /*Set full scale*/
-  if(_this->acc_sensor_status.FS < 3.0f)
-    iis3dwb_xl_full_scale_set(p_sensor_drv, IIS3DWB_2g);
-  else if(_this->acc_sensor_status.FS < 5.0f)
-    iis3dwb_xl_full_scale_set(p_sensor_drv, IIS3DWB_4g);
-  else if(_this->acc_sensor_status.FS < 9.0f)
-    iis3dwb_xl_full_scale_set(p_sensor_drv, IIS3DWB_8g);
-  else
-    iis3dwb_xl_full_scale_set(p_sensor_drv, IIS3DWB_16g);
-
-  /*Set 2nd stage filter*/
-  iis3dwb_xl_filt_path_on_out_set(p_sensor_drv, IIS3DWB_LP_6k3Hz);
-
-#if IIS3DWB_FIFO_ENABLED
-  uint16_t iis3dwb_wtm_level = 0;
   /* Calculation of watermark and samples per int*/
   iis3dwb_wtm_level = ((uint16_t) _this->acc_sensor_status.ODR * (uint16_t) IIS3DWB_MAX_DRDY_PERIOD);
   if(iis3dwb_wtm_level > IIS3DWB_MAX_WTM_LEVEL)
@@ -1218,7 +1197,8 @@ static sys_error_code_t IIS3DWBTaskSensorInit(IIS3DWBTask *_this)
 
   _this->samples_per_it = iis3dwb_wtm_level;
 
-  /*Set fifo in continuous / stream mode*/
+  /*Disable the I2C interfacer and set fifo in continuous / stream mode*/
+  iis3dwb_i2c_interface_set(p_sensor_drv, IIS3DWB_I2C_DISABLE);
   iis3dwb_fifo_mode_set(p_sensor_drv, IIS3DWB_STREAM_MODE);
 
   /*Set watermark*/
@@ -1259,19 +1239,6 @@ static sys_error_code_t IIS3DWBTaskSensorInit(IIS3DWBTask *_this)
 
   /*Enable writing to FIFO*/
   iis3dwb_fifo_xl_batch_set(p_sensor_drv, IIS3DWB_XL_BATCHED_AT_26k7Hz);
-#else
-  _this->samples_per_it = 1;
-  *(uint8_t*) &(pin_int1_route) = 0;
-  if(_this->pIRQConfig != NULL)
-  {
-    pin_int1_route.drdy_xl = PROPERTY_ENABLE;
-  }
-  else
-  {
-    pin_int1_route.drdy_xl = PROPERTY_DISABLE;
-  }
-  iis3dwb_pin_int1_route_set(p_sensor_drv, &pin_int1_route);
-#endif /* IIS3DWB_FIFO_ENABLED */
 
   return res;
 }
@@ -1282,7 +1249,6 @@ static sys_error_code_t IIS3DWBTaskSensorReadData(IIS3DWBTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
   stmdev_ctx_t *p_sensor_drv = (stmdev_ctx_t*) &_this->p_sensor_bus_if->m_xConnector;
 
-#if IIS3DWB_FIFO_ENABLED
   uint8_t reg[2];
   uint16_t fifo_level = 0;
   uint16_t i;
@@ -1323,9 +1289,6 @@ static sys_error_code_t IIS3DWBTaskSensorReadData(IIS3DWBTask *_this)
   {
     res = SYS_BASE_ERROR_CODE;
   }
-#else
-  iis3dwb_read_reg(p_sensor_drv, IIS3DWB_OUTX_L_A, (uint8_t*) _this->p_sensor_data_buff, _this->samples_per_it * 6);
-#endif /* IIS3DWB_FIFO_ENABLED */
 
   return res;
 }
@@ -1347,13 +1310,20 @@ static sys_error_code_t IIS3DWBTaskSensorInitTaskParams(IIS3DWBTask *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* ACCELEROMETER SENSOR STATUS */
-  _this->acc_sensor_status.DataType = E_EM_INT16;
+  _this->acc_sensor_status.DataType = DATA_TYPE_INT16;
   _this->acc_sensor_status.Dimensions = 3;
   _this->acc_sensor_status.IsActive = TRUE;
   _this->acc_sensor_status.FS = 16.0f;
   _this->acc_sensor_status.Sensitivity = 0.0000305f * _this->acc_sensor_status.FS;
   _this->acc_sensor_status.ODR = 26667.0f;
   _this->acc_sensor_status.MeasuredODR = 0.0f;
+  _this->acc_sensor_status.InitialOffset = 0.0f;
+  _this->acc_sensor_status.DataPacketSize = 3000;
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->acc_sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->acc_sensor_status.SamplesPerTimestamp = 1000;
+#endif
 
   return res;
 }
@@ -1517,9 +1487,11 @@ static sys_error_code_t IIS3DWBTaskConfigureIrqPin(const IIS3DWBTask *_this, boo
 
 static void IIS3DWBTaskTimerCallbackFunction(ULONG timer)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   // if (sTaskObj.in_queue != NULL ) {//TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
@@ -1530,19 +1502,21 @@ static void IIS3DWBTaskTimerCallbackFunction(ULONG timer)
   //}
 }
 
-/* CubeMX integration */
+// CubeMX integration
 // ******************
 
 void IIS3DWBTask_EXTI_Callback(uint16_t nPin)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+    .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+    .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
   // }

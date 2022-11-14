@@ -34,8 +34,8 @@ extern "C" {
 #include "services/AManagedTaskEx.h"
 #include "services/AManagedTaskEx_vtbl.h"
 #include "ABusIF.h"
-#include "events/DataEventSrc.h"
-#include "events/DataEventSrc_vtbl.h"
+#include "events/SensorEventSrc.h"
+#include "events/SensorEventSrc_vtbl.h"
 #include "ISensor.h"
 #include "ISensor_vtbl.h"
 

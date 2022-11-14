@@ -624,7 +624,7 @@ static sys_error_code_t CB_storing_int16_toInt16_helper(ADPU * _this, CBHandle_t
         }
         else
         {
-          IDPU_Process((IDPU *)_this);
+        	IDPU_Process((IDPU *)_this);
         }
         return xRes;
       }
@@ -772,7 +772,22 @@ static sys_error_code_t CB_storing_int16_toFloat_helper(ADPU * _this, CBHandle_t
         }
         else
         {
-          IDPU_Process((IDPU *)_this);
+        	/*
+			//stop the data acquisition process after 1 s of buffer audio acquisition
+			uint16_t sensor_id;
+			SensorManager_t *p_sm = SMGetSensorManager();
+
+			// first disable all sensors.
+			SIterator_t iterator;
+			sensor_id = SI_NULL_SENSOR_ID;
+			SIInit(&iterator, p_sm);
+			while (SIHasNext(&iterator))
+			{
+				sensor_id = SINext(&iterator);
+				SMSensorDisable(sensor_id);
+			}*/
+
+        	IDPU_Process((IDPU *)_this);
         }
         return xRes;
       }
@@ -917,7 +932,7 @@ static sys_error_code_t CB_storing_float_toFloat_helper(ADPU * _this, CBHandle_t
         sys_error_handler();
         return xRes;
       }
-      p_outData =  CB_GetItemData(p_workingCB->pProducerDataBuff);
+      p_outData =  CB_GetItemData(p_workingCB->pProducerDataBuff);  //perchè questo??
       
       if(_this->notifyCall != NULL)
       {

@@ -32,10 +32,11 @@
 #include "SensorCommands.h"
 #include "SensorDef.h"
 #include "SensorRegister.h"
-#include "events/IDataEventListener.h"
-#include "events/IDataEventListener_vtbl.h"
+#include "events/ISensorEventListener.h"
+#include "events/ISensorEventListener_vtbl.h"
 #include "services/SysTimestamp.h"
 #include "SMMessageParser.h"
+#include "SMUtilTask.h"
 
 #ifndef IMP34DT05_TASK_CFG_STACK_DEPTH
 #define IMP34DT05_TASK_CFG_STACK_DEPTH           (TX_MINIMUM_STACK*2)
@@ -46,7 +47,7 @@
 #endif
 
 #ifndef IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH
-#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      20
+#define IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH      40
 #endif
 
 #define IMP34DT05_TASK_CFG_IN_QUEUE_ITEM_SIZE   sizeof(SMMessage)
@@ -166,7 +167,7 @@ typedef struct _IMP34DT05TaskClass
   /**
    * IMP34DT05Task (PM_STATE, ExecuteStepFunc) map.
    */
-  pExecuteStepFunc_t p_pm_state2func_map[3];
+  pExecuteStepFunc_t p_pm_state2func_map[];
 } IMP34DT05TaskClass_t;
 
 /**
@@ -183,7 +184,8 @@ void MDF_Filter_0_Complete_Callback(MDF_HandleTypeDef *hmdf);
  */
 void MDF_Filter_0_HalfComplete_Callback(MDF_HandleTypeDef *hmdf);
 
-/* Private member function declaration */// ***********************************
+// Private member function declaration
+// ***********************************
 
 /**
  * Execute one step of the task control loop while the system is in RUN mode.
@@ -242,7 +244,7 @@ static sys_error_code_t IMP34DT05TaskSensorDisable(IMP34DT05Task *_this, SMMessa
  */
 static boolean_t IMP34DT05TaskSensorIsActive(const IMP34DT05Task *_this);
 
-/* Inline function forward declaration */
+// Inline function forward declaration
 // ***********************************
 
 /**
@@ -342,7 +344,7 @@ static const IMP34DT05TaskClass_t sTheClass =
   }
 };
 
-/* Public API definition */
+// Public API definition
 // *********************
 
 ISourceObservable* IMP34DT05TaskGetMicSensorIF(IMP34DT05Task *_this)
@@ -352,9 +354,10 @@ ISourceObservable* IMP34DT05TaskGetMicSensorIF(IMP34DT05Task *_this)
 
 AManagedTaskEx* IMP34DT05TaskAlloc(const void *p_mx_mdf_cfg)
 {
-  /* This allocator implements the singleton design pattern. */
+  // In this application there is only one Keyboard task,
+  // so this allocator implement the singleton design pattern.
 
-  /* Initialize the super class */
+  // Initialize the super class
   AMTInitEx(&sTaskObj.super);
 
   sTaskObj.super.vptr = &sTheClass.vtbl;
@@ -427,25 +430,25 @@ VOID **pvStackStart,
   *pTimeSlice = TX_NO_TIME_SLICE;
   *pAutoStart = TX_AUTO_START;
 
-  /* Create task specific sw resources. */
-  uint32_t item_size = (uint32_t)IMP34DT05_TASK_CFG_IN_QUEUE_ITEM_SIZE;
-  VOID *p_queue_items_buff = SysAlloc(IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH * item_size);
-  if(p_queue_items_buff == NULL)
+  // Create task specific sw resources.
+  uint16_t nItemSize = IMP34DT05_TASK_CFG_IN_QUEUE_ITEM_SIZE;
+  VOID *pvQueueItemsBuff = SysAlloc(IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH * nItemSize);
+  if(pvQueueItemsBuff == NULL)
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IMP34DT05_Q", item_size / 4u, p_queue_items_buff,
-                                    IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH * item_size))
+  if (TX_SUCCESS != tx_queue_create(&p_obj->in_queue, "IMP34DT05_Q", nItemSize / 4, pvQueueItemsBuff,
+                                    IMP34DT05_TASK_CFG_IN_QUEUE_LENGTH * nItemSize))
   {
     res = SYS_TASK_HEAP_OUT_OF_MEMORY_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(res);
     return res;
   }
 
-  p_obj->p_event_src = (IEventSrc*) DataEventSrcAlloc();
+  p_obj->p_event_src = (IEventSrc*) SensorEventSrcAlloc();
   if(p_obj->p_event_src == NULL)
   {
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
@@ -494,7 +497,7 @@ sys_error_code_t IMP34DT05Task_vtblDoEnterPowerMode(AManagedTask *_this, const E
 
   if(NewPowerMode == E_POWER_MODE_SENSORS_ACTIVE)
   {
-    if(IMP34DT05TaskSensorIsActive(p_obj))
+    //if(IMP34DT05TaskSensorIsActive(p_obj))
     {
       SMMessage xReport =
       {
@@ -549,18 +552,13 @@ sys_error_code_t IMP34DT05Task_vtblOnEnterTaskControlLoop(AManagedTask *_this)
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IMP34DT05: start.\r\n"));
 
-#ifdef ENABLE_THREADX_DBG_PIN
-  IMP34DT05Task *p_obj = (IMP34DT05Task *) _this;
-  p_obj->super.m_xTaskHandle.pxTaskTag = IMP34DT05_TASK_CFG_TAG;
-#endif
-
   // At this point all system has been initialized.
   // Execute task specific delayed one time initialization.
 
   return res;
 }
 
-/* AManagedTaskEx virtual functions definition */
+// AManagedTaskEx virtual functions definition
 // *******************************************
 
 sys_error_code_t IMP34DT05Task_vtblForceExecuteStep(AManagedTaskEx *_this, EPowerMode ActivePowerMode)
@@ -585,12 +583,12 @@ sys_error_code_t IMP34DT05Task_vtblForceExecuteStep(AManagedTaskEx *_this, EPowe
   else
   {
     UINT state;
-    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xTaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
+    if (TX_SUCCESS == tx_thread_info_get(&_this->m_xThaskHandle, TX_NULL, &state, TX_NULL, TX_NULL, TX_NULL, TX_NULL,
                                          TX_NULL, TX_NULL))
     {
       if(state == TX_SUSPENDED)
       {
-        tx_thread_resume(&_this->m_xTaskHandle);
+        tx_thread_resume(&_this->m_xThaskHandle);
       }
     }
   }
@@ -644,7 +642,7 @@ sys_error_code_t IMP34DT05Task_vtblMicGetODR(ISourceObservable *_this, float *p_
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* parameter validation */
-  if((p_measured == NULL) || (p_nominal == NULL))
+  if((p_measured) == NULL || (p_nominal == NULL))
   {
     res = SYS_INVALID_PARAMETER_ERROR_CODE;
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_INVALID_PARAMETER_ERROR_CODE);
@@ -839,7 +837,7 @@ SensorStatus_t IMP34DT05Task_vtblSensorGetStatus(ISensor_t *_this)
   return p_if_owner->sensor_status;
 }
 
-/* Private function definition */
+// Private function definition
 // ***************************
 
 static sys_error_code_t IMP34DT05TaskExecuteStepRun(AManagedTask *_this)
@@ -882,7 +880,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepRun(AManagedTask *_this)
               res = IMP34DT05TaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE)
               ;
@@ -895,7 +893,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepRun(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -934,7 +932,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepDatalog(AManagedTask *_this)
         }
       case SM_MESSAGE_ID_DATA_READY:
         {
-//          SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IMP34DT05: new data.\r\n"));
+          //SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("IMP34DT05: new data.\r\n"));
 
           p_obj->half = report.sensorDataReadyMessage.half;
 
@@ -949,25 +947,30 @@ static sys_error_code_t IMP34DT05TaskExecuteStepDatalog(AManagedTask *_this)
             double delta_timestamp = timestamp - p_obj->prev_timestamp;
             p_obj->prev_timestamp = timestamp;
 
-//            EMData_t data;
-//#if (HSD_USE_DUMMY_DATA == 1)
-//            EMD_Init(&data, (uint8_t*) &p_obj->p_dummy_data_buff[(p_obj->half - 1) * (((uint32_t)p_obj->sensor_status.ODR / 1000) )], E_EM_INT16, E_EM_MODE_LINEAR, 1, ((uint32_t) p_obj->sensor_status.ODR / 1000));
-//#else
-//            EMD_Init(&data, (uint8_t*) &p_obj->p_sensor_data_buff[(p_obj->half - 1) * (((uint32_t) p_obj->sensor_status.ODR / 1000))], E_EM_INT16, E_EM_MODE_LINEAR, 1, ((uint32_t) p_obj->sensor_status.ODR / 1000));
-//#endif
-
-            EMData_t data;
-            uint16_t samples = (uint16_t)(p_obj->sensor_status.ODR / 1000u);
+            SensorEvent evt;
 #if (HSD_USE_DUMMY_DATA == 1)
-            EMD_Init(&data, (uint8_t*) &p_obj->p_dummy_data_buff[(p_obj->half - 1) * (((uint32_t)p_obj->sensor_status.ODR / 1000) )], E_EM_INT16, E_EM_MODE_LINEAR, 1, ((uint32_t) p_obj->sensor_status.ODR / 1000));
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = (uint8_t*) &p_obj->p_dummy_data_buff[(p_obj->half - 1) * (((uint32_t)p_obj->sensor_status.ODR / 1000) )],
+                .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_FULL
+            // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+            // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
 #else
-            EMD_1dInit(&data, (uint8_t*) &p_obj->p_sensor_data_buff[(p_obj->half - 1) * samples], E_EM_INT16, samples);
+            AI_SP_Stream_t stream =
+            {
+                .packet.payload = (uint8_t*) &p_obj->p_sensor_data_buff[(p_obj->half - 1) * (((uint32_t) p_obj->sensor_status.ODR / 1000))],
+                .packet.payload_fmt = AI_SP_FMT_INT16_RESET(),
+                .mode = AI_SP_MODE_FULL
+            // bonus question: what is AI_LOGGING_SHAPES_DEPTH ??
+            // (can I represent anomogeneous matrix [4*4] with this data format ?
+                };
 #endif
+            ai_logging_create_shape_1d(&stream.packet.shape, ((p_obj->sensor_status.ODR / 1000)));
+            stream.packet.payload_size = 2 * stream.packet.shape.shapes[0] * stream.packet.shape.shapes[1];
 
-
-            DataEvent_t evt;
-
-            DataEventInit((IEvent*)&evt, p_obj->p_event_src, &data, timestamp, p_obj->mic_id);
+            SensorEventInit((IEvent*) &evt, p_obj->p_event_src, (ai_logging_packet_t*) &stream, timestamp, p_obj->mic_id);
             IEventSrcSendEvent(p_obj->p_event_src, (IEvent*) &evt, NULL);
 
             /* update measuredODR */
@@ -1001,7 +1004,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepDatalog(AManagedTask *_this)
               res = IMP34DT05TaskSensorDisable(p_obj, report);
               break;
             default:
-              /* unwanted report */
+              // unwanted report
               res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
               SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE)
               ;
@@ -1014,7 +1017,7 @@ static sys_error_code_t IMP34DT05TaskExecuteStepDatalog(AManagedTask *_this)
         }
       default:
         {
-          /* unwanted report */
+          // unwanted report
           res = SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE;
           SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_APP_TASK_UNKNOWN_REPORT_ERROR_CODE);
 
@@ -1116,13 +1119,21 @@ static sys_error_code_t IMP34DT05TaskSensorInitTaskParams(IMP34DT05Task *_this)
   sys_error_code_t res = SYS_NO_ERROR_CODE;
 
   /* MIC STATUS */
-  _this->sensor_status.DataType = E_EM_INT16;
+  _this->sensor_status.DataType = DATA_TYPE_INT16;
   _this->sensor_status.Dimensions = 1;
   _this->sensor_status.IsActive = TRUE;
   _this->sensor_status.FS = 130.0f;
   _this->sensor_status.Sensitivity = 1.0f;
   _this->sensor_status.ODR = 48000.0f;
   _this->sensor_status.MeasuredODR = 0.0f;
+  _this->sensor_status.InitialOffset = 0.0f;
+  _this->sensor_status.DataPacketSize = 4096;
+
+#if (HSD_USE_DUMMY_DATA == 1)
+  _this->sensor_status.SamplesPerTimestamp = 0;
+#else
+  _this->sensor_status.SamplesPerTimestamp = 1000;
+#endif
 
   return res;
 }
@@ -1241,15 +1252,17 @@ static boolean_t IMP34DT05TaskSensorIsActive(const IMP34DT05Task *_this)
 
 void MDF_Filter_0_Complete_Callback(MDF_HandleTypeDef *hmdf)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.half = 2;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
+  SMMessage report =
+  {
+      .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+      .sensorDataReadyMessage.half = 2,
+	  .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
   // }
@@ -1257,16 +1270,17 @@ void MDF_Filter_0_Complete_Callback(MDF_HandleTypeDef *hmdf)
 
 void MDF_Filter_0_HalfComplete_Callback(MDF_HandleTypeDef *hmdf)
 {
-  SMMessage report;
-  report.sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY;
-  report.sensorDataReadyMessage.half = 1;
-  report.sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv());
-
+  SMMessage report =
+  {
+      .sensorDataReadyMessage.messageId = SM_MESSAGE_ID_DATA_READY,
+      .sensorDataReadyMessage.half = 1,
+	  .sensorDataReadyMessage.fTimestamp = SysTsGetTimestampF(SysGetTimestampSrv())
+  };
 
   //  if (sTaskObj.in_queue != NULL) { //TODO: STF.Port - how to check if the queue has been initialized ??
   if(TX_SUCCESS != tx_queue_send(&sTaskObj.in_queue, &report, TX_NO_WAIT))
   {
-    /* unable to send the report. Signal the error */
+    // unable to send the report. Signal the error
     sys_error_handler();
   }
   // }

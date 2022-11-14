@@ -22,8 +22,8 @@
  *
  ******************************************************************************
  */
-#ifndef SENSORDEF_H_
-#define SENSORDEF_H_
+#ifndef HSDCORE_INC_SENSORDEF_H_
+#define HSDCORE_INC_SENSORDEF_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -164,6 +164,21 @@ struct _SensorStatus_t
      */
     float MeasuredODR;
 
+    /**
+     * Specifies the time offset before first data were available.
+     */
+    float InitialOffset;
+
+    /**
+     * Specifies how many samples there are between two consecutive timestamps.
+     */
+    uint16_t SamplesPerTimestamp;
+
+  /**
+	* Specifies the data packet size.
+   */
+	uint16_t DataPacketSize;
+
   /**
    * Specifies the data type (int16, float, ...).
    */
@@ -189,4 +204,4 @@ struct _SensorStatus_t
 }
 #endif
 
-#endif /* SENSORDEF_H_ */
+#endif /* HSDCORE_INC_SENSORDEF_H_ */

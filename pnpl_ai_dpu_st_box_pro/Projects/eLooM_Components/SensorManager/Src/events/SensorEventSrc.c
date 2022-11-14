@@ -69,18 +69,18 @@ IEventSrc *SensorEventSrcAlloc()
 sys_error_code_t SensorEventSrc_vtblSendEvent(const IEventSrc *_this, const IEvent *pxEvent, void *pvParams)
 {
   assert_param(_this);
-  SensorEventSrc *p_obj = (SensorEventSrc *) _this;
-  sys_error_code_t res = SYS_NO_ERROR_CODE;
+  SensorEventSrc *pObj = (SensorEventSrc *) _this;
+  sys_error_code_t xRes = SYS_NO_ERROR_CODE;
   UNUSED(pvParams);
 
   for (uint8_t i = 0; i < AEVENT_SRC_CFG_MAX_LISTENERS; ++i)
   {
-    if (p_obj->super.m_pxListeners[i] != NULL)
+    if (pObj->super.m_pxListeners[i] != NULL)
     {
-      ISensorEventListenerOnNewDataReady(p_obj->super.m_pxListeners[i], (SensorEvent *) pxEvent);
+      ISensorEventListenerOnNewDataReady(pObj->super.m_pxListeners[i], (SensorEvent *) pxEvent);
     }
   }
 
-  return res;
+  return xRes;
 }
 

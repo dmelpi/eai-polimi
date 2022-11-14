@@ -22,8 +22,8 @@
   *
   ******************************************************************************
   */
-#ifndef SENSORREGISTER_H_
-#define SENSORREGISTER_H_
+#ifndef HSDCORE_INC_SENSORREGISTER_H_
+#define HSDCORE_INC_SENSORREGISTER_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -64,4 +64,4 @@ sys_error_code_t SMRemoveSensor(ISensor_t *pSensor);
 }
 #endif
 
-#endif /* SENSORREGISTER_H_ */
+#endif /* HSDCORE_INC_SENSORREGISTER_H_ */

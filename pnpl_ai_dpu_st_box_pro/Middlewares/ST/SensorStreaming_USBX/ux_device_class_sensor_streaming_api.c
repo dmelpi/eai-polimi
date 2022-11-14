@@ -33,7 +33,7 @@ UINT ux_device_class_sensor_streaming_SetTransmissionEP(UX_SLAVE_CLASS_SENSOR_ST
   {
     return UX_ERROR;
   }
-  if(ep > N_IN_ENDPOINTS - 1)
+  if(ep > N_IN_ENDPOINTS-1)
   {
     return UX_ERROR;
   }
@@ -63,7 +63,7 @@ UINT ux_device_class_sensor_streaming_SetRxDataBuffer(UX_SLAVE_CLASS_SENSOR_STRE
  * @param _this [IN] Pointer to sensor_streaming class.
  * @param  ch_number: channel number
  * @param  ptr: pointer to data
- *              NOTE! Memory allocated must be at least equal to (size * 2) + 2 + 4;
+ *              NOTE! Memory allocated must be at least equal to (size * 2) + 2;
  * @param  size: length of each packet in bytes
  * @retval status
  */
@@ -73,19 +73,14 @@ UINT ux_device_class_sensor_streaming_SetTxDataBuffer(UX_SLAVE_CLASS_SENSOR_STRE
   uint8_t **tx_buffer = hwcid->tx_buffer;
   uint32_t *tx_buff_idx = hwcid->tx_buff_idx;
   uint16_t *ch_data_size = hwcid->ch_data_size;
-  uint32_t *p_src;
 
   tx_buffer[id] = ptr;
-  p_src = (uint32_t*) tx_buffer[id];
-  /* Double buffer contains 2 * user data packet + 1st byte (id) + pkt counter for each half */
-  ch_data_size[id] = (size * 2U) + 2U + 8U;
+  /* Double buffer contains 2 * user data packet + 1st byte (id) for each half */
+  ch_data_size[id] = (size * 2U) + 2U;
   /* write the id at the beginning of the buffer (first byte) */
   ptr[0] = id;
-  /* initialize pkt counter */
-  p_src = (uint32_t*) &((uint8_t*) (p_src))[1];
-  *p_src = 1;
-  /* move buffer index to position 5 */
-  tx_buff_idx[id] = 5;
+  /* move buffer index to position 1 */
+  tx_buff_idx[id] = 1;
 
   return (UX_SUCCESS);
 }
@@ -122,11 +117,9 @@ UINT ux_device_class_sensor_streaming_FillTxDataBuffer(UX_SLAVE_CLASS_SENSOR_STR
   uint32_t *tx_buff_idx = hwcid->tx_buff_idx;
   uint16_t *ch_data_size = hwcid->ch_data_size;
   volatile uint8_t *tx_buff_reset = hwcid->tx_buff_reset;
-  uint8_t *tx_buff_ptr = (uint8_t*) tx_buffer[ch_number];
+  uint8_t  *tx_buff_ptr = (uint8_t*) tx_buffer[ch_number];
   volatile uint8_t *tx_buff_status;
   uint32_t i;
-  uint32_t *p_src;
-  uint32_t *p_dest;
 
   UX_DISABLE
   tx_buff_status = hwcid->tx_buff_status;
@@ -134,17 +127,17 @@ UINT ux_device_class_sensor_streaming_FillTxDataBuffer(UX_SLAVE_CLASS_SENSOR_STR
 
   if(tx_buff_reset[ch_number] == 1U)
   {
-    /* write ch_number at the beginning of the buffer (first byte) */
-    tx_buff_ptr[0] = ch_number;
-
-    /* initialize pkt counter */
-    p_src = &((uint32_t*) tx_buff_ptr)[0];
-    p_src = (uint32_t*) &((uint8_t*) (p_src))[1];
-    *p_src = 1;
-
-    /* move buffer index to position 5 */
-    tx_buff_idx[ch_number] = 5;
-
+//    if(ch_number >= (N_IN_ENDPOINTS - 1U))
+//    {
+      /* write ch_number at the beginning of the buffer (first byte) */
+      tx_buff_ptr[0] = ch_number;
+      /* move buffer index to position 1 */
+      tx_buff_idx[ch_number] = 1;
+//    }
+//    else
+//    {
+//      tx_buff_idx[ch_number] = 0;
+//    }
     UX_DISABLE
     tx_buff_status[ch_number] = 0;
     UX_RESTORE
@@ -165,17 +158,13 @@ UINT ux_device_class_sensor_streaming_FillTxDataBuffer(UX_SLAVE_CLASS_SENSOR_STR
       tx_buff_status[ch_number] = 1;
       UX_RESTORE
 
-      /* write ch_number at the beginning of the buffer (first byte) */
-      tx_buff_ptr[ch_tx_buff_idx] = ch_number;
-
-      /* incrementing pkt counter of data size */
-      /* ch_data_size = (data size/2) + 2 + 8 */
-      p_src = (uint32_t*) &((uint8_t*) (tx_buff_ptr))[1];
-      p_dest = (uint32_t*) &((uint8_t*) (tx_buff_ptr))[ch_tx_buff_idx + 1];
-      *p_dest = *p_src + (uint32_t) (ch_data_size[ch_number] - 2U - 8U) / 2U;
-
-      /* move buffer index to position 5 */
-      ch_tx_buff_idx = (ch_tx_buff_idx + 5U);
+//      if(ch_number >= (N_IN_ENDPOINTS - 1U))
+//      {
+        /* write ch_number at the beginning of the buffer (first byte) */
+        tx_buff_ptr[ch_tx_buff_idx] = ch_number;
+        /* move buffer index to position 1 */
+        ch_tx_buff_idx = (ch_tx_buff_idx + 1U);
+//      }
     }
     else if(ch_tx_buff_idx == 0U)
     {
@@ -183,17 +172,13 @@ UINT ux_device_class_sensor_streaming_FillTxDataBuffer(UX_SLAVE_CLASS_SENSOR_STR
       tx_buff_status[ch_number] = 2;
       UX_RESTORE
 
-      /* write ch_number at the beginning of the buffer (first byte) */
-      tx_buff_ptr[ch_tx_buff_idx] = ch_number;
-
-      /* incrementing pkt counter of data size */
-      /* ch_data_size = (data size/2) + 2 + 8 */
-      p_src = (uint32_t*) &((uint8_t*) (tx_buff_ptr))[ch_data_size[ch_number] / 2U + 1];
-      p_dest = (uint32_t*) &((uint8_t*) (tx_buff_ptr))[ch_tx_buff_idx + 1];
-      *p_dest = *p_src + (uint32_t) (ch_data_size[ch_number] - 2U - 8U) / 2U;
-
-      /* move buffer index to position 5 */
-      ch_tx_buff_idx = (ch_tx_buff_idx + 5U);
+//      if(ch_number >= (N_IN_ENDPOINTS - 1U))
+//      {
+        /* write ch_number at the beginning of the buffer (first byte) */
+        tx_buff_ptr[ch_tx_buff_idx] = ch_number;
+        /* move buffer index to position 1 */
+        ch_tx_buff_idx = (ch_tx_buff_idx + 1U);
+//      }
     }
     else
     {

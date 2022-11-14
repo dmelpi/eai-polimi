@@ -41,6 +41,10 @@ static const IDriver_vtbl sMDFDriver_vtbl =
   MDFDriver_vtblReset
 };
 
+#if defined (__GNUC__) || defined (__ICCARM__)
+extern sys_error_code_t MDFDriverFilterRegisterCallback(MDFDriver_t *_this, HAL_MDF_CallbackIDTypeDef CallbackID,
+                                                        pMDF_CallbackTypeDef pCallback);
+#endif
 
 /* Private member function declaration */
 /***************************************/
@@ -68,29 +72,29 @@ sys_error_code_t MDFSetMDFConfig(IDriver *_this, float ODR)
 {
   MDFDriver_t *p_obj = (MDFDriver_t *) _this;
 
-  if (p_obj->mx_handle.param == 7u)  /* IMP34DT05 - Digital mic */
+  if (p_obj->mx_handle.param == 7)  /* IMP34DT05 - Digital mic */
   {
-    (void)HAL_MDF_DeInit(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
+    HAL_MDF_DeInit(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
 
     if (ODR <= 16000.0f)
     {
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 10;
-      (void)HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = -4;
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 10;  //?? corretto che vengano modificati i parametri???
+      HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = -3;
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->DecimationRatio = 24;
     }
     else if (ODR <= 32000.0f)
     {
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 10;
-      (void)HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
+      HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = 5;
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->DecimationRatio = 12;
     }
     else
     {
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf->Init.CommonParam.OutputClock.Divider = 5;
-      (void)HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
-      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = 1;
+      HAL_MDF_Init(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
+      p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->Gain = 3;
       p_obj->mx_handle.p_mx_mdf_cfg->p_mdf_config->DecimationRatio = 16;
     }
   }
@@ -199,9 +203,9 @@ sys_error_code_t MDFDriver_vtblStart(IDriver *_this)
     else
     {
       HAL_NVIC_EnableIRQ(p_obj->mx_handle.p_mx_mdf_cfg->irq_n);
-      if (p_obj->mx_handle.param == 7u)
+      if (p_obj->mx_handle.param == 7)
       {
-        (void)HAL_MDF_GenerateTrgo(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
+        HAL_MDF_GenerateTrgo(p_obj->mx_handle.p_mx_mdf_cfg->p_mdf);
       }
     }
   }

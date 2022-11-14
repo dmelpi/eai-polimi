@@ -1,4 +1,4 @@
-Copyright (c) 2022 STMicroelectronics.
+Copyright CCCC(-UUUU) STMicroelectronics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BLE_Battery.c
   * @author  System Research & Applications Team - Agrate/Catania Lab.
-  * @version 1.4.0
-  * @date    31-May-2022
+  * @version 1.2.0
+  * @date    28-Feb-2022
   * @brief   Add battery info services using vendor specific profiles.
   ******************************************************************************
   * @attention

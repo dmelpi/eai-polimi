@@ -7,7 +7,7 @@
   *
   * @brief
   *
-  * <DESCRIPTION>
+  * <DESCRIPTIOM>
   *
   ******************************************************************************
   * @attention
@@ -40,6 +40,10 @@ static const IDriver_vtbl sAnalogMicDriver_vtbl =
   AnalogMicDriver_vtblDoEnterPowerMode,
   AnalogMicDriver_vtblReset
 };
+
+#if defined (__GNUC__) || defined (__ICCARM__)
+extern sys_error_code_t AnalogMicDrvSetDataBuffer(AnalogMicDriver_t *_this, int16_t *p_buffer, uint32_t buffer_size);
+#endif
 
 /* Private member function declaration */
 /***************************************/
