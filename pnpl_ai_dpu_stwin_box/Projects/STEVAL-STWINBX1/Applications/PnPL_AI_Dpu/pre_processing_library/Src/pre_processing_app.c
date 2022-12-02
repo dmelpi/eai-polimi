@@ -25,7 +25,7 @@
  * limitations under the License.
  *
  ******************************************************************************
- */
+*/
 //WORKING FFT -  validated
 #include "services/syserror.h"
 #include "arm_math.h"
@@ -56,10 +56,10 @@ void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_siz
     float32_t data_0[data_in_size];
     axis_selection(data_in, data_in_size, data_0, data_in_size, pre_processing_data->axis_selection_axis);
 
-    /*Mean removal.
-    float32_t data_1[data_in_size];
-    mean_removal(data_0, data_in_size, data_1, data_in_size);
-    */
+    //Mean removal.
+    //float32_t data_1[data_in_size];
+    //mean_removal(data_0, data_in_size, data_1, data_in_size);
+
 
     //Signal normalization
     //float32_t data_1[data_in_size];
@@ -74,6 +74,7 @@ void pre_processing_free(pre_processing_data_t* pre_processing_data) {
     // MFCC.
     SysFree((*pre_processing_data).mfcc_multipliers);
 }
+
 
 
 /**
@@ -134,16 +135,17 @@ void pre_processing_process(tridimensional_data_t* data_in, uint32_t data_in_siz
     float32_t data_0[data_in_size];
     axis_selection(data_in, data_in_size, data_0, data_in_size, pre_processing_data->axis_selection_axis);
 
-    // Mean removal.
-    float32_t data_1[data_in_size];
-    mean_removal(data_0, data_in_size, data_1, data_in_size);
+    // Mean removal.-- removed for processing of mic data
+    //float32_t data_1[data_in_size];
+    //mean_removal(data_0, data_in_size, data_1, data_in_size);
 
     // MFCC.
-    mfcc(data_1, data_in_size, data_out, data_out_size, ((*pre_processing_data).mfcc_bin), &((*pre_processing_data).mfcc_dct4f32), &((*pre_processing_data).mfcc_handler), (*pre_processing_data).mfcc_signal_windowing, (*pre_processing_data).mfcc_multipliers);
+    mfcc(data_0, data_in_size, data_out, data_out_size, ((*pre_processing_data).mfcc_bin), &((*pre_processing_data).mfcc_dct4f32), &((*pre_processing_data).mfcc_handler), (*pre_processing_data).mfcc_signal_windowing, (*pre_processing_data).mfcc_multipliers);
 }
 
 void pre_processing_free(pre_processing_data_t* pre_processing_data) {
     // MFCC.
     SysFree((*pre_processing_data).mfcc_multipliers);
 }
+
  */

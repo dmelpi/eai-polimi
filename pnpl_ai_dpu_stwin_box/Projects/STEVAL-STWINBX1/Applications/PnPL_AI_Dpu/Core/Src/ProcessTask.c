@@ -376,7 +376,7 @@ sys_error_code_t ProcessTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
   ProcessTaskSetSensorsConfig(p_obj, &active_sensor_id);
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: connect to sensor %d.\r\n", active_sensor_id));
-  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 2);
+  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 3);
 //  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 2);
 
   return xRes;

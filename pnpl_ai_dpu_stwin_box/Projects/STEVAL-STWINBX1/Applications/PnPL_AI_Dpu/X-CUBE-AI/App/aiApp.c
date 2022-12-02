@@ -130,7 +130,10 @@ int aiProcess(const char* nn_name, float *p_inData, float p_out_data[2])
 	  ai_network_get_error(network);
   };
 
-  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[aiProcess()] label_id: %d, accuracy: %.2f.\r\n", (int) p_out_data[0] , p_out_data[1]));
+  if ((int) p_out_data[1] > 85){
+	  SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("[aiProcess()] label_id: %d, accuracy: %.2f.\r\n", (int) p_out_data[0] , p_out_data[1]));
+  }
+
 
   return 0;
 }
