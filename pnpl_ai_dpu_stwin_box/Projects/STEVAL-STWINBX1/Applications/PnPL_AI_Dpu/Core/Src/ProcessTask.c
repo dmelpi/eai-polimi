@@ -200,6 +200,7 @@ sys_error_code_t ProcessTaskAttachToSensorEx(ProcessTask_t *_this, ISourceObserv
   else
   {
     res = SYS_OUT_OF_MEMORY_ERROR_CODE;
+
     SYS_SET_SERVICE_LEVEL_ERROR_CODE(SYS_OUT_OF_MEMORY_ERROR_CODE);
   }
 
@@ -281,6 +282,7 @@ sys_error_code_t ProcessTask_vtblOnCreateTask(AManagedTask *_this, tx_entry_func
 
   IDPU *idpu = AiDPUStaticAlloc(p_obj->p_dpu);
   res = IDPU_Init(idpu);
+
   IDPU_RegisterNotifyCallback((IDPU*)p_obj->p_dpu, ProcessTaskDPUCallback, p_obj);
   ADPU_SetTag((ADPU*)p_obj->p_dpu, PRC_TASK_DPU_TAG);
 
@@ -374,7 +376,7 @@ sys_error_code_t ProcessTask_vtblOnEnterTaskControlLoop(AManagedTask *_this)
   ProcessTaskSetSensorsConfig(p_obj, &active_sensor_id);
 
   SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PRC: connect to sensor %d.\r\n", active_sensor_id));
-  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 1);
+  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 3);
 //  ProcessTaskAttachToSensor(p_obj, SMGetSensorObserver(active_sensor_id), 2);
 
   return xRes;
