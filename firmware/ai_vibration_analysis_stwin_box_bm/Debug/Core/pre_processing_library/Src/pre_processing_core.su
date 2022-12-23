@@ -1,0 +1,12 @@
+../Core/pre_processing_library/Src/pre_processing_core.c:16:7:complex_abs	16	static
+../Core/pre_processing_library/Src/pre_processing_core.c:21:11:dot_product	64	dynamic
+../Core/pre_processing_library/Src/pre_processing_core.c:33:7:hz_to_mel	16	static
+../Core/pre_processing_library/Src/pre_processing_core.c:37:7:mel_to_hz	16	static
+../Core/pre_processing_library/Src/pre_processing_core.c:45:6:axis_selection	40	static
+../Core/pre_processing_library/Src/pre_processing_core.c:70:6:mean_removal	32	static
+../Core/pre_processing_library/Src/pre_processing_core.c:87:6:signal_normalization	48	static
+../Core/pre_processing_library/Src/pre_processing_core.c:104:6:hanning	32	static
+../Core/pre_processing_library/Src/pre_processing_core.c:116:6:fft	64	dynamic
+../Core/pre_processing_library/Src/pre_processing_core.c:151:6:triangular_filters_bank	584	static
+../Core/pre_processing_library/Src/pre_processing_core.c:185:6:triangular_filters_convolution	88	dynamic
+../Core/pre_processing_library/Src/pre_processing_core.c:212:6:mfcc	96	dynamic
