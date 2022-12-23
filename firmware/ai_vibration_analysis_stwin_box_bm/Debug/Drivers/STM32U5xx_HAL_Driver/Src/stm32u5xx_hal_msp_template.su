@@ -1,0 +1,2 @@
+../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_msp_template.c:57:6:HAL_MspInit	4	static
+../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_msp_template.c:66:6:HAL_MspDeInit	4	static
