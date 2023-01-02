@@ -35,5 +35,9 @@ Drivers/BSP/Components/lps22hh \
 Drivers/BSP/Components/stts22h \
 Drivers/BSP/STWIN.box \
 Drivers/STM32U5xx_HAL_Driver/Src \
+Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src \
+Middlewares/ST/STM32_USB_Device_Library/Core/Src \
+USB_Device/App \
+USB_Device/Target \
 X-CUBE-AI/App \
 

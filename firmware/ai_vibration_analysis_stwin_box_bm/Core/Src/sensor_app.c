@@ -7,10 +7,10 @@
 
 #include "sensor_app.h"
 #include "STWIN.box_motion_sensors.h"
-//#include "usb_device.h"
+#include "usb_device.h"
 #include <stdio.h>
 #include "arm_math.h"
-//#include "usbd_cdc_if.h"
+#include "usbd_cdc_interface.h"
 
 // define number of samples in the ISM330DHCX FIFO BUFFER
 #define NUMBER_OF_SAMPLES 256  // max 256 samples
@@ -112,37 +112,44 @@ void sensor_process(void){
 
 	/*if(ButtonEventDetected==1){
 		ButtonEventDetected = 0;*/
-		if (MemsEventDetected == 1){
+	if (MemsEventDetected == 1){
 
-			//pre_FIFO_read = BSP_GetTick();
-			MemsEventDetected = 0;
+		//pre_FIFO_read = BSP_GetTick();
+		MemsEventDetected = 0;
 
-			BSP_LED_On(LED1);
+		BSP_LED_On(LED1);
 
-			for(int jj=0;jj<num_samples;jj++){
-				BSP_MOTION_SENSOR_FIFO_Get_Data_Word(ISM330DHCX_0, MOTION_ACCELERO, &DataOut);
-				ism330dhcx_acc[jj].x = ((float)DataOut[0])*ism330dhcx_acc_sensitivity*0.001; // from [mg] to [g]
-				ism330dhcx_acc[jj].y = ((float)DataOut[1])*ism330dhcx_acc_sensitivity*0.001;
-				ism330dhcx_acc[jj].z = ((float)DataOut[2])*ism330dhcx_acc_sensitivity*0.001;
-			}
-
-			// call pre_processing_functions
-			pre_processing_process(ism330dhcx_acc, INPUT_BUFFER_SIZE, preprocessing_output_array, INPUT_BUFFER_SIZE/2, &pre_processing_data);
-
-			// call ai process
-			aiProcess(preprocessing_output_array, ai_out);
-
-			BSP_LED_Off(LED1);
-			//post_FIFO_read = BSP_GetTick();
-
-			//time_elapsed = post_FIFO_read - pre_FIFO_read;
-
-			printf("Class: %f, Accuracy: %f \r\n",ai_out[0],ai_out[1]);
-
+		for(int jj=0;jj<num_samples;jj++){
+			BSP_MOTION_SENSOR_FIFO_Get_Data_Word(ISM330DHCX_0, MOTION_ACCELERO, &DataOut);
+			ism330dhcx_acc[jj].x = ((float)DataOut[0])*ism330dhcx_acc_sensitivity*0.001; // from [mg] to [g]
+			ism330dhcx_acc[jj].y = ((float)DataOut[1])*ism330dhcx_acc_sensitivity*0.001;
+			ism330dhcx_acc[jj].z = ((float)DataOut[2])*ism330dhcx_acc_sensitivity*0.001;
 		}
 
-		//Get number of unread FIFO samples
-		BSP_MOTION_SENSOR_FIFO_Get_Num_Samples(ISM330DHCX_0, &num_samples);
+		// call pre_processing_functions
+		pre_processing_process(ism330dhcx_acc, INPUT_BUFFER_SIZE, preprocessing_output_array, INPUT_BUFFER_SIZE/2, &pre_processing_data);
+
+		// call ai process
+		aiProcess(preprocessing_output_array, ai_out);
+
+		// print to Virtual COM
+		snprintf(string_out, sizeof(string_out), "label: %.0f , Accuracy: %.2f \r\n", ai_out[0], ai_out[1]);
+		CDC_Transmit_FS((uint8_t*)string_out, strlen(string_out));
+
+		// print to STLINK
+		//printf("Class: %f, Accuracy: %f \r\n",ai_out[0],ai_out[1]);
+
+		BSP_LED_Off(LED1);
+		//post_FIFO_read = BSP_GetTick();
+
+		//time_elapsed = post_FIFO_read - pre_FIFO_read;
+
+
+
+	}
+
+	//Get number of unread FIFO samples
+	BSP_MOTION_SENSOR_FIFO_Get_Num_Samples(ISM330DHCX_0, &num_samples);
 	//}
 
 

@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
- ******************************************************************************
- * @file    stm32u5xx_hal_conf.h
- * @author  MCD Application Team
- * @brief   HAL configuration file.
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2021 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file    stm32u5xx_hal_conf.h
+  * @author  MCD Application Team
+  * @brief   HAL configuration file.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2021 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -23,7 +23,7 @@
 #define STM32U5xx_HAL_CONF_H
 
 #ifdef __cplusplus
-extern "C" {
+ extern "C" {
 #endif
 
 /* Exported types ------------------------------------------------------------*/
@@ -31,18 +31,18 @@ extern "C" {
 
 /* ########################## Module Selection ############################## */
 /**
- * @brief This is the list of modules to be used in the HAL driver
- */
+  * @brief This is the list of modules to be used in the HAL driver
+  */
 
 #define HAL_MODULE_ENABLED
 
-/*#define HAL_ADC_MODULE_ENABLED */
-/*#define HAL_MDF_MODULE_ENABLED */
+#define HAL_ADC_MODULE_ENABLED
+#define HAL_MDF_MODULE_ENABLED
 /*#define HAL_COMP_MODULE_ENABLED */
 /*#define HAL_CORDIC_MODULE_ENABLED */
 #define HAL_CRC_MODULE_ENABLED
 /*#define HAL_CRYP_MODULE_ENABLED */
-/*#define HAL_DAC_MODULE_ENABLED */
+#define HAL_DAC_MODULE_ENABLED
 /*#define HAL_DMA2D_MODULE_ENABLED */
 /*#define HAL_DSI_MODULE_ENABLED */
 /*#define HAL_FDCAN_MODULE_ENABLED */
@@ -67,8 +67,8 @@ extern "C" {
 /*#define HAL_PKA_MODULE_ENABLED */
 /*#define HAL_QSPI_MODULE_ENABLED */
 /*#define HAL_RNG_MODULE_ENABLED */
-/*#define HAL_RTC_MODULE_ENABLED */
-/*#define HAL_SAI_MODULE_ENABLED */
+#define HAL_RTC_MODULE_ENABLED
+#define HAL_SAI_MODULE_ENABLED
 /*#define HAL_CRYP_MODULE_ENABLED */
 /*#define HAL_SD_MODULE_ENABLED */
 /*#define HAL_MMC_MODULE_ENABLED */
@@ -84,7 +84,7 @@ extern "C" {
 /*#define HAL_WWDG_MODULE_ENABLED */
 /*#define HAL_DCMI_MODULE_ENABLED */
 /*#define HAL_PSSI_MODULE_ENABLED */
-/*#define HAL_ICACHE_MODULE_ENABLED */
+#define HAL_ICACHE_MODULE_ENABLED
 /*#define HAL_DCACHE_MODULE_ENABLED */
 #define HAL_PCD_MODULE_ENABLED
 /*#define HAL_HCD_MODULE_ENABLED */
@@ -99,74 +99,74 @@ extern "C" {
 
 /* ########################## Oscillator Values adaptation ####################*/
 /**
- * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
- *        This value is used by the RCC HAL module to compute the system frequency
- *        (when HSE is used as system clock source, directly or through the PLL).
- */
+  * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
+  *        This value is used by the RCC HAL module to compute the system frequency
+  *        (when HSE is used as system clock source, directly or through the PLL).
+  */
 #if !defined  (HSE_VALUE)
-#define HSE_VALUE    16000000UL /*!< Value of the External oscillator in Hz */
+  #define HSE_VALUE    16000000UL /*!< Value of the External oscillator in Hz */
 #endif /* HSE_VALUE */
 
 #if !defined  (HSE_STARTUP_TIMEOUT)
-#define HSE_STARTUP_TIMEOUT    100UL   /*!< Time out for HSE start up, in ms */
+  #define HSE_STARTUP_TIMEOUT    100UL   /*!< Time out for HSE start up, in ms */
 #endif /* HSE_STARTUP_TIMEOUT */
 
 /**
- * @brief Internal Multiple Speed oscillator (MSI) default value.
- *        This value is the default MSI range value after Reset.
- */
+  * @brief Internal Multiple Speed oscillator (MSI) default value.
+  *        This value is the default MSI range value after Reset.
+  */
 #if !defined  (MSI_VALUE)
-#define MSI_VALUE              4000000UL /*!< Value of the Internal oscillator in Hz*/
+  #define MSI_VALUE              4000000UL /*!< Value of the Internal oscillator in Hz*/
 #endif /* MSI_VALUE */
 
 /**
- * @brief Internal High Speed oscillator (HSI) value.
- *        This value is used by the RCC HAL module to compute the system frequency
- *        (when HSI is used as system clock source, directly or through the PLL).
- */
+  * @brief Internal High Speed oscillator (HSI) value.
+  *        This value is used by the RCC HAL module to compute the system frequency
+  *        (when HSI is used as system clock source, directly or through the PLL).
+  */
 #if !defined  (HSI_VALUE)
-#define HSI_VALUE              16000000UL /*!< Value of the Internal oscillator in Hz*/
+  #define HSI_VALUE              16000000UL /*!< Value of the Internal oscillator in Hz*/
 #endif /* HSI_VALUE */
 
 /**
- * @brief Internal High Speed oscillator (HSI48) value for USB FS, SDMMC and RNG.
- *        This internal oscillator is mainly dedicated to provide a high precision clock to
- *        the USB peripheral by means of a special Clock Recovery System (CRS) circuitry.
- *        When the CRS is not used, the HSI48 RC oscillator runs on it default frequency
- *        which is subject to manufacturing process variations.
- */
+  * @brief Internal High Speed oscillator (HSI48) value for USB FS, SDMMC and RNG.
+  *        This internal oscillator is mainly dedicated to provide a high precision clock to
+  *        the USB peripheral by means of a special Clock Recovery System (CRS) circuitry.
+  *        When the CRS is not used, the HSI48 RC oscillator runs on it default frequency
+  *        which is subject to manufacturing process variations.
+  */
 #if !defined  (HSI48_VALUE)
-#define HSI48_VALUE             48000000UL /*!< Value of the Internal High Speed oscillator for USB FS/SDMMC/RNG in Hz.
+  #define HSI48_VALUE             48000000UL /*!< Value of the Internal High Speed oscillator for USB FS/SDMMC/RNG in Hz.
                                                The real value my vary depending on manufacturing process variations.*/
 #endif /* HSI48_VALUE */
 
 /**
- * @brief Internal Low Speed oscillator (LSI) value.
- */
+  * @brief Internal Low Speed oscillator (LSI) value.
+  */
 #if !defined  (LSI_VALUE)
-#define LSI_VALUE  32000UL     /*!< LSI Typical Value in Hz*/
+  #define LSI_VALUE  32000UL     /*!< LSI Typical Value in Hz*/
 #endif /* LSI_VALUE */                     /*!< Value of the Internal Low Speed oscillator in Hz
                                                 The real value may vary depending on the variations
                                                 in voltage and temperature.*/
 /**
- * @brief External Low Speed oscillator (LSE) value.
- *        This value is used by the UART, RTC HAL module to compute the system frequency
- */
+  * @brief External Low Speed oscillator (LSE) value.
+  *        This value is used by the UART, RTC HAL module to compute the system frequency
+  */
 #if !defined  (LSE_VALUE)
-#define LSE_VALUE  32768UL    /*!< Value of the External Low Speed oscillator in Hz */
+  #define LSE_VALUE  32768UL    /*!< Value of the External Low Speed oscillator in Hz */
 #endif /* LSE_VALUE */
 
 #if !defined  (LSE_STARTUP_TIMEOUT)
-#define LSE_STARTUP_TIMEOUT    5000UL   /*!< Time out for LSE start up, in ms */
+  #define LSE_STARTUP_TIMEOUT    5000UL   /*!< Time out for LSE start up, in ms */
 #endif /* LSE_STARTUP_TIMEOUT */
 
 /**
- * @brief External clock source for SAI1 peripheral
- *        This value is used by the RCC HAL module to compute the SAI1 & SAI2 clock source
- *        frequency.
- */
+  * @brief External clock source for SAI1 peripheral
+  *        This value is used by the RCC HAL module to compute the SAI1 & SAI2 clock source
+  *        frequency.
+  */
 #if !defined  (EXTERNAL_SAI1_CLOCK_VALUE)
-#define EXTERNAL_SAI1_CLOCK_VALUE    48000UL /*!< Value of the SAI1 External clock source in Hz*/
+  #define EXTERNAL_SAI1_CLOCK_VALUE    48000UL /*!< Value of the SAI1 External clock source in Hz*/
 #endif /* EXTERNAL_SAI1_CLOCK_VALUE */
 
 /* Tip: To avoid modifying this file each time you need to use different HSE,
@@ -174,8 +174,8 @@ extern "C" {
 
 /* ########################### System Configuration ######################### */
 /**
- * @brief This is the HAL system configuration section
- */
+  * @brief This is the HAL system configuration section
+  */
 
 #define  VDD_VALUE                    3300UL /*!< Value of VDD in mv */
 #define  TICK_INT_PRIORITY            (15UL)    /*!< tick interrupt priority (lowest by default)  */
@@ -184,22 +184,22 @@ extern "C" {
 
 /* ########################## Assert Selection ############################## */
 /**
- * @brief Uncomment the line below to expanse the "assert_param" macro in the
- *        HAL drivers code
- */
+  * @brief Uncomment the line below to expanse the "assert_param" macro in the
+  *        HAL drivers code
+  */
 
 /* #define USE_FULL_ASSERT    1U */
 
 /* ################## Register callback feature configuration ############### */
 /**
- * @brief Set below the peripheral configuration  to "1U" to add the support
- *        of HAL callback registration/unregistration feature for the HAL
- *        driver(s). This allows user application to provide specific callback
- *        functions thanks to HAL_PPP_RegisterCallback() rather than overwriting
- *        the default weak callback functions (see each stm32u5xx_hal_ppp.h file
- *        for possible callback identifiers defined in HAL_PPP_CallbackIDTypeDef
- *        for each PPP peripheral).
- */
+  * @brief Set below the peripheral configuration  to "1U" to add the support
+  *        of HAL callback registration/unregistration feature for the HAL
+  *        driver(s). This allows user application to provide specific callback
+  *        functions thanks to HAL_PPP_RegisterCallback() rather than overwriting
+  *        the default weak callback functions (see each stm32u5xx_hal_ppp.h file
+  *        for possible callback identifiers defined in HAL_PPP_CallbackIDTypeDef
+  *        for each PPP peripheral).
+  */
 #define  USE_HAL_ADC_REGISTER_CALLBACKS        0U /* ADC register callback disabled       */
 #define  USE_HAL_COMP_REGISTER_CALLBACKS       0U /* COMP register callback disabled      */
 #define  USE_HAL_CORDIC_REGISTER_CALLBACKS     0U /* CORDIC register callback disabled    */
@@ -258,8 +258,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 /**
- * @brief Include module's header file
- */
+  * @brief Include module's header file
+  */
 
 #ifdef HAL_RCC_MODULE_ENABLED
   #include "stm32u5xx_hal_rcc.h"
