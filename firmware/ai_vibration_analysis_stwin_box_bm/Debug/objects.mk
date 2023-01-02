@@ -5,5 +5,5 @@
 
 USER_OBJS :=
 
-LIBS := -l:libarm_ARMv8MMLlfsp_math.a -l:NetworkRuntime710_CM33_GCC.a
+LIBS := -l:NetworkRuntime710_CM33_GCC.a -l:libarm_ARMv8MMLlfsp_math.a
 
